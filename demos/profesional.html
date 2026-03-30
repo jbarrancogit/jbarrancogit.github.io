@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consultorio Dra. María López — Odontóloga especialista en Godoy Cruz, Mendoza</title>
+  <meta name="description" content="Consultorio odontológico de la Dra. María López en Godoy Cruz, Mendoza. Limpieza dental, blanqueamiento, ortodoncia, implantes y más. Turnos online.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #0B1120;
+      color: #CBD5E1;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: #38BDF8; text-decoration: none; transition: color 0.2s; }
+    a:hover { color: #7DD3FC; }
+    ul { list-style: none; }
+
+    /* ===== UTILITY ===== */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.25rem; }
+    .section-title {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 700;
+      color: #F1F5F9;
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .section-subtitle {
+      text-align: center;
+      color: #94A3B8;
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      font-size: 1rem;
+    }
+    .accent { color: #0EA5E9; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.8rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      background: linear-gradient(135deg, #0EA5E9, #06B6D4);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(14, 165, 233, 0.35);
+    }
+    .btn-primary:hover { background: linear-gradient(135deg, #38BDF8, #22D3EE); color: #fff; }
+    .btn-whatsapp {
+      background: #25D366;
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+    }
+    .btn-whatsapp:hover { background: #2BE675; color: #fff; }
+
+    /* ===== DEMO BANNER ===== */
+    .demo-banner {
+      background: linear-gradient(90deg, #0EA5E9, #8B5CF6);
+      padding: 0.65rem 1rem;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .demo-banner a {
+      color: #fff;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .demo-banner a:hover { color: #FDE68A; }
+
+    /* ===== NAV ===== */
+    .navbar {
+      background: rgba(11, 17, 32, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(14, 165, 233, 0.1);
+      padding: 0.9rem 0;
+      position: sticky;
+      top: 38px;
+      z-index: 999;
+    }
+    .navbar .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #F1F5F9;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .nav-brand span { color: #0EA5E9; }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a {
+      color: #94A3B8;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #0EA5E9; }
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.25rem;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #CBD5E1;
+      margin: 5px 0;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding: 5rem 0 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(14, 165, 233, 0.12), transparent 70%);
+      pointer-events: none;
+    }
+    .hero-emoji {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5.5vw, 3.2rem);
+      font-weight: 800;
+      color: #F1F5F9;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, #0EA5E9, #06B6D4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      color: #94A3B8;
+      max-width: 560px;
+      margin: 0 auto 2rem;
+    }
+    .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .hero-trust {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+    .hero-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      color: #64748B;
+      font-weight: 500;
+    }
+    .hero-trust-item .icon { color: #0EA5E9; font-size: 1rem; }
+
+    /* ===== ABOUT ===== */
+    .about {
+      padding: 4.5rem 0;
+      background: linear-gradient(180deg, #0B1120, #0F172A);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+    .about-photo {
+      width: 280px;
+      height: 340px;
+      border-radius: 1rem;
+      background: linear-gradient(135deg, #1E293B, #0F172A);
+      border: 2px solid rgba(14, 165, 233, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(14, 165, 233, 0.05) 100%);
+      border-radius: 1rem;
+    }
+    .about-text h2 {
+      font-size: 1.8rem;
+      color: #F1F5F9;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .about-text .credential {
+      color: #0EA5E9;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .about-text p { margin-bottom: 1rem; color: #94A3B8; }
+    .about-badges {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+    .about-badges .badge {
+      background: rgba(14, 165, 233, 0.1);
+      border: 1px solid rgba(14, 165, 233, 0.2);
+      padding: 0.45rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: #38BDF8;
+    }
+
+    /* ===== SERVICES ===== */
+    .services { padding: 4.5rem 0; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+    .service-card {
+      background: #111827;
+      border: 1px solid #1E293B;
+      border-radius: 1rem;
+      padding: 1.75rem;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+    .service-card:hover {
+      border-color: #0EA5E9;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(14, 165, 233, 0.08);
+    }
+    .service-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .service-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #F1F5F9;
+      margin-bottom: 0.4rem;
+    }
+    .service-card p {
+      font-size: 0.9rem;
+      color: #94A3B8;
+      margin-bottom: 0.75rem;
+      line-height: 1.6;
+    }
+    .service-price {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #0EA5E9;
+    }
+
+    /* ===== APPOINTMENT ===== */
+    .appointment {
+      padding: 4.5rem 0;
+      background: #0F172A;
+    }
+    .appointment-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+    .appointment-info h3 {
+      font-size: 1.3rem;
+      color: #F1F5F9;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .appointment-info p {
+      color: #94A3B8;
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+    }
+    .appointment-steps { margin-bottom: 1.5rem; }
+    .appointment-steps li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(14, 165, 233, 0.15);
+      color: #0EA5E9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+    .step-text { font-size: 0.92rem; color: #CBD5E1; padding-top: 0.2rem; }
+    .form-card {
+      background: #111827;
+      border: 1px solid #1E293B;
+      border-radius: 1rem;
+      padding: 2rem;
+    }
+    .form-card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #F1F5F9;
+      margin-bottom: 1.25rem;
+      text-align: center;
+    }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #94A3B8;
+      margin-bottom: 0.35rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      background: #0B1120;
+      border: 1px solid #1E293B;
+      border-radius: 0.5rem;
+      color: #F1F5F9;
+      font-family: inherit;
+      font-size: 0.92rem;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #0EA5E9;
+      box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+    }
+    .form-group input::placeholder { color: #475569; }
+    .form-group select option { background: #111827; }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    .form-card .btn { width: 100%; justify-content: center; margin-top: 0.5rem; }
+
+    /* ===== INSURANCE ===== */
+    .insurance { padding: 4.5rem 0; }
+    .insurance-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .insurance-item {
+      background: #111827;
+      border: 1px solid #1E293B;
+      border-radius: 0.75rem;
+      padding: 0.9rem 1.5rem;
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: #F1F5F9;
+      transition: border-color 0.3s, transform 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .insurance-item:hover { border-color: #0EA5E9; transform: translateY(-2px); }
+    .insurance-item .check { color: #0EA5E9; }
+    .insurance-note {
+      text-align: center;
+      color: #64748B;
+      font-size: 0.85rem;
+      margin-top: 1.5rem;
+    }
+
+    /* ===== LOCATION ===== */
+    .location {
+      padding: 4.5rem 0;
+      background: #0F172A;
+    }
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+    .location-map {
+      border-radius: 1rem;
+      overflow: hidden;
+      background: #1E293B;
+      min-height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .location-map iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 340px;
+      border: 0;
+      filter: brightness(0.85) contrast(1.1) saturate(0.8);
+    }
+    .location-details h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #F1F5F9;
+      margin-bottom: 1.25rem;
+    }
+    .location-item {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+      align-items: flex-start;
+    }
+    .location-icon {
+      flex-shrink: 0;
+      width: 42px;
+      height: 42px;
+      border-radius: 0.6rem;
+      background: rgba(14, 165, 233, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+    }
+    .location-item strong {
+      display: block;
+      color: #F1F5F9;
+      font-size: 0.9rem;
+      margin-bottom: 0.15rem;
+    }
+    .location-item span {
+      font-size: 0.88rem;
+      color: #94A3B8;
+      line-height: 1.5;
+    }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials { padding: 4.5rem 0; }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+    .testimonial-card {
+      background: #111827;
+      border: 1px solid #1E293B;
+      border-radius: 1rem;
+      padding: 1.75rem;
+      transition: border-color 0.3s;
+    }
+    .testimonial-card:hover { border-color: rgba(14, 165, 233, 0.3); }
+    .testimonial-stars {
+      color: #FBBF24;
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+      letter-spacing: 2px;
+    }
+    .testimonial-card blockquote {
+      font-size: 0.92rem;
+      color: #CBD5E1;
+      font-style: italic;
+      margin-bottom: 1rem;
+      line-height: 1.65;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .testimonial-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0EA5E9, #8B5CF6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .testimonial-name {
+      font-weight: 600;
+      color: #F1F5F9;
+      font-size: 0.88rem;
+    }
+    .testimonial-role {
+      font-size: 0.78rem;
+      color: #64748B;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: #070D1A;
+      border-top: 1px solid #1E293B;
+      padding: 3rem 0 1.5rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .footer-brand h3 {
+      font-size: 1.15rem;
+      color: #F1F5F9;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .footer-brand p {
+      color: #64748B;
+      font-size: 0.88rem;
+      max-width: 320px;
+    }
+    .footer h4 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #94A3B8;
+      margin-bottom: 0.75rem;
+    }
+    .footer ul li {
+      margin-bottom: 0.4rem;
+    }
+    .footer ul li a {
+      font-size: 0.88rem;
+      color: #64748B;
+      transition: color 0.2s;
+    }
+    .footer ul li a:hover { color: #0EA5E9; }
+    .footer-bottom {
+      border-top: 1px solid #1E293B;
+      padding-top: 1.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #475569;
+    }
+    .footer-bottom a { color: #0EA5E9; }
+
+    /* ===== SCROLL ANIMATIONS ===== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: block; }
+      .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(11, 17, 32, 0.98);
+        backdrop-filter: blur(12px);
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid #1E293B;
+        gap: 0.75rem;
+      }
+      .about-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .about-photo {
+        margin: 0 auto;
+        width: 200px;
+        height: 240px;
+        font-size: 4.5rem;
+      }
+      .about-badges { justify-content: center; }
+      .appointment-grid { grid-template-columns: 1fr; }
+      .location-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .hero { padding: 3.5rem 0 3rem; }
+      .hero-emoji { font-size: 2.8rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .hero-trust { gap: 0.75rem; }
+    }
+    @media (max-width: 480px) {
+      .demo-banner { font-size: 0.78rem; padding: 0.5rem 0.75rem; }
+      .hero h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DEMO BANNER -->
+  <div class="demo-banner">
+    ✨ Esta es una demo creada por <strong>Juan Barranco</strong> — ¿Querés algo así para tu consultorio?
+    <a href="https://wa.me/5492616423730?text=Hola%20Juan!%20Vi%20la%20demo%20de%20consultorio%20y%20me%20interesa" target="_blank" rel="noopener">→ Contactame</a>
+  </div>
+
+  <!-- NAV -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="#" class="nav-brand">🦷 <span>Dra. López</span>&nbsp;Odontología</a>
+      <div class="nav-links" id="navLinks">
+        <a href="#sobre">Sobre mí</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#turnos">Turnos</a>
+        <a href="#obras-sociales">Obras sociales</a>
+        <a href="#ubicacion">Ubicación</a>
+        <a href="#opiniones">Opiniones</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="container">
+      <span class="hero-emoji" role="img" aria-label="Diente y sonrisa">🦷😁</span>
+      <h1>Tu sonrisa en las<br><span class="highlight">mejores manos</span></h1>
+      <p>Consultorio odontológico en Godoy Cruz, Mendoza. Más de 15 años cuidando la salud dental de nuestros pacientes con tecnología de vanguardia y un trato cálido.</p>
+      <div class="hero-buttons">
+        <a href="#turnos" class="btn btn-primary">📅 Reservar turno online</a>
+        <a href="https://wa.me/5492614001234?text=Hola%20Dra.%20López!%20Quisiera%20pedir%20un%20turno" class="btn btn-whatsapp" target="_blank" rel="noopener">💬 WhatsApp directo</a>
+      </div>
+      <div class="hero-trust">
+        <div class="hero-trust-item"><span class="icon">✓</span> Matrícula 4.521</div>
+        <div class="hero-trust-item"><span class="icon">🎓</span> Egresada UNCuyo</div>
+        <div class="hero-trust-item"><span class="icon">⭐</span> 4.9 en Google (200+ reseñas)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE LA DOCTORA -->
+  <section class="about" id="sobre">
+    <div class="container">
+      <div class="about-grid fade-up">
+        <div class="about-photo" aria-label="Foto de la Dra. María López">👩‍⚕️</div>
+        <div class="about-text">
+          <h2>Dra. María López</h2>
+          <span class="credential">Matrícula N.° 4.521 — Colegio Odontológico de Mendoza</span>
+          <p>Egresada de la Facultad de Odontología de la <strong style="color:#F1F5F9">Universidad Nacional de Cuyo (UNCuyo)</strong>, con más de <strong style="color:#F1F5F9">15 años de experiencia</strong> en odontología general, estética e implantología.</p>
+          <p>Especialista en rehabilitación oral, con formación continua en las últimas técnicas y materiales. Mi prioridad es que cada paciente se sienta cómodo, informado y confiado en su tratamiento.</p>
+          <p>Creo que una sonrisa sana cambia la vida de las personas. Por eso trabajo con dedicación, empatía y compromiso en cada consulta.</p>
+          <div class="about-badges">
+            <span class="badge">🎓 UNCuyo</span>
+            <span class="badge">🦷 15+ años de experiencia</span>
+            <span class="badge">✨ Estética dental</span>
+            <span class="badge">🔩 Implantología</span>
+            <span class="badge">📜 Posgrado en UBA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section class="services" id="servicios">
+    <div class="container">
+      <h2 class="section-title fade-up">Nuestros <span class="accent">servicios</span></h2>
+      <p class="section-subtitle fade-up">Atención integral con tecnología moderna, materiales de primera calidad y precios accesibles.</p>
+      <div class="services-grid">
+
+        <div class="service-card fade-up">
+          <div class="service-icon">🪥</div>
+          <h3>Limpieza dental</h3>
+          <p>Profilaxis profesional con ultrasonido para eliminar sarro y placa bacteriana. Incluye pulido dental y control de encías. Recomendada cada 6 meses.</p>
+          <span class="service-price">Desde $15.000</span>
+        </div>
+
+        <div class="service-card fade-up">
+          <div class="service-icon">✨</div>
+          <h3>Blanqueamiento</h3>
+          <p>Blanqueamiento LED en consultorio con resultados visibles en una sola sesión. Hasta 6 tonos más blanco, sin dañar el esmalte.</p>
+          <span class="service-price">Desde $45.000</span>
+        </div>
+
+        <div class="service-card fade-up">
+          <div class="service-icon">🔧</div>
+          <h3>Ortodoncia</h3>
+          <p>Brackets metálicos, estéticos y alineadores invisibles. Plan de tratamiento personalizado con seguimiento mensual hasta lograr la alineación perfecta.</p>
+          <span class="service-price">Desde $35.000/mes</span>
+        </div>
+
+        <div class="service-card fade-up">
+          <div class="service-icon">🔩</div>
+          <h3>Implantes dentales</h3>
+          <p>Implantes de titanio de primera línea con corona de porcelana. Recuperá tu sonrisa completa de forma definitiva con cirugía mínimamente invasiva.</p>
+          <span class="service-price">Consultar presupuesto</span>
+        </div>
+
+        <div class="service-card fade-up">
+          <div class="service-icon">🩺</div>
+          <h3>Endodoncia</h3>
+          <p>Tratamiento de conducto indoloro con instrumental rotatorio de última generación. Salvá tu pieza dental y eliminá el dolor de raíz.</p>
+          <span class="service-price">Desde $25.000</span>
+        </div>
+
+        <div class="service-card fade-up">
+          <div class="service-icon">💎</div>
+          <h3>Odontología estética</h3>
+          <p>Carillas de porcelana, resinas estéticas y diseño de sonrisa digital. Resultados naturales y armónicos que realzan tu mejor versión.</p>
+          <span class="service-price">Desde $30.000 por pieza</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TURNOS ONLINE -->
+  <section class="appointment" id="turnos">
+    <div class="container">
+      <h2 class="section-title fade-up">Reservá tu <span class="accent">turno online</span></h2>
+      <p class="section-subtitle fade-up">Elegí el horario que más te convenga. Confirmamos tu turno en menos de 2 horas.</p>
+      <div class="appointment-grid">
+
+        <div class="appointment-info fade-up">
+          <h3>¿Cómo funciona?</h3>
+          <p>Solicitar tu turno es muy simple. Podés completar el formulario o escribirnos directamente por WhatsApp.</p>
+          <ul class="appointment-steps">
+            <li>
+              <span class="step-num">1</span>
+              <span class="step-text">Completá el formulario con tus datos y el servicio que necesitás.</span>
+            </li>
+            <li>
+              <span class="step-num">2</span>
+              <span class="step-text">Nuestro equipo confirma tu turno por WhatsApp o llamada telefónica.</span>
+            </li>
+            <li>
+              <span class="step-num">3</span>
+              <span class="step-text">¡Listo! Presentate el día y hora acordados. Te esperamos con un café ☕</span>
+            </li>
+          </ul>
+          <a href="https://wa.me/5492614001234?text=Hola%20Dra.%20López!%20Quisiera%20pedir%20un%20turno" class="btn btn-whatsapp" target="_blank" rel="noopener">💬 Pedir turno por WhatsApp</a>
+        </div>
+
+        <div class="form-card fade-up">
+          <h3>📅 Solicitar turno</h3>
+          <form onsubmit="event.preventDefault(); document.querySelector('.form-success').style.display='block'; this.style.display='none';">
+            <div class="form-group">
+              <label for="nombre">Nombre completo</label>
+              <input type="text" id="nombre" placeholder="Ej: María Gómez" required>
+            </div>
+            <div class="form-group">
+              <label for="telefono">Teléfono / WhatsApp</label>
+              <input type="tel" id="telefono" placeholder="Ej: 261 400 1234" required>
+            </div>
+            <div class="form-group">
+              <label for="servicio">Servicio</label>
+              <select id="servicio" required>
+                <option value="">Seleccioná un servicio</option>
+                <option value="limpieza">Limpieza dental</option>
+                <option value="blanqueamiento">Blanqueamiento</option>
+                <option value="ortodoncia">Ortodoncia</option>
+                <option value="implantes">Implantes dentales</option>
+                <option value="endodoncia">Endodoncia</option>
+                <option value="estetica">Odontología estética</option>
+                <option value="consulta">Consulta general</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fecha">Fecha preferida</label>
+                <input type="date" id="fecha" required>
+              </div>
+              <div class="form-group">
+                <label for="horario">Horario preferido</label>
+                <select id="horario" required>
+                  <option value="">Seleccionar</option>
+                  <option value="manana">Mañana (9-12)</option>
+                  <option value="mediodia">Mediodía (12-14)</option>
+                  <option value="tarde">Tarde (14-18)</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Solicitar turno</button>
+          </form>
+          <div class="form-success" style="display:none; text-align:center; padding: 2rem 0;">
+            <div style="font-size: 3rem; margin-bottom: 0.75rem;">✅</div>
+            <p style="color: #F1F5F9; font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;">¡Turno solicitado!</p>
+            <p style="color: #94A3B8; font-size: 0.9rem;">Esta es una demo. En un sitio real, recibirías la confirmación por WhatsApp.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- OBRAS SOCIALES -->
+  <section class="insurance" id="obras-sociales">
+    <div class="container">
+      <h2 class="section-title fade-up">Obras sociales y <span class="accent">prepagas</span></h2>
+      <p class="section-subtitle fade-up">Trabajamos con las principales obras sociales y prepagas de Mendoza y del país.</p>
+      <div class="insurance-grid fade-up">
+        <div class="insurance-item"><span class="check">✓</span> OSEP</div>
+        <div class="insurance-item"><span class="check">✓</span> OSDE</div>
+        <div class="insurance-item"><span class="check">✓</span> Swiss Medical</div>
+        <div class="insurance-item"><span class="check">✓</span> Galeno</div>
+        <div class="insurance-item"><span class="check">✓</span> Medifé</div>
+        <div class="insurance-item"><span class="check">✓</span> OSPAT</div>
+        <div class="insurance-item"><span class="check">✓</span> OSFATLYF</div>
+        <div class="insurance-item"><span class="check">✓</span> Sancor Salud</div>
+        <div class="insurance-item"><span class="check">✓</span> OMINT</div>
+        <div class="insurance-item"><span class="check">✓</span> Particular</div>
+      </div>
+      <p class="insurance-note fade-up">¿Tu obra social no está en la lista? Consultanos, trabajamos con más convenios.</p>
+    </div>
+  </section>
+
+  <!-- UBICACIÓN Y HORARIOS -->
+  <section class="location" id="ubicacion">
+    <div class="container">
+      <h2 class="section-title fade-up">Ubicación y <span class="accent">horarios</span></h2>
+      <p class="section-subtitle fade-up">Te esperamos en nuestro consultorio en el corazón de Godoy Cruz.</p>
+      <div class="location-grid fade-up">
+
+        <div class="location-map">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13402.6!2d-68.4362!3d-32.9277!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x967e091f48bce89f%3A0x4c7eab3f4c0c6a8b!2sGodoy+Cruz%2C+Mendoza!5e0!3m2!1ses!2sar!4v1700000000000!5m2!1ses!2sar"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Ubicación del consultorio en Godoy Cruz, Mendoza">
+          </iframe>
+        </div>
+
+        <div class="location-details">
+          <h3>Encontranos acá</h3>
+
+          <div class="location-item">
+            <div class="location-icon">📍</div>
+            <div>
+              <strong>Dirección</strong>
+              <span>Av. San Martín 1450, Piso 2, Of. B<br>Godoy Cruz, Mendoza (CP 5501)</span>
+            </div>
+          </div>
+
+          <div class="location-item">
+            <div class="location-icon">🕐</div>
+            <div>
+              <strong>Horarios de atención</strong>
+              <span>Lunes a viernes: 9:00 a 18:00<br>Sábados: 9:00 a 13:00<br>Domingos y feriados: cerrado</span>
+            </div>
+          </div>
+
+          <div class="location-item">
+            <div class="location-icon">📞</div>
+            <div>
+              <strong>Teléfono</strong>
+              <span>(261) 400-1234</span>
+            </div>
+          </div>
+
+          <div class="location-item">
+            <div class="location-icon">📧</div>
+            <div>
+              <strong>Email</strong>
+              <span>turnos@dralopezodontologia.com.ar</span>
+            </div>
+          </div>
+
+          <div class="location-item">
+            <div class="location-icon">♿</div>
+            <div>
+              <strong>Accesibilidad</strong>
+              <span>Edificio con ascensor y rampas de acceso</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPINIONES -->
+  <section class="testimonials" id="opiniones">
+    <div class="container">
+      <h2 class="section-title fade-up">Lo que dicen nuestros <span class="accent">pacientes</span></h2>
+      <p class="section-subtitle fade-up">La confianza de nuestros pacientes es nuestro mayor logro. Más de 200 reseñas en Google.</p>
+      <div class="testimonials-grid">
+
+        <div class="testimonial-card fade-up">
+          <div class="testimonial-stars">★★★★★</div>
+          <blockquote>"Fui por un blanqueamiento y el resultado fue increíble. La Dra. López es súper profesional y el consultorio es impecable. Totalmente recomendable."</blockquote>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">CG</div>
+            <div>
+              <div class="testimonial-name">Carolina Gutiérrez</div>
+              <div class="testimonial-role">Paciente desde 2021 · Blanqueamiento</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card fade-up">
+          <div class="testimonial-stars">★★★★★</div>
+          <blockquote>"Le tenía pánico al dentista hasta que conocí a la Dra. María. Me hizo un tratamiento de conducto sin dolor y con una paciencia infinita. ¡Gracias!"</blockquote>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">RM</div>
+            <div>
+              <div class="testimonial-name">Roberto Martínez</div>
+              <div class="testimonial-role">Paciente desde 2019 · Endodoncia</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card fade-up">
+          <div class="testimonial-stars">★★★★★</div>
+          <blockquote>"Mis hijos van encantados al consultorio. Tiene una dedicación especial con los más chicos. El lugar es moderno y siempre te atienden a horario."</blockquote>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">LF</div>
+            <div>
+              <div class="testimonial-name">Luciana Fernández</div>
+              <div class="testimonial-role">Paciente desde 2020 · Familia</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card fade-up">
+          <div class="testimonial-stars">★★★★★</div>
+          <blockquote>"Me puse implantes con la Dra. López y el resultado superó todas mis expectativas. Volví a sonreír con confianza. El seguimiento post-operatorio fue excelente."</blockquote>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">JA</div>
+            <div>
+              <div class="testimonial-name">Jorge Acosta</div>
+              <div class="testimonial-role">Paciente desde 2022 · Implantes</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>🦷 Dra. María López — Odontología</h3>
+          <p>Cuidamos tu sonrisa con profesionalismo, tecnología y calidez humana. Más de 15 años de trayectoria en Godoy Cruz, Mendoza.</p>
+        </div>
+        <div>
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="#sobre">Sobre la Dra.</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#turnos">Turnos online</a></li>
+            <li><a href="#obras-sociales">Obras sociales</a></li>
+            <li><a href="#ubicacion">Ubicación</a></li>
+            <li><a href="#opiniones">Opiniones</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="tel:+5492614001234">📞 (261) 400-1234</a></li>
+            <li><a href="https://wa.me/5492614001234" target="_blank" rel="noopener">💬 WhatsApp</a></li>
+            <li><a href="mailto:turnos@dralopezodontologia.com.ar">📧 Email</a></li>
+            <li><a href="#ubicacion">📍 Cómo llegar</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Consultorio Dra. María López — Todos los derechos reservados</p>
+        <p style="margin-top: 0.5rem;">
+          Sitio creado como demostración por <a href="https://wa.me/5492616423730?text=Hola%20Juan!%20Vi%20la%20demo%20de%20consultorio%20y%20me%20interesa" target="_blank" rel="noopener">Juan Barranco</a> · Desarrollo web profesional en Mendoza
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => navLinks.classList.remove('active'));
+    });
+
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Set minimum date on date input to today
+    const fechaInput = document.getElementById('fecha');
+    if (fechaInput) {
+      const today = new Date().toISOString().split('T')[0];
+      fechaInput.setAttribute('min', today);
+    }
+  </script>
+
+</body>
+</html>

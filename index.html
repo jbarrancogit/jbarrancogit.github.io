@@ -84,6 +84,17 @@
       pointer-events: none;
     }
     .hero-content { position: relative; z-index: 1; max-width: 700px; }
+    .hero-profile {
+      display: flex; align-items: center; gap: 16px; margin-bottom: 24px;
+    }
+    .hero-avatar {
+      width: 72px; height: 72px; border-radius: 50%; border: 3px solid var(--accent);
+      box-shadow: 0 0 20px var(--accent-glow), 0 0 40px rgba(59, 130, 246, 0.06);
+      object-fit: cover; flex-shrink: 0;
+    }
+    .hero-profile-info { display: flex; flex-direction: column; gap: 2px; }
+    .hero-profile-name { font-weight: 700; font-size: 1rem; color: var(--text-primary); }
+    .hero-profile-role { font-size: 0.82rem; color: var(--text-secondary); }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
       background: var(--green-glow); border: 1px solid rgba(34, 197, 94, 0.25);
@@ -280,6 +291,31 @@
       border-radius: 100px; color: var(--text-muted); font-weight: 500;
     }
 
+    /* DEMOS */
+    .demos-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;
+    }
+    .demo-card {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; transition: all var(--transition); text-decoration: none; color: inherit; display: block;
+    }
+    .demo-card:hover { border-color: var(--accent); transform: translateY(-4px); color: inherit; }
+    .demo-preview {
+      height: 200px; display: flex; align-items: center; justify-content: center;
+      font-size: 3rem; position: relative; overflow: hidden;
+    }
+    .demo-preview::after {
+      content: 'VER DEMO →'; position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(59, 130, 246, 0.85); color: #fff; font-weight: 700;
+      font-size: 1rem; letter-spacing: 0.05em; opacity: 0; transition: opacity var(--transition);
+    }
+    .demo-card:hover .demo-preview::after { opacity: 1; }
+    .demo-info { padding: 20px; }
+    .demo-info h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; }
+    .demo-sector { font-size: 0.78rem; color: var(--accent-light); margin-bottom: 8px; }
+    .demo-info p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; }
+
     /* PRICING */
     .pricing-grid {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;
@@ -386,7 +422,7 @@
       .exp-grid, .faq-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 480px) {
-      .services-grid, .pricing-grid, .portfolio-grid, .problem-grid, .steps-grid { grid-template-columns: 1fr; }
+      .services-grid, .pricing-grid, .portfolio-grid, .problem-grid, .steps-grid, .demos-grid { grid-template-columns: 1fr; }
     }
 
     /* ANIMATIONS */
@@ -404,6 +440,7 @@
         <li><a href="#como-funciona">Cómo funciona</a></li>
         <li><a href="#servicios">Servicios</a></li>
         <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#demos">Demos</a></li>
         <li><a href="#precios">Precios</a></li>
       </ul>
       <a href="https://wa.me/5492616423730?text=Hola%20Juan!%20Quiero%20mi%20prototipo%20gratis" class="nav-cta" target="_blank">Prototipo gratis</a>
@@ -417,6 +454,13 @@
   <section class="hero">
     <div class="container">
       <div class="hero-content">
+        <div class="hero-profile">
+          <img src="https://avatars.githubusercontent.com/u/258823180?v=4" alt="Juan Ignacio Barranco" class="hero-avatar" width="72" height="72" loading="eager">
+          <div class="hero-profile-info">
+            <span class="hero-profile-name">Juan Ignacio Barranco</span>
+            <span class="hero-profile-role">Ingeniero de Software — Ex-Globant (Disney Paris)</span>
+          </div>
+        </div>
         <h1>
           Tu negocio es bueno. Tus clientes deberían poder <span class="highlight">encontrarte.</span>
         </h1>
@@ -796,6 +840,107 @@
             </div>
           </div>
         </div>
+
+        <a href="https://jbarrancogit.github.io/dashboard-arquitectura-utn/" target="_blank" class="portfolio-card fade-up" style="text-decoration:none; color:inherit;">
+          <div class="portfolio-img" style="background: linear-gradient(135deg, #1a0a3b, #0a0a2a);">&#128187;</div>
+          <div class="portfolio-info">
+            <h3>Dashboard Arquitectura de Computadoras</h3>
+            <p class="portfolio-company">UTN FRM — Proyecto universitario <span style="font-size:0.72rem; background:var(--green-glow); color:var(--green); padding:2px 8px; border-radius:100px; margin-left:6px;">EN VIVO</span></p>
+            <p>Dashboard interactivo de estudio para Arquitectura de Computadoras. Visualización de datos, estadísticas y herramientas de repaso para la materia.</p>
+            <div class="portfolio-tags">
+              <span class="portfolio-tag">HTML/CSS/JS</span>
+              <span class="portfolio-tag">Dashboard</span>
+              <span class="portfolio-tag">GitHub Pages</span>
+              <span class="portfolio-tag">UTN</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="https://jbarrancogit.github.io/dashboard-ssl-utn/" target="_blank" class="portfolio-card fade-up" style="text-decoration:none; color:inherit;">
+          <div class="portfolio-img" style="background: linear-gradient(135deg, #0a2a2a, #0a1a1a);">&#128202;</div>
+          <div class="portfolio-info">
+            <h3>Dashboard Sintaxis y Semántica</h3>
+            <p class="portfolio-company">UTN FRM — Proyecto universitario <span style="font-size:0.72rem; background:var(--green-glow); color:var(--green); padding:2px 8px; border-radius:100px; margin-left:6px;">EN VIVO</span></p>
+            <p>Predicción de examen basada en análisis estadístico de 39 finales reales. Dashboard interactivo con visualizaciones de datos para Sintaxis y Semántica de los Lenguajes.</p>
+            <div class="portfolio-tags">
+              <span class="portfolio-tag">Estadística</span>
+              <span class="portfolio-tag">Dashboard</span>
+              <span class="portfolio-tag">GitHub Pages</span>
+              <span class="portfolio-tag">UTN</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="https://jbarrancogit.github.io/paradigmas-dashboard/" target="_blank" class="portfolio-card fade-up" style="text-decoration:none; color:inherit;">
+          <div class="portfolio-img" style="background: linear-gradient(135deg, #2a1a0a, #1a0a0a);">&#129520;</div>
+          <div class="portfolio-info">
+            <h3>Dashboard Paradigmas de Programación</h3>
+            <p class="portfolio-company">UTN FRM — Proyecto universitario <span style="font-size:0.72rem; background:var(--green-glow); color:var(--green); padding:2px 8px; border-radius:100px; margin-left:6px;">EN VIVO</span></p>
+            <p>Dashboard maestro para estudiar Paradigmas de Programación. Herramienta interactiva con ejercicios, conceptos clave y material de repaso organizado.</p>
+            <div class="portfolio-tags">
+              <span class="portfolio-tag">Paradigmas</span>
+              <span class="portfolio-tag">Dashboard</span>
+              <span class="portfolio-tag">GitHub Pages</span>
+              <span class="portfolio-tag">UTN</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEMOS POR SECTOR -->
+  <section id="demos">
+    <div class="container">
+      <p class="section-label fade-up">Demos en vivo</p>
+      <h2 class="section-title fade-up">Mirá cómo quedaría tu sitio web</h2>
+      <p class="section-desc fade-up">Creé estas demos funcionales para que veas la calidad real que ofrezco. Hacé clic en cualquiera para verla en vivo.</p>
+
+      <div class="demos-grid">
+        <a href="demos/bodega.html" target="_blank" class="demo-card fade-up">
+          <div class="demo-preview" style="background: linear-gradient(135deg, #3b0a2a, #1a0515);">🍷</div>
+          <div class="demo-info">
+            <h3>Bodega Tierra del Sol</h3>
+            <p class="demo-sector">Bodegas y Viñedos — Luján de Cuyo</p>
+            <p>Sitio elegante con carta de vinos, sistema de reservas para degustaciones, galería de viñedos e historia de la bodega.</p>
+          </div>
+        </a>
+
+        <a href="demos/restaurante.html" target="_blank" class="demo-card fade-up">
+          <div class="demo-preview" style="background: linear-gradient(135deg, #3b1a0a, #1a0d05);">🔥</div>
+          <div class="demo-info">
+            <h3>Fuegos de Mendoza</h3>
+            <p class="demo-sector">Gastronomía — Av. Arístides Villanueva</p>
+            <p>Menú digital interactivo, sistema de reservas, reseñas de clientes, horarios y ubicación. Ideal para restaurantes y bares.</p>
+          </div>
+        </a>
+
+        <a href="demos/alojamiento.html" target="_blank" class="demo-card fade-up">
+          <div class="demo-preview" style="background: linear-gradient(135deg, #0a2a1a, #051a0d);">🏔️</div>
+          <div class="demo-info">
+            <h3>Cabañas del Valle</h3>
+            <p class="demo-sector">Alojamiento y Turismo — Potrerillos</p>
+            <p>Tipos de cabañas con precios, actividades, sistema de reserva, reseñas estilo Booking y cómo llegar. Perfecto para cabañas y hoteles.</p>
+          </div>
+        </a>
+
+        <a href="demos/profesional.html" target="_blank" class="demo-card fade-up">
+          <div class="demo-preview" style="background: linear-gradient(135deg, #0a1a3b, #050d1a);">🦷</div>
+          <div class="demo-info">
+            <h3>Consultorio Dra. López</h3>
+            <p class="demo-sector">Servicios Profesionales — Godoy Cruz</p>
+            <p>Turnos online, servicios y precios, obras sociales aceptadas, opiniones de pacientes. Para médicos, abogados y profesionales.</p>
+          </div>
+        </a>
+
+        <a href="demos/peluqueria.html" target="_blank" class="demo-card fade-up">
+          <div class="demo-preview" style="background: linear-gradient(135deg, #2a1a0a, #1a0d05);">💈</div>
+          <div class="demo-info">
+            <h3>Navaja & Estilo</h3>
+            <p class="demo-sector">Peluquerías y Barberías — Maipú</p>
+            <p>Lista de precios, equipo de barberos, galería de trabajos, turnos por WhatsApp y reseñas. Moderno y directo.</p>
+          </div>
+        </a>
       </div>
     </div>
   </section>

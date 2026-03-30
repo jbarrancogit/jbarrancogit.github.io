@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bodega Tierra del Sol — Luján de Cuyo, Mendoza</title>
+    <meta name="description" content="Bodega Tierra del Sol: 80 años de tradición vitivinícola en Luján de Cuyo, Mendoza. Visitanos, degustá nuestros vinos y viví una experiencia única.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --wine: #8B1A4A;
+            --wine-dark: #5E0F32;
+            --wine-light: #A8325E;
+            --wine-glow: #C2476F;
+            --gold: #D4A853;
+            --gold-light: #E8C97A;
+            --gold-dark: #B08A3A;
+            --cream: #FAF3E8;
+            --bg-dark: #0D0A0C;
+            --bg-card: #1A1318;
+            --bg-card-hover: #231C20;
+            --text-primary: #F5EDE4;
+            --text-secondary: #B8A99A;
+            --text-muted: #7A6E66;
+            --border-subtle: rgba(139, 26, 74, 0.2);
+            --border-wine: rgba(139, 26, 74, 0.4);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ===== DEMO BANNER ===== */
+        .demo-banner {
+            background: linear-gradient(135deg, var(--wine-dark), var(--wine), var(--wine-light));
+            background-size: 200% 200%;
+            color: #fff;
+            text-align: center;
+            padding: 12px 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(139, 26, 74, 0.4);
+            animation: bannerShimmer 4s ease-in-out infinite;
+        }
+
+        @keyframes bannerShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .demo-banner a {
+            color: var(--gold-light);
+            text-decoration: none;
+            font-weight: 700;
+            margin-left: 6px;
+            padding: 4px 14px;
+            border: 1px solid var(--gold);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .demo-banner a:hover {
+            background: var(--gold);
+            color: var(--wine-dark);
+        }
+
+        /* ===== NAVIGATION ===== */
+        .nav {
+            position: sticky;
+            top: 42px;
+            z-index: 999;
+            background: rgba(13, 10, 12, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 0 2rem;
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .nav-logo {
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .nav-logo span {
+            color: var(--wine-light);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--wine-light);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 4rem 2rem;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 50% 40%, rgba(139, 26, 74, 0.15), transparent),
+                radial-gradient(ellipse 60% 50% at 20% 80%, rgba(139, 26, 74, 0.08), transparent),
+                radial-gradient(ellipse 40% 40% at 80% 20%, rgba(212, 168, 83, 0.06), transparent);
+            z-index: 0;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to top, var(--bg-dark), transparent);
+            z-index: 1;
+        }
+
+        .hero-particles {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .hero-particles span {
+            position: absolute;
+            display: block;
+            width: 3px;
+            height: 3px;
+            background: var(--wine-light);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFade 6s ease-in-out infinite;
+        }
+
+        .hero-particles span:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .hero-particles span:nth-child(2) { top: 60%; left: 85%; animation-delay: 1s; }
+        .hero-particles span:nth-child(3) { top: 35%; left: 70%; animation-delay: 2s; }
+        .hero-particles span:nth-child(4) { top: 75%; left: 25%; animation-delay: 3s; }
+        .hero-particles span:nth-child(5) { top: 15%; left: 55%; animation-delay: 4s; }
+        .hero-particles span:nth-child(6) { top: 80%; left: 60%; animation-delay: 1.5s; }
+        .hero-particles span:nth-child(7) { top: 45%; left: 15%; animation-delay: 3.5s; }
+        .hero-particles span:nth-child(8) { top: 50%; left: 90%; animation-delay: 0.5s; }
+
+        @keyframes particleFade {
+            0%, 100% { opacity: 0; transform: translateY(0) scale(1); }
+            50% { opacity: 0.6; transform: translateY(-20px) scale(1.5); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero-emoji {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            display: block;
+            animation: floatEmoji 4s ease-in-out infinite;
+        }
+
+        @keyframes floatEmoji {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 6px 20px;
+            border: 1px solid var(--border-wine);
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--wine-light);
+            margin-bottom: 2rem;
+            background: rgba(139, 26, 74, 0.1);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--gold) 50%, var(--text-primary) 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textShine 4s ease-in-out infinite;
+        }
+
+        @keyframes textShine {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 200% center; }
+        }
+
+        .hero h1 .line-accent {
+            display: block;
+            font-style: italic;
+            font-weight: 300;
+            font-size: 0.45em;
+            letter-spacing: 0.08em;
+            -webkit-text-fill-color: var(--wine-light);
+            margin-top: 0.3em;
+        }
+
+        .hero-tagline {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: var(--text-secondary);
+            font-weight: 300;
+            max-width: 550px;
+            margin: 1.5rem auto 2.5rem;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            border: none;
+            letter-spacing: 0.02em;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--wine), var(--wine-light));
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(139, 26, 74, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(139, 26, 74, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-wine);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(139, 26, 74, 0.1);
+            border-color: var(--wine-light);
+            transform: translateY(-2px);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 3rem;
+            z-index: 2;
+            animation: scrollBounce 2s ease-in-out infinite;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        @keyframes scrollBounce {
+            0%, 100% { transform: translateY(0); opacity: 0.5; }
+            50% { transform: translateY(8px); opacity: 1; }
+        }
+
+        /* ===== SECTIONS ===== */
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--wine-light);
+            margin-bottom: 1rem;
+            padding: 5px 14px;
+            border: 1px solid var(--border-wine);
+            border-radius: 20px;
+            background: rgba(139, 26, 74, 0.08);
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            line-height: 1.15;
+        }
+
+        .section-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        .section-header {
+            margin-bottom: 3.5rem;
+        }
+
+        .section-divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(to right, var(--wine), var(--gold));
+            margin: 1.5rem 0;
+            border-radius: 2px;
+        }
+
+        .section-center .section-subtitle {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-center {
+            text-align: center;
+        }
+
+        .section-center .section-divider {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===== HISTORIA ===== */
+        .historia-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .historia-visual {
+            aspect-ratio: 4 / 5;
+            border-radius: 16px;
+            background: linear-gradient(160deg, var(--wine-dark) 0%, #2A1520 40%, var(--bg-card) 100%);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .historia-visual::before {
+            content: '🍇';
+            position: absolute;
+            font-size: 8rem;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.15;
+        }
+
+        .historia-visual-inner {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 30% 70%, rgba(139, 26, 74, 0.3), transparent 50%),
+                radial-gradient(circle at 70% 30%, rgba(212, 168, 83, 0.15), transparent 50%);
+        }
+
+        .historia-visual-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(13, 10, 12, 0.95), transparent);
+        }
+
+        .historia-visual-overlay p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .historia-stat-row {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .historia-stat {
+            text-align: center;
+        }
+
+        .historia-stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--gold);
+            line-height: 1;
+        }
+
+        .historia-stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.3rem;
+        }
+
+        .historia-text p {
+            color: var(--text-secondary);
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .historia-text p:first-of-type::first-letter {
+            font-size: 3.5rem;
+            font-weight: 800;
+            float: left;
+            line-height: 1;
+            margin-right: 12px;
+            margin-top: 4px;
+            color: var(--wine-light);
+        }
+
+        .historia-quote {
+            border-left: 3px solid var(--wine);
+            padding: 1.2rem 1.5rem;
+            margin: 2rem 0;
+            background: rgba(139, 26, 74, 0.06);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .historia-quote p {
+            font-style: italic;
+            color: var(--text-primary) !important;
+            font-size: 1.05rem !important;
+        }
+
+        .historia-quote cite {
+            display: block;
+            margin-top: 0.8rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-style: normal;
+        }
+
+        /* ===== VINOS ===== */
+        .vinos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .vino-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vino-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--wine-light), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .vino-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--border-wine);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            background: var(--bg-card-hover);
+        }
+
+        .vino-card:hover::before {
+            opacity: 1;
+        }
+
+        .vino-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .vino-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .vino-varietal {
+            font-size: 0.75rem;
+            color: var(--wine-light);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .vino-notes {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .vino-awards {
+            font-size: 0.7rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .vino-price {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .vino-price span {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        /* ===== VISITAS ===== */
+        .visitas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .visita-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .visita-card:hover {
+            border-color: var(--border-wine);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .visita-card.featured {
+            border-color: var(--wine);
+            position: relative;
+        }
+
+        .visita-card.featured::after {
+            content: 'MÁS ELEGIDA';
+            position: absolute;
+            top: 16px;
+            right: -30px;
+            background: var(--wine);
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            padding: 4px 40px;
+            transform: rotate(45deg);
+        }
+
+        .visita-header {
+            padding: 2rem 2rem 1rem;
+        }
+
+        .visita-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .visita-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .visita-duration {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .visita-body {
+            padding: 0 2rem;
+        }
+
+        .visita-body ul {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .visita-body li {
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .visita-body li::before {
+            content: '✓';
+            color: var(--wine-light);
+            font-weight: 700;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .visita-footer {
+            padding: 1.5rem 2rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .visita-price {
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .visita-price span {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: #fff;
+            padding: 10px 22px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-whatsapp:hover {
+            background: #1FB855;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        /* ===== GALERIA ===== */
+        .galeria-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: auto auto;
+            gap: 1rem;
+        }
+
+        .galeria-item {
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 4 / 3;
+            cursor: pointer;
+        }
+
+        .galeria-item:nth-child(1) {
+            grid-column: 1 / 3;
+            grid-row: 1 / 3;
+            aspect-ratio: auto;
+        }
+
+        .galeria-bg {
+            position: absolute;
+            inset: 0;
+            transition: transform 0.6s ease;
+        }
+
+        .galeria-item:hover .galeria-bg {
+            transform: scale(1.05);
+        }
+
+        .galeria-item:nth-child(1) .galeria-bg {
+            background: linear-gradient(145deg, #2D1B24 0%, #5E0F32 40%, #8B1A4A 70%, #3A1828 100%);
+        }
+        .galeria-item:nth-child(2) .galeria-bg {
+            background: linear-gradient(145deg, #1A2615 0%, #2D4A1F 50%, #1A3312 100%);
+        }
+        .galeria-item:nth-child(3) .galeria-bg {
+            background: linear-gradient(145deg, #2A1F10 0%, #5C3D1A 50%, #3A2A10 100%);
+        }
+        .galeria-item:nth-child(4) .galeria-bg {
+            background: linear-gradient(145deg, #1A1528 0%, #3A2050 50%, #2A1840 100%);
+        }
+        .galeria-item:nth-child(5) .galeria-bg {
+            background: linear-gradient(145deg, #28181A 0%, #4A2028 50%, #351820 100%);
+        }
+
+        .galeria-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(13, 10, 12, 0.9) 0%, rgba(13, 10, 12, 0.1) 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            opacity: 0.7;
+            transition: opacity 0.4s ease;
+        }
+
+        .galeria-item:hover .galeria-overlay {
+            opacity: 1;
+        }
+
+        .galeria-overlay-emoji {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .galeria-overlay h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .galeria-overlay p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* ===== UBICACION ===== */
+        .ubicacion-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .ubicacion-map {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 4 / 3;
+            position: relative;
+        }
+
+        .ubicacion-map-placeholder {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(135deg, #1A1318 0%, #2A1F24 50%, #1A1318 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .ubicacion-map-placeholder .map-emoji {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+
+        .ubicacion-map-placeholder p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .ubicacion-map-placeholder p strong {
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 0.3rem;
+            font-size: 1rem;
+        }
+
+        .ubicacion-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .ubicacion-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .ubicacion-item-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(139, 26, 74, 0.1);
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .ubicacion-item h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .ubicacion-item p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .ubicacion-horarios {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .ubicacion-horarios h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .horario-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            font-size: 0.85rem;
+        }
+
+        .horario-row:last-child {
+            border-bottom: none;
+        }
+
+        .horario-day {
+            color: var(--text-secondary);
+        }
+
+        .horario-time {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .horario-closed {
+            color: var(--wine-light);
+        }
+
+        /* ===== CTA BANNER ===== */
+        .cta-banner {
+            text-align: center;
+            padding: 5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, rgba(139, 26, 74, 0.12), transparent 70%);
+        }
+
+        .cta-banner-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-banner h2 {
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .cta-banner p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            border-top: 1px solid var(--border-subtle);
+            padding: 4rem 2rem 2rem;
+            margin-top: 2rem;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-brand h3 span {
+            color: var(--wine-light);
+        }
+
+        .footer-brand p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 300px;
+        }
+
+        .footer-col h4 {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            margin-bottom: 1.2rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 0.6rem;
+        }
+
+        .footer-col a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-col a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background: rgba(139, 26, 74, 0.2);
+            border-color: var(--wine-light);
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .footer-bottom a {
+            color: var(--wine-light);
+            text-decoration: none;
+        }
+
+        .footer-bottom a:hover {
+            color: var(--wine-glow);
+        }
+
+        .footer-legal {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        /* ===== FADE-IN ANIMATION ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* stagger children */
+        .fade-in-stagger > .fade-in:nth-child(2) { transition-delay: 0.1s; }
+        .fade-in-stagger > .fade-in:nth-child(3) { transition-delay: 0.2s; }
+        .fade-in-stagger > .fade-in:nth-child(4) { transition-delay: 0.3s; }
+        .fade-in-stagger > .fade-in:nth-child(5) { transition-delay: 0.4s; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 968px) {
+            .historia-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .historia-visual {
+                aspect-ratio: 16 / 9;
+            }
+
+            .ubicacion-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+
+            .galeria-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .galeria-item:nth-child(1) {
+                grid-column: 1 / 3;
+                grid-row: auto;
+                aspect-ratio: 16 / 9;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(13, 10, 12, 0.98);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 1.5rem 2rem;
+                gap: 1rem;
+                border-bottom: 1px solid var(--border-subtle);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .section {
+                padding: 4rem 1.5rem;
+            }
+
+            .historia-stat-row {
+                gap: 1.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .historia-stat-number {
+                font-size: 1.8rem;
+            }
+
+            .visitas-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 0.8rem;
+                text-align: center;
+            }
+
+            .demo-banner {
+                font-size: 0.75rem;
+                padding: 10px 15px;
+                line-height: 1.6;
+            }
+
+            .galeria-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .galeria-item:nth-child(1) {
+                grid-column: auto;
+                grid-row: auto;
+            }
+
+            .galeria-item {
+                aspect-ratio: 16 / 9;
+            }
+
+            .visita-footer {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .vinos-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- DEMO BANNER -->
+    <div class="demo-banner">
+        ✨ Esta es una demo creada por <strong>Juan Barranco</strong> — ¿Querés algo así para tu bodega?
+        <a href="https://wa.me/5492616423730?text=Hola%20Juan!%20Vi%20la%20demo%20de%20bodega%20y%20me%20interesa" target="_blank" rel="noopener">→ Contactame</a>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">Tierra <span>del Sol</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#historia">Historia</a></li>
+                <li><a href="#vinos">Vinos</a></li>
+                <li><a href="#visitas">Visitas</a></li>
+                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#ubicacion">Ubicación</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Abrir menú de navegación">☰</button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-particles">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+        </div>
+        <div class="hero-content">
+            <span class="hero-emoji">🍷</span>
+            <div class="hero-badge">Luján de Cuyo · Mendoza · Argentina</div>
+            <h1>
+                Bodega<br>Tierra del Sol
+                <span class="line-accent">Donde la tradición se encuentra con la excelencia</span>
+            </h1>
+            <p class="hero-tagline">
+                Tres generaciones cultivando la vid bajo el sol mendocino.
+                80 años de pasión, tierra y vino.
+            </p>
+            <div class="hero-buttons">
+                <a href="#visitas" class="btn btn-primary">🍇 Reservá tu visita</a>
+                <a href="#vinos" class="btn btn-secondary">Conocé nuestros vinos</a>
+            </div>
+        </div>
+        <a href="#historia" class="hero-scroll">↓ Descubrí nuestra historia</a>
+    </section>
+
+    <!-- NUESTRA HISTORIA -->
+    <section class="section" id="historia">
+        <div class="historia-grid">
+            <div class="historia-visual fade-in">
+                <div class="historia-visual-inner"></div>
+                <div class="historia-visual-overlay">
+                    <p>Viñedos al pie de la Cordillera de los Andes, Luján de Cuyo</p>
+                </div>
+            </div>
+            <div class="fade-in">
+                <div class="section-header">
+                    <span class="section-label">Nuestra historia</span>
+                    <h2 class="section-title">Tres generaciones,<br>un mismo sueño</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="historia-text">
+                    <p>En 1945, Don Antonio Herrera llegó a Luján de Cuyo con un sueño: crear vinos que reflejaran el alma de la tierra mendocina. Con sus propias manos plantó las primeras cepas de Malbec en un terroir privilegiado, a 980 metros sobre el nivel del mar, al pie de la imponente Cordillera de los Andes.</p>
+                    <p>Hoy, su nieta Valentina lidera la tercera generación de esta familia vitivinícola, combinando las técnicas artesanales heredadas con innovación enológica de vanguardia. Cada botella que sale de nuestra bodega lleva consigo 80 años de historia, pasión y un compromiso inquebrantable con la calidad.</p>
+                    <div class="historia-quote">
+                        <p>«El vino no se hace en la bodega, se hace en el viñedo. Nosotros solo lo acompañamos.»</p>
+                        <cite>— Don Antonio Herrera, fundador (1945)</cite>
+                    </div>
+                </div>
+                <div class="historia-stat-row">
+                    <div class="historia-stat">
+                        <div class="historia-stat-number">80</div>
+                        <div class="historia-stat-label">Años de historia</div>
+                    </div>
+                    <div class="historia-stat">
+                        <div class="historia-stat-number">45</div>
+                        <div class="historia-stat-label">Hectáreas</div>
+                    </div>
+                    <div class="historia-stat">
+                        <div class="historia-stat-number">980</div>
+                        <div class="historia-stat-label">Metros de altitud</div>
+                    </div>
+                    <div class="historia-stat">
+                        <div class="historia-stat-number">3.ª</div>
+                        <div class="historia-stat-label">Generación</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NUESTROS VINOS -->
+    <section class="section section-center" id="vinos">
+        <div class="section-header fade-in">
+            <span class="section-label">Nuestros vinos</span>
+            <h2 class="section-title">Expresiones de nuestra tierra</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Cada vino cuenta una historia única, nacida de uvas cultivadas con dedicación en nuestros viñedos de altura.</p>
+        </div>
+        <div class="vinos-grid fade-in-stagger">
+            <div class="vino-card fade-in">
+                <span class="vino-icon">🍷</span>
+                <h3 class="vino-name">Gran Reserva</h3>
+                <div class="vino-varietal">Malbec · 2019</div>
+                <p class="vino-notes">Intenso color violeta. Aromas a frutos negros maduros, violetas y un sutil toque de vainilla. Taninos firmes y un final largo y elegante. 18 meses en barrica de roble francés.</p>
+                <div class="vino-awards">🏅 92 pts — Robert Parker</div>
+                <div class="vino-price">$18.500 <span>ARS</span></div>
+            </div>
+            <div class="vino-card fade-in">
+                <span class="vino-icon">🍷</span>
+                <h3 class="vino-name">Reserva</h3>
+                <div class="vino-varietal">Cabernet Sauvignon · 2020</div>
+                <p class="vino-notes">Color rojo profundo con destellos rubí. Notas de cassis, pimiento rojo y especias. Estructura firme con taninos sedosos. 12 meses en roble. Ideal para carnes rojas.</p>
+                <div class="vino-awards">🏅 90 pts — Wine Spectator</div>
+                <div class="vino-price">$14.200 <span>ARS</span></div>
+            </div>
+            <div class="vino-card fade-in">
+                <span class="vino-icon">🥂</span>
+                <h3 class="vino-name">Corte del Sol</h3>
+                <div class="vino-varietal">Blend Premium · 2020</div>
+                <p class="vino-notes">Malbec 60%, Cabernet 25%, Merlot 15%. Aromas de ciruela, chocolate amargo y tabaco. Redondo en boca, con gran volumen y un final persistente y mineral.</p>
+                <div class="vino-awards">🏅 Doble Oro — Catena Wine Trophy</div>
+                <div class="vino-price">$22.800 <span>ARS</span></div>
+            </div>
+            <div class="vino-card fade-in">
+                <span class="vino-icon">🥂</span>
+                <h3 class="vino-name">Brisa Andina</h3>
+                <div class="vino-varietal">Torrontés · 2023</div>
+                <p class="vino-notes">Amarillo pálido brillante. Aromas florales intensos: rosas, jazmín y durazno blanco. Fresco en boca con acidez vibrante. Perfecto para tardes de verano.</p>
+                <div class="vino-awards">🏅 Mejor Torrontés — Vendimia 2024</div>
+                <div class="vino-price">$8.900 <span>ARS</span></div>
+            </div>
+            <div class="vino-card fade-in">
+                <span class="vino-icon">🌸</span>
+                <h3 class="vino-name">Atardecer Rosé</h3>
+                <div class="vino-varietal">Malbec Rosé · 2023</div>
+                <p class="vino-notes">Delicado color rosa salmón. Frutillas frescas, frambuesas y pétalos de rosa. Ligero y refrescante, con acidez equilibrada. Ideal como aperitivo.</p>
+                <div class="vino-awards">🏅 91 pts — Descorchados</div>
+                <div class="vino-price">$9.500 <span>ARS</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VISITAS Y DEGUSTACIONES -->
+    <section class="section" id="visitas">
+        <div class="section-header section-center fade-in">
+            <span class="section-label">Visitas y degustaciones</span>
+            <h2 class="section-title">Viví la experiencia<br>Tierra del Sol</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Recorré nuestros viñedos, conocé nuestra bodega y degustá nuestros vinos en un entorno único al pie de los Andes.</p>
+        </div>
+        <div class="visitas-grid">
+            <!-- Clásica -->
+            <div class="visita-card fade-in">
+                <div class="visita-header">
+                    <span class="visita-emoji">🍇</span>
+                    <h3 class="visita-name">Experiencia Clásica</h3>
+                    <span class="visita-duration">Duración: 1 hora 30 minutos</span>
+                </div>
+                <div class="visita-body">
+                    <ul>
+                        <li>Recorrido guiado por los viñedos</li>
+                        <li>Visita a la sala de barricas</li>
+                        <li>Degustación de 3 vinos de línea</li>
+                        <li>Copa de cortesía para llevar</li>
+                    </ul>
+                </div>
+                <div class="visita-footer">
+                    <div class="visita-price">$12.000 <span>por persona</span></div>
+                    <a href="https://wa.me/5492616423730?text=Hola!%20Quiero%20reservar%20la%20Experiencia%20Cl%C3%A1sica%20en%20Bodega%20Tierra%20del%20Sol" class="btn-whatsapp" target="_blank" rel="noopener">📱 Reservar</a>
+                </div>
+            </div>
+            <!-- Premium -->
+            <div class="visita-card featured fade-in">
+                <div class="visita-header">
+                    <span class="visita-emoji">🏆</span>
+                    <h3 class="visita-name">Experiencia Premium</h3>
+                    <span class="visita-duration">Duración: 2 horas 30 minutos</span>
+                </div>
+                <div class="visita-body">
+                    <ul>
+                        <li>Todo lo de la Experiencia Clásica</li>
+                        <li>Degustación de 5 vinos incluido Gran Reserva</li>
+                        <li>Maridaje con tabla de quesos artesanales</li>
+                        <li>Acceso a la cava privada</li>
+                        <li>Botella de Reserva de regalo</li>
+                    </ul>
+                </div>
+                <div class="visita-footer">
+                    <div class="visita-price">$28.000 <span>por persona</span></div>
+                    <a href="https://wa.me/5492616423730?text=Hola!%20Quiero%20reservar%20la%20Experiencia%20Premium%20en%20Bodega%20Tierra%20del%20Sol" class="btn-whatsapp" target="_blank" rel="noopener">📱 Reservar</a>
+                </div>
+            </div>
+            <!-- Atardecer -->
+            <div class="visita-card fade-in">
+                <div class="visita-header">
+                    <span class="visita-emoji">🌅</span>
+                    <h3 class="visita-name">Experiencia Atardecer</h3>
+                    <span class="visita-duration">Viernes y sábados · 18:00 hs</span>
+                </div>
+                <div class="visita-body">
+                    <ul>
+                        <li>Recorrido al atardecer por los viñedos</li>
+                        <li>Degustación de 4 vinos premium</li>
+                        <li>Picada gourmet con productos regionales</li>
+                        <li>Música en vivo (sábados)</li>
+                        <li>Foto profesional de recuerdo</li>
+                    </ul>
+                </div>
+                <div class="visita-footer">
+                    <div class="visita-price">$35.000 <span>por persona</span></div>
+                    <a href="https://wa.me/5492616423730?text=Hola!%20Quiero%20reservar%20la%20Experiencia%20Atardecer%20en%20Bodega%20Tierra%20del%20Sol" class="btn-whatsapp" target="_blank" rel="noopener">📱 Reservar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERIA -->
+    <section class="section" id="galeria">
+        <div class="section-header section-center fade-in">
+            <span class="section-label">Galería</span>
+            <h2 class="section-title">Nuestro mundo en imágenes</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="galeria-grid fade-in">
+            <div class="galeria-item">
+                <div class="galeria-bg"></div>
+                <div class="galeria-overlay">
+                    <span class="galeria-overlay-emoji">🏔️</span>
+                    <h3>Viñedos de altura</h3>
+                    <p>Nuestras 45 hectáreas al pie de la Cordillera, a 980 m.s.n.m.</p>
+                </div>
+            </div>
+            <div class="galeria-item">
+                <div class="galeria-bg"></div>
+                <div class="galeria-overlay">
+                    <span class="galeria-overlay-emoji">🍇</span>
+                    <h3>Cosecha manual</h3>
+                    <p>Selección racimo por racimo en vendimia</p>
+                </div>
+            </div>
+            <div class="galeria-item">
+                <div class="galeria-bg"></div>
+                <div class="galeria-overlay">
+                    <span class="galeria-overlay-emoji">🪵</span>
+                    <h3>Sala de barricas</h3>
+                    <p>Roble francés y americano de primera selección</p>
+                </div>
+            </div>
+            <div class="galeria-item">
+                <div class="galeria-bg"></div>
+                <div class="galeria-overlay">
+                    <span class="galeria-overlay-emoji">🍷</span>
+                    <h3>Sala de degustación</h3>
+                    <p>Espacios diseñados para una experiencia única</p>
+                </div>
+            </div>
+            <div class="galeria-item">
+                <div class="galeria-bg"></div>
+                <div class="galeria-overlay">
+                    <span class="galeria-overlay-emoji">🌅</span>
+                    <h3>Atardeceres mendocinos</h3>
+                    <p>Vistas inigualables desde nuestra terraza</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- UBICACION -->
+    <section class="section" id="ubicacion">
+        <div class="section-header section-center fade-in">
+            <span class="section-label">Ubicación</span>
+            <h2 class="section-title">Visitanos en Luján de Cuyo</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="ubicacion-grid fade-in">
+            <div class="ubicacion-map">
+                <div class="ubicacion-map-placeholder">
+                    <span class="map-emoji">📍</span>
+                    <p><strong>Bodega Tierra del Sol</strong>Ruta Provincial 15, Km 32<br>Luján de Cuyo, Mendoza</p>
+                    <a href="https://maps.google.com/?q=-33.03,-68.87" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top: 1.2rem; font-size: 0.85rem; padding: 10px 24px;">
+                        🗺️ Abrir en Google Maps
+                    </a>
+                </div>
+            </div>
+            <div class="ubicacion-info">
+                <div class="ubicacion-item">
+                    <div class="ubicacion-item-icon">📍</div>
+                    <div>
+                        <h4>Dirección</h4>
+                        <p>Ruta Provincial 15, Km 32<br>Luján de Cuyo, Mendoza, Argentina<br>CP M5507</p>
+                    </div>
+                </div>
+                <div class="ubicacion-item">
+                    <div class="ubicacion-item-icon">🚗</div>
+                    <div>
+                        <h4>Cómo llegar</h4>
+                        <p>A 25 minutos del centro de Mendoza por Ruta 7. Estacionamiento gratuito. También ofrecemos servicio de transfer desde la ciudad.</p>
+                    </div>
+                </div>
+                <div class="ubicacion-item">
+                    <div class="ubicacion-item-icon">📞</div>
+                    <div>
+                        <h4>Reservas</h4>
+                        <p>+54 261 555-0123<br>reservas@tierradelsol.com.ar</p>
+                    </div>
+                </div>
+                <div class="ubicacion-horarios">
+                    <h4>🕐 Horarios de visita</h4>
+                    <div class="horario-row">
+                        <span class="horario-day">Lunes a viernes</span>
+                        <span class="horario-time">10:00 — 18:00</span>
+                    </div>
+                    <div class="horario-row">
+                        <span class="horario-day">Sábados</span>
+                        <span class="horario-time">09:00 — 19:00</span>
+                    </div>
+                    <div class="horario-row">
+                        <span class="horario-day">Domingos</span>
+                        <span class="horario-time">10:00 — 15:00</span>
+                    </div>
+                    <div class="horario-row">
+                        <span class="horario-day">Feriados</span>
+                        <span class="horario-time horario-closed">Consultar disponibilidad</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="cta-banner fade-in">
+        <div class="cta-banner-content">
+            <span style="font-size: 3rem; display: block; margin-bottom: 1rem;">🍷🍇✨</span>
+            <h2>¿Listo para vivir la experiencia?</h2>
+            <p>Reservá tu visita y descubrí por qué nuestros vinos enamoran desde la primera copa.</p>
+            <a href="https://wa.me/5492616423730?text=Hola!%20Quiero%20reservar%20una%20visita%20en%20Bodega%20Tierra%20del%20Sol" class="btn btn-primary" target="_blank" rel="noopener">📱 Reservar por WhatsApp</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer" id="contacto">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Tierra <span>del Sol</span></h3>
+                    <p>Tres generaciones cultivando la vid bajo el sol mendocino. Elaboramos vinos de altura que expresan la identidad de Luján de Cuyo.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Instagram" title="Instagram">📸</a>
+                        <a href="#" aria-label="Facebook" title="Facebook">👥</a>
+                        <a href="#" aria-label="YouTube" title="YouTube">🎬</a>
+                        <a href="#" aria-label="WhatsApp" title="WhatsApp">💬</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Navegación</h4>
+                    <ul>
+                        <li><a href="#historia">Nuestra historia</a></li>
+                        <li><a href="#vinos">Nuestros vinos</a></li>
+                        <li><a href="#visitas">Visitas</a></li>
+                        <li><a href="#galeria">Galería</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><a href="tel:+542615550123">+54 261 555-0123</a></li>
+                        <li><a href="mailto:info@tierradelsol.com.ar">info@tierradelsol.com.ar</a></li>
+                        <li><a href="mailto:reservas@tierradelsol.com.ar">reservas@tierradelsol.com.ar</a></li>
+                        <li><a href="#">Prensa y medios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Política de privacidad</a></li>
+                        <li><a href="#">Términos y condiciones</a></li>
+                        <li><a href="#">Beber con moderación</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Bodega Tierra del Sol. Todos los derechos reservados.</p>
+                <p>Sitio demo creado por <a href="https://wa.me/5492616423730?text=Hola%20Juan!%20Vi%20la%20demo%20de%20bodega%20y%20me%20interesa" target="_blank" rel="noopener">Juan Barranco</a></p>
+            </div>
+            <p class="footer-legal">Beber con moderación. Prohibida su venta a menores de 18 años.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        // Mobile nav toggle
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+
+        // Close nav when a link is clicked (mobile)
+        document.querySelectorAll('.nav-links a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+
+        // Fade-in on scroll (Intersection Observer)
+        (function() {
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            document.querySelectorAll('.fade-in').forEach(function(el) {
+                observer.observe(el);
+            });
+        })();
+
+        // Smooth scroll for anchor links (fallback)
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                var href = this.getAttribute('href');
+                if (href === '#') return;
+                var target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
