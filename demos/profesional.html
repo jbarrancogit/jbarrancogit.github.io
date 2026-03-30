@@ -7,6 +7,7 @@
   <meta name="description" content="Consultorio odontológico de la Dra. María López en Godoy Cruz, Mendoza. Limpieza dental, blanqueamiento, ortodoncia, implantes y más. Turnos online.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://images.unsplash.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     /* ===== RESET & BASE ===== */
@@ -143,17 +144,20 @@
       text-align: center;
       position: relative;
       overflow: hidden;
+      background-image: url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1400&q=80&fit=crop');
+      background-size: cover;
+      background-position: center;
     }
     .hero::before {
       content: '';
       position: absolute;
-      top: -50%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(14, 165, 233, 0.12), transparent 70%);
+      inset: 0;
+      background: linear-gradient(180deg, rgba(11, 17, 32, 0.88) 0%, rgba(11, 17, 32, 0.92) 50%, rgba(11, 17, 32, 0.97) 100%);
       pointer-events: none;
+    }
+    .hero .container {
+      position: relative;
+      z-index: 1;
     }
     .hero-emoji {
       font-size: 3.5rem;
@@ -212,12 +216,15 @@
       width: 280px;
       height: 340px;
       border-radius: 1rem;
-      background: linear-gradient(135deg, #1E293B, #0F172A);
+      background-image: url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=500&q=80&fit=crop');
+      background-size: cover;
+      background-position: center top;
       border: 2px solid rgba(14, 165, 233, 0.2);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 6rem;
+      font-size: 0;
+      color: transparent;
       position: relative;
       overflow: hidden;
     }
@@ -225,7 +232,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, transparent 60%, rgba(14, 165, 233, 0.05) 100%);
+      background: linear-gradient(180deg, transparent 60%, rgba(11, 17, 32, 0.4) 100%);
       border-radius: 1rem;
     }
     .about-text h2 {
@@ -269,13 +276,30 @@
       background: #111827;
       border: 1px solid #1E293B;
       border-radius: 1rem;
-      padding: 1.75rem;
+      padding: 0;
+      overflow: hidden;
       transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
     }
     .service-card:hover {
       border-color: #0EA5E9;
       transform: translateY(-4px);
       box-shadow: 0 8px 32px rgba(14, 165, 233, 0.08);
+    }
+    .service-card-img {
+      width: 100%;
+      height: 180px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    .service-card-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(17, 24, 39, 0.7) 100%);
+    }
+    .service-card-body {
+      padding: 1.25rem 1.75rem 1.75rem;
     }
     .service-icon { font-size: 2rem; margin-bottom: 0.75rem; }
     .service-card h3 {
@@ -306,6 +330,24 @@
       grid-template-columns: 1fr 1fr;
       gap: 2.5rem;
       align-items: start;
+    }
+    .appointment-img {
+      width: 100%;
+      height: 200px;
+      border-radius: 1rem;
+      background-image: url('https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=600&q=80&fit=crop');
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .appointment-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 50%, rgba(15, 23, 42, 0.5) 100%);
+      border-radius: 1rem;
     }
     .appointment-info h3 {
       font-size: 1.3rem;
@@ -446,6 +488,24 @@
       min-height: 340px;
       border: 0;
       filter: brightness(0.85) contrast(1.1) saturate(0.8);
+    }
+    .location-photo {
+      width: 100%;
+      height: 200px;
+      border-radius: 1rem;
+      background-image: url('https://images.unsplash.com/photo-1629909615184-74f495363b67?w=600&q=80&fit=crop');
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .location-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 50%, rgba(15, 23, 42, 0.4) 100%);
+      border-radius: 1rem;
     }
     .location-details h3 {
       font-size: 1.3rem;
@@ -622,7 +682,14 @@
         margin: 0 auto;
         width: 200px;
         height: 240px;
-        font-size: 4.5rem;
+        font-size: 0;
+      }
+      .service-card-img {
+        height: 150px;
+      }
+      .appointment-img,
+      .location-photo {
+        height: 180px;
       }
       .about-badges { justify-content: center; }
       .appointment-grid { grid-template-columns: 1fr; }
@@ -716,45 +783,63 @@
       <div class="services-grid">
 
         <div class="service-card fade-up">
-          <div class="service-icon">🪥</div>
-          <h3>Limpieza dental</h3>
-          <p>Profilaxis profesional con ultrasonido para eliminar sarro y placa bacteriana. Incluye pulido dental y control de encías. Recomendada cada 6 meses.</p>
-          <span class="service-price">Desde $15.000</span>
+          <div class="service-card-img" style="background-image: url('https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=400&q=80&fit=crop');" role="img" aria-label="Limpieza dental profesional"></div>
+          <div class="service-card-body">
+            <div class="service-icon">🪥</div>
+            <h3>Limpieza dental</h3>
+            <p>Profilaxis profesional con ultrasonido para eliminar sarro y placa bacteriana. Incluye pulido dental y control de encías. Recomendada cada 6 meses.</p>
+            <span class="service-price">Desde $15.000</span>
+          </div>
         </div>
 
         <div class="service-card fade-up">
-          <div class="service-icon">✨</div>
-          <h3>Blanqueamiento</h3>
-          <p>Blanqueamiento LED en consultorio con resultados visibles en una sola sesión. Hasta 6 tonos más blanco, sin dañar el esmalte.</p>
-          <span class="service-price">Desde $45.000</span>
+          <div class="service-card-img" style="background-image: url('https://images.unsplash.com/photo-1581585090592-25e4e43ef691?w=400&q=80&fit=crop');" role="img" aria-label="Blanqueamiento dental"></div>
+          <div class="service-card-body">
+            <div class="service-icon">✨</div>
+            <h3>Blanqueamiento</h3>
+            <p>Blanqueamiento LED en consultorio con resultados visibles en una sola sesión. Hasta 6 tonos más blanco, sin dañar el esmalte.</p>
+            <span class="service-price">Desde $45.000</span>
+          </div>
         </div>
 
         <div class="service-card fade-up">
-          <div class="service-icon">🔧</div>
-          <h3>Ortodoncia</h3>
-          <p>Brackets metálicos, estéticos y alineadores invisibles. Plan de tratamiento personalizado con seguimiento mensual hasta lograr la alineación perfecta.</p>
-          <span class="service-price">Desde $35.000/mes</span>
+          <div class="service-card-img" style="background-image: url('https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=400&q=80&fit=crop');" role="img" aria-label="Ortodoncia y brackets"></div>
+          <div class="service-card-body">
+            <div class="service-icon">🔧</div>
+            <h3>Ortodoncia</h3>
+            <p>Brackets metálicos, estéticos y alineadores invisibles. Plan de tratamiento personalizado con seguimiento mensual hasta lograr la alineación perfecta.</p>
+            <span class="service-price">Desde $35.000/mes</span>
+          </div>
         </div>
 
         <div class="service-card fade-up">
-          <div class="service-icon">🔩</div>
-          <h3>Implantes dentales</h3>
-          <p>Implantes de titanio de primera línea con corona de porcelana. Recuperá tu sonrisa completa de forma definitiva con cirugía mínimamente invasiva.</p>
-          <span class="service-price">Consultar presupuesto</span>
+          <div class="service-card-img" style="background-image: url('https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=400&q=80&fit=crop');" role="img" aria-label="Implantes dentales"></div>
+          <div class="service-card-body">
+            <div class="service-icon">🔩</div>
+            <h3>Implantes dentales</h3>
+            <p>Implantes de titanio de primera línea con corona de porcelana. Recuperá tu sonrisa completa de forma definitiva con cirugía mínimamente invasiva.</p>
+            <span class="service-price">Consultar presupuesto</span>
+          </div>
         </div>
 
         <div class="service-card fade-up">
-          <div class="service-icon">🩺</div>
-          <h3>Endodoncia</h3>
-          <p>Tratamiento de conducto indoloro con instrumental rotatorio de última generación. Salvá tu pieza dental y eliminá el dolor de raíz.</p>
-          <span class="service-price">Desde $25.000</span>
+          <div class="service-card-img" style="background-image: url('https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=400&q=80&fit=crop');" role="img" aria-label="Tratamiento de endodoncia"></div>
+          <div class="service-card-body">
+            <div class="service-icon">🩺</div>
+            <h3>Endodoncia</h3>
+            <p>Tratamiento de conducto indoloro con instrumental rotatorio de última generación. Salvá tu pieza dental y eliminá el dolor de raíz.</p>
+            <span class="service-price">Desde $25.000</span>
+          </div>
         </div>
 
         <div class="service-card fade-up">
-          <div class="service-icon">💎</div>
-          <h3>Odontología estética</h3>
-          <p>Carillas de porcelana, resinas estéticas y diseño de sonrisa digital. Resultados naturales y armónicos que realzan tu mejor versión.</p>
-          <span class="service-price">Desde $30.000 por pieza</span>
+          <div class="service-card-img" style="background-image: url('https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80&fit=crop');" role="img" aria-label="Odontología estética y sonrisa"></div>
+          <div class="service-card-body">
+            <div class="service-icon">💎</div>
+            <h3>Odontología estética</h3>
+            <p>Carillas de porcelana, resinas estéticas y diseño de sonrisa digital. Resultados naturales y armónicos que realzan tu mejor versión.</p>
+            <span class="service-price">Desde $30.000 por pieza</span>
+          </div>
         </div>
 
       </div>
@@ -769,6 +854,7 @@
       <div class="appointment-grid">
 
         <div class="appointment-info fade-up">
+          <div class="appointment-img" role="img" aria-label="Consulta odontológica profesional"></div>
           <h3>¿Cómo funciona?</h3>
           <p>Solicitar tu turno es muy simple. Podés completar el formulario o escribirnos directamente por WhatsApp.</p>
           <ul class="appointment-steps">
@@ -879,6 +965,7 @@
         </div>
 
         <div class="location-details">
+          <div class="location-photo" role="img" aria-label="Recepción del consultorio odontológico"></div>
           <h3>Encontranos acá</h3>
 
           <div class="location-item">

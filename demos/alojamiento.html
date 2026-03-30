@@ -149,10 +149,9 @@
             justify-content: center;
             text-align: center;
             padding: 80px 24px;
-            background:
-                radial-gradient(ellipse at 20% 80%, rgba(5, 150, 105, 0.15) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 20%, rgba(52, 211, 153, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 50%, rgba(15, 26, 20, 1) 0%, var(--bg-dark) 100%);
+            background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1400&q=80&fit=crop');
+            background-size: cover;
+            background-position: center;
             position: relative;
             overflow: hidden;
         }
@@ -160,28 +159,20 @@
         .hero::before {
             content: '';
             position: absolute;
-            top: -200px;
-            left: -200px;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(5,150,105,0.06) 0%, transparent 70%);
-            animation: float 20s ease-in-out infinite;
+            inset: 0;
+            background: rgba(15, 26, 20, 0.65);
+            z-index: 0;
         }
 
         .hero::after {
             content: '';
             position: absolute;
-            bottom: -100px;
-            right: -100px;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(52,211,153,0.04) 0%, transparent 70%);
-            animation: float 15s ease-in-out infinite reverse;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(40px, -30px); }
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to top, var(--bg-dark) 0%, transparent 100%);
+            z-index: 0;
         }
 
         .hero-content {
@@ -356,20 +347,35 @@
         }
 
         .cabana-image {
-            height: 200px;
+            height: 220px;
             position: relative;
+            background-size: cover;
+            background-position: center;
         }
 
         .cabana-image-duo {
-            background: linear-gradient(135deg, #1a3a2a 0%, #0d2818 40%, #132f1e 100%);
+            background-image: url('https://images.unsplash.com/photo-1518732714860-b62714ce0c59?w=500&q=80&fit=crop');
+            background-size: cover;
+            background-position: center;
         }
 
         .cabana-image-familiar {
-            background: linear-gradient(135deg, #1a2f3a 0%, #0d1f28 40%, #13252f 100%);
+            background-image: url('https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?w=500&q=80&fit=crop');
+            background-size: cover;
+            background-position: center;
         }
 
         .cabana-image-premium {
-            background: linear-gradient(135deg, #2a1a1a 0%, #1f1510 40%, #2a1f13 100%);
+            background-image: url('https://images.unsplash.com/photo-1587061949409-02df41d5e562?w=500&q=80&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .cabana-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 60%);
         }
 
         .cabana-image-label {
@@ -377,6 +383,7 @@
             bottom: 16px;
             left: 16px;
             font-size: 2.5rem;
+            z-index: 1;
         }
 
         .cabana-body {
@@ -467,7 +474,7 @@
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-md);
-            padding: 28px 24px;
+            overflow: hidden;
             text-align: center;
             transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
         }
@@ -476,6 +483,31 @@
             transform: translateY(-4px);
             border-color: var(--green-primary);
             box-shadow: var(--shadow-md);
+        }
+
+        .experiencia-img {
+            width: 100%;
+            height: 140px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .experiencia-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(15,26,20,0.5) 100%);
+        }
+
+        .experiencia-img-trekking { background-image: url('https://images.unsplash.com/photo-1551632811-561732d1e306?w=400&q=80&fit=crop'); }
+        .experiencia-img-rafting { background-image: url('https://images.unsplash.com/photo-1530866495561-507c83a18e81?w=400&q=80&fit=crop'); }
+        .experiencia-img-cabalgatas { background-image: url('https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=400&q=80&fit=crop'); }
+        .experiencia-img-kayak { background-image: url('https://images.unsplash.com/photo-1472745942893-4b9f730c7668?w=400&q=80&fit=crop'); }
+        .experiencia-img-astro { background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=400&q=80&fit=crop'); }
+
+        .experiencia-body {
+            padding: 20px 24px 28px;
         }
 
         .experiencia-icon {
@@ -528,28 +560,40 @@
 
         .galeria-item:nth-child(1) {
             grid-column: span 2;
-            background: linear-gradient(135deg, #0d3b2e 0%, #1a5c44 50%, #0f4a38 100%);
+            background-image: url('https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=600&q=80&fit=crop');
+            background-size: cover;
+            background-position: center;
         }
 
         .galeria-item:nth-child(2) {
-            background: linear-gradient(135deg, #2a1f13 0%, #3d2e1a 50%, #4a3820 100%);
+            background-image: url('https://images.unsplash.com/photo-1595521624992-48a59aef95e3?w=600&q=80&fit=crop');
+            background-size: cover;
+            background-position: center;
         }
 
         .galeria-item:nth-child(3) {
-            background: linear-gradient(135deg, #3a1a0d 0%, #5c3a1a 50%, #8a5020 100%);
+            background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80&fit=crop');
+            background-size: cover;
+            background-position: center;
         }
 
         .galeria-item:nth-child(4) {
-            background: linear-gradient(135deg, #1a1a2e 0%, #0d0d1a 50%, #2a2a4a 100%);
+            background-image: url('https://images.unsplash.com/photo-1475483768296-6163e08872a1?w=600&q=80&fit=crop');
+            background-size: cover;
+            background-position: center;
         }
 
         .galeria-item:nth-child(5) {
-            background: linear-gradient(135deg, #1a3a2a 0%, #2a5040 50%, #1f4535 100%);
+            background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80&fit=crop');
+            background-size: cover;
+            background-position: center;
         }
 
         .galeria-item:nth-child(6) {
             grid-column: span 2;
-            background: linear-gradient(135deg, #0d2a3a 0%, #1a4a5c 50%, #0f3848 100%);
+            background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&q=80&fit=crop');
+            background-size: cover;
+            background-position: center;
         }
 
         .galeria-label {
@@ -577,7 +621,9 @@
         }
 
         .llegar-map-placeholder {
-            background: linear-gradient(135deg, var(--bg-card) 0%, #1a2f22 100%);
+            background-image: url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&q=80&fit=crop');
+            background-size: cover;
+            background-position: center;
             border: 1px solid var(--border-color);
             border-radius: var(--radius-lg);
             height: 360px;
@@ -586,7 +632,22 @@
             align-items: center;
             justify-content: center;
             gap: 12px;
-            color: var(--text-muted);
+            color: #fff;
+            position: relative;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+        }
+
+        .llegar-map-placeholder::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(15, 26, 20, 0.45);
+            border-radius: var(--radius-lg);
+        }
+
+        .llegar-map-placeholder > * {
+            position: relative;
+            z-index: 1;
         }
 
         .llegar-map-placeholder .map-icon {
@@ -1161,33 +1222,48 @@
 
             <div class="experiencias-grid">
                 <div class="experiencia-card animate-on-scroll">
-                    <span class="experiencia-icon">🥾</span>
-                    <h3 class="experiencia-name">Trekking</h3>
-                    <p class="experiencia-desc">Senderos guiados por la precordillera con vistas increíbles al lago y la Cordillera de los Andes</p>
+                    <div class="experiencia-img experiencia-img-trekking"></div>
+                    <div class="experiencia-body">
+                        <span class="experiencia-icon">🥾</span>
+                        <h3 class="experiencia-name">Trekking</h3>
+                        <p class="experiencia-desc">Senderos guiados por la precordillera con vistas increíbles al lago y la Cordillera de los Andes</p>
+                    </div>
                 </div>
 
                 <div class="experiencia-card animate-on-scroll">
-                    <span class="experiencia-icon">🚣</span>
-                    <h3 class="experiencia-name">Rafting</h3>
-                    <p class="experiencia-desc">Adrenalina en el río Mendoza con guías certificados. Apto para principiantes y avanzados</p>
+                    <div class="experiencia-img experiencia-img-rafting"></div>
+                    <div class="experiencia-body">
+                        <span class="experiencia-icon">🚣</span>
+                        <h3 class="experiencia-name">Rafting</h3>
+                        <p class="experiencia-desc">Adrenalina en el río Mendoza con guías certificados. Apto para principiantes y avanzados</p>
+                    </div>
                 </div>
 
                 <div class="experiencia-card animate-on-scroll">
-                    <span class="experiencia-icon">🐎</span>
-                    <h3 class="experiencia-name">Cabalgatas</h3>
-                    <p class="experiencia-desc">Recorridos a caballo por valles y quebradas, disfrutando la fauna y flora nativa</p>
+                    <div class="experiencia-img experiencia-img-cabalgatas"></div>
+                    <div class="experiencia-body">
+                        <span class="experiencia-icon">🐎</span>
+                        <h3 class="experiencia-name">Cabalgatas</h3>
+                        <p class="experiencia-desc">Recorridos a caballo por valles y quebradas, disfrutando la fauna y flora nativa</p>
+                    </div>
                 </div>
 
                 <div class="experiencia-card animate-on-scroll">
-                    <span class="experiencia-icon">🛶</span>
-                    <h3 class="experiencia-name">Kayak</h3>
-                    <p class="experiencia-desc">Navegá el lago Potrerillos en kayak al amanecer o al atardecer. Una experiencia única</p>
+                    <div class="experiencia-img experiencia-img-kayak"></div>
+                    <div class="experiencia-body">
+                        <span class="experiencia-icon">🛶</span>
+                        <h3 class="experiencia-name">Kayak</h3>
+                        <p class="experiencia-desc">Navegá el lago Potrerillos en kayak al amanecer o al atardecer. Una experiencia única</p>
+                    </div>
                 </div>
 
                 <div class="experiencia-card animate-on-scroll">
-                    <span class="experiencia-icon">🌌</span>
-                    <h3 class="experiencia-name">Astroturismo</h3>
-                    <p class="experiencia-desc">Observación de estrellas con telescopios profesionales. Cielo limpio, sin contaminación lumínica</p>
+                    <div class="experiencia-img experiencia-img-astro"></div>
+                    <div class="experiencia-body">
+                        <span class="experiencia-icon">🌌</span>
+                        <h3 class="experiencia-name">Astroturismo</h3>
+                        <p class="experiencia-desc">Observación de estrellas con telescopios profesionales. Cielo limpio, sin contaminación lumínica</p>
+                    </div>
                 </div>
             </div>
         </div>

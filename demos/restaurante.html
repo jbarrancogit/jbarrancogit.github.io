@@ -147,21 +147,16 @@
             padding: 80px 24px;
             position: relative;
             overflow: hidden;
-            background:
-                radial-gradient(ellipse at 30% 20%, rgba(245, 158, 11, 0.08) 0%, transparent 60%),
-                radial-gradient(ellipse at 70% 80%, rgba(217, 119, 6, 0.06) 0%, transparent 60%),
-                var(--bg-dark);
+            background-image: url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1400&q=80&fit=crop');
+            background-size: cover;
+            background-position: center;
         }
 
         .hero::before {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(245, 158, 11, 0.06) 0%, transparent 70%);
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(15, 13, 10, 0.72) 0%, rgba(15, 13, 10, 0.85) 60%, rgba(15, 13, 10, 0.95) 100%);
             pointer-events: none;
         }
 
@@ -306,9 +301,10 @@
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 36px 28px;
+            padding: 0;
             transition: all 0.3s;
             text-align: center;
+            overflow: hidden;
         }
 
         .propuesta-card:hover {
@@ -316,6 +312,25 @@
             background: var(--bg-card-hover);
             transform: translateY(-4px);
             box-shadow: var(--shadow-glow);
+        }
+
+        .propuesta-card-img {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .propuesta-card-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 40%, rgba(26, 23, 20, 0.9) 100%);
+        }
+
+        .propuesta-card-body {
+            padding: 28px 28px 36px;
         }
 
         .propuesta-icon {
@@ -369,13 +384,34 @@
         .menu-category { display: none; }
         .menu-category.active { display: block; }
 
+        .menu-category-header {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin-bottom: 32px;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .menu-category-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgba(15, 13, 10, 0.8) 0%, rgba(15, 13, 10, 0.5) 100%);
+        }
+
         .menu-category-title {
             font-size: 1.6rem;
             font-weight: 800;
-            margin-bottom: 32px;
             text-align: center;
             color: var(--amber);
             letter-spacing: -0.5px;
+            position: relative;
+            z-index: 1;
         }
 
         .menu-grid {
@@ -424,7 +460,29 @@
         }
 
         /* ===== RESERVAS ===== */
-        .reservas { background: var(--bg-surface); }
+        .reservas {
+            background: var(--bg-surface);
+            position: relative;
+        }
+
+        .reservas-hero-img {
+            width: 100%;
+            height: 280px;
+            background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80&fit=crop');
+            background-size: cover;
+            background-position: center;
+            border-radius: var(--radius);
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reservas-hero-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(20, 18, 16, 0.3) 0%, rgba(20, 18, 16, 0.7) 100%);
+        }
 
         .reservas-wrapper {
             display: grid;
@@ -566,7 +624,9 @@
         .horario-cerrado { color: #EF4444; font-weight: 600; }
 
         .map-placeholder {
-            background: var(--bg-card);
+            background-image: url('https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=600&q=80&fit=crop');
+            background-size: cover;
+            background-position: center;
             border: 1px solid var(--border);
             border-radius: var(--radius);
             height: 100%;
@@ -584,11 +644,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background:
-                linear-gradient(90deg, var(--border) 1px, transparent 1px),
-                linear-gradient(var(--border) 1px, transparent 1px);
-            background-size: 40px 40px;
-            opacity: 0.3;
+            background: linear-gradient(to bottom, rgba(15, 13, 10, 0.5) 0%, rgba(15, 13, 10, 0.8) 100%);
         }
 
         .map-pin {
@@ -826,6 +882,9 @@
             .navbar-cta { display: none; }
             .hero { min-height: 80vh; padding: 60px 16px; }
             .hero-emoji { font-size: 2.5rem; }
+            .propuesta-card-img { height: 160px; }
+            .menu-category-header { height: 140px; }
+            .reservas-hero-img { height: 200px; }
             .form-row { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: 1fr; gap: 28px; }
             .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
@@ -928,19 +987,28 @@
         </div>
         <div class="propuesta-grid">
             <div class="propuesta-card">
-                <span class="propuesta-icon">🪵</span>
-                <h3>Parrilla de leña</h3>
-                <p>Trabajamos exclusivamente con leña de algarrobo y quebracho, aportando un ahumado sutil y único a cada corte. Cocción lenta sobre brasas vivas.</p>
+                <div class="propuesta-card-img" style="background-image: url('https://images.unsplash.com/photo-1558030006-450675393462?w=500&q=80&fit=crop');"></div>
+                <div class="propuesta-card-body">
+                    <span class="propuesta-icon">🪵</span>
+                    <h3>Parrilla de leña</h3>
+                    <p>Trabajamos exclusivamente con leña de algarrobo y quebracho, aportando un ahumado sutil y único a cada corte. Cocción lenta sobre brasas vivas.</p>
+                </div>
             </div>
             <div class="propuesta-card">
-                <span class="propuesta-icon">👨‍🍳</span>
-                <h3>Cocina de autor</h3>
-                <p>Nuestro chef fusiona las raíces culinarias mendocinas con técnicas contemporáneas, creando platos que sorprenden sin perder la esencia.</p>
+                <div class="propuesta-card-img" style="background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=500&q=80&fit=crop');"></div>
+                <div class="propuesta-card-body">
+                    <span class="propuesta-icon">👨‍🍳</span>
+                    <h3>Cocina de autor</h3>
+                    <p>Nuestro chef fusiona las raíces culinarias mendocinas con técnicas contemporáneas, creando platos que sorprenden sin perder la esencia.</p>
+                </div>
             </div>
             <div class="propuesta-card">
-                <span class="propuesta-icon">🍷</span>
-                <h3>Cava propia</h3>
-                <p>Más de 80 etiquetas de bodegas mendocinas cuidadosamente seleccionadas. Cada vino tiene su maridaje perfecto en nuestra carta.</p>
+                <div class="propuesta-card-img" style="background-image: url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=500&q=80&fit=crop');"></div>
+                <div class="propuesta-card-body">
+                    <span class="propuesta-icon">🍷</span>
+                    <h3>Cava propia</h3>
+                    <p>Más de 80 etiquetas de bodegas mendocinas cuidadosamente seleccionadas. Cada vino tiene su maridaje perfecto en nuestra carta.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -965,7 +1033,9 @@
 
         <!-- ENTRADAS -->
         <div class="menu-category active" id="cat-entradas">
-            <h3 class="menu-category-title">🥗 Entradas</h3>
+            <div class="menu-category-header" style="background-image: url('https://images.unsplash.com/photo-1541014741259-de529411b96a?w=400&q=80&fit=crop');">
+                <h3 class="menu-category-title">🥗 Entradas</h3>
+            </div>
             <div class="menu-grid">
                 <div class="menu-item">
                     <div class="menu-item-info">
@@ -1000,7 +1070,9 @@
 
         <!-- CARNES -->
         <div class="menu-category" id="cat-carnes">
-            <h3 class="menu-category-title">🥩 Carnes a la parrilla</h3>
+            <div class="menu-category-header" style="background-image: url('https://images.unsplash.com/photo-1544025162-d76694265947?w=400&q=80&fit=crop');">
+                <h3 class="menu-category-title">🥩 Carnes a la parrilla</h3>
+            </div>
             <div class="menu-grid">
                 <div class="menu-item">
                     <div class="menu-item-info">
@@ -1049,7 +1121,9 @@
 
         <!-- PASTAS -->
         <div class="menu-category" id="cat-pastas">
-            <h3 class="menu-category-title">🍝 Pastas artesanales</h3>
+            <div class="menu-category-header" style="background-image: url('https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=400&q=80&fit=crop');">
+                <h3 class="menu-category-title">🍝 Pastas artesanales</h3>
+            </div>
             <div class="menu-grid">
                 <div class="menu-item">
                     <div class="menu-item-info">
@@ -1084,7 +1158,9 @@
 
         <!-- POSTRES -->
         <div class="menu-category" id="cat-postres">
-            <h3 class="menu-category-title">🍮 Postres</h3>
+            <div class="menu-category-header" style="background-image: url('https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&q=80&fit=crop');">
+                <h3 class="menu-category-title">🍮 Postres</h3>
+            </div>
             <div class="menu-grid">
                 <div class="menu-item">
                     <div class="menu-item-info">
@@ -1119,7 +1195,9 @@
 
         <!-- VINOS -->
         <div class="menu-category" id="cat-vinos">
-            <h3 class="menu-category-title">🍷 Vinos de la casa</h3>
+            <div class="menu-category-header" style="background-image: url('https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=400&q=80&fit=crop');">
+                <h3 class="menu-category-title">🍷 Vinos de la casa</h3>
+            </div>
             <div class="menu-grid">
                 <div class="menu-item">
                     <div class="menu-item-info">
@@ -1162,6 +1240,8 @@
             <h2 class="section-title">Reservá tu mesa</h2>
             <p class="section-desc">Asegurá tu lugar para una noche inolvidable. Podés reservar completando el formulario o directamente por WhatsApp.</p>
         </div>
+
+        <div class="reservas-hero-img"></div>
 
         <div class="reservas-wrapper">
             <div class="reservas-info">

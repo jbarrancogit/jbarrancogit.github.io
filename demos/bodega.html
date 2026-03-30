@@ -178,16 +178,16 @@
             position: relative;
             padding: 4rem 2rem;
             overflow: hidden;
+            background-image: url('https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=1400&q=80&fit=crop');
+            background-size: cover;
+            background-position: center;
         }
 
         .hero::before {
             content: '';
             position: absolute;
             inset: 0;
-            background:
-                radial-gradient(ellipse 80% 60% at 50% 40%, rgba(139, 26, 74, 0.15), transparent),
-                radial-gradient(ellipse 60% 50% at 20% 80%, rgba(139, 26, 74, 0.08), transparent),
-                radial-gradient(ellipse 40% 40% at 80% 20%, rgba(212, 168, 83, 0.06), transparent);
+            background: rgba(13, 10, 12, 0.65);
             z-index: 0;
         }
 
@@ -441,28 +441,26 @@
         .historia-visual {
             aspect-ratio: 4 / 5;
             border-radius: 16px;
-            background: linear-gradient(160deg, var(--wine-dark) 0%, #2A1520 40%, var(--bg-card) 100%);
+            background-image: url('https://images.unsplash.com/photo-1464638681273-0962e9b53566?w=800&q=80&fit=crop');
+            background-size: cover;
+            background-position: center;
             position: relative;
             overflow: hidden;
             border: 1px solid var(--border-subtle);
         }
 
         .historia-visual::before {
-            content: '🍇';
+            content: '';
             position: absolute;
-            font-size: 8rem;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            opacity: 0.15;
+            inset: 0;
+            background: rgba(13, 10, 12, 0.25);
+            z-index: 1;
         }
 
         .historia-visual-inner {
             position: absolute;
             inset: 0;
-            background:
-                radial-gradient(circle at 30% 70%, rgba(139, 26, 74, 0.3), transparent 50%),
-                radial-gradient(circle at 70% 30%, rgba(212, 168, 83, 0.15), transparent 50%);
+            background: transparent;
         }
 
         .historia-visual-overlay {
@@ -555,11 +553,30 @@
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
             border-radius: 16px;
-            padding: 2rem 1.5rem;
+            padding: 0;
             text-align: center;
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
             overflow: hidden;
+        }
+
+        .vino-card-img {
+            width: 100%;
+            height: 160px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .vino-card-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(13, 10, 12, 0.1) 0%, rgba(13, 10, 12, 0.7) 100%);
+        }
+
+        .vino-card-body {
+            padding: 1.5rem 1.5rem 2rem;
         }
 
         .vino-card::before {
@@ -633,6 +650,25 @@
         }
 
         /* ===== VISITAS ===== */
+        .visitas-banner {
+            width: 100%;
+            height: 280px;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+            position: relative;
+            background-image: url('https://images.unsplash.com/photo-1474722883778-792e7990302f?w=600&q=80&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .visitas-banner::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(13, 10, 12, 0.2) 0%, rgba(13, 10, 12, 0.7) 100%);
+        }
+
         .visitas-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -792,19 +828,29 @@
         }
 
         .galeria-item:nth-child(1) .galeria-bg {
-            background: linear-gradient(145deg, #2D1B24 0%, #5E0F32 40%, #8B1A4A 70%, #3A1828 100%);
+            background-image: url('https://images.unsplash.com/photo-1560493676-04071c5f467b?w=600&q=80&fit=crop');
+            background-size: cover;
+            background-position: center;
         }
         .galeria-item:nth-child(2) .galeria-bg {
-            background: linear-gradient(145deg, #1A2615 0%, #2D4A1F 50%, #1A3312 100%);
+            background-image: url('https://images.unsplash.com/photo-1507434965515-61970f2bd7c6?w=600&q=80&fit=crop');
+            background-size: cover;
+            background-position: center;
         }
         .galeria-item:nth-child(3) .galeria-bg {
-            background: linear-gradient(145deg, #2A1F10 0%, #5C3D1A 50%, #3A2A10 100%);
+            background-image: url('https://images.unsplash.com/photo-1516594915307-8f71a2f3aac6?w=600&q=80&fit=crop');
+            background-size: cover;
+            background-position: center;
         }
         .galeria-item:nth-child(4) .galeria-bg {
-            background: linear-gradient(145deg, #1A1528 0%, #3A2050 50%, #2A1840 100%);
+            background-image: url('https://images.unsplash.com/photo-1528823872057-9c018a7a7553?w=600&q=80&fit=crop');
+            background-size: cover;
+            background-position: center;
         }
         .galeria-item:nth-child(5) .galeria-bg {
-            background: linear-gradient(145deg, #28181A 0%, #4A2028 50%, #351820 100%);
+            background-image: url('https://images.unsplash.com/photo-1504279577054-acfeccf8fc52?w=600&q=80&fit=crop');
+            background-size: cover;
+            background-position: center;
         }
 
         .galeria-overlay {
@@ -1258,6 +1304,14 @@
             .hero h1 {
                 font-size: 2.4rem;
             }
+
+            .vino-card-img {
+                height: 140px;
+            }
+
+            .visitas-banner {
+                height: 180px;
+            }
         }
     </style>
 </head>
@@ -1365,44 +1419,59 @@
         </div>
         <div class="vinos-grid fade-in-stagger">
             <div class="vino-card fade-in">
-                <span class="vino-icon">🍷</span>
-                <h3 class="vino-name">Gran Reserva</h3>
-                <div class="vino-varietal">Malbec · 2019</div>
-                <p class="vino-notes">Intenso color violeta. Aromas a frutos negros maduros, violetas y un sutil toque de vainilla. Taninos firmes y un final largo y elegante. 18 meses en barrica de roble francés.</p>
-                <div class="vino-awards">🏅 92 pts — Robert Parker</div>
-                <div class="vino-price">$18.500 <span>ARS</span></div>
+                <div class="vino-card-img" style="background-image: url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=400&q=80&fit=crop');"></div>
+                <div class="vino-card-body">
+                    <span class="vino-icon">🍷</span>
+                    <h3 class="vino-name">Gran Reserva</h3>
+                    <div class="vino-varietal">Malbec · 2019</div>
+                    <p class="vino-notes">Intenso color violeta. Aromas a frutos negros maduros, violetas y un sutil toque de vainilla. Taninos firmes y un final largo y elegante. 18 meses en barrica de roble francés.</p>
+                    <div class="vino-awards">🏅 92 pts — Robert Parker</div>
+                    <div class="vino-price">$18.500 <span>ARS</span></div>
+                </div>
             </div>
             <div class="vino-card fade-in">
-                <span class="vino-icon">🍷</span>
-                <h3 class="vino-name">Reserva</h3>
-                <div class="vino-varietal">Cabernet Sauvignon · 2020</div>
-                <p class="vino-notes">Color rojo profundo con destellos rubí. Notas de cassis, pimiento rojo y especias. Estructura firme con taninos sedosos. 12 meses en roble. Ideal para carnes rojas.</p>
-                <div class="vino-awards">🏅 90 pts — Wine Spectator</div>
-                <div class="vino-price">$14.200 <span>ARS</span></div>
+                <div class="vino-card-img" style="background-image: url('https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=400&q=80&fit=crop');"></div>
+                <div class="vino-card-body">
+                    <span class="vino-icon">🍷</span>
+                    <h3 class="vino-name">Reserva</h3>
+                    <div class="vino-varietal">Cabernet Sauvignon · 2020</div>
+                    <p class="vino-notes">Color rojo profundo con destellos rubí. Notas de cassis, pimiento rojo y especias. Estructura firme con taninos sedosos. 12 meses en roble. Ideal para carnes rojas.</p>
+                    <div class="vino-awards">🏅 90 pts — Wine Spectator</div>
+                    <div class="vino-price">$14.200 <span>ARS</span></div>
+                </div>
             </div>
             <div class="vino-card fade-in">
-                <span class="vino-icon">🥂</span>
-                <h3 class="vino-name">Corte del Sol</h3>
-                <div class="vino-varietal">Blend Premium · 2020</div>
-                <p class="vino-notes">Malbec 60%, Cabernet 25%, Merlot 15%. Aromas de ciruela, chocolate amargo y tabaco. Redondo en boca, con gran volumen y un final persistente y mineral.</p>
-                <div class="vino-awards">🏅 Doble Oro — Catena Wine Trophy</div>
-                <div class="vino-price">$22.800 <span>ARS</span></div>
+                <div class="vino-card-img" style="background-image: url('https://images.unsplash.com/photo-1547595628-c61a29f496f0?w=400&q=80&fit=crop');"></div>
+                <div class="vino-card-body">
+                    <span class="vino-icon">🥂</span>
+                    <h3 class="vino-name">Corte del Sol</h3>
+                    <div class="vino-varietal">Blend Premium · 2020</div>
+                    <p class="vino-notes">Malbec 60%, Cabernet 25%, Merlot 15%. Aromas de ciruela, chocolate amargo y tabaco. Redondo en boca, con gran volumen y un final persistente y mineral.</p>
+                    <div class="vino-awards">🏅 Doble Oro — Catena Wine Trophy</div>
+                    <div class="vino-price">$22.800 <span>ARS</span></div>
+                </div>
             </div>
             <div class="vino-card fade-in">
-                <span class="vino-icon">🥂</span>
-                <h3 class="vino-name">Brisa Andina</h3>
-                <div class="vino-varietal">Torrontés · 2023</div>
-                <p class="vino-notes">Amarillo pálido brillante. Aromas florales intensos: rosas, jazmín y durazno blanco. Fresco en boca con acidez vibrante. Perfecto para tardes de verano.</p>
-                <div class="vino-awards">🏅 Mejor Torrontés — Vendimia 2024</div>
-                <div class="vino-price">$8.900 <span>ARS</span></div>
+                <div class="vino-card-img" style="background-image: url('https://images.unsplash.com/photo-1566995541428-f4e046f85f18?w=400&q=80&fit=crop');"></div>
+                <div class="vino-card-body">
+                    <span class="vino-icon">🥂</span>
+                    <h3 class="vino-name">Brisa Andina</h3>
+                    <div class="vino-varietal">Torrontés · 2023</div>
+                    <p class="vino-notes">Amarillo pálido brillante. Aromas florales intensos: rosas, jazmín y durazno blanco. Fresco en boca con acidez vibrante. Perfecto para tardes de verano.</p>
+                    <div class="vino-awards">🏅 Mejor Torrontés — Vendimia 2024</div>
+                    <div class="vino-price">$8.900 <span>ARS</span></div>
+                </div>
             </div>
             <div class="vino-card fade-in">
-                <span class="vino-icon">🌸</span>
-                <h3 class="vino-name">Atardecer Rosé</h3>
-                <div class="vino-varietal">Malbec Rosé · 2023</div>
-                <p class="vino-notes">Delicado color rosa salmón. Frutillas frescas, frambuesas y pétalos de rosa. Ligero y refrescante, con acidez equilibrada. Ideal como aperitivo.</p>
-                <div class="vino-awards">🏅 91 pts — Descorchados</div>
-                <div class="vino-price">$9.500 <span>ARS</span></div>
+                <div class="vino-card-img" style="background-image: url('https://images.unsplash.com/photo-1558001373-7b93ee48ffa0?w=400&q=80&fit=crop');"></div>
+                <div class="vino-card-body">
+                    <span class="vino-icon">🌸</span>
+                    <h3 class="vino-name">Atardecer Rosé</h3>
+                    <div class="vino-varietal">Malbec Rosé · 2023</div>
+                    <p class="vino-notes">Delicado color rosa salmón. Frutillas frescas, frambuesas y pétalos de rosa. Ligero y refrescante, con acidez equilibrada. Ideal como aperitivo.</p>
+                    <div class="vino-awards">🏅 91 pts — Descorchados</div>
+                    <div class="vino-price">$9.500 <span>ARS</span></div>
+                </div>
             </div>
         </div>
     </section>
@@ -1415,6 +1484,7 @@
             <div class="section-divider"></div>
             <p class="section-subtitle">Recorré nuestros viñedos, conocé nuestra bodega y degustá nuestros vinos en un entorno único al pie de los Andes.</p>
         </div>
+        <div class="visitas-banner fade-in"></div>
         <div class="visitas-grid">
             <!-- Clásica -->
             <div class="visita-card fade-in">
