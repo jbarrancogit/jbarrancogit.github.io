@@ -6,13 +6,13 @@
 
 **Título visual para el feed:**
 
-🚀 Ayudé a construir el backend de Disney Paris. Ahora quiero ayudar a negocios de Mendoza.
+🚀 Soy ingeniero de software. Y quiero ayudar a negocios de Mendoza a ser visibles en internet.
 
 ---
 
-Hace unos años estaba en Globant trabajando en el monitoreo de reservas y el backend de Disney Paris. Microservicios en AWS, APIs que procesan millones de solicitudes, Spring Boot, el paquete completo.
+Trabajo como ingeniero full-stack en Nevra, y antes estuve en Globant como backend engineer en proyectos internacionales. Microservicios en AWS, APIs que procesan millones de solicitudes, Spring Boot, el paquete completo.
 
-Hoy sigo trabajando como ingeniero full-stack en Nevra, y en paralelo estoy cursando Ingeniería en Sistemas en la UTN. Pero algo me venía dando vueltas hace rato:
+En paralelo estoy cursando Ingeniería en Sistemas en la UTN. Pero algo me venía dando vueltas hace rato:
 
 **¿Por qué tantos negocios buenos en Mendoza siguen siendo invisibles en internet?**
 
@@ -43,7 +43,7 @@ Si tenés un negocio en Mendoza (o conocés a alguien que lo tenga), escribime. 
 🌐 Mi sitio: https://jbarrancogit.github.io
 📧 jbarranco.sistemas@gmail.com
 
-#DesarrolloWeb #Mendoza #PáginasWeb #Emprendimiento #NegociosLocales #WebDevelopment #Freelance #Globant #DisneyParis #UTN #Argentina
+#DesarrolloWeb #Mendoza #PáginasWeb #Emprendimiento #NegociosLocales #WebDevelopment #Freelance #UTN #Argentina
 
 ---
 
@@ -51,7 +51,7 @@ Si tenés un negocio en Mendoza (o conocés a alguien que lo tenga), escribime. 
 
 ---
 
-Trabajo como ingeniero de software en Nevra. Antes estuve en Globant trabajando en el backend de Disney Paris.
+Trabajo como ingeniero de software full-stack en Nevra. Antes estuve en Globant en proyectos internacionales.
 
 Ahora, además de mi trabajo, estoy ayudando a negocios de Mendoza a tener su propia página web profesional — **desde $99.000**.
 
@@ -77,13 +77,11 @@ Si tenés un negocio o conocés a alguien que necesite presencia digital, escrib
 
 ---
 
-En 2019 estaba en una sala de Globant ayudando a que millones de personas pudieran reservar su visita a Disney Paris.
+El otro día, caminando por Mendoza, vi una parrilla espectacular en Villanueva que no tenía ni página web. Un cartel escrito a mano decía "Reservas por WhatsApp." Ningún menú online. Ninguna reseña. Invisible para Google.
 
-En 2024, caminando por Mendoza, vi una parrilla espectacular en Villanueva que no tenía ni página web. Un cartel escrito a mano decía "Reservas por WhatsApp." Ningún menú online. Ninguna reseña. Invisible para Google.
+Y pensé: la diferencia entre un negocio que crece y uno que se estanca muchas veces no es la calidad del producto. Es la presencia digital.
 
-Y pensé: la diferencia entre ese restaurante y Disney no es la calidad del producto. Es la presencia digital.
-
-Hoy estoy usando la misma ingeniería que usé para Disney para construir sitios web para negocios de Mendoza. Pero a un precio que cualquier negocio puede pagar: **desde $99.000**.
+Soy ingeniero de software full-stack. Trabajo en Nevra y antes estuve en Globant en proyectos internacionales. Hoy estoy usando esa misma ingeniería para construir sitios web para negocios de Mendoza. Pero a un precio que cualquier negocio puede pagar: **desde $99.000**.
 
 No te cobro hosting mensual. No te ato a una plataforma. Te entrego tu código, tu sitio es tuyo para siempre.
 
