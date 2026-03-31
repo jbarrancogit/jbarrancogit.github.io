@@ -102,6 +102,53 @@
       background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
       pointer-events: none;
     }
+    .hero-grid-bg {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+    }
+    .hero-grid-bg::before {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(59, 130, 246, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 70% 60% at 70% 50%, black 20%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 70% 50%, black 20%, transparent 70%);
+    }
+    .hero-orb {
+      position: absolute; border-radius: 50%; pointer-events: none; filter: blur(60px);
+    }
+    .hero-orb-1 {
+      width: 400px; height: 400px; top: -80px; right: -100px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.15), transparent 70%);
+      animation: heroOrb1 8s ease-in-out infinite;
+    }
+    .hero-orb-2 {
+      width: 300px; height: 300px; bottom: -60px; left: 10%;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.1), transparent 70%);
+      animation: heroOrb2 10s ease-in-out infinite;
+    }
+    .hero-orb-3 {
+      width: 200px; height: 200px; top: 30%; right: 20%;
+      background: radial-gradient(circle, rgba(20, 184, 166, 0.08), transparent 70%);
+      animation: heroOrb3 12s ease-in-out infinite;
+    }
+    @keyframes heroOrb1 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-30px, 20px) scale(1.1); } }
+    @keyframes heroOrb2 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(20px, -15px) scale(1.05); } }
+    @keyframes heroOrb3 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-15px, 10px) scale(0.95); } }
+    .hero-code-mockup {
+      position: absolute; right: -40px; top: 50%; transform: translateY(-50%);
+      width: 380px; padding: 24px 28px;
+      background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px; font-family: 'Courier New', monospace; font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.15); line-height: 1.8; pointer-events: none;
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      z-index: 0;
+    }
+    .hero-code-mockup .hl-key { color: rgba(139, 92, 246, 0.3); }
+    .hero-code-mockup .hl-str { color: rgba(34, 197, 94, 0.25); }
+    .hero-code-mockup .hl-fn { color: rgba(59, 130, 246, 0.3); }
+    .hero-code-mockup .hl-comment { color: rgba(255, 255, 255, 0.08); font-style: italic; }
+    @media (max-width: 1100px) { .hero-code-mockup { display: none; } }
     .hero-content { position: relative; z-index: 1; max-width: 700px; }
     .hero-profile {
       display: flex; align-items: center; gap: 16px; margin-bottom: 24px;
@@ -444,10 +491,62 @@
 
     /* FOOTER */
     footer {
-      padding: 40px 0; border-top: 1px solid var(--border);
-      text-align: center; font-size: 0.82rem; color: var(--text-muted);
+      position: relative; overflow: hidden;
+      padding: 0; border-top: none; font-size: 0.82rem; color: var(--text-muted);
+    }
+    footer::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), rgba(139, 92, 246, 0.5), var(--accent), transparent);
     }
     footer a { color: var(--text-secondary); }
+    footer a:hover { color: var(--accent-light); }
+    .footer-main {
+      padding: 64px 0 48px;
+      background:
+        radial-gradient(ellipse at 20% 0%, rgba(59, 130, 246, 0.04) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 100%, rgba(139, 92, 246, 0.03) 0%, transparent 50%),
+        var(--bg-primary);
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.7; margin-top: 16px; max-width: 280px; }
+    .footer-col h4 {
+      font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--text-secondary); font-weight: 600; margin-bottom: 16px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { font-size: 0.84rem; color: var(--text-muted); transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--text-primary); }
+    .footer-socials { display: flex; gap: 12px; margin-top: 20px; }
+    .footer-socials a {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s; color: var(--text-muted);
+    }
+    .footer-socials a:hover {
+      background: var(--accent); border-color: var(--accent); color: #fff;
+      transform: translateY(-2px); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
+    .footer-bottom {
+      padding: 24px 0;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p { font-size: 0.78rem; color: var(--text-muted); }
+    .footer-bottom-links { display: flex; gap: 24px; }
+    .footer-bottom-links a { font-size: 0.78rem; color: var(--text-muted); }
+    .footer-bottom-links a:hover { color: var(--text-secondary); }
+    @media (max-width: 768px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+    @media (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
 
     /* WHATSAPP */
     .whatsapp-float {
@@ -617,7 +716,23 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="container">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+    <div class="container" style="position: relative; z-index: 1;">
+      <div class="hero-code-mockup" aria-hidden="true">
+        <span class="hl-comment">// tu-negocio.com.ar</span><br>
+        <span class="hl-key">const</span> sitio = {<br>
+        &nbsp;&nbsp;nombre: <span class="hl-str">"Tu Negocio"</span>,<br>
+        &nbsp;&nbsp;plan: <span class="hl-str">"profesional"</span>,<br>
+        &nbsp;&nbsp;seo: <span class="hl-key">true</span>,<br>
+        &nbsp;&nbsp;analytics: <span class="hl-key">true</span>,<br>
+        &nbsp;&nbsp;reservas: <span class="hl-key">true</span>,<br>
+        };<br><br>
+        <span class="hl-fn">deploy</span>(sitio);<br>
+        <span class="hl-comment">// ✓ Live en 7 días</span>
+      </div>
       <div class="hero-content">
         <div class="hero-profile">
           <img src="https://avatars.githubusercontent.com/u/258823180?v=4" alt="Juan Ignacio Barranco" class="hero-avatar" width="72" height="72" loading="eager">
@@ -1633,23 +1748,79 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="container">
-      <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 10px;">
-        <div style="width: 34px; height: 34px; border-radius: 9px; background: #111827; border: 1px solid #1e293b; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.78rem; color: var(--accent); box-shadow: 0 2px 8px rgba(59,130,246,0.15); position: relative; overflow: hidden;">
-          <span style="position: absolute; top: 3px; left: 25%; right: 25%; height: 1.5px; background: linear-gradient(90deg, #60a5fa, #3b82f6, #2563eb); border-radius: 1px; opacity: 0.7;"></span>
-          JB
+    <div class="footer-main">
+      <div class="container">
+        <div class="footer-grid">
+          <!-- Brand -->
+          <div class="footer-brand">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div style="width: 38px; height: 38px; border-radius: 10px; background: #111827; border: 1px solid #1e293b; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.85rem; color: var(--accent); box-shadow: 0 2px 8px rgba(59,130,246,0.15); position: relative; overflow: hidden; flex-shrink: 0;">
+                <span style="position: absolute; top: 3px; left: 25%; right: 25%; height: 1.5px; background: linear-gradient(90deg, #60a5fa, #3b82f6, #2563eb); border-radius: 1px; opacity: 0.7;"></span>
+                JB
+              </div>
+              <div style="display: flex; flex-direction: column; line-height: 1.2;">
+                <span style="font-weight: 800; font-size: 1.05rem; letter-spacing: -0.01em; color: var(--text-primary);">Juan<span style="color: var(--accent);">.</span>Barranco</span>
+                <span style="font-size: 0.6rem; color: #64748b; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 1px;">Lo digital, bien hecho.</span>
+              </div>
+            </div>
+            <p>Ingeniero de software con experiencia internacional. Páginas web, datos y automatizaciones para negocios de Mendoza.</p>
+            <div class="footer-socials">
+              <a href="https://wa.me/5492616423730" target="_blank" aria-label="WhatsApp">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.932 11.932 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.313 0-4.455-.776-6.166-2.084l-.43-.332-3.29 1.103 1.103-3.29-.332-.43A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+              </a>
+              <a href="https://www.linkedin.com/in/juan-ignacio-barranco-a8748114a/" target="_blank" aria-label="LinkedIn">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </a>
+              <a href="https://github.com/jbarrancogit" target="_blank" aria-label="GitHub">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              </a>
+              <a href="mailto:jbarranco.sistemas@gmail.com" aria-label="Email">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z"/><path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z"/></svg>
+              </a>
+            </div>
+          </div>
+          <!-- Servicios -->
+          <div class="footer-col">
+            <h4>Servicios</h4>
+            <ul>
+              <li><a href="#servicios">Páginas web</a></li>
+              <li><a href="#servicios">Sistemas de reservas</a></li>
+              <li><a href="#servicios">SEO y Analytics</a></li>
+              <li><a href="#dashboards">Dashboards de datos</a></li>
+              <li><a href="#servicios">Automatizaciones</a></li>
+            </ul>
+          </div>
+          <!-- Navegación -->
+          <div class="footer-col">
+            <h4>Navegación</h4>
+            <ul>
+              <li><a href="#como-funciona">Cómo funciona</a></li>
+              <li><a href="#proyectos">Proyectos</a></li>
+              <li><a href="#demos">Demos</a></li>
+              <li><a href="#precios">Precios</a></li>
+              <li><a href="#iniciar">Iniciar proyecto</a></li>
+            </ul>
+          </div>
+          <!-- Contacto -->
+          <div class="footer-col">
+            <h4>Contacto</h4>
+            <ul>
+              <li><a href="https://wa.me/5492616423730" target="_blank">+54 9 261 642-3730</a></li>
+              <li><a href="mailto:jbarranco.sistemas@gmail.com">jbarranco.sistemas@gmail.com</a></li>
+              <li style="color: var(--text-muted); font-size: 0.84rem; margin-top: 8px;">Maipú, Mendoza, Argentina</li>
+            </ul>
+          </div>
         </div>
-        <div style="display: flex; flex-direction: column; line-height: 1.2;">
-          <span style="font-weight: 800; font-size: 0.95rem; letter-spacing: -0.01em;">Juan<span style="color: var(--accent);">.</span>Barranco</span>
-          <span style="font-size: 0.58rem; color: #64748b; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 1px;">Lo digital, bien hecho.</span>
+        <!-- Bottom -->
+        <div class="footer-bottom">
+          <p>&copy; 2026 Juan Barranco. Todos los derechos reservados.</p>
+          <div class="footer-bottom-links">
+            <a href="#precios">Precios</a>
+            <a href="#contacto">Contacto</a>
+            <a href="#iniciar">Empezar</a>
+          </div>
         </div>
       </div>
-      <p>Ingeniero de Software — Maipú, Mendoza</p>
-      <p style="margin-top: 8px;">
-        <a href="mailto:jbarranco.sistemas@gmail.com">jbarranco.sistemas@gmail.com</a> &middot;
-        <a href="https://www.linkedin.com/in/juan-ignacio-barranco-a8748114a/" target="_blank">LinkedIn</a> &middot;
-        <a href="https://github.com/jbarrancogit" target="_blank">GitHub</a>
-      </p>
     </div>
   </footer>
 
