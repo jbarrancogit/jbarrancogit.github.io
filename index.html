@@ -6,7 +6,7 @@
   <meta name="description" content="Páginas web para negocios en Mendoza. Ingeniero de software con experiencia en empresas internacionales. Sitios rápidos, profesionales y accesibles. Prototipo gratuito en 48 hs.">
   <meta name="keywords" content="página web mendoza, desarrollo web mendoza, diseño web mendoza, página web para negocios, tienda online mendoza, sitio web mendoza">
   <meta property="og:title" content="Páginas Web para Negocios en Mendoza — Juan Barranco">
-  <meta property="og:description" content="Ingeniero de software con experiencia internacional. Páginas web profesionales desde $99.000. Prototipo gratis en 48 hs.">
+  <meta property="og:description" content="Ingeniero de software con experiencia internacional. Páginas web profesionales desde $79.200 (USD 65). Prototipo gratis en 48 hs.">
   <meta property="og:type" content="website">
   <title>Páginas Web para Negocios en Mendoza — Juan Barranco | Prototipo Gratis</title>
   <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
@@ -19,24 +19,27 @@
     :root {
       --bg-primary: #09090b;
       --bg-secondary: #0f0f12;
-      --bg-card: #16161a;
-      --bg-card-hover: #1c1c21;
+      --bg-card: rgba(255, 255, 255, 0.03);
+      --bg-card-hover: rgba(255, 255, 255, 0.06);
       --accent: #3b82f6;
       --accent-light: #60a5fa;
       --accent-glow: rgba(59, 130, 246, 0.12);
       --text-primary: #f4f4f5;
       --text-secondary: #a1a1aa;
       --text-muted: #71717a;
-      --border: #27272a;
+      --border: rgba(255, 255, 255, 0.06);
       --green: #22c55e;
       --green-glow: rgba(34, 197, 94, 0.12);
       --orange: #f97316;
       --red: #ef4444;
       --red-glow: rgba(239, 68, 68, 0.08);
-      --radius: 12px;
-      --radius-sm: 8px;
-      --max-width: 1100px;
-      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --radius: 20px;
+      --radius-sm: 14px;
+      --max-width: 1200px;
+      --transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.06);
+      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
     }
 
     html { scroll-behavior: smooth; }
@@ -56,7 +59,7 @@
     /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(9, 9, 11, 0.88); backdrop-filter: blur(12px);
+      background: rgba(9, 9, 11, 0.72); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
       border-bottom: 1px solid var(--border);
     }
     .nav-inner {
@@ -92,7 +95,7 @@
     .nav-toggle { display: none; background: none; border: none; color: var(--text-primary); cursor: pointer; }
 
     /* HERO */
-    .hero { padding: 140px 0 60px; position: relative; overflow: hidden; }
+    .hero { padding: 160px 0 100px; position: relative; overflow: hidden; }
     .hero::before {
       content: ''; position: absolute; top: -200px; right: -200px;
       width: 600px; height: 600px;
@@ -123,35 +126,35 @@
     }
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
     .hero h1 {
-      font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 900;
-      line-height: 1.08; margin-bottom: 20px; letter-spacing: -0.03em;
+      font-size: clamp(2.8rem, 6vw, 4.5rem); font-weight: 900;
+      line-height: 1.05; margin-bottom: 28px; letter-spacing: -0.04em;
     }
     .hero h1 .highlight {
       background: linear-gradient(135deg, var(--accent), var(--accent-light));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
     .hero-sub {
-      font-size: 1.1rem; color: var(--text-secondary);
-      line-height: 1.7; margin-bottom: 32px; max-width: 580px; text-align: justify;
+      font-size: 1.15rem; color: var(--text-secondary);
+      line-height: 1.8; margin-bottom: 40px; max-width: 600px; text-align: justify;
     }
     .hero-sub strong { color: var(--text-primary); font-weight: 600; }
     .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
     .btn {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 14px 28px; border-radius: var(--radius-sm);
+      padding: 16px 32px; border-radius: var(--radius-sm);
       font-weight: 600; font-size: 0.95rem;
       transition: all var(--transition); border: none; cursor: pointer;
     }
     .btn-primary {
-      background: var(--accent); color: #fff;
-      box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+      background: linear-gradient(135deg, var(--accent), #2563eb); color: #fff;
+      box-shadow: 0 4px 24px rgba(59, 130, 246, 0.35);
     }
-    .btn-primary:hover { background: var(--accent-light); color: #fff; transform: translateY(-2px); box-shadow: 0 6px 30px rgba(59, 130, 246, 0.4); }
+    .btn-primary:hover { background: linear-gradient(135deg, var(--accent-light), var(--accent)); color: #fff; transform: translateY(-2px); box-shadow: 0 8px 40px rgba(59, 130, 246, 0.45); }
     .btn-secondary { background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border); }
     .btn-secondary:hover { background: var(--bg-card-hover); border-color: var(--text-muted); }
 
     /* TRUST BAR */
-    .trust-bar { padding: 48px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .trust-bar { padding: 56px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .trust-grid {
       display: flex; justify-content: center; align-items: center; gap: 48px; flex-wrap: wrap;
     }
@@ -161,34 +164,37 @@
 
     /* STATS */
     .stats-bar {
-      padding: 40px 0;
+      padding: 56px 0;
       background: var(--bg-secondary);
     }
     .stats-grid {
       display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; text-align: center;
     }
     .stat-item {}
-    .stat-number { font-size: 1.8rem; font-weight: 800; color: var(--accent-light); }
+    .stat-number { font-size: 2.2rem; font-weight: 900; color: var(--accent-light); letter-spacing: -0.02em; }
     .stat-label { font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; }
 
     /* SECTIONS */
-    section { padding: 80px 0; }
+    section { padding: 120px 0; }
     .section-label {
-      font-size: 0.78rem; color: var(--accent); text-transform: uppercase;
-      letter-spacing: 0.1em; font-weight: 600; margin-bottom: 12px;
+      font-size: 0.8rem; text-transform: uppercase;
+      letter-spacing: 0.12em; font-weight: 600; margin-bottom: 14px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      display: inline-block;
     }
     .section-title {
-      font-size: clamp(1.6rem, 3.5vw, 2.3rem);
-      font-weight: 800; line-height: 1.2; margin-bottom: 16px; letter-spacing: -0.01em;
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 800; line-height: 1.12; margin-bottom: 20px; letter-spacing: -0.025em;
     }
     .section-desc {
-      font-size: 1.02rem; color: var(--text-secondary);
-      max-width: 580px; margin-bottom: 48px; line-height: 1.7; text-align: justify;
+      font-size: 1.05rem; color: var(--text-secondary);
+      max-width: 600px; margin-bottom: 56px; line-height: 1.8; text-align: justify;
     }
 
     /* PROBLEM */
     .problem-section {
-      padding: 80px 0;
+      padding: 120px 0;
       background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
       border-top: 1px solid var(--border);
       position: relative; overflow: hidden;
@@ -205,7 +211,7 @@
     }
     .problem-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
     .problem-card p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; text-align: justify; }
-    .problem-stat { font-size: 2rem; font-weight: 800; color: var(--red); margin-bottom: 8px; }
+    .problem-stat { font-size: 2.6rem; font-weight: 900; color: var(--red); margin-bottom: 10px; letter-spacing: -0.02em; }
 
     /* STEPS */
     .steps-grid {
@@ -214,11 +220,12 @@
     }
     .step-card { text-align: center; padding: 32px 24px; }
     .step-number {
-      width: 56px; height: 56px; border-radius: 50%;
+      width: 64px; height: 64px; border-radius: 50%;
       background: var(--accent-glow); border: 2px solid var(--accent);
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.3rem; font-weight: 800; color: var(--accent-light);
-      margin: 0 auto 20px;
+      font-size: 1.4rem; font-weight: 900; color: var(--accent-light);
+      margin: 0 auto 24px;
+      box-shadow: 0 0 30px var(--accent-glow);
     }
     .step-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
     .step-card p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; }
@@ -238,7 +245,7 @@
     }
     .service-card:hover {
       border-color: var(--accent); background: var(--bg-card-hover);
-      transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
     }
     .service-icon {
       width: 44px; height: 44px; border-radius: 10px;
@@ -278,8 +285,8 @@
       display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;
     }
     .diff-item {
-      padding: 28px; border-left: 3px solid var(--accent);
-      background: var(--bg-card); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 32px; border-left: 3px solid var(--accent);
+      background: var(--bg-card); border-radius: 0 var(--radius) var(--radius) 0;
     }
     .diff-item h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
     .diff-item p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; text-align: justify; }
@@ -292,7 +299,7 @@
       background: var(--bg-card); border: 1px solid var(--border);
       border-radius: var(--radius); overflow: hidden; transition: all var(--transition);
     }
-    .portfolio-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .portfolio-card:hover { border-color: var(--accent); transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25); }
     .portfolio-img {
       height: 180px; background: linear-gradient(135deg, #1e293b, #0f172a);
       display: flex; align-items: center; justify-content: center;
@@ -348,7 +355,7 @@
       background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
       overflow: hidden; transition: all var(--transition); text-decoration: none; color: inherit; display: block;
     }
-    .demo-card:hover { border-color: var(--accent); transform: translateY(-4px); color: inherit; }
+    .demo-card:hover { border-color: var(--accent); transform: translateY(-6px); color: inherit; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25); }
     .demo-preview {
       height: 200px; display: flex; align-items: center; justify-content: center;
       font-size: 3rem; position: relative; overflow: hidden;
@@ -371,18 +378,18 @@
     }
     .price-card {
       background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 32px;
+      border-radius: var(--radius); padding: 36px;
       position: relative; transition: all var(--transition);
     }
-    .price-card:hover { border-color: var(--accent); }
-    .price-card.featured { border-color: var(--accent); box-shadow: 0 0 40px var(--accent-glow); }
+    .price-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25); }
+    .price-card.featured { border-color: var(--accent); box-shadow: 0 0 60px var(--accent-glow), 0 20px 60px rgba(0, 0, 0, 0.15); }
     .price-card.featured::before {
       content: 'MAS ELEGIDO'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
       background: var(--accent); color: #fff; font-size: 0.68rem; font-weight: 700;
       padding: 4px 16px; border-radius: 100px; letter-spacing: 0.05em;
     }
     .price-card h3 { font-size: 0.82rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
-    .price-card .price { font-size: 2.2rem; font-weight: 900; margin: 10px 0 2px; }
+    .price-card .price { font-size: 2.6rem; font-weight: 900; margin: 4px 0 2px; letter-spacing: -0.02em; }
     .price-card .price-note { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 20px; }
     .price-features { list-style: none; margin-bottom: 24px; }
     .price-features li {
@@ -421,9 +428,11 @@
     /* CTA */
     .cta-section { padding: 80px 0; text-align: center; }
     .cta-box {
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(59, 130, 246, 0.02));
-      border: 1px solid rgba(59, 130, 246, 0.2);
-      border-radius: 20px; padding: 60px 40px; max-width: 700px; margin: 0 auto;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.03));
+      border: 1px solid rgba(59, 130, 246, 0.15);
+      border-radius: 28px; padding: 72px 48px; max-width: 720px; margin: 0 auto;
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      box-shadow: 0 20px 80px rgba(59, 130, 246, 0.08);
     }
     .cta-box h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; margin-bottom: 16px; }
     .cta-box p { color: var(--text-secondary); margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto; }
@@ -466,7 +475,7 @@
       .btn { justify-content: center; }
       .trust-grid { gap: 20px; }
       .stats-grid { gap: 24px; }
-      section { padding: 60px 0; }
+      section { padding: 80px 0; }
       .cta-box { padding: 40px 24px; }
       .exp-grid, .faq-grid { grid-template-columns: 1fr; }
     }
@@ -548,10 +557,10 @@
     .data-pricing-desc { font-size: 0.92rem; color: var(--text-secondary); max-width: 560px; margin: 0 auto 32px; line-height: 1.6; }
     .data-pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
     .data-price-card {
-      background: var(--bg-primary); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 28px; transition: all var(--transition);
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 32px; transition: all var(--transition);
     }
-    .data-price-card:hover { border-color: var(--accent); }
+    .data-price-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25); }
     .data-price-card h4 { font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
     .data-price-card .dprice { font-size: 1.6rem; font-weight: 900; margin: 8px 0 4px; }
     .data-price-card .dprice-note { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 16px; }
@@ -560,9 +569,18 @@
     .data-price-card .dfeatures li::before { content: '\2713'; color: var(--green); font-weight: 700; flex-shrink: 0; }
     .data-demo-link { display: inline-block; font-size: 0.78rem; color: var(--accent); font-weight: 600; margin-top: 4px; }
 
+    /* GLASS MORPHISM */
+    .service-card, .problem-card, .value-card, .demo-card, .price-card,
+    .faq-item, .diff-item, .exp-item, .portfolio-card, .data-card, .data-price-card {
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      box-shadow: var(--glass-shadow);
+    }
+
     /* ANIMATIONS */
-    .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+    .scale-in.visible { opacity: 1; transform: scale(1); }
   </style>
 </head>
 <body>
@@ -606,7 +624,7 @@
           Tu negocio es bueno. Tus clientes deberían poder <span class="highlight">encontrarte.</span>
         </h1>
         <p class="hero-sub">
-          Soy ingeniero de software con experiencia en empresas internacionales y clientes de Estados Unidos. Construyo páginas web, sistemas de reservas, dashboards de datos y automatizaciones para negocios de Mendoza — <strong>desde $99.000</strong>, con un prototipo gratis en 48 horas para que veas cómo queda antes de pagar un peso.
+          Soy ingeniero de software con experiencia en empresas internacionales y clientes de Estados Unidos. Construyo páginas web, sistemas de reservas, dashboards de datos y automatizaciones para negocios de Mendoza — <strong>desde $79.200 (~USD 65)</strong>, con un prototipo gratis en 48 horas para que veas cómo queda antes de pagar un peso.
         </p>
         <div class="hero-buttons">
           <a href="https://wa.me/5492616423730?text=Hola%20Juan!%20Quiero%20ver%20un%20prototipo%20para%20mi%20negocio" class="btn btn-primary" target="_blank">
@@ -740,7 +758,7 @@
           <div class="service-icon" style="background: var(--accent-glow); color: var(--accent);">&#9783;</div>
           <h3>Página Web Profesional</h3>
           <p>Tu negocio visible en Google con un sitio rápido, moderno y adaptado a celulares. Formulario de contacto, botón de WhatsApp y optimización para aparecer primero cuando buscan tu rubro en Mendoza.</p>
-          <span class="service-tag">Desde $99.000</span>
+          <span class="service-tag">Desde $79.200 (~USD 65)</span>
         </div>
 
         <div class="service-card fade-up">
@@ -828,7 +846,7 @@
           <div class="value-icon">💰</div>
           <h3>Se paga solo con un cliente nuevo por mes</h3>
           <p>Si tu sitio te genera un solo cliente nuevo por mes, en pocos meses ya recuperaste toda la inversión. Después es ganancia pura. Es la publicidad más barata que existe: trabaja todos los días sin que le pagues sueldo.</p>
-          <div class="value-example">Plan Starter: $99.000 pago único → menos de $9.000/mes en un año</div>
+          <div class="value-example">Plan Starter: $79.200 pago único (~USD 65) → menos de $7.000/mes en un año</div>
         </div>
       </div>
     </div>
@@ -1223,11 +1241,18 @@
       <h2 class="section-title fade-up">Ingeniería de verdad, a un precio que tiene sentido</h2>
       <p class="section-desc fade-up">Programo todo yo y uso plataformas de hosting sin costo mensual. Eso me permite cobrarte una fracción de lo que cobra una agencia.</p>
 
+      <div style="text-align: center; margin-bottom: 48px; padding: 24px 32px; background: linear-gradient(135deg, rgba(34, 197, 94, 0.08), rgba(34, 197, 94, 0.02)); border: 1px solid rgba(34, 197, 94, 0.15); border-radius: var(--radius); max-width: 620px; margin-left: auto; margin-right: auto; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);" class="fade-up">
+        <p style="font-size: 0.82rem; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px;">&#128640; Lanzamiento — Primeros 10 clientes</p>
+        <p style="font-size: 1.3rem; font-weight: 900; color: var(--text-primary); letter-spacing: -0.02em;">20% OFF en todos los planes y servicios</p>
+        <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 6px;">Solo para quienes firmen contrato durante el período de lanzamiento</p>
+      </div>
+
       <div class="pricing-grid">
         <div class="price-card fade-up">
           <h3>Starter</h3>
-          <div class="price">$99.000</div>
-          <p class="price-note">pago único</p>
+          <div style="font-size: 0.88rem; text-decoration: line-through; color: var(--text-muted); margin-top: 6px;">$99.000</div>
+          <div class="price">$79.200</div>
+          <p class="price-note">pago único · ~USD 65</p>
           <ul class="price-features">
             <li>Página web profesional a medida</li>
             <li>Adaptada a celular, PC y tablet</li>
@@ -1243,8 +1268,9 @@
 
         <div class="price-card featured fade-up">
           <h3>Profesional</h3>
-          <div class="price">$280.000</div>
-          <p class="price-note">o 3 cuotas de $95.000</p>
+          <div style="font-size: 0.88rem; text-decoration: line-through; color: var(--text-muted); margin-top: 6px;">$280.000</div>
+          <div class="price">$224.000</div>
+          <p class="price-note">o 3 cuotas de $75.000 · ~USD 185</p>
           <ul class="price-features">
             <li>Sitio completo (5+ secciones)</li>
             <li>Sistema de reservas o turnos online</li>
@@ -1260,8 +1286,9 @@
 
         <div class="price-card fade-up">
           <h3>Premium</h3>
-          <div class="price">$480.000</div>
-          <p class="price-note">o 3 cuotas de $165.000</p>
+          <div style="font-size: 0.88rem; text-decoration: line-through; color: var(--text-muted); margin-top: 6px;">$480.000</div>
+          <div class="price">$384.000</div>
+          <p class="price-note">o 3 cuotas de $128.000 · ~USD 320</p>
           <ul class="price-features">
             <li>Todo lo del plan Profesional</li>
             <li>Catálogo online con Mercado Pago</li>
@@ -1278,6 +1305,13 @@
         <p><strong>¿Por qué tan accesible si tenés experiencia internacional?</strong> Porque programo todo yo, uso plataformas profesionales que no cobran hosting mensual y no tengo gastos de agencia. Mi estrategia es tener muchos clientes contentos, no pocos clientes caros. Tu inversión va 100% a desarrollo real.</p>
       </div>
 
+      <div style="text-align: center; margin-top: 24px; padding: 24px 32px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); max-width: 620px; margin-left: auto; margin-right: auto; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);" class="fade-up">
+        <p style="font-size: 0.88rem; font-weight: 700; color: var(--text-primary); margin-bottom: 10px;">Medios de pago</p>
+        <p style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.7;">Transferencia bancaria · Efectivo · Mercado Pago</p>
+        <p style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.7;">Pagos en USD: <strong style="color: var(--accent-light);">USDT · USDC · DAI</strong></p>
+        <p style="font-size: 0.72rem; color: var(--text-muted); margin-top: 10px;">* Precios en USD son referenciales al tipo de cambio del momento de pago. Todos los precios en pesos argentinos (ARS).</p>
+      </div>
+
       <!-- Servicios de Datos -->
       <div class="data-pricing-header fade-up">
         <p class="data-pricing-label">Servicios de datos</p>
@@ -1288,8 +1322,9 @@
       <div class="data-pricing-grid">
         <div class="data-price-card fade-up">
           <h4>Analytics Setup</h4>
-          <div class="dprice">$55.000</div>
-          <p class="dprice-note">pago único</p>
+          <div style="font-size: 0.82rem; text-decoration: line-through; color: var(--text-muted); margin-top: 4px;">$55.000</div>
+          <div class="dprice">$44.000</div>
+          <p class="dprice-note">pago único · ~USD 35</p>
           <ul class="dfeatures">
             <li>Google Analytics 4 configurado a medida</li>
             <li>Eventos personalizados (clics, formularios, conversiones)</li>
@@ -1302,8 +1337,9 @@
 
         <div class="data-price-card fade-up">
           <h4>Data Pro</h4>
-          <div class="dprice">$190.000</div>
-          <p class="dprice-note">pago único o 2 cuotas</p>
+          <div style="font-size: 0.82rem; text-decoration: line-through; color: var(--text-muted); margin-top: 4px;">$190.000</div>
+          <div class="dprice">$152.000</div>
+          <p class="dprice-note">pago único o 2 cuotas · ~USD 125</p>
           <ul class="dfeatures">
             <li>Pipeline de datos personalizado (ETL)</li>
             <li>Dashboard ejecutivo interactivo</li>
@@ -1317,8 +1353,9 @@
 
         <div class="data-price-card fade-up" style="border-color: rgba(139, 92, 246, 0.3);">
           <h4>Data Enterprise</h4>
-          <div class="dprice">A medida</div>
-          <p class="dprice-note">desde $380.000 — presupuesto según alcance</p>
+          <div style="font-size: 0.82rem; text-decoration: line-through; color: var(--text-muted); margin-top: 4px;">desde $380.000</div>
+          <div class="dprice">Desde $304.000</div>
+          <p class="dprice-note">presupuesto según alcance · ~USD 250+</p>
           <ul class="dfeatures">
             <li>Data Warehouse completo para tu negocio</li>
             <li>Pipelines ETL con múltiples fuentes</li>
@@ -1438,9 +1475,17 @@
       link.addEventListener('click', () => document.getElementById('navLinks').classList.remove('active'));
     });
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const parent = entry.target.parentElement;
+          const siblings = parent ? [...parent.children].filter(c => c.classList.contains('fade-up') || c.classList.contains('scale-in')) : [];
+          const idx = siblings.indexOf(entry.target);
+          entry.target.style.transitionDelay = (idx >= 0 ? idx * 0.08 : 0) + 's';
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-up, .scale-in').forEach(el => observer.observe(el));
   </script>
 
 </body>
