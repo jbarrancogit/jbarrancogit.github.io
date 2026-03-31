@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Barbería Los Andes | Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #D4A017;
+      --gold-light: #E8C547;
+      --gold-dark: #B8860B;
+      --bg-primary: #0F1117;
+      --bg-secondary: #1A1D27;
+      --bg-card: #1E2130;
+      --bg-sidebar: #141620;
+      --text-primary: #F0F0F5;
+      --text-secondary: #9CA3AF;
+      --text-muted: #6B7280;
+      --border: #2A2D3A;
+      --green: #22C55E;
+      --red: #EF4444;
+      --sidebar-width: 260px;
+    }
+
+    html { font-size: 14px; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ===== DEMO BANNER ===== */
+    .demo-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
+      color: #0F1117;
+      text-align: center;
+      padding: 10px 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      box-shadow: 0 2px 12px rgba(212, 160, 23, 0.3);
+    }
+    .demo-banner a {
+      color: #0F1117;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      font-weight: 700;
+      margin-left: 4px;
+      transition: opacity 0.2s;
+    }
+    .demo-banner a:hover { opacity: 0.75; }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      position: fixed;
+      top: 40px;
+      left: 0;
+      width: var(--sidebar-width);
+      height: calc(100vh - 40px);
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border);
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      z-index: 100;
+      transition: transform 0.3s ease;
+    }
+
+    .sidebar-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+      padding: 0 8px;
+    }
+    .sidebar-brand .logo {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #0F1117;
+      flex-shrink: 0;
+    }
+    .sidebar-brand h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+    .sidebar-brand span {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .sidebar-nav { flex: 1; }
+    .sidebar-nav ul { list-style: none; }
+    .sidebar-nav li { margin-bottom: 2px; }
+    .sidebar-nav a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .sidebar-nav a:hover {
+      background: rgba(212, 160, 23, 0.08);
+      color: var(--text-primary);
+    }
+    .sidebar-nav a.active {
+      background: rgba(212, 160, 23, 0.12);
+      color: var(--gold);
+    }
+    .sidebar-nav .nav-icon {
+      width: 20px;
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    .sidebar-footer {
+      padding: 16px 8px 0;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sidebar-footer .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.8rem;
+      color: #0F1117;
+      flex-shrink: 0;
+    }
+    .sidebar-footer .user-info {
+      line-height: 1.3;
+    }
+    .sidebar-footer .user-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .sidebar-footer .user-role {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    /* ===== MOBILE MENU TOGGLE ===== */
+    .menu-toggle {
+      display: none;
+      position: fixed;
+      top: 50px;
+      left: 12px;
+      z-index: 200;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--gold);
+      font-size: 1.2rem;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .main {
+      margin-left: var(--sidebar-width);
+      margin-top: 40px;
+      padding: 28px 28px 60px;
+      min-height: calc(100vh - 40px);
+    }
+
+    .main-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .main-header h1 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+    .main-header h1 span {
+      color: var(--gold);
+    }
+    .main-header p {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      margin-top: 4px;
+    }
+
+    .date-badge {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    /* ===== KPI CARDS ===== */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .kpi-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    }
+    .kpi-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .kpi-value {
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      line-height: 1;
+    }
+    .kpi-change {
+      font-size: 0.78rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 20px;
+    }
+    .kpi-change.up {
+      color: var(--green);
+      background: rgba(34, 197, 94, 0.1);
+    }
+    .kpi-change.down {
+      color: var(--red);
+      background: rgba(239, 68, 68, 0.1);
+    }
+    .kpi-icon {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      font-size: 1.6rem;
+      opacity: 0.15;
+    }
+
+    /* ===== CHART CARDS ===== */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      transition: box-shadow 0.2s;
+    }
+    .card:hover {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    .card-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .card-badge {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      background: rgba(255,255,255,0.05);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    .col-8 { grid-column: span 8; }
+    .col-6 { grid-column: span 6; }
+    .col-4 { grid-column: span 4; }
+    .col-12 { grid-column: span 12; }
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+    }
+    .chart-container.line-chart { height: 260px; }
+    .chart-container.doughnut-chart { height: 260px; }
+    .chart-container.bar-chart { height: 260px; }
+
+    /* ===== TABLE ===== */
+    .table-wrapper {
+      overflow-x: auto;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .data-table th {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+      text-align: left;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .data-table td {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(42, 45, 58, 0.5);
+    }
+    .data-table tbody tr {
+      transition: background 0.15s;
+    }
+    .data-table tbody tr:hover {
+      background: rgba(212, 160, 23, 0.04);
+    }
+    .data-table .amount {
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .barbero-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: rgba(212, 160, 23, 0.1);
+      color: var(--gold);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1200px) {
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+      .col-8, .col-6, .col-4 { grid-column: span 6; }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar { transform: translateX(-100%); }
+      .sidebar.open { transform: translateX(0); }
+      .menu-toggle { display: flex; }
+      .main { margin-left: 0; padding: 16px 14px 60px; }
+      .main-header { margin-top: 40px; }
+      .kpi-grid { grid-template-columns: 1fr; }
+      .col-8, .col-6, .col-4, .col-12 { grid-column: span 12; }
+      .dashboard-grid { grid-template-columns: 1fr; gap: 14px; }
+      .kpi-value { font-size: 1.3rem; }
+      .demo-banner { font-size: 0.72rem; padding: 8px 12px; }
+    }
+
+    /* ===== SIDEBAR OVERLAY (mobile) ===== */
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 99;
+    }
+    .sidebar-overlay.active { display: block; }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .kpi-card, .card {
+      animation: fadeInUp 0.5s ease both;
+    }
+    .kpi-card:nth-child(1) { animation-delay: 0.05s; }
+    .kpi-card:nth-child(2) { animation-delay: 0.1s; }
+    .kpi-card:nth-child(3) { animation-delay: 0.15s; }
+    .kpi-card:nth-child(4) { animation-delay: 0.2s; }
+    .card:nth-child(1) { animation-delay: 0.25s; }
+    .card:nth-child(2) { animation-delay: 0.3s; }
+    .card:nth-child(3) { animation-delay: 0.35s; }
+    .card:nth-child(4) { animation-delay: 0.4s; }
+    .card:nth-child(5) { animation-delay: 0.45s; }
+    .card:nth-child(6) { animation-delay: 0.5s; }
+    .card:nth-child(7) { animation-delay: 0.55s; }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+  </style>
+</head>
+<body>
+
+  <!-- DEMO BANNER -->
+  <div class="demo-banner">
+    &#10024; Esta es una demo creada por Juan Barranco — Todos los datos son ficticios e ilustrativos.
+    ¿Querés un dashboard así para tu barbería?
+    <a href="https://wa.me/5492616423730?text=Hola%20Juan!%20Vi%20el%20dashboard%20de%20barbería%20y%20me%20interesa" target="_blank" rel="noopener">→ Contactame</a>
+  </div>
+
+  <!-- MOBILE TOGGLE -->
+  <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">☰</button>
+
+  <!-- SIDEBAR OVERLAY -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo">LA</div>
+      <div>
+        <h2>Los Andes</h2>
+        <span>Barbería &amp; Estilo</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <ul>
+        <li><a href="#" class="active"><span class="nav-icon">📊</span> Dashboard</a></li>
+        <li><a href="#"><span class="nav-icon">📅</span> Agenda</a></li>
+        <li><a href="#"><span class="nav-icon">👥</span> Clientes</a></li>
+        <li><a href="#"><span class="nav-icon">✂️</span> Servicios</a></li>
+        <li><a href="#"><span class="nav-icon">👨‍💼</span> Barberos</a></li>
+        <li><a href="#"><span class="nav-icon">💰</span> Facturación</a></li>
+        <li><a href="#"><span class="nav-icon">📦</span> Productos</a></li>
+        <li><a href="#"><span class="nav-icon">⚙️</span> Configuración</a></li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="avatar">RA</div>
+      <div class="user-info">
+        <div class="user-name">Rodrigo Álvarez</div>
+        <div class="user-role">Administrador</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+    <div class="main-header">
+      <div>
+        <h1>Panel de <span>Gestión</span></h1>
+        <p>Resumen de rendimiento — Marzo 2026</p>
+      </div>
+      <div class="date-badge">📅 Lunes 30 de marzo, 2026</div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">Facturación del mes</div>
+        <div class="kpi-value">$1.450.000</div>
+        <div class="kpi-change up">▲ +13% vs. mes anterior</div>
+        <div class="kpi-icon">💰</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Turnos atendidos</div>
+        <div class="kpi-value">520</div>
+        <div class="kpi-change up">▲ +10% vs. mes anterior</div>
+        <div class="kpi-icon">📅</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Ticket promedio</div>
+        <div class="kpi-value">$6.200</div>
+        <div class="kpi-change up">▲ +5% vs. mes anterior</div>
+        <div class="kpi-icon">🧾</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Clientes nuevos</div>
+        <div class="kpi-value">78</div>
+        <div class="kpi-change up">▲ +22% vs. mes anterior</div>
+        <div class="kpi-icon">👤</div>
+      </div>
+    </div>
+
+    <!-- CHARTS GRID -->
+    <div class="dashboard-grid">
+
+      <!-- 1. Facturación semanal (Line) -->
+      <div class="card col-8">
+        <div class="card-header">
+          <div class="card-title">Facturación semanal</div>
+          <div class="card-badge">Últimas 12 semanas</div>
+        </div>
+        <div class="chart-container line-chart">
+          <canvas id="chartFacturacion"></canvas>
+        </div>
+      </div>
+
+      <!-- 2. Servicios más solicitados (Doughnut) -->
+      <div class="card col-4">
+        <div class="card-header">
+          <div class="card-title">Servicios más solicitados</div>
+          <div class="card-badge">Marzo</div>
+        </div>
+        <div class="chart-container doughnut-chart">
+          <canvas id="chartServicios"></canvas>
+        </div>
+      </div>
+
+      <!-- 3. Turnos por día (Bar) -->
+      <div class="card col-6">
+        <div class="card-header">
+          <div class="card-title">Turnos por día</div>
+          <div class="card-badge">Promedio semanal</div>
+        </div>
+        <div class="chart-container bar-chart">
+          <canvas id="chartTurnos"></canvas>
+        </div>
+      </div>
+
+      <!-- 4. Rendimiento por barbero (Bar) -->
+      <div class="card col-6">
+        <div class="card-header">
+          <div class="card-title">Rendimiento por barbero</div>
+          <div class="card-badge">Marzo</div>
+        </div>
+        <div class="chart-container bar-chart">
+          <canvas id="chartBarberos"></canvas>
+        </div>
+      </div>
+
+      <!-- 5. Horarios pico (Line) -->
+      <div class="card col-8">
+        <div class="card-header">
+          <div class="card-title">Horarios pico</div>
+          <div class="card-badge">Turnos promedio por hora</div>
+        </div>
+        <div class="chart-container line-chart">
+          <canvas id="chartHorarios"></canvas>
+        </div>
+      </div>
+
+      <!-- 6. Cómo nos encontraron (Doughnut) -->
+      <div class="card col-4">
+        <div class="card-header">
+          <div class="card-title">Cómo nos encontraron</div>
+          <div class="card-badge">Clientes nuevos</div>
+        </div>
+        <div class="chart-container doughnut-chart">
+          <canvas id="chartCanales"></canvas>
+        </div>
+      </div>
+
+      <!-- 7. Últimos turnos (Table) -->
+      <div class="card col-12">
+        <div class="card-header">
+          <div class="card-title">Últimos turnos</div>
+          <div class="card-badge">Hoy</div>
+        </div>
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Hora</th>
+                <th>Cliente</th>
+                <th>Barbero</th>
+                <th>Servicio</th>
+                <th>Monto</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>09:00</td>
+                <td>Marcos Pereyra</td>
+                <td><span class="barbero-badge">Martín</span></td>
+                <td>Corte clásico</td>
+                <td class="amount">$4.500</td>
+              </tr>
+              <tr>
+                <td>09:30</td>
+                <td>Tomás Gutiérrez</td>
+                <td><span class="barbero-badge">Luciano</span></td>
+                <td>Corte + barba</td>
+                <td class="amount">$7.200</td>
+              </tr>
+              <tr>
+                <td>10:00</td>
+                <td>Valentín Rosas</td>
+                <td><span class="barbero-badge">Sofía</span></td>
+                <td>Coloración</td>
+                <td class="amount">$9.500</td>
+              </tr>
+              <tr>
+                <td>10:30</td>
+                <td>Ignacio Fernández</td>
+                <td><span class="barbero-badge">Martín</span></td>
+                <td>Barba sola</td>
+                <td class="amount">$3.800</td>
+              </tr>
+              <tr>
+                <td>11:00</td>
+                <td>Agustín López</td>
+                <td><span class="barbero-badge">Luciano</span></td>
+                <td>Corte clásico</td>
+                <td class="amount">$4.500</td>
+              </tr>
+              <tr>
+                <td>11:30</td>
+                <td>Facundo Morales</td>
+                <td><span class="barbero-badge">Sofía</span></td>
+                <td>Tratamiento capilar</td>
+                <td class="amount">$8.000</td>
+              </tr>
+              <tr>
+                <td>12:00</td>
+                <td>Nicolás Díaz</td>
+                <td><span class="barbero-badge">Martín</span></td>
+                <td>Corte + barba</td>
+                <td class="amount">$7.200</td>
+              </tr>
+              <tr>
+                <td>12:30</td>
+                <td>Santiago Ruiz</td>
+                <td><span class="barbero-badge">Luciano</span></td>
+                <td>Corte clásico</td>
+                <td class="amount">$4.500</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    // ===== MOBILE MENU =====
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('active');
+    });
+    overlay.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('active');
+    });
+
+    // ===== CHART.JS GLOBAL CONFIG =====
+    Chart.defaults.color = '#9CA3AF';
+    Chart.defaults.font.family = "'Inter', sans-serif";
+    Chart.defaults.font.size = 11;
+    Chart.defaults.plugins.legend.labels.usePointStyle = true;
+    Chart.defaults.plugins.legend.labels.pointStyleWidth = 10;
+    Chart.defaults.plugins.legend.labels.padding = 16;
+    Chart.defaults.scale.grid = { color: 'rgba(42, 45, 58, 0.7)' };
+
+    const gold = '#D4A017';
+    const goldLight = '#E8C547';
+    const goldDark = '#B8860B';
+
+    function goldGradient(ctx, chartArea) {
+      if (!chartArea) return gold;
+      const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+      gradient.addColorStop(0, 'rgba(212, 160, 23, 0.0)');
+      gradient.addColorStop(1, 'rgba(212, 160, 23, 0.25)');
+      return gradient;
+    }
+
+    // ===== 1. FACTURACIÓN SEMANAL (Line) =====
+    const ctxFact = document.getElementById('chartFacturacion').getContext('2d');
+    new Chart(ctxFact, {
+      type: 'line',
+      data: {
+        labels: ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4', 'Sem 5', 'Sem 6', 'Sem 7', 'Sem 8', 'Sem 9', 'Sem 10', 'Sem 11', 'Sem 12'],
+        datasets: [{
+          label: 'Facturación ($)',
+          data: [280000, 310000, 295000, 340000, 320000, 360000, 355000, 380000, 370000, 410000, 395000, 420000],
+          borderColor: gold,
+          backgroundColor: function(context) {
+            const chart = context.chart;
+            const { ctx, chartArea } = chart;
+            return goldGradient(ctx, chartArea);
+          },
+          borderWidth: 2.5,
+          fill: true,
+          tension: 0.4,
+          pointRadius: 4,
+          pointBackgroundColor: gold,
+          pointBorderColor: '#1E2130',
+          pointBorderWidth: 2,
+          pointHoverRadius: 7,
+          pointHoverBackgroundColor: goldLight,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#1E2130',
+            borderColor: gold,
+            borderWidth: 1,
+            titleColor: '#F0F0F5',
+            bodyColor: gold,
+            padding: 12,
+            cornerRadius: 8,
+            callbacks: {
+              label: ctx => '$ ' + ctx.parsed.y.toLocaleString('es-AR')
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: false,
+            ticks: {
+              callback: v => '$' + (v / 1000) + 'k'
+            }
+          }
+        },
+        animation: {
+          duration: 1200,
+          easing: 'easeOutQuart'
+        }
+      }
+    });
+
+    // ===== 2. SERVICIOS MÁS SOLICITADOS (Doughnut) =====
+    const ctxServ = document.getElementById('chartServicios').getContext('2d');
+    new Chart(ctxServ, {
+      type: 'doughnut',
+      data: {
+        labels: ['Corte clásico', 'Corte + barba', 'Barba sola', 'Coloración', 'Tratamiento'],
+        datasets: [{
+          data: [35, 28, 15, 12, 10],
+          backgroundColor: ['#D4A017', '#E8C547', '#B8860B', '#8B6914', '#6B5210'],
+          borderColor: '#1E2130',
+          borderWidth: 3,
+          hoverOffset: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '62%',
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: { font: { size: 11 } }
+          },
+          tooltip: {
+            backgroundColor: '#1E2130',
+            borderColor: gold,
+            borderWidth: 1,
+            titleColor: '#F0F0F5',
+            bodyColor: gold,
+            padding: 12,
+            cornerRadius: 8,
+            callbacks: {
+              label: ctx => ' ' + ctx.label + ': ' + ctx.parsed + '%'
+            }
+          }
+        },
+        animation: {
+          animateRotate: true,
+          duration: 1000,
+          easing: 'easeOutQuart'
+        }
+      }
+    });
+
+    // ===== 3. TURNOS POR DÍA (Bar) =====
+    const ctxTurnos = document.getElementById('chartTurnos').getContext('2d');
+    new Chart(ctxTurnos, {
+      type: 'bar',
+      data: {
+        labels: ['Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
+        datasets: [{
+          label: 'Turnos',
+          data: [18, 22, 20, 28, 35, 12],
+          backgroundColor: [
+            'rgba(212, 160, 23, 0.6)',
+            'rgba(212, 160, 23, 0.7)',
+            'rgba(212, 160, 23, 0.65)',
+            'rgba(212, 160, 23, 0.8)',
+            'rgba(212, 160, 23, 1)',
+            'rgba(212, 160, 23, 0.4)'
+          ],
+          borderColor: gold,
+          borderWidth: 1,
+          borderRadius: 6,
+          hoverBackgroundColor: goldLight
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#1E2130',
+            borderColor: gold,
+            borderWidth: 1,
+            titleColor: '#F0F0F5',
+            bodyColor: gold,
+            padding: 12,
+            cornerRadius: 8
+          }
+        },
+        scales: {
+          y: { beginAtZero: true }
+        },
+        animation: {
+          duration: 1000,
+          easing: 'easeOutQuart'
+        }
+      }
+    });
+
+    // ===== 4. RENDIMIENTO POR BARBERO (Bar grouped) =====
+    const ctxBarberos = document.getElementById('chartBarberos').getContext('2d');
+    new Chart(ctxBarberos, {
+      type: 'bar',
+      data: {
+        labels: ['Martín', 'Luciano', 'Sofía'],
+        datasets: [
+          {
+            label: 'Turnos atendidos',
+            data: [198, 182, 140],
+            backgroundColor: 'rgba(212, 160, 23, 0.85)',
+            borderColor: gold,
+            borderWidth: 1,
+            borderRadius: 6,
+            yAxisID: 'y'
+          },
+          {
+            label: 'Facturación ($k)',
+            data: [560, 510, 380],
+            backgroundColor: 'rgba(184, 134, 11, 0.5)',
+            borderColor: goldDark,
+            borderWidth: 1,
+            borderRadius: 6,
+            yAxisID: 'y1'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: { font: { size: 11 } }
+          },
+          tooltip: {
+            backgroundColor: '#1E2130',
+            borderColor: gold,
+            borderWidth: 1,
+            titleColor: '#F0F0F5',
+            bodyColor: gold,
+            padding: 12,
+            cornerRadius: 8,
+            callbacks: {
+              label: function(ctx) {
+                if (ctx.datasetIndex === 1) {
+                  return ' Facturación: $' + ctx.parsed.y + 'k';
+                }
+                return ' Turnos: ' + ctx.parsed.y;
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            position: 'left',
+            title: { display: true, text: 'Turnos', color: '#9CA3AF' }
+          },
+          y1: {
+            beginAtZero: true,
+            position: 'right',
+            title: { display: true, text: 'Facturación ($k)', color: '#9CA3AF' },
+            grid: { drawOnChartArea: false }
+          }
+        },
+        animation: {
+          duration: 1000,
+          easing: 'easeOutQuart'
+        }
+      }
+    });
+
+    // ===== 5. HORARIOS PICO (Line) =====
+    const ctxHorarios = document.getElementById('chartHorarios').getContext('2d');
+    new Chart(ctxHorarios, {
+      type: 'line',
+      data: {
+        labels: ['9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'],
+        datasets: [{
+          label: 'Turnos promedio',
+          data: [3, 5, 7, 6, 3, 2, 4, 6, 8, 9, 7, 4],
+          borderColor: gold,
+          backgroundColor: function(context) {
+            const chart = context.chart;
+            const { ctx, chartArea } = chart;
+            return goldGradient(ctx, chartArea);
+          },
+          borderWidth: 2.5,
+          fill: true,
+          tension: 0.4,
+          pointRadius: 4,
+          pointBackgroundColor: gold,
+          pointBorderColor: '#1E2130',
+          pointBorderWidth: 2,
+          pointHoverRadius: 7,
+          pointHoverBackgroundColor: goldLight,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#1E2130',
+            borderColor: gold,
+            borderWidth: 1,
+            titleColor: '#F0F0F5',
+            bodyColor: gold,
+            padding: 12,
+            cornerRadius: 8,
+            callbacks: {
+              label: ctx => ' ' + ctx.parsed.y + ' turnos'
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: { display: true, text: 'Cantidad de turnos', color: '#9CA3AF' }
+          }
+        },
+        animation: {
+          duration: 1200,
+          easing: 'easeOutQuart'
+        }
+      }
+    });
+
+    // ===== 6. CÓMO NOS ENCONTRARON (Doughnut) =====
+    const ctxCanales = document.getElementById('chartCanales').getContext('2d');
+    new Chart(ctxCanales, {
+      type: 'doughnut',
+      data: {
+        labels: ['Instagram', 'Google', 'Recomendación', 'WhatsApp', 'Otros'],
+        datasets: [{
+          data: [35, 25, 25, 10, 5],
+          backgroundColor: ['#D4A017', '#E8C547', '#B8860B', '#8B6914', '#6B5210'],
+          borderColor: '#1E2130',
+          borderWidth: 3,
+          hoverOffset: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '62%',
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: { font: { size: 11 } }
+          },
+          tooltip: {
+            backgroundColor: '#1E2130',
+            borderColor: gold,
+            borderWidth: 1,
+            titleColor: '#F0F0F5',
+            bodyColor: gold,
+            padding: 12,
+            cornerRadius: 8,
+            callbacks: {
+              label: ctx => ' ' + ctx.label + ': ' + ctx.parsed + '%'
+            }
+          }
+        },
+        animation: {
+          animateRotate: true,
+          duration: 1000,
+          easing: 'easeOutQuart'
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

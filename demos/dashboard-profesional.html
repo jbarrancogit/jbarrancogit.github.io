@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — Consultorio Odontológico Sonrisa Mendoza</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --accent: #0EA5E9;
+            --accent-light: #38BDF8;
+            --accent-dark: #0284C7;
+            --bg-dark: #0F172A;
+            --bg-card: #1E293B;
+            --bg-sidebar: #0F172A;
+            --bg-hover: #334155;
+            --text-primary: #F1F5F9;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --border: #334155;
+            --green: #22C55E;
+            --red: #EF4444;
+            --yellow: #F59E0B;
+            --sidebar-width: 260px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ===== DEMO BANNER ===== */
+        .demo-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: linear-gradient(135deg, var(--accent-dark), var(--accent), #6366F1);
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .demo-banner a {
+            color: #fff;
+            font-weight: 700;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        .demo-banner a:hover {
+            color: #E0F2FE;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            position: fixed;
+            top: 40px;
+            left: 0;
+            bottom: 0;
+            width: var(--sidebar-width);
+            background: var(--bg-sidebar);
+            border-right: 1px solid var(--border);
+            padding: 24px 16px;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+            z-index: 900;
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 32px;
+            padding: 0 8px;
+        }
+
+        .sidebar-logo .icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .sidebar-logo .text {
+            font-weight: 700;
+            font-size: 1rem;
+            line-height: 1.2;
+        }
+
+        .sidebar-logo .text span {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+        }
+
+        .sidebar-section {
+            margin-bottom: 24px;
+        }
+
+        .sidebar-section-title {
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            padding: 0 12px;
+            margin-bottom: 8px;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.15s ease;
+            cursor: pointer;
+        }
+
+        .sidebar-link:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .sidebar-link.active {
+            background: rgba(14, 165, 233, 0.15);
+            color: var(--accent-light);
+        }
+
+        .sidebar-link .nav-icon {
+            width: 20px;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        /* ===== HAMBURGER ===== */
+        .hamburger {
+            display: none;
+            position: fixed;
+            top: 50px;
+            left: 12px;
+            z-index: 950;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main {
+            margin-left: var(--sidebar-width);
+            margin-top: 40px;
+            padding: 28px 28px 60px;
+            min-height: calc(100vh - 40px);
+        }
+
+        .main-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .main-header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .header-date {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            background: var(--bg-card);
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        /* ===== KPI CARDS ===== */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 28px;
+        }
+
+        .kpi-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--border);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .kpi-label {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .kpi-value {
+            font-size: 1.65rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .kpi-change {
+            font-size: 0.78rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 8px;
+            border-radius: 20px;
+        }
+
+        .kpi-change.positive {
+            color: var(--green);
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .kpi-change.negative {
+            color: var(--green);
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        /* ===== CHART CARDS ===== */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 28px;
+        }
+
+        .chart-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--border);
+        }
+
+        .chart-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .chart-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .chart-container.line-chart {
+            height: 280px;
+        }
+
+        .chart-container.doughnut-chart {
+            height: 300px;
+        }
+
+        .chart-container.bar-chart {
+            height: 280px;
+        }
+
+        .chart-container.horizontal-bar-chart {
+            height: 260px;
+        }
+
+        /* ===== TABLE ===== */
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .data-table thead th {
+            text-align: left;
+            padding: 12px 16px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .data-table tbody tr {
+            transition: background 0.15s ease;
+        }
+
+        .data-table tbody tr:hover {
+            background: var(--bg-hover);
+        }
+
+        .data-table tbody td {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+            color: var(--text-primary);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 600;
+        }
+
+        .badge-confirmed {
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--green);
+        }
+
+        .badge-pending {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--yellow);
+        }
+
+        .badge-cancelled {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--red);
+        }
+
+        /* ===== MOBILE OVERLAY ===== */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 850;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1200px) {
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .sidebar-overlay.open {
+                display: block;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 16px;
+                padding-top: 60px;
+            }
+
+            .kpi-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+
+            .charts-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .main-header h1 {
+                font-size: 1.2rem;
+            }
+
+            .demo-banner {
+                font-size: 0.75rem;
+                padding: 8px 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .kpi-value {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        .animate-in:nth-child(1) { animation-delay: 0.05s; }
+        .animate-in:nth-child(2) { animation-delay: 0.1s; }
+        .animate-in:nth-child(3) { animation-delay: 0.15s; }
+        .animate-in:nth-child(4) { animation-delay: 0.2s; }
+        .animate-in:nth-child(5) { animation-delay: 0.25s; }
+        .animate-in:nth-child(6) { animation-delay: 0.3s; }
+        .animate-in:nth-child(7) { animation-delay: 0.35s; }
+        .animate-in:nth-child(8) { animation-delay: 0.4s; }
+        .animate-in:nth-child(9) { animation-delay: 0.45s; }
+        .animate-in:nth-child(10) { animation-delay: 0.5s; }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- DEMO BANNER -->
+    <div class="demo-banner">
+        ✨ Esta es una demo creada por Juan Barranco — Todos los datos son ficticios e ilustrativos.
+        <a href="https://wa.me/5492616423730?text=Hola%20Juan!%20Vi%20el%20dashboard%20de%20consultorio%20y%20me%20interesa" target="_blank" rel="noopener">
+            ¿Querés un dashboard así para tu consultorio? → Contactame
+        </a>
+    </div>
+
+    <!-- SIDEBAR OVERLAY (mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- HAMBURGER (mobile) -->
+    <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú">☰</button>
+
+    <!-- SIDEBAR -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <div class="icon">🦷</div>
+            <div class="text">
+                Sonrisa Mendoza
+                <span>Consultorio Odontológico</span>
+            </div>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">General</div>
+            <a class="sidebar-link active" href="#">
+                <span class="nav-icon">📊</span> Dashboard
+            </a>
+            <a class="sidebar-link" href="#">
+                <span class="nav-icon">📅</span> Agenda
+            </a>
+            <a class="sidebar-link" href="#">
+                <span class="nav-icon">👥</span> Pacientes
+            </a>
+            <a class="sidebar-link" href="#">
+                <span class="nav-icon">💰</span> Facturación
+            </a>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Clínica</div>
+            <a class="sidebar-link" href="#">
+                <span class="nav-icon">🩺</span> Tratamientos
+            </a>
+            <a class="sidebar-link" href="#">
+                <span class="nav-icon">📋</span> Historias clínicas
+            </a>
+            <a class="sidebar-link" href="#">
+                <span class="nav-icon">📦</span> Insumos
+            </a>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Configuración</div>
+            <a class="sidebar-link" href="#">
+                <span class="nav-icon">⚙️</span> Ajustes
+            </a>
+            <a class="sidebar-link" href="#">
+                <span class="nav-icon">👤</span> Mi perfil
+            </a>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+        <div class="main-header">
+            <h1>Panel de control</h1>
+            <div class="header-date">📅 Marzo 2026 — Mendoza, Argentina</div>
+        </div>
+
+        <!-- KPI CARDS -->
+        <div class="kpi-grid">
+            <div class="kpi-card animate-in">
+                <div class="kpi-label">Facturación mensual</div>
+                <div class="kpi-value">$2.150.000</div>
+                <span class="kpi-change positive">▲ +10% vs. mes anterior</span>
+            </div>
+            <div class="kpi-card animate-in">
+                <div class="kpi-label">Turnos atendidos</div>
+                <div class="kpi-value">186</div>
+                <span class="kpi-change positive">▲ +8% vs. mes anterior</span>
+            </div>
+            <div class="kpi-card animate-in">
+                <div class="kpi-label">Pacientes nuevos</div>
+                <div class="kpi-value">34</div>
+                <span class="kpi-change positive">▲ +15% vs. mes anterior</span>
+            </div>
+            <div class="kpi-card animate-in">
+                <div class="kpi-label">Tasa de ausentismo</div>
+                <div class="kpi-value">8,2%</div>
+                <span class="kpi-change negative">▼ -2,1% vs. mes anterior</span>
+            </div>
+        </div>
+
+        <!-- CHARTS ROW 1 -->
+        <div class="charts-grid">
+            <!-- Facturación mensual (Line) -->
+            <div class="chart-card animate-in">
+                <h3>Facturación mensual</h3>
+                <div class="chart-container line-chart">
+                    <canvas id="chartFacturacion"></canvas>
+                </div>
+            </div>
+
+            <!-- Ingresos por servicio (Doughnut) -->
+            <div class="chart-card animate-in">
+                <h3>Ingresos por servicio</h3>
+                <div class="chart-container doughnut-chart">
+                    <canvas id="chartServicios"></canvas>
+                </div>
+            </div>
+
+            <!-- Turnos por día (Bar) -->
+            <div class="chart-card animate-in">
+                <h3>Turnos por día de la semana</h3>
+                <div class="chart-container bar-chart">
+                    <canvas id="chartTurnosDia"></canvas>
+                </div>
+            </div>
+
+            <!-- Origen pacientes nuevos (Doughnut) -->
+            <div class="chart-card animate-in">
+                <h3>Origen de pacientes nuevos</h3>
+                <div class="chart-container doughnut-chart">
+                    <canvas id="chartOrigen"></canvas>
+                </div>
+            </div>
+
+            <!-- Turnos diarios últimos 30 días (Line - full width) -->
+            <div class="chart-card full-width animate-in">
+                <h3>Turnos diarios — Últimos 30 días</h3>
+                <div class="chart-container line-chart">
+                    <canvas id="chartTurnosDiarios"></canvas>
+                </div>
+            </div>
+
+            <!-- Obras sociales (Horizontal Bar) -->
+            <div class="chart-card animate-in">
+                <h3>Obras sociales más frecuentes</h3>
+                <div class="chart-container horizontal-bar-chart">
+                    <canvas id="chartObrasSociales"></canvas>
+                </div>
+            </div>
+
+            <!-- Tabla próximos turnos -->
+            <div class="chart-card animate-in">
+                <h3>Próximos turnos</h3>
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Horario</th>
+                                <th>Paciente</th>
+                                <th>Servicio</th>
+                                <th>Obra social</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>09:00</td>
+                                <td>María López</td>
+                                <td>Limpieza dental</td>
+                                <td>Particular</td>
+                                <td><span class="badge badge-confirmed">Confirmado</span></td>
+                            </tr>
+                            <tr>
+                                <td>09:30</td>
+                                <td>Carlos Gutiérrez</td>
+                                <td>Ortodoncia</td>
+                                <td>Obra Social A</td>
+                                <td><span class="badge badge-confirmed">Confirmado</span></td>
+                            </tr>
+                            <tr>
+                                <td>10:00</td>
+                                <td>Ana Fernández</td>
+                                <td>Implante</td>
+                                <td>Prepaga Salud</td>
+                                <td><span class="badge badge-pending">Pendiente</span></td>
+                            </tr>
+                            <tr>
+                                <td>10:30</td>
+                                <td>Jorge Martínez</td>
+                                <td>Blanqueamiento</td>
+                                <td>Particular</td>
+                                <td><span class="badge badge-confirmed">Confirmado</span></td>
+                            </tr>
+                            <tr>
+                                <td>11:00</td>
+                                <td>Lucía Romero</td>
+                                <td>Endodoncia</td>
+                                <td>Obra Social B</td>
+                                <td><span class="badge badge-confirmed">Confirmado</span></td>
+                            </tr>
+                            <tr>
+                                <td>11:30</td>
+                                <td>Diego Sánchez</td>
+                                <td>Control</td>
+                                <td>Prepaga Plus</td>
+                                <td><span class="badge badge-cancelled">Cancelado</span></td>
+                            </tr>
+                            <tr>
+                                <td>12:00</td>
+                                <td>Valentina Ruiz</td>
+                                <td>Ortodoncia</td>
+                                <td>Obra Social A</td>
+                                <td><span class="badge badge-pending">Pendiente</span></td>
+                            </tr>
+                            <tr>
+                                <td>12:30</td>
+                                <td>Martín Herrera</td>
+                                <td>Limpieza dental</td>
+                                <td>Particular</td>
+                                <td><span class="badge badge-confirmed">Confirmado</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // ===== SIDEBAR MOBILE TOGGLE =====
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        const hamburger = document.getElementById('hamburgerBtn');
+
+        hamburger.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('open');
+        });
+
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('open');
+        });
+
+        // ===== CHART.JS GLOBAL DEFAULTS =====
+        Chart.defaults.color = '#94A3B8';
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        Chart.defaults.plugins.legend.labels.usePointStyle = true;
+        Chart.defaults.plugins.legend.labels.padding = 16;
+        Chart.defaults.plugins.tooltip.backgroundColor = '#1E293B';
+        Chart.defaults.plugins.tooltip.borderColor = '#334155';
+        Chart.defaults.plugins.tooltip.borderWidth = 1;
+        Chart.defaults.plugins.tooltip.titleFont = { weight: '600' };
+        Chart.defaults.plugins.tooltip.padding = 12;
+        Chart.defaults.plugins.tooltip.cornerRadius = 8;
+        Chart.defaults.elements.point.radius = 3;
+        Chart.defaults.elements.point.hoverRadius = 6;
+        Chart.defaults.animation.duration = 1200;
+        Chart.defaults.animation.easing = 'easeOutQuart';
+
+        const accentColor = '#0EA5E9';
+        const accentColorLight = 'rgba(14, 165, 233, 0.15)';
+
+        // ===== 1. FACTURACIÓN MENSUAL (Line) =====
+        new Chart(document.getElementById('chartFacturacion'), {
+            type: 'line',
+            data: {
+                labels: ['Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic', 'Ene', 'Feb', 'Mar'],
+                datasets: [{
+                    label: 'Facturación ($)',
+                    data: [1420000, 1380000, 1510000, 1560000, 1620000, 1700000, 1780000, 1850000, 1920000, 1980000, 1950000, 2150000],
+                    borderColor: accentColor,
+                    backgroundColor: accentColorLight,
+                    fill: true,
+                    tension: 0.4,
+                    borderWidth: 2.5,
+                    pointBackgroundColor: accentColor,
+                    pointBorderColor: '#1E293B',
+                    pointBorderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: ctx => '$ ' + ctx.parsed.y.toLocaleString('es-AR')
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { color: 'rgba(51, 65, 85, 0.4)' },
+                        ticks: { font: { size: 11 } }
+                    },
+                    y: {
+                        grid: { color: 'rgba(51, 65, 85, 0.4)' },
+                        ticks: {
+                            font: { size: 11 },
+                            callback: v => '$' + (v / 1000000).toFixed(1) + 'M'
+                        }
+                    }
+                }
+            }
+        });
+
+        // ===== 2. INGRESOS POR SERVICIO (Doughnut) =====
+        new Chart(document.getElementById('chartServicios'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Implantes', 'Ortodoncia', 'Blanqueamiento', 'Limpieza', 'Endodoncia', 'Otros'],
+                datasets: [{
+                    data: [28, 22, 18, 15, 10, 7],
+                    backgroundColor: [
+                        '#0EA5E9',
+                        '#6366F1',
+                        '#22C55E',
+                        '#F59E0B',
+                        '#EF4444',
+                        '#64748B'
+                    ],
+                    borderColor: '#1E293B',
+                    borderWidth: 3,
+                    hoverOffset: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '65%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { font: { size: 11 }, padding: 12 }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: ctx => ctx.label + ': ' + ctx.parsed + '%'
+                        }
+                    }
+                }
+            }
+        });
+
+        // ===== 3. TURNOS POR DÍA (Bar) =====
+        new Chart(document.getElementById('chartTurnosDia'), {
+            type: 'bar',
+            data: {
+                labels: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                datasets: [{
+                    label: 'Turnos',
+                    data: [38, 42, 35, 40, 36, 18],
+                    backgroundColor: [
+                        'rgba(14, 165, 233, 0.8)',
+                        'rgba(14, 165, 233, 0.8)',
+                        'rgba(14, 165, 233, 0.8)',
+                        'rgba(14, 165, 233, 0.8)',
+                        'rgba(14, 165, 233, 0.8)',
+                        'rgba(14, 165, 233, 0.5)'
+                    ],
+                    borderRadius: 6,
+                    borderSkipped: false,
+                    barPercentage: 0.6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: {
+                        grid: { display: false },
+                        ticks: { font: { size: 11 } }
+                    },
+                    y: {
+                        grid: { color: 'rgba(51, 65, 85, 0.4)' },
+                        ticks: { font: { size: 11 } },
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // ===== 4. TURNOS DIARIOS - ÚLTIMOS 30 DÍAS (Line) =====
+        (function() {
+            const labels = [];
+            const data = [];
+            const baseDate = new Date(2026, 2, 1); // Marzo 2026
+            const values = [7, 8, 6, 9, 7, 3, 0, 8, 7, 6, 8, 9, 3, 0, 7, 8, 9, 7, 6, 3, 0, 8, 7, 8, 9, 7, 3, 0, 8, 7];
+            for (let i = 0; i < 30; i++) {
+                const d = new Date(baseDate);
+                d.setDate(d.getDate() + i);
+                labels.push(d.getDate() + '/' + (d.getMonth() + 1));
+                data.push(values[i]);
+            }
+
+            new Chart(document.getElementById('chartTurnosDiarios'), {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Turnos',
+                        data: data,
+                        borderColor: '#22C55E',
+                        backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        borderWidth: 2,
+                        pointRadius: 2,
+                        pointHoverRadius: 5,
+                        pointBackgroundColor: '#22C55E'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: {
+                            grid: { color: 'rgba(51, 65, 85, 0.3)' },
+                            ticks: { font: { size: 10 }, maxRotation: 45, autoSkip: true, maxTicksLimit: 15 }
+                        },
+                        y: {
+                            grid: { color: 'rgba(51, 65, 85, 0.4)' },
+                            ticks: { font: { size: 11 }, stepSize: 2 },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        })();
+
+        // ===== 5. OBRAS SOCIALES (Horizontal Bar) =====
+        new Chart(document.getElementById('chartObrasSociales'), {
+            type: 'bar',
+            data: {
+                labels: ['Particular', 'Obra Social A', 'Prepaga Salud', 'Obra Social B', 'Prepaga Plus'],
+                datasets: [{
+                    label: 'Porcentaje',
+                    data: [30, 25, 20, 15, 10],
+                    backgroundColor: [
+                        '#0EA5E9',
+                        '#6366F1',
+                        '#22C55E',
+                        '#F59E0B',
+                        '#EF4444'
+                    ],
+                    borderRadius: 6,
+                    borderSkipped: false,
+                    barPercentage: 0.65
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: ctx => ctx.parsed.x + '% de los pacientes'
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { color: 'rgba(51, 65, 85, 0.4)' },
+                        ticks: {
+                            font: { size: 11 },
+                            callback: v => v + '%'
+                        },
+                        max: 40
+                    },
+                    y: {
+                        grid: { display: false },
+                        ticks: { font: { size: 11 } }
+                    }
+                }
+            }
+        });
+
+        // ===== 6. ORIGEN DE PACIENTES NUEVOS (Doughnut) =====
+        new Chart(document.getElementById('chartOrigen'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Google', 'Recomendación', 'Instagram', 'Web propia', 'Otros'],
+                datasets: [{
+                    data: [40, 30, 15, 10, 5],
+                    backgroundColor: [
+                        '#0EA5E9',
+                        '#22C55E',
+                        '#E040FB',
+                        '#F59E0B',
+                        '#64748B'
+                    ],
+                    borderColor: '#1E293B',
+                    borderWidth: 3,
+                    hoverOffset: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '65%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { font: { size: 11 }, padding: 12 }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: ctx => ctx.label + ': ' + ctx.parsed + '%'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

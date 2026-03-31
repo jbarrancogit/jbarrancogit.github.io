@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bodega Tierra del Sol — Panel de Control</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg-primary: #0f0a12;
+            --bg-secondary: #1a1220;
+            --bg-card: #221828;
+            --bg-sidebar: #160e1c;
+            --border: #2e2236;
+            --text-primary: #f0e8f4;
+            --text-secondary: #a89bb2;
+            --text-muted: #7a6d85;
+            --accent: #8B1A4A;
+            --accent-light: #a8325f;
+            --accent-glow: rgba(139, 26, 74, 0.25);
+            --gold: #D4A853;
+            --gold-light: #e6c477;
+            --gold-glow: rgba(212, 168, 83, 0.2);
+            --success: #34d399;
+            --warning: #fbbf24;
+            --danger: #f87171;
+            --info: #60a5fa;
+            --sidebar-width: 260px;
+        }
+
+        html { font-size: 14px; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ── Demo Banner ────────────────────────────── */
+        .demo-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: linear-gradient(135deg, var(--accent) 0%, #5c1133 50%, var(--accent) 100%);
+            background-size: 200% 200%;
+            animation: bannerShimmer 6s ease infinite;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid rgba(212, 168, 83, 0.3);
+        }
+
+        @keyframes bannerShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .demo-banner span { opacity: 0.9; }
+
+        .demo-banner a {
+            color: var(--gold-light);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 4px 14px;
+            border: 1px solid var(--gold);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .demo-banner a:hover {
+            background: var(--gold);
+            color: #1a1220;
+        }
+
+        /* ── Layout ──────────────────────────────────── */
+        .layout {
+            display: grid;
+            grid-template-columns: var(--sidebar-width) 1fr;
+            min-height: 100vh;
+            padding-top: 44px;
+        }
+
+        /* ── Sidebar ─────────────────────────────────── */
+        .sidebar {
+            background: var(--bg-sidebar);
+            border-right: 1px solid var(--border);
+            padding: 28px 0;
+            position: fixed;
+            top: 44px;
+            left: 0;
+            bottom: 0;
+            width: var(--sidebar-width);
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .sidebar-brand {
+            padding: 0 24px 28px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 12px;
+        }
+
+        .sidebar-brand .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--accent), var(--gold));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+        }
+
+        .sidebar-brand h2 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        .sidebar-brand p {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .sidebar-nav { padding: 8px 12px; }
+
+        .nav-section-title {
+            font-size: 0.68rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--text-muted);
+            padding: 16px 12px 8px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 11px 14px;
+            border-radius: 10px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.92rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            margin-bottom: 2px;
+        }
+
+        .nav-item:hover {
+            background: rgba(139, 26, 74, 0.12);
+            color: var(--text-primary);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, var(--accent-glow), rgba(212, 168, 83, 0.08));
+            color: var(--gold-light);
+            border: 1px solid rgba(139, 26, 74, 0.3);
+        }
+
+        .nav-item .nav-icon {
+            width: 20px;
+            text-align: center;
+            font-size: 1.05rem;
+        }
+
+        .nav-item .badge {
+            margin-left: auto;
+            background: var(--accent);
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        /* ── Main Content ────────────────────────────── */
+        .main-content {
+            grid-column: 2;
+            padding: 28px 32px 48px;
+            max-width: 1400px;
+        }
+
+        /* ── Header ──────────────────────────────────── */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .page-header h1 {
+            font-size: 1.65rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--text-primary), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header .subtitle {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            margin-top: 4px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .date-display {
+            text-align: right;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .date-display .time {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #fff;
+        }
+
+        /* ── KPI Cards ───────────────────────────────── */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .kpi-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 22px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--gold));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .kpi-card:hover::before { opacity: 1; }
+
+        .kpi-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .kpi-value {
+            font-size: 1.85rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .kpi-change {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 20px;
+        }
+
+        .kpi-change.positive {
+            color: var(--success);
+            background: rgba(52, 211, 153, 0.12);
+        }
+
+        .kpi-change.negative {
+            color: var(--danger);
+            background: rgba(248, 113, 113, 0.12);
+        }
+
+        .kpi-icon {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            opacity: 0.8;
+        }
+
+        .kpi-icon.sales { background: rgba(139, 26, 74, 0.2); }
+        .kpi-icon.tastings { background: rgba(212, 168, 83, 0.2); }
+        .kpi-icon.visitors { background: rgba(96, 165, 250, 0.2); }
+        .kpi-icon.conversion { background: rgba(52, 211, 153, 0.2); }
+
+        /* ── Chart Cards ─────────────────────────────── */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .chart-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .chart-card:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .chart-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .chart-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .chart-subtitle {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .chart-badge {
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: rgba(139, 26, 74, 0.15);
+            color: var(--accent-light);
+            border: 1px solid rgba(139, 26, 74, 0.25);
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .chart-container.line-chart { height: 280px; }
+        .chart-container.doughnut-chart { height: 280px; }
+        .chart-container.bar-chart { height: 240px; }
+        .chart-container.horizontal-bar-chart { height: 200px; }
+
+        /* ── Table ────────────────────────────────────── */
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead th {
+            text-align: left;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tbody td {
+            padding: 14px 16px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            border-bottom: 1px solid rgba(46, 34, 54, 0.5);
+        }
+
+        tbody tr {
+            transition: background 0.2s ease;
+        }
+
+        tbody tr:hover {
+            background: rgba(139, 26, 74, 0.06);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
+        .status-badge.confirmada {
+            background: rgba(52, 211, 153, 0.15);
+            color: var(--success);
+        }
+
+        .status-badge.pendiente {
+            background: rgba(251, 191, 36, 0.15);
+            color: var(--warning);
+        }
+
+        .status-badge.completada {
+            background: rgba(96, 165, 250, 0.15);
+            color: var(--info);
+        }
+
+        .person-name {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* ── Mobile Menu Toggle ──────────────────────── */
+        .mobile-toggle {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 200;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--gold));
+            border: none;
+            color: #fff;
+            font-size: 1.4rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(139, 26, 74, 0.4);
+            transition: transform 0.2s ease;
+        }
+
+        .mobile-toggle:active { transform: scale(0.93); }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 99;
+        }
+
+        /* ── Footer ──────────────────────────────────── */
+        .dashboard-footer {
+            text-align: center;
+            padding: 32px 0 12px;
+            color: var(--text-muted);
+            font-size: 0.78rem;
+        }
+
+        .dashboard-footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        .dashboard-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ── Responsive ──────────────────────────────── */
+        @media (max-width: 1200px) {
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 900px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                z-index: 150;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .sidebar-overlay.open {
+                display: block;
+            }
+
+            .main-content {
+                grid-column: 1;
+                padding: 20px 16px 48px;
+            }
+
+            .mobile-toggle { display: flex; align-items: center; justify-content: center; }
+
+            .charts-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 600px) {
+            .kpi-grid { grid-template-columns: 1fr; }
+            .page-header h1 { font-size: 1.3rem; }
+            .kpi-value { font-size: 1.5rem; }
+            .demo-banner { font-size: 0.8rem; padding: 8px 12px; }
+        }
+
+        /* ── Animations ──────────────────────────────── */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        .delay-6 { animation-delay: 0.6s; }
+        .delay-7 { animation-delay: 0.7s; }
+        .delay-8 { animation-delay: 0.8s; }
+
+        /* ── Scrollbar ───────────────────────────────── */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+    </style>
+</head>
+<body>
+
+<!-- Demo Banner -->
+<div class="demo-banner">
+    <span>&#10024; Esta es una demo creada por <strong>Juan Barranco</strong> — Todos los datos son ficticios e ilustrativos.</span>
+    <span>¿Querés un dashboard así para tu bodega?</span>
+    <a href="https://wa.me/5492616423730?text=Hola%20Juan!%20Vi%20el%20dashboard%20de%20bodega%20y%20me%20interesa" target="_blank" rel="noopener">→ Contactame</a>
+</div>
+
+<div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <div class="logo-icon">🍷</div>
+            <h2>Bodega Tierra del Sol</h2>
+            <p>Panel de gestión</p>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section-title">Principal</div>
+            <a class="nav-item active" href="#" onclick="return false;">
+                <span class="nav-icon">📊</span>
+                Dashboard
+            </a>
+            <a class="nav-item" href="#" onclick="return false;">
+                <span class="nav-icon">💰</span>
+                Ventas
+                <span class="badge">12</span>
+            </a>
+            <a class="nav-item" href="#" onclick="return false;">
+                <span class="nav-icon">📅</span>
+                Reservas
+                <span class="badge">5</span>
+            </a>
+            <a class="nav-item" href="#" onclick="return false;">
+                <span class="nav-icon">👥</span>
+                Visitantes
+            </a>
+            <div class="nav-section-title">Catálogo</div>
+            <a class="nav-item" href="#" onclick="return false;">
+                <span class="nav-icon">🍇</span>
+                Vinos
+            </a>
+            <a class="nav-item" href="#" onclick="return false;">
+                <span class="nav-icon">📦</span>
+                Stock
+            </a>
+            <div class="nav-section-title">Sistema</div>
+            <a class="nav-item" href="#" onclick="return false;">
+                <span class="nav-icon">⚙️</span>
+                Configuración
+            </a>
+        </nav>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="page-header animate-in delay-1">
+            <div>
+                <h1>Bodega Tierra del Sol — Panel de Control</h1>
+                <p class="subtitle">Resumen general del rendimiento de la bodega</p>
+            </div>
+            <div class="header-right">
+                <div class="date-display">
+                    <div class="time" id="clock">--:--</div>
+                    <div id="dateDisplay">--</div>
+                </div>
+                <div class="avatar">TS</div>
+            </div>
+        </header>
+
+        <!-- KPI Cards -->
+        <section class="kpi-grid">
+            <div class="kpi-card animate-in delay-1">
+                <div class="kpi-icon sales">💰</div>
+                <div class="kpi-label">Ventas del mes</div>
+                <div class="kpi-value">$4.850.000</div>
+                <span class="kpi-change positive">▲ +12% vs mes anterior</span>
+            </div>
+            <div class="kpi-card animate-in delay-2">
+                <div class="kpi-icon tastings">🥂</div>
+                <div class="kpi-label">Degustaciones reservadas</div>
+                <div class="kpi-value">847</div>
+                <span class="kpi-change positive">▲ +23%</span>
+            </div>
+            <div class="kpi-card animate-in delay-3">
+                <div class="kpi-icon visitors">🌐</div>
+                <div class="kpi-label">Visitantes web</div>
+                <div class="kpi-value">3.240</div>
+                <span class="kpi-change positive">▲ +8%</span>
+            </div>
+            <div class="kpi-card animate-in delay-4">
+                <div class="kpi-icon conversion">📈</div>
+                <div class="kpi-label">Tasa de conversión</div>
+                <div class="kpi-value">26,1%</div>
+                <span class="kpi-change positive">▲ +2,3%</span>
+            </div>
+        </section>
+
+        <!-- Charts Row 1: Monthly Sales + Wine Type Doughnut -->
+        <section class="charts-grid">
+            <div class="chart-card animate-in delay-3">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">Ventas mensuales</div>
+                        <div class="chart-subtitle">Comparación año actual vs. año anterior</div>
+                    </div>
+                    <span class="chart-badge">Anual</span>
+                </div>
+                <div class="chart-container line-chart">
+                    <canvas id="chartVentasMensuales"></canvas>
+                </div>
+            </div>
+            <div class="chart-card animate-in delay-4">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">Ventas por tipo de vino</div>
+                        <div class="chart-subtitle">Distribución porcentual del mes</div>
+                    </div>
+                    <span class="chart-badge">Mensual</span>
+                </div>
+                <div class="chart-container doughnut-chart">
+                    <canvas id="chartTipoVino"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Charts Row 2: Tastings Bar + Web Visitors -->
+        <section class="charts-grid">
+            <div class="chart-card animate-in delay-5">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">Degustaciones por experiencia</div>
+                        <div class="chart-subtitle">Total de reservas por tipo</div>
+                    </div>
+                    <span class="chart-badge">Este mes</span>
+                </div>
+                <div class="chart-container horizontal-bar-chart">
+                    <canvas id="chartDegustaciones"></canvas>
+                </div>
+            </div>
+            <div class="chart-card animate-in delay-6">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">Origen de visitantes</div>
+                        <div class="chart-subtitle">Canales de adquisición web</div>
+                    </div>
+                    <span class="chart-badge">Último mes</span>
+                </div>
+                <div class="chart-container bar-chart">
+                    <canvas id="chartOrigen"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Web Visitors Line Chart (full width) -->
+        <section class="charts-grid">
+            <div class="chart-card full-width animate-in delay-7">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">Visitantes web — Últimos 30 días</div>
+                        <div class="chart-subtitle">Tráfico diario al sitio web de la bodega</div>
+                    </div>
+                    <span class="chart-badge">30 días</span>
+                </div>
+                <div class="chart-container line-chart">
+                    <canvas id="chartVisitantesWeb"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reservations Table -->
+        <section class="charts-grid">
+            <div class="chart-card full-width animate-in delay-8">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">Últimas reservas</div>
+                        <div class="chart-subtitle">Actividad reciente de degustaciones</div>
+                    </div>
+                    <span class="chart-badge">Tiempo real</span>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Nombre</th>
+                                <th>Experiencia</th>
+                                <th>Personas</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reservasTable">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="dashboard-footer">
+            Dashboard desarrollado por <a href="https://wa.me/5492616423730?text=Hola%20Juan!%20Vi%20el%20dashboard%20de%20bodega%20y%20me%20interesa" target="_blank" rel="noopener">Juan Barranco</a> · Datos ficticios con fines demostrativos
+        </footer>
+    </main>
+</div>
+
+<!-- Mobile Toggle -->
+<button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menú">☰</button>
+
+<script>
+    // ── Clock ──────────────────────────────────────────
+    function updateClock() {
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
+        const dateStr = now.toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+        document.getElementById('clock').textContent = timeStr;
+        document.getElementById('dateDisplay').textContent = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
+    }
+    updateClock();
+    setInterval(updateClock, 30000);
+
+    // ── Mobile Sidebar ─────────────────────────────────
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    const toggle = document.getElementById('mobileToggle');
+
+    toggle.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('open');
+    });
+    overlay.addEventListener('click', () => {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('open');
+    });
+
+    // ── Chart.js Global Config ─────────────────────────
+    Chart.defaults.color = '#a89bb2';
+    Chart.defaults.font.family = "'Inter', sans-serif";
+    Chart.defaults.font.size = 12;
+    Chart.defaults.plugins.legend.labels.usePointStyle = true;
+    Chart.defaults.plugins.legend.labels.padding = 16;
+    Chart.defaults.elements.line.tension = 0.4;
+
+    const WINE = '#8B1A4A';
+    const WINE_LIGHT = 'rgba(139, 26, 74, 0.2)';
+    const GOLD = '#D4A853';
+    const GOLD_LIGHT = 'rgba(212, 168, 83, 0.2)';
+
+    // ── 1) Ventas Mensuales (Line) ─────────────────────
+    const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+    // Current year: peaks in Mar-Apr (harvest) and Sep-Nov (tourism)
+    const ventasActual = [3200, 3500, 5100, 5400, 3800, 3100, 2900, 3300, 4800, 5200, 4900, 4850];
+    // Previous year: similar pattern, slightly lower
+    const ventasAnterior = [2800, 3000, 4500, 4700, 3300, 2700, 2500, 2900, 4100, 4500, 4200, 4100];
+
+    new Chart(document.getElementById('chartVentasMensuales'), {
+        type: 'line',
+        data: {
+            labels: meses,
+            datasets: [
+                {
+                    label: '2026',
+                    data: ventasActual,
+                    borderColor: WINE,
+                    backgroundColor: WINE_LIGHT,
+                    fill: true,
+                    pointBackgroundColor: WINE,
+                    pointRadius: 4,
+                    pointHoverRadius: 7,
+                    borderWidth: 2.5
+                },
+                {
+                    label: '2025',
+                    data: ventasAnterior,
+                    borderColor: GOLD,
+                    backgroundColor: GOLD_LIGHT,
+                    fill: true,
+                    pointBackgroundColor: GOLD,
+                    pointRadius: 3,
+                    pointHoverRadius: 6,
+                    borderWidth: 2,
+                    borderDash: [5, 5]
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { intersect: false, mode: 'index' },
+            scales: {
+                y: {
+                    grid: { color: 'rgba(46, 34, 54, 0.5)' },
+                    ticks: {
+                        callback: v => '$' + (v / 1000).toFixed(0) + 'k'
+                    }
+                },
+                x: {
+                    grid: { color: 'rgba(46, 34, 54, 0.3)' }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    backgroundColor: '#221828',
+                    borderColor: '#2e2236',
+                    borderWidth: 1,
+                    titleColor: '#f0e8f4',
+                    bodyColor: '#a89bb2',
+                    padding: 12,
+                    callbacks: {
+                        label: ctx => ctx.dataset.label + ': $' + ctx.parsed.y.toLocaleString('es-AR') + '.000'
+                    }
+                }
+            }
+        }
+    });
+
+    // ── 2) Ventas por tipo de vino (Doughnut) ──────────
+    new Chart(document.getElementById('chartTipoVino'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Malbec 42%', 'Cabernet 22%', 'Blend 18%', 'Torrontés 10%', 'Rosé 8%'],
+            datasets: [{
+                data: [42, 22, 18, 10, 8],
+                backgroundColor: [
+                    '#8B1A4A',
+                    '#D4A853',
+                    '#a8325f',
+                    '#60a5fa',
+                    '#e6c477'
+                ],
+                borderColor: '#221828',
+                borderWidth: 3,
+                hoverOffset: 8
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '62%',
+            plugins: {
+                legend: {
+                    position: 'right',
+                    labels: {
+                        padding: 14,
+                        font: { size: 12, weight: '500' }
+                    }
+                },
+                tooltip: {
+                    backgroundColor: '#221828',
+                    borderColor: '#2e2236',
+                    borderWidth: 1,
+                    titleColor: '#f0e8f4',
+                    bodyColor: '#a89bb2',
+                    padding: 12
+                }
+            }
+        }
+    });
+
+    // ── 3) Degustaciones por experiencia (Horizontal Bar) ─
+    new Chart(document.getElementById('chartDegustaciones'), {
+        type: 'bar',
+        data: {
+            labels: ['Clásica', 'Premium', 'Atardecer'],
+            datasets: [{
+                label: 'Reservas',
+                data: [380, 290, 177],
+                backgroundColor: [
+                    'rgba(139, 26, 74, 0.75)',
+                    'rgba(212, 168, 83, 0.75)',
+                    'rgba(168, 50, 95, 0.75)'
+                ],
+                borderColor: [WINE, GOLD, '#a8325f'],
+                borderWidth: 1.5,
+                borderRadius: 6,
+                barThickness: 36
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    grid: { color: 'rgba(46, 34, 54, 0.5)' },
+                    beginAtZero: true
+                },
+                y: {
+                    grid: { display: false }
+                }
+            },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: '#221828',
+                    borderColor: '#2e2236',
+                    borderWidth: 1,
+                    titleColor: '#f0e8f4',
+                    bodyColor: '#a89bb2',
+                    padding: 12,
+                    callbacks: {
+                        label: ctx => ctx.parsed.x + ' reservas'
+                    }
+                }
+            }
+        }
+    });
+
+    // ── 4) Origen de visitantes (Vertical Bar) ─────────
+    new Chart(document.getElementById('chartOrigen'), {
+        type: 'bar',
+        data: {
+            labels: ['Google', 'Instagram', 'Directo', 'Booking', 'TripAdvisor'],
+            datasets: [{
+                label: 'Porcentaje',
+                data: [45, 22, 15, 12, 6],
+                backgroundColor: [
+                    'rgba(139, 26, 74, 0.8)',
+                    'rgba(212, 168, 83, 0.8)',
+                    'rgba(96, 165, 250, 0.8)',
+                    'rgba(168, 50, 95, 0.8)',
+                    'rgba(230, 196, 119, 0.8)'
+                ],
+                borderColor: [WINE, GOLD, '#60a5fa', '#a8325f', '#e6c477'],
+                borderWidth: 1.5,
+                borderRadius: 6
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    grid: { color: 'rgba(46, 34, 54, 0.5)' },
+                    beginAtZero: true,
+                    ticks: { callback: v => v + '%' }
+                },
+                x: {
+                    grid: { display: false }
+                }
+            },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: '#221828',
+                    borderColor: '#2e2236',
+                    borderWidth: 1,
+                    titleColor: '#f0e8f4',
+                    bodyColor: '#a89bb2',
+                    padding: 12,
+                    callbacks: {
+                        label: ctx => ctx.parsed.y + '% del tráfico'
+                    }
+                }
+            }
+        }
+    });
+
+    // ── 5) Visitantes Web - Últimos 30 días (Line) ─────
+    // Generate realistic daily data with weekly patterns
+    const visitorsData = [];
+    const visitorLabels = [];
+    const now = new Date();
+    for (let i = 29; i >= 0; i--) {
+        const d = new Date(now);
+        d.setDate(d.getDate() - i);
+        const dayOfWeek = d.getDay(); // 0=Sun ... 6=Sat
+        const dayLabel = d.getDate() + '/' + (d.getMonth() + 1);
+        visitorLabels.push(dayLabel);
+
+        // Base traffic ~100, lower on Mon(1)-Tue(2), peaks on Thu(4)-Sat(6)
+        let base = 95;
+        if (dayOfWeek === 0) base = 82;       // Domingo
+        else if (dayOfWeek === 1) base = 72;  // Lunes
+        else if (dayOfWeek === 2) base = 78;  // Martes
+        else if (dayOfWeek === 3) base = 98;  // Miércoles
+        else if (dayOfWeek === 4) base = 125; // Jueves
+        else if (dayOfWeek === 5) base = 140; // Viernes
+        else if (dayOfWeek === 6) base = 132; // Sábado
+
+        // Add some randomness via seed based on day index
+        const noise = Math.sin(i * 3.7) * 18 + Math.cos(i * 1.3) * 12;
+        visitorsData.push(Math.round(base + noise));
+    }
+
+    new Chart(document.getElementById('chartVisitantesWeb'), {
+        type: 'line',
+        data: {
+            labels: visitorLabels,
+            datasets: [{
+                label: 'Visitantes',
+                data: visitorsData,
+                borderColor: GOLD,
+                backgroundColor: GOLD_LIGHT,
+                fill: true,
+                pointBackgroundColor: GOLD,
+                pointRadius: 2.5,
+                pointHoverRadius: 6,
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { intersect: false, mode: 'index' },
+            scales: {
+                y: {
+                    grid: { color: 'rgba(46, 34, 54, 0.5)' },
+                    beginAtZero: false
+                },
+                x: {
+                    grid: { color: 'rgba(46, 34, 54, 0.2)' },
+                    ticks: {
+                        maxTicksLimit: 15
+                    }
+                }
+            },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: '#221828',
+                    borderColor: '#2e2236',
+                    borderWidth: 1,
+                    titleColor: '#f0e8f4',
+                    bodyColor: '#a89bb2',
+                    padding: 12,
+                    callbacks: {
+                        label: ctx => ctx.parsed.y + ' visitantes'
+                    }
+                }
+            }
+        }
+    });
+
+    // ── 6) Reservas Table ──────────────────────────────
+    const reservas = [
+        { fecha: '30/03/2026', nombre: 'María González', experiencia: 'Premium', personas: 4, estado: 'confirmada' },
+        { fecha: '30/03/2026', nombre: 'Carlos Rodríguez', experiencia: 'Atardecer', personas: 2, estado: 'pendiente' },
+        { fecha: '29/03/2026', nombre: 'Ana Fernández', experiencia: 'Clásica', personas: 6, estado: 'completada' },
+        { fecha: '29/03/2026', nombre: 'Roberto Martínez', experiencia: 'Premium', personas: 3, estado: 'confirmada' },
+        { fecha: '28/03/2026', nombre: 'Lucía Pérez', experiencia: 'Atardecer', personas: 2, estado: 'completada' },
+        { fecha: '28/03/2026', nombre: 'Diego López', experiencia: 'Clásica', personas: 8, estado: 'completada' },
+        { fecha: '27/03/2026', nombre: 'Valentina Ruiz', experiencia: 'Premium', personas: 5, estado: 'confirmada' },
+        { fecha: '27/03/2026', nombre: 'Martín Sánchez', experiencia: 'Clásica', personas: 4, estado: 'pendiente' }
+    ];
+
+    const statusLabels = {
+        confirmada: 'Confirmada',
+        pendiente: 'Pendiente',
+        completada: 'Completada'
+    };
+
+    const tbody = document.getElementById('reservasTable');
+    reservas.forEach(r => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${r.fecha}</td>
+            <td class="person-name">${r.nombre}</td>
+            <td>${r.experiencia}</td>
+            <td style="text-align:center">${r.personas}</td>
+            <td><span class="status-badge ${r.estado}">${statusLabels[r.estado]}</span></td>
+        `;
+        tbody.appendChild(tr);
+    });
+</script>
+
+</body>
+</html>
