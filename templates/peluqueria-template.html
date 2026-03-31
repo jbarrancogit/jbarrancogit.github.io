@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargando...</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #D4A017;
+            --gold-light: #E8BF3B;
+            --gold-dark: #B8860B;
+            --bg-primary: #0A0A0A;
+            --bg-secondary: #111111;
+            --bg-card: #1A1A1A;
+            --bg-card-hover: #222222;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #777777;
+            --border: #2A2A2A;
+            --radius: 12px;
+            --radius-sm: 8px;
+            --shadow: 0 4px 24px rgba(0,0,0,0.4);
+            --shadow-gold: 0 4px 30px rgba(212,160,23,0.15);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-label {
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 550px;
+            line-height: 1.7;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header .section-subtitle {
+            margin: 0 auto;
+        }
+
+        /* ===== DEMO BANNER ===== */
+        .demo-banner {
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
+            color: #0A0A0A;
+            text-align: center;
+            padding: 10px 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .demo-banner a {
+            color: #0A0A0A;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            font-weight: 700;
+        }
+
+        .demo-banner a:hover {
+            opacity: 0.8;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: sticky;
+            top: 38px;
+            z-index: 999;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 20px;
+        }
+
+        .navbar-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+
+        .navbar-logo {
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .navbar-logo span {
+            color: var(--gold);
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .navbar-links a {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: color 0.2s;
+        }
+
+        .navbar-links a:hover {
+            color: var(--gold);
+        }
+
+        .navbar-cta {
+            background: var(--gold);
+            color: #0A0A0A;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .navbar-cta:hover {
+            background: var(--gold-light);
+            transform: translateY(-1px);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            width: 24px;
+            height: 2px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            padding: 100px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(10, 10, 10, 0.82);
+            pointer-events: none;
+        }
+
+        .hero > .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(26, 26, 26, 0.85);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .hero-badge span {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero h1 .gold {
+            color: var(--gold);
+        }
+
+        .hero-sub {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--gold);
+            color: #0A0A0A;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            color: var(--text-primary);
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .hero-icons {
+            font-size: 3.5rem;
+            margin-bottom: 24px;
+            letter-spacing: 8px;
+        }
+
+        /* ===== SERVICIOS ===== */
+        .servicios {
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .servicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+        }
+
+        .servicio-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .servicio-card:hover {
+            border-color: var(--gold);
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .servicio-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .servicio-icon {
+            font-size: 1.8rem;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(212,160,23,0.1);
+            border-radius: var(--radius-sm);
+            flex-shrink: 0;
+        }
+
+        .servicio-name {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 2px;
+        }
+
+        .servicio-detail {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .servicio-price {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--gold);
+            white-space: nowrap;
+        }
+
+        /* ===== EQUIPO ===== */
+        .equipo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .equipo-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 36px 28px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .equipo-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .equipo-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #1a1a2e;
+            letter-spacing: -1px;
+            border: 3px solid var(--gold);
+            box-shadow: 0 4px 20px rgba(212,160,23,0.2);
+        }
+
+        .equipo-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .equipo-role {
+            color: var(--gold);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .equipo-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .equipo-exp {
+            display: inline-block;
+            margin-top: 14px;
+            background: rgba(212,160,23,0.1);
+            color: var(--gold);
+            padding: 4px 14px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* ===== GALERÍA ===== */
+        .galeria {
+            background: var(--bg-secondary);
+        }
+
+        .galeria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+        }
+
+        .galeria-item {
+            position: relative;
+            aspect-ratio: 1 / 1;
+            border-radius: var(--radius);
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .galeria-item .galeria-bg {
+            position: absolute;
+            inset: 0;
+            transition: transform 0.5s;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .galeria-item:hover .galeria-bg {
+            transform: scale(1.05);
+        }
+
+        .galeria-item .galeria-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 24px;
+            transition: background 0.3s;
+        }
+
+        .galeria-item:hover .galeria-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%);
+        }
+
+        .galeria-style {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .galeria-tag {
+            font-size: 0.75rem;
+            color: var(--gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ===== CONTACTO / FORMULARIO ===== */
+        .contacto {
+            text-align: center;
+        }
+
+        .contacto-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 50px 40px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contacto-emoji {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .contacto-box h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .contacto-box > p {
+            color: var(--text-secondary);
+            margin-bottom: 28px;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .contacto-form {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            text-align: left;
+            margin-bottom: 24px;
+        }
+
+        .contacto-form input,
+        .contacto-form textarea,
+        .contacto-form select {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            transition: border-color 0.2s;
+        }
+
+        .contacto-form input:focus,
+        .contacto-form textarea:focus,
+        .contacto-form select:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .contacto-form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .contacto-form select option {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .contacto-form button[type="submit"] {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--gold);
+            color: #0A0A0A;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            align-self: center;
+        }
+
+        .contacto-form button[type="submit"]:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .btn-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #25D366;
+            color: #fff;
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-whatsapp:hover {
+            background: #20bd5a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 24px rgba(37,211,102,0.3);
+        }
+
+        .btn-whatsapp svg {
+            width: 22px;
+            height: 22px;
+            fill: #fff;
+        }
+
+        .contacto-note {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .contacto-divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 20px 0;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .contacto-divider::before,
+        .contacto-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* ===== HORARIOS ===== */
+        .horarios {
+            background: var(--bg-secondary);
+        }
+
+        .horarios-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .horarios-box, .ubicacion-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 36px;
+        }
+
+        .horarios-box h3, .ubicacion-box h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .horario-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+
+        .horario-row:last-child {
+            border-bottom: none;
+        }
+
+        .horario-day {
+            color: var(--text-secondary);
+        }
+
+        .horario-time {
+            font-weight: 600;
+        }
+
+        .horario-closed {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+
+        .ubicacion-address {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .ubicacion-map {
+            width: 100%;
+            height: 180px;
+            border-radius: var(--radius-sm);
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .ubicacion-map::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(10, 10, 10, 0.55);
+            border-radius: var(--radius-sm);
+        }
+
+        .ubicacion-map span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== REVIEWS ===== */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .review-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px;
+            transition: all 0.3s;
+        }
+
+        .review-card:hover {
+            border-color: var(--gold);
+        }
+
+        .review-stars {
+            color: var(--gold);
+            font-size: 0.9rem;
+            margin-bottom: 14px;
+            letter-spacing: 2px;
+        }
+
+        .review-text {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+
+        .review-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .review-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            color: #fff;
+        }
+
+        .review-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .review-date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .review-source {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 0;
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-brand {
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
+
+        .footer-brand span {
+            color: var(--gold);
+        }
+
+        .footer-copy {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer-social a {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .footer-social a:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(212,160,23,0.1);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            section {
+                padding: 60px 0;
+            }
+
+            .navbar-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .navbar-links.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: rgba(10,10,10,0.97);
+                backdrop-filter: blur(20px);
+                padding: 20px;
+                gap: 16px;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .hero {
+                padding: 60px 0;
+            }
+
+            .hero h1 {
+                letter-spacing: -1px;
+            }
+
+            .hero-icons {
+                font-size: 2.5rem;
+            }
+
+            .servicios-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .equipo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .equipo-avatar {
+                width: 100px;
+                height: 100px;
+            }
+
+            .servicios {
+                background-attachment: scroll;
+            }
+
+            .galeria-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .horarios-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contacto-box {
+                padding: 36px 24px;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .demo-banner {
+                font-size: 0.78rem;
+                padding: 10px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .galeria-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .animate-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== STRUCTURAL CONTAINERS — Populated by JavaScript from CONFIG ===== -->
+    <div id="demo-banner"></div>
+    <nav class="navbar" id="navbar"></nav>
+    <section class="hero" id="hero-section"></section>
+    <section class="servicios" id="servicios"></section>
+    <section class="equipo" id="equipo"></section>
+    <section class="galeria" id="galeria"></section>
+    <section class="contacto" id="contacto"></section>
+    <section class="horarios" id="horarios"></section>
+    <section class="reviews" id="reviews"></section>
+    <footer class="footer" id="footer"></footer>
+
+    <!-- ===== CONFIG + RENDER ENGINE ===== -->
+    <script>
+    // ============================================================
+    //  CONFIG — Modificá SOLO este objeto para personalizar la web
+    // ============================================================
+    const CONFIG = {
+        // --- Negocio ---
+        nombre: 'Navaja & Estilo',
+        nombreLogo: { antes: 'NAVAJA ', acento: '&', despues: ' ESTILO' },
+        slogan: 'Tu mejor versión empieza acá',
+        sloganAccent: 'empieza acá',
+        descripcion: 'Cortes de autor, barba impecable y la mejor onda. Más de 8 años cuidando el estilo de Maipú.',
+        heroBadge: '📍 Maipú, Mendoza —',
+        heroBadgeAccent: 'Barbería moderna',
+        heroEmojis: '💈 ✂️ 🪒',
+        heroCtaPrimario: '📲 Reservá tu turno',
+        heroCtaSecundario: 'Ver servicios y precios',
+        heroImage: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1400&q=80&fit=crop',
+
+        // --- Colores ---
+        colores: {
+            gold: '#D4A017',
+            goldLight: '#E8BF3B',
+            goldDark: '#B8860B',
+            bgPrimary: '#0A0A0A',
+            bgSecondary: '#111111',
+            bgCard: '#1A1A1A',
+            bgCardHover: '#222222',
+            textPrimary: '#FFFFFF',
+            textSecondary: '#B0B0B0',
+            textMuted: '#777777',
+            border: '#2A2A2A'
+        },
+
+        // --- Servicios ---
+        servicios: [
+            { nombre: 'Corte clásico', icono: '✂️', detalle: 'Tijera o máquina', duracion: '40 min', precio: '$5.500' },
+            { nombre: 'Corte + barba', icono: '💈', detalle: 'Combo completo', duracion: '60 min', precio: '$7.500' },
+            { nombre: 'Barba sola', icono: '🪒', detalle: 'Perfilado y toalla caliente', duracion: '30 min', precio: '$3.500' },
+            { nombre: 'Coloración', icono: '🎨', detalle: 'Color completo o mechas', duracion: '50 min', precio: '$8.000' },
+            { nombre: 'Corte niño', icono: '👦', detalle: 'Hasta 12 años', duracion: '30 min', precio: '$4.000' },
+            { nombre: 'Tratamiento capilar', icono: '💆', detalle: 'Hidratación y nutrición', duracion: '45 min', precio: '$6.500' }
+        ],
+        serviciosSubtitulo: 'Cada servicio incluye lavado, producto de terminación y la mejor atención.',
+        serviciosBgImage: 'https://images.unsplash.com/photo-1582095133179-bfd08e2fc6b3?w=800&q=80&fit=crop',
+
+        // --- Equipo (gradient + initials avatars, NO fotos reales) ---
+        equipo: [
+            {
+                nombre: 'Martín «Tano» Rossi',
+                iniciales: 'MR',
+                rol: 'Fundador · Master Barber',
+                descripcion: 'Especialista en fades y diseños con navaja. Formación en Buenos Aires y Santiago de Chile.',
+                experiencia: '12 años de experiencia',
+                colorGradient: 'linear-gradient(135deg, #D4A017 0%, #b8860b 100%)'
+            },
+            {
+                nombre: 'Luciano Peralta',
+                iniciales: 'LP',
+                rol: 'Barbero Senior',
+                descripcion: 'Experto en barbas y estilos clásicos. Su perfilado con navaja es de los mejores de Mendoza.',
+                experiencia: '8 años de experiencia',
+                colorGradient: 'linear-gradient(135deg, #c0a06e 0%, #8b6914 100%)'
+            },
+            {
+                nombre: 'Sofía Gutiérrez',
+                iniciales: 'SG',
+                rol: 'Colorista y Estilista',
+                descripcion: 'Creatividad pura. Especialista en coloración, mechas y tratamientos capilares de última generación.',
+                experiencia: '6 años de experiencia',
+                colorGradient: 'linear-gradient(135deg, #e6c56c 0%, #a08030 100%)'
+            }
+        ],
+        equipoSubtitulo: 'Profesionales con pasión por el estilo y años de experiencia.',
+
+        // --- Galería ---
+        galeria: [
+            { estilo: 'Mid Fade', tag: 'Tendencia', imagen: 'https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=500&q=80&fit=crop' },
+            { estilo: 'Pompadour', tag: 'Clásico', imagen: 'https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=500&q=80&fit=crop' },
+            { estilo: 'Barba clásica', tag: 'Especialidad', imagen: 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=500&q=80&fit=crop' },
+            { estilo: 'French Crop', tag: 'Moderno', imagen: 'https://images.unsplash.com/photo-1599351431613-18ef1fdd27e1?w=500&q=80&fit=crop' },
+            { estilo: 'Mullet moderno', tag: 'Audaz', imagen: 'https://images.unsplash.com/photo-1493256338651-d82f7acb2b38?w=500&q=80&fit=crop' },
+            { estilo: 'Buzz Cut', tag: 'Minimalista', imagen: 'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=500&q=80&fit=crop' }
+        ],
+        galeriaDescripciones: [
+            'Tendencia actual, limpio y versátil.',
+            'Estilo clásico con volumen y elegancia.',
+            'Perfilado con navaja y toalla caliente.',
+            'Corte moderno con textura y flequillo.',
+            'Estilo audaz, con personalidad.',
+            'Minimalista y fácil de mantener.'
+        ],
+        galeriaSubtitulo: 'Cada corte es una obra. Mirá lo que hacemos todos los días.',
+
+        // --- Reseñas ---
+        reviews: [
+            {
+                nombre: 'Facundo M.',
+                texto: 'La mejor barbería de Maipú, lejos. El Tano es un crack con la navaja, y el ambiente es genial. Siempre salgo contento.',
+                estrellas: 5,
+                fecha: 'Hace 2 semanas',
+                fuente: '📍 Reseña de Google',
+                iniciales: 'FM',
+                colorGradient: 'linear-gradient(135deg, #D4A017 0%, #b8860b 100%)'
+            },
+            {
+                nombre: 'Carolina L.',
+                texto: 'Llevo a mi hijo y siempre tiene paciencia. El corte le queda espectacular y el precio es muy accesible. Súper recomendable.',
+                estrellas: 5,
+                fecha: 'Hace 1 mes',
+                fuente: '📍 Reseña de Google',
+                iniciales: 'CL',
+                colorGradient: 'linear-gradient(135deg, #c0a06e 0%, #8b6914 100%)'
+            },
+            {
+                nombre: 'Nicolás R.',
+                texto: 'Me hice la coloración con Sofía y quedó increíble. Muy profesional, te asesora bien y usa buenos productos. Vuelvo seguro.',
+                estrellas: 5,
+                fecha: 'Hace 3 semanas',
+                fuente: '📍 Reseña de Google',
+                iniciales: 'NR',
+                colorGradient: 'linear-gradient(135deg, #e6c56c 0%, #a08030 100%)'
+            }
+        ],
+        reviewsSubtitulo: 'Más de 200 reseñas en Google con promedio de 4.9 ⭐',
+
+        // --- Contacto ---
+        telefono: '+54 261 642-3730',
+        whatsapp: '5492616423730',
+        whatsappMensaje: 'Hola! Quiero reservar un turno en Navaja & Estilo',
+        email: 'info@navajayestilo.com',
+        direccion: 'Av. San Martín 1234\nMaipú, Mendoza\nArgentina 🇦🇷',
+        formspreeId: 'xpznqkby', // Reemplazar con el ID real de Formspree
+        contactoNota: 'También podés reservar por WhatsApp o Instagram DM',
+
+        // --- Horarios ---
+        horarios: {
+            'Lunes': null,
+            'Martes a sábado': '9:00 – 20:00',
+            'Domingo': '10:00 – 14:00'
+        },
+
+        // --- Redes sociales ---
+        redes: {
+            instagram: 'https://instagram.com/navajayestilo',
+            whatsapp: 'https://wa.me/5492616423730'
+        },
+
+        // --- Demo banner (poner null para desactivar) ---
+        demoBanner: {
+            texto: '✨ Esta es una demo creada por <strong>Juan Barranco</strong> — Todos los datos son ficticios e ilustrativos. ¿Querés algo así para tu barbería? →',
+            linkTexto: 'Contactame',
+            linkUrl: 'https://wa.me/5492616423730?text=Hola%20Juan!%20Vi%20la%20demo%20de%20barbería%20y%20me%20interesa'
+        }
+    };
+
+    // ============================================================
+    //  RENDER ENGINE — No tocar a menos que quieras cambiar layout
+    // ============================================================
+
+    // --- Aplicar colores desde CONFIG a CSS variables ---
+    function aplicarColores(colores) {
+        const root = document.documentElement;
+        const mapa = {
+            gold: '--gold',
+            goldLight: '--gold-light',
+            goldDark: '--gold-dark',
+            bgPrimary: '--bg-primary',
+            bgSecondary: '--bg-secondary',
+            bgCard: '--bg-card',
+            bgCardHover: '--bg-card-hover',
+            textPrimary: '--text-primary',
+            textSecondary: '--text-secondary',
+            textMuted: '--text-muted',
+            border: '--border'
+        };
+        Object.entries(mapa).forEach(([key, cssVar]) => {
+            if (colores[key]) {
+                root.style.setProperty(cssVar, colores[key]);
+            }
+        });
+        // Actualizar shadow-gold dinámicamente basado en el color gold
+        const goldHex = colores.gold || '#D4A017';
+        const r = parseInt(goldHex.slice(1,3), 16);
+        const g = parseInt(goldHex.slice(3,5), 16);
+        const b = parseInt(goldHex.slice(5,7), 16);
+        root.style.setProperty('--shadow-gold', `0 4px 30px rgba(${r},${g},${b},0.15)`);
+    }
+
+    // --- Escapar HTML para prevenir XSS ---
+    function esc(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    }
+
+    // --- Generar estrellas ---
+    function generarEstrellas(n) {
+        return '★'.repeat(n) + '☆'.repeat(5 - n);
+    }
+
+    // --- WhatsApp SVG icon ---
+    const whatsappSVG = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>';
+
+    // --- Render: Demo Banner ---
+    function renderDemoBanner() {
+        const el = document.getElementById('demo-banner');
+        if (!CONFIG.demoBanner) { el.remove(); document.querySelector('.navbar').style.top = '0'; return; }
+        el.className = 'demo-banner';
+        el.innerHTML = `${CONFIG.demoBanner.texto} <a href="${esc(CONFIG.demoBanner.linkUrl)}" target="_blank" rel="noopener">${esc(CONFIG.demoBanner.linkTexto)}</a>`;
+    }
+
+    // --- Render: Navbar ---
+    function renderNavbar() {
+        const el = document.getElementById('navbar');
+        const logo = CONFIG.nombreLogo;
+        el.innerHTML = `
+            <div class="navbar-inner">
+                <div class="navbar-logo">${esc(logo.antes)}<span>${esc(logo.acento)}</span>${esc(logo.despues)}</div>
+                <ul class="navbar-links" id="navLinks">
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#equipo">Equipo</a></li>
+                    <li><a href="#galeria">Galería</a></li>
+                    <li><a href="#reviews">Reseñas</a></li>
+                    <li><a href="#horarios">Horarios</a></li>
+                </ul>
+                <a href="#contacto" class="navbar-cta">${esc(CONFIG.heroCtaPrimario.replace(/^[^\s]+\s/, ''))}</a>
+                <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>`;
+    }
+
+    // --- Render: Hero ---
+    function renderHero() {
+        const el = document.getElementById('hero-section');
+        el.style.backgroundImage = `url('${CONFIG.heroImage}')`;
+
+        // Separar slogan en partes: antes del accent y el accent
+        const sloganParts = CONFIG.slogan.split(CONFIG.sloganAccent);
+        const sloganHTML = sloganParts[0]
+            ? `${esc(sloganParts[0])}<br><span class="gold">${esc(CONFIG.sloganAccent)}</span>`
+            : `<span class="gold">${esc(CONFIG.sloganAccent)}</span>`;
+
+        el.innerHTML = `
+            <div class="container">
+                <div class="hero-icons">${CONFIG.heroEmojis}</div>
+                <div class="hero-badge">
+                    ${esc(CONFIG.heroBadge)} <span>${esc(CONFIG.heroBadgeAccent)}</span>
+                </div>
+                <h1>${sloganHTML}</h1>
+                <p class="hero-sub">${esc(CONFIG.descripcion)}</p>
+                <div class="hero-buttons">
+                    <a href="#contacto" class="btn-primary">${esc(CONFIG.heroCtaPrimario)}</a>
+                    <a href="#servicios" class="btn-secondary">${esc(CONFIG.heroCtaSecundario)}</a>
+                </div>
+            </div>`;
+    }
+
+    // --- Render: Servicios ---
+    function renderServicios() {
+        const el = document.getElementById('servicios');
+        el.style.background = `linear-gradient(rgba(17, 17, 17, 0.92), rgba(17, 17, 17, 0.92)), url('${CONFIG.serviciosBgImage}')`;
+        el.style.backgroundSize = 'cover';
+        el.style.backgroundPosition = 'center';
+        el.style.backgroundAttachment = 'fixed';
+
+        const cards = CONFIG.servicios.map(s => `
+            <div class="servicio-card animate-in">
+                <div class="servicio-info">
+                    <div class="servicio-icon">${s.icono}</div>
+                    <div>
+                        <div class="servicio-name">${esc(s.nombre)}</div>
+                        <div class="servicio-detail">${esc(s.detalle)} · ${esc(s.duracion)}</div>
+                    </div>
+                </div>
+                <div class="servicio-price">${esc(s.precio)}</div>
+            </div>`).join('');
+
+        el.innerHTML = `
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-label">Servicios y precios</p>
+                    <h2 class="section-title">Todo lo que necesitás</h2>
+                    <p class="section-subtitle">${esc(CONFIG.serviciosSubtitulo)}</p>
+                </div>
+                <div class="servicios-grid">${cards}</div>
+            </div>`;
+    }
+
+    // --- Render: Equipo ---
+    function renderEquipo() {
+        const el = document.getElementById('equipo');
+
+        const cards = CONFIG.equipo.map(m => `
+            <div class="equipo-card animate-in">
+                <div class="equipo-avatar" style="background: ${m.colorGradient};" aria-label="${esc(m.nombre)}">${esc(m.iniciales)}</div>
+                <h3 class="equipo-name">${esc(m.nombre)}</h3>
+                <p class="equipo-role">${esc(m.rol)}</p>
+                <p class="equipo-desc">${esc(m.descripcion)}</p>
+                <span class="equipo-exp">${esc(m.experiencia)}</span>
+            </div>`).join('');
+
+        el.innerHTML = `
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-label">Nuestro equipo</p>
+                    <h2 class="section-title">Los mejores de Maipú</h2>
+                    <p class="section-subtitle">${esc(CONFIG.equipoSubtitulo)}</p>
+                </div>
+                <div class="equipo-grid">${cards}</div>
+            </div>`;
+    }
+
+    // --- Render: Galería ---
+    function renderGaleria() {
+        const el = document.getElementById('galeria');
+
+        const items = CONFIG.galeria.map(g => `
+            <div class="galeria-item animate-in">
+                <div class="galeria-bg" style="background-image: url('${g.imagen}');"></div>
+                <div class="galeria-overlay">
+                    <span class="galeria-tag">${esc(g.tag)}</span>
+                    <span class="galeria-style">${esc(g.estilo)}</span>
+                </div>
+            </div>`).join('');
+
+        el.innerHTML = `
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-label">Galería de trabajos</p>
+                    <h2 class="section-title">Nuestros estilos</h2>
+                    <p class="section-subtitle">${esc(CONFIG.galeriaSubtitulo)}</p>
+                </div>
+                <div class="galeria-grid">${items}</div>
+            </div>`;
+    }
+
+    // --- Render: Contacto (Formspree + WhatsApp) ---
+    function renderContacto() {
+        const el = document.getElementById('contacto');
+        const waUrl = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(CONFIG.whatsappMensaje)}`;
+
+        // Generar opciones de servicio para el select
+        const servicioOptions = CONFIG.servicios.map(s =>
+            `<option value="${esc(s.nombre)}">${esc(s.nombre)} — ${esc(s.precio)}</option>`
+        ).join('');
+
+        el.innerHTML = `
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-label">Contacto</p>
+                    <h2 class="section-title">Reservá tu turno</h2>
+                    <p class="section-subtitle">Completá el formulario o escribinos por WhatsApp.</p>
+                </div>
+                <div class="contacto-box animate-in">
+                    <span class="contacto-emoji">📲</span>
+                    <h3>Reservá tu turno ahora</h3>
+                    <p>Completá tus datos y te confirmamos a la brevedad.</p>
+                    <form class="contacto-form" action="https://formspree.io/f/${esc(CONFIG.formspreeId)}" method="POST">
+                        <input type="text" name="nombre" placeholder="Tu nombre" required>
+                        <input type="tel" name="telefono" placeholder="Tu teléfono o WhatsApp" required>
+                        <input type="email" name="email" placeholder="Tu email (opcional)">
+                        <select name="servicio" required>
+                            <option value="" disabled selected>Elegí un servicio</option>
+                            ${servicioOptions}
+                        </select>
+                        <input type="text" name="fecha" placeholder="Fecha y horario preferido">
+                        <textarea name="mensaje" placeholder="Mensaje adicional (opcional)"></textarea>
+                        <button type="submit">✉️ Enviar solicitud de turno</button>
+                    </form>
+                    <div class="contacto-divider">o</div>
+                    <a href="${waUrl}" target="_blank" rel="noopener" class="btn-whatsapp">
+                        ${whatsappSVG}
+                        Abrir WhatsApp
+                    </a>
+                    <p class="contacto-note">${esc(CONFIG.contactoNota)}</p>
+                </div>
+            </div>`;
+    }
+
+    // --- Render: Horarios y Ubicación ---
+    function renderHorarios() {
+        const el = document.getElementById('horarios');
+
+        const filas = Object.entries(CONFIG.horarios).map(([dia, hora]) => {
+            if (hora === null) {
+                return `<div class="horario-row">
+                    <span class="horario-day">${esc(dia)}</span>
+                    <span class="horario-closed">Cerrado</span>
+                </div>`;
+            }
+            return `<div class="horario-row">
+                <span class="horario-day">${esc(dia)}</span>
+                <span class="horario-time">${esc(hora)}</span>
+            </div>`;
+        }).join('');
+
+        const direccionHTML = CONFIG.direccion.split('\n').map(l => esc(l)).join('<br>');
+
+        el.innerHTML = `
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-label">Horarios y ubicación</p>
+                    <h2 class="section-title">¿Cuándo y dónde?</h2>
+                </div>
+                <div class="horarios-grid">
+                    <div class="horarios-box animate-in">
+                        <h3>🕐 Horarios de atención</h3>
+                        ${filas}
+                    </div>
+                    <div class="ubicacion-box animate-in">
+                        <h3>📍 Ubicación</h3>
+                        <p class="ubicacion-address">${direccionHTML}</p>
+                        <div class="ubicacion-map">
+                            <span>🗺️ Mapa interactivo (Google Maps)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+    }
+
+    // --- Render: Reviews ---
+    function renderReviews() {
+        const el = document.getElementById('reviews');
+
+        const cards = CONFIG.reviews.map(r => `
+            <div class="review-card animate-in">
+                <div class="review-stars">${generarEstrellas(r.estrellas)}</div>
+                <p class="review-text">"${esc(r.texto)}"</p>
+                <div class="review-author">
+                    <div class="review-avatar" style="background: ${r.colorGradient};">${esc(r.iniciales)}</div>
+                    <div>
+                        <div class="review-name">${esc(r.nombre)}</div>
+                        <div class="review-date">${esc(r.fecha)}</div>
+                        <div class="review-source">${r.fuente}</div>
+                    </div>
+                </div>
+            </div>`).join('');
+
+        el.innerHTML = `
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-label">Reseñas</p>
+                    <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+                    <p class="section-subtitle">${CONFIG.reviewsSubtitulo}</p>
+                </div>
+                <div class="reviews-grid">${cards}</div>
+            </div>`;
+    }
+
+    // --- Render: Footer ---
+    function renderFooter() {
+        const el = document.getElementById('footer');
+        const logo = CONFIG.nombreLogo;
+        const year = new Date().getFullYear();
+
+        // Generar links de redes sociales
+        const redesIconos = {
+            instagram: '📸',
+            whatsapp: '💬',
+            facebook: '👤',
+            tiktok: '🎵',
+            twitter: '🐦',
+            youtube: '▶️'
+        };
+
+        const socialLinks = Object.entries(CONFIG.redes).map(([red, url]) => {
+            const icono = redesIconos[red] || '🔗';
+            const nombre = red.charAt(0).toUpperCase() + red.slice(1);
+            return `<a href="${esc(url)}" target="_blank" rel="noopener" aria-label="${nombre}" title="${nombre}">${icono}</a>`;
+        }).join('');
+
+        el.innerHTML = `
+            <div class="container">
+                <div class="footer-inner">
+                    <div>
+                        <div class="footer-brand">${esc(logo.antes)}<span>${esc(logo.acento)}</span>${esc(logo.despues)}</div>
+                        <p class="footer-copy">© ${year} ${esc(CONFIG.nombre)}. Todos los derechos reservados.</p>
+                    </div>
+                    <div class="footer-social">${socialLinks}</div>
+                </div>
+            </div>`;
+    }
+
+    // --- Actualizar título y meta ---
+    function renderMeta() {
+        document.title = `${CONFIG.nombre} — Peluquería / Barbería`;
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) {
+            metaDesc.content = CONFIG.descripcion;
+        } else {
+            const meta = document.createElement('meta');
+            meta.name = 'description';
+            meta.content = CONFIG.descripcion;
+            document.head.appendChild(meta);
+        }
+    }
+
+    // --- Inicializar interactividad (menú móvil + scroll animations) ---
+    function inicializarInteractividad() {
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('open');
+            });
+
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('open');
+                });
+            });
+        }
+
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        document.querySelectorAll('.animate-in').forEach(el => {
+            observer.observe(el);
+        });
+    }
+
+    // ============================================================
+    //  INIT — Ejecutar todo el render
+    // ============================================================
+    (function init() {
+        aplicarColores(CONFIG.colores);
+        renderMeta();
+        renderDemoBanner();
+        renderNavbar();
+        renderHero();
+        renderServicios();
+        renderEquipo();
+        renderGaleria();
+        renderContacto();
+        renderHorarios();
+        renderReviews();
+        renderFooter();
+        inicializarInteractividad();
+    })();
+    </script>
+
+</body>
+</html>

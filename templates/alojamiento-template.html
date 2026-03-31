@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Cargando...</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --green-primary: #059669;
+            --green-dark: #047857;
+            --green-light: #34d399;
+            --green-faint: #06362515;
+            --bg-dark: #0f1a14;
+            --bg-card: #162019;
+            --bg-card-hover: #1c2b22;
+            --bg-section-alt: #111d16;
+            --text-primary: #e8f0eb;
+            --text-secondary: #9cb3a5;
+            --text-muted: #6b8a78;
+            --border-color: #2a3e31;
+            --gold: #f5b942;
+            --gold-dim: #c49432;
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.4);
+            --shadow-md: 0 8px 30px rgba(0,0,0,0.3);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== DEMO BANNER ===== */
+        .demo-banner {
+            background: linear-gradient(135deg, var(--green-primary), var(--green-dark));
+            color: #fff;
+            text-align: center;
+            padding: 10px 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            letter-spacing: 0.01em;
+        }
+
+        .demo-banner a {
+            color: #fde68a;
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 1px solid rgba(253, 230, 138, 0.4);
+            transition: border-color 0.3s;
+        }
+
+        .demo-banner a:hover {
+            border-bottom-color: #fde68a;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            background: rgba(15, 26, 20, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0 24px;
+            position: sticky;
+            top: 40px;
+            z-index: 999;
+        }
+
+        .navbar-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+
+        .navbar-logo {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .navbar-logo span { color: var(--green-primary); }
+
+        .navbar-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .navbar-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .navbar-links a:hover { color: var(--green-light); }
+
+        .navbar-cta {
+            background: var(--green-primary);
+            color: #fff !important;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .navbar-cta:hover {
+            background: var(--green-dark) !important;
+            transform: translateY(-1px);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 24px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(15, 26, 20, 0.65);
+            z-index: 0;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to top, var(--bg-dark) 0%, transparent 100%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-emoji {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 12px;
+            letter-spacing: -0.03em;
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--green-light), var(--green-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 400;
+        }
+
+        .hero-location {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--green-primary);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: var(--green-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(5,150,105,0.35);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1.5px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--green-primary);
+            color: var(--green-light);
+            transform: translateY(-2px);
+        }
+
+        /* ===== SECTION COMMON ===== */
+        section {
+            padding: 100px 24px;
+        }
+
+        .section-alt {
+            background: var(--bg-section-alt);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--green-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .section-desc {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.05rem;
+        }
+
+        /* ===== CABANAS ===== */
+        .cabanas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 28px;
+        }
+
+        .cabana-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+        }
+
+        .cabana-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--green-primary);
+        }
+
+        .cabana-card.featured {
+            border-color: var(--green-primary);
+            position: relative;
+        }
+
+        .cabana-card.featured::before {
+            content: '\2B50 Más elegida';
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: var(--green-primary);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 14px;
+            border-radius: 50px;
+            z-index: 2;
+        }
+
+        .cabana-image {
+            height: 220px;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .cabana-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 60%);
+        }
+
+        .cabana-image-label {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            font-size: 2.5rem;
+            z-index: 1;
+        }
+
+        .cabana-body {
+            padding: 28px;
+        }
+
+        .cabana-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .cabana-capacity {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .cabana-amenities {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .cabana-amenities li {
+            background: var(--green-faint);
+            border: 1px solid var(--border-color);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+        }
+
+        .cabana-divider {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 16px 0;
+        }
+
+        .cabana-price {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+
+        .cabana-price-amount {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--green-light);
+        }
+
+        .cabana-price-unit {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .cabana-book-btn {
+            display: block;
+            width: 100%;
+            margin-top: 16px;
+            padding: 12px;
+            text-align: center;
+            background: rgba(5,150,105,0.12);
+            border: 1px solid rgba(5,150,105,0.3);
+            color: var(--green-light);
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background 0.3s, border-color 0.3s;
+        }
+
+        .cabana-book-btn:hover {
+            background: rgba(5,150,105,0.25);
+            border-color: var(--green-primary);
+        }
+
+        /* ===== EXPERIENCIAS ===== */
+        .experiencias-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .experiencia-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .experiencia-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--green-primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .experiencia-img {
+            width: 100%;
+            height: 140px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .experiencia-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(15,26,20,0.5) 100%);
+        }
+
+        .experiencia-body {
+            padding: 20px 24px 28px;
+        }
+
+        .experiencia-icon {
+            font-size: 2.5rem;
+            margin-bottom: 14px;
+            display: block;
+        }
+
+        .experiencia-name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .experiencia-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ===== GALERIA ===== */
+        .galeria-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 220px);
+            gap: 16px;
+        }
+
+        .galeria-item {
+            border-radius: var(--radius-md);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .galeria-item:hover {
+            transform: scale(1.02);
+        }
+
+        .galeria-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 60%);
+        }
+
+        .galeria-item:nth-child(1) {
+            grid-column: span 2;
+        }
+
+        .galeria-item:nth-child(6) {
+            grid-column: span 2;
+        }
+
+        .galeria-label {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .galeria-label small {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 400;
+            color: rgba(255,255,255,0.7);
+            margin-top: 2px;
+        }
+
+        /* ===== COMO LLEGAR ===== */
+        .llegar-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .llegar-map-placeholder {
+            background-size: cover;
+            background-position: center;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            height: 360px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            color: #fff;
+            position: relative;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+        }
+
+        .llegar-map-placeholder::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(15, 26, 20, 0.45);
+            border-radius: var(--radius-lg);
+        }
+
+        .llegar-map-placeholder > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .llegar-map-placeholder .map-icon {
+            font-size: 3rem;
+        }
+
+        .llegar-info h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .llegar-detail {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .llegar-detail-icon {
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .llegar-detail-text strong {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .llegar-detail-text span {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* ===== RESERVAS ===== */
+        .reservas-wrapper {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 48px;
+        }
+
+        .reservas-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+            outline: none;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--green-primary);
+        }
+
+        .form-group select option {
+            background: var(--bg-dark);
+        }
+
+        .form-full {
+            grid-column: span 2;
+        }
+
+        .reservas-whatsapp {
+            grid-column: span 2;
+            margin-top: 12px;
+        }
+
+        .reservas-actions {
+            grid-column: span 2;
+            margin-top: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: var(--green-primary);
+            color: #fff;
+            font-family: inherit;
+            font-size: 1.05rem;
+            font-weight: 700;
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-submit:hover {
+            background: var(--green-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-whatsapp {
+            width: 100%;
+            padding: 16px;
+            background: #25d366;
+            color: #fff;
+            font-family: inherit;
+            font-size: 1.05rem;
+            font-weight: 700;
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-whatsapp:hover {
+            background: #20bd5a;
+            transform: translateY(-2px);
+        }
+
+        .reservas-note {
+            grid-column: span 2;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .reservas-divider {
+            grid-column: span 2;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            position: relative;
+        }
+
+        .reservas-divider::before,
+        .reservas-divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .reservas-divider::before { left: 0; }
+        .reservas-divider::after { right: 0; }
+
+        /* ===== REVIEWS ===== */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .review-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 28px;
+            transition: transform 0.3s;
+        }
+
+        .review-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .review-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .review-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .review-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .review-origin {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .review-score {
+            background: var(--green-primary);
+            color: #fff;
+            font-weight: 800;
+            font-size: 0.95rem;
+            padding: 6px 12px;
+            border-radius: var(--radius-sm);
+            line-height: 1;
+        }
+
+        .review-score.excellent {
+            background: #059669;
+        }
+
+        .review-text {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .review-date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .review-stars {
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #0a130e;
+            border-top: 1px solid var(--border-color);
+            padding: 60px 24px 30px;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand-name {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .footer-brand-name span { color: var(--green-primary); }
+
+        .footer-brand-desc {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 10px;
+        }
+
+        .footer-social a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: border-color 0.3s, background 0.3s;
+        }
+
+        .footer-social a:hover {
+            border-color: var(--green-primary);
+            background: rgba(5,150,105,0.15);
+        }
+
+        .footer-col h4 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--green-light);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .footer-bottom a {
+            color: var(--green-primary);
+            text-decoration: none;
+        }
+
+        .footer-bottom a:hover {
+            color: var(--green-light);
+        }
+
+        /* ===== MOBILE RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .navbar-links {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: rgba(15, 26, 20, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 20px 24px;
+                gap: 16px;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .navbar-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .cabanas-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .galeria-grid {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: repeat(3, 180px);
+            }
+
+            .galeria-item:nth-child(1),
+            .galeria-item:nth-child(6) {
+                grid-column: span 2;
+            }
+
+            .llegar-content {
+                grid-template-columns: 1fr;
+            }
+
+            .reservas-wrapper {
+                padding: 28px 20px;
+            }
+
+            .reservas-form {
+                grid-template-columns: 1fr;
+            }
+
+            .form-full,
+            .reservas-whatsapp,
+            .reservas-actions,
+            .reservas-note,
+            .reservas-divider {
+                grid-column: span 1;
+            }
+
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .demo-banner { font-size: 0.78rem; padding: 8px 16px; }
+
+            .hero { min-height: 80vh; padding: 60px 20px; }
+            .hero-emoji { font-size: 2.5rem; }
+
+            .experiencias-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .galeria-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(6, 160px);
+            }
+
+            .galeria-item:nth-child(1),
+            .galeria-item:nth-child(6) {
+                grid-column: span 1;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* ===== SCROLL ANIMATIONS ===== */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- All HTML will be rendered dynamically by the render engine below -->
+    <div id="app"></div>
+
+    <script>
+    // =====================================================================
+    // CONFIG — Personalizá todos los datos de tu alojamiento aquí
+    // =====================================================================
+    const CONFIG = {
+        nombre: 'Cabañas del Valle',
+        slogan: 'Tu refugio en la montaña mendocina',
+        heroTitulo: 'Tu refugio en la<br><span class="highlight">montaña mendocina</span>',
+        heroSubtitulo: 'Desconectá de la rutina y conectá con la naturaleza en Potrerillos',
+        heroUbicacion: 'Potrerillos, Mendoza — A orillas del lago, entre montañas',
+        heroEmoji: '🏔️🌲🌿',
+        logoEmoji: '🏔️',
+
+        colores: {
+            primary: '#059669',
+            primaryDark: '#047857',
+            primaryLight: '#34d399',
+            primaryFaint: '#06362515',
+            bgDark: '#0f1a14',
+            bgCard: '#162019',
+            bgCardHover: '#1c2b22',
+            bgSectionAlt: '#111d16',
+            textPrimary: '#e8f0eb',
+            textSecondary: '#9cb3a5',
+            textMuted: '#6b8a78',
+            borderColor: '#2a3e31',
+            gold: '#f5b942'
+        },
+
+        cabanas: [
+            {
+                nombre: 'Cabaña Dúo',
+                capacidad: 'Hasta 2 personas — Ideal para parejas',
+                capacidadIcono: '👥',
+                precio: '$45.000',
+                precioUnidad: '/ noche',
+                amenidades: ['🛏️ Cama doble', '🔥 Estufa a leña', '🚿 Baño privado', '☕ Kitchenette', '📶 Wi-Fi', '🏔️ Vista al cerro'],
+                imagen: 'https://images.unsplash.com/photo-1518732714860-b62714ce0c59?w=500&q=80&fit=crop',
+                emoji: '🏡',
+                destacada: false
+            },
+            {
+                nombre: 'Cabaña Familiar',
+                capacidad: 'Hasta 5 personas — Perfecta para familias',
+                capacidadIcono: '👨‍👩‍👧‍👦',
+                precio: '$72.000',
+                precioUnidad: '/ noche',
+                amenidades: ['🛏️ 2 habitaciones', '🔥 Hogar a leña', '🍳 Cocina completa', '🚿 2 baños', '📶 Wi-Fi', '🌳 Deck con parrilla', '🏔️ Vista al lago'],
+                imagen: 'https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?w=500&q=80&fit=crop',
+                emoji: '🏠',
+                destacada: true
+            },
+            {
+                nombre: 'Cabaña Premium',
+                capacidad: 'Hasta 6 personas — Lujo en la montaña',
+                capacidadIcono: '👨‍👩‍👧‍👦',
+                precio: '$110.000',
+                precioUnidad: '/ noche',
+                amenidades: ['🛏️ 3 habitaciones', '🔥 Hogar doble', '🍳 Cocina premium', '🚿 2 baños + jacuzzi', '📶 Wi-Fi', '🌳 Quincho privado', '🏔️ Vista panorámica', '📺 Smart TV'],
+                imagen: 'https://images.unsplash.com/photo-1587061949409-02df41d5e562?w=500&q=80&fit=crop',
+                emoji: '✨',
+                destacada: false
+            }
+        ],
+
+        experiencias: [
+            {
+                nombre: 'Trekking',
+                icono: '🥾',
+                descripcion: 'Senderos guiados por la precordillera con vistas increíbles al lago y la Cordillera de los Andes',
+                imagen: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=400&q=80&fit=crop'
+            },
+            {
+                nombre: 'Rafting',
+                icono: '🚣',
+                descripcion: 'Adrenalina en el río Mendoza con guías certificados. Apto para principiantes y avanzados',
+                imagen: 'https://images.unsplash.com/photo-1530866495561-507c83a18e81?w=400&q=80&fit=crop'
+            },
+            {
+                nombre: 'Cabalgatas',
+                icono: '🐎',
+                descripcion: 'Recorridos a caballo por valles y quebradas, disfrutando la fauna y flora nativa',
+                imagen: 'https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=400&q=80&fit=crop'
+            },
+            {
+                nombre: 'Kayak',
+                icono: '🛶',
+                descripcion: 'Navegá el lago Potrerillos en kayak al amanecer o al atardecer. Una experiencia única',
+                imagen: 'https://images.unsplash.com/photo-1472745942893-4b9f730c7668?w=400&q=80&fit=crop'
+            },
+            {
+                nombre: 'Astroturismo',
+                icono: '🌌',
+                descripcion: 'Observación de estrellas con telescopios profesionales. Cielo limpio, sin contaminación lumínica',
+                imagen: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=400&q=80&fit=crop'
+            }
+        ],
+
+        galeria: [
+            {
+                titulo: '🏔️ Vistas del lago',
+                subtitulo: 'Lago Potrerillos desde la cabaña',
+                imagen: 'https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=600&q=80&fit=crop'
+            },
+            {
+                titulo: '🛋️ Interior cabaña',
+                subtitulo: 'Calidez y confort natural',
+                imagen: 'https://images.unsplash.com/photo-1595521624992-48a59aef95e3?w=600&q=80&fit=crop'
+            },
+            {
+                titulo: '🌅 Atardecer',
+                subtitulo: 'Colores únicos al caer el sol',
+                imagen: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80&fit=crop'
+            },
+            {
+                titulo: '🔥 Fogón nocturno',
+                subtitulo: 'Noches junto al fuego',
+                imagen: 'https://images.unsplash.com/photo-1475483768296-6163e08872a1?w=600&q=80&fit=crop'
+            },
+            {
+                titulo: '🌿 Senderos',
+                subtitulo: 'Naturaleza a cada paso',
+                imagen: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80&fit=crop'
+            },
+            {
+                titulo: '🌊 El lago',
+                subtitulo: 'Aguas cristalinas de montaña',
+                imagen: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&q=80&fit=crop'
+            }
+        ],
+
+        ubicacion: {
+            mapImagen: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&q=80&fit=crop',
+            localidad: 'Potrerillos, Luján de Cuyo, Mendoza',
+            indicaciones: [
+                {
+                    icono: '🚗',
+                    titulo: 'Desde Mendoza Capital',
+                    descripcion: '45 minutos por Ruta Provincial 82 (ubicación ilustrativa). Camino completamente asfaltado.'
+                },
+                {
+                    icono: '📍',
+                    titulo: 'Dirección',
+                    descripcion: 'Ruta Provincial 82, Km 52 (ubicación ilustrativa) — Potrerillos, Luján de Cuyo, Mendoza, Argentina'
+                },
+                {
+                    icono: '✈️',
+                    titulo: 'Desde el Aeropuerto',
+                    descripcion: 'Aeropuerto El Plumerillo a 1 hora. Ofrecemos servicio de transfer (con reserva previa).'
+                },
+                {
+                    icono: '🚌',
+                    titulo: 'En colectivo',
+                    descripcion: 'Línea 200 (referencia ilustrativa) desde Terminal de Mendoza hasta Potrerillos. Te buscamos en la parada.'
+                }
+            ]
+        },
+
+        reviews: [
+            {
+                nombre: 'María Laura',
+                iniciales: 'ML',
+                origen: 'Buenos Aires, Argentina',
+                puntuacion: '9.6',
+                estrellas: 5,
+                texto: '"Increíble lugar. La cabaña estaba impecable, con una vista al lago que te deja sin palabras. Los chicos que atienden son súper amables y nos recomendaron un trekking espectacular. ¡Ya estamos planeando volver!"',
+                fecha: 'Febrero 2026 · Cabaña Familiar · 4 noches',
+                colorIndex: 0
+            },
+            {
+                nombre: 'Diego Peralta',
+                iniciales: 'DP',
+                origen: 'Córdoba, Argentina',
+                puntuacion: '9.3',
+                estrellas: 5,
+                texto: '"Fuimos con mi pareja buscando desconectar y lo logramos al 100%. La estufa a leña, el silencio de la montaña, el cielo estrellado... todo perfecto. La relación precio-calidad es excelente."',
+                fecha: 'Enero 2026 · Cabaña Dúo · 3 noches',
+                colorIndex: 1
+            },
+            {
+                nombre: 'Carolina Fernández',
+                iniciales: 'CF',
+                origen: 'Rosario, Argentina',
+                puntuacion: '9.8',
+                estrellas: 5,
+                texto: '"La cabaña Premium es un sueño. El jacuzzi con vista a la montaña, el quincho privado, todo pensado al detalle. Mis hijos no paraban de jugar afuera. Sin dudas el mejor alojamiento que probamos en Mendoza."',
+                fecha: 'Marzo 2026 · Cabaña Premium · 5 noches',
+                colorIndex: 2
+            }
+        ],
+
+        reviewsResumen: 'Más de 200 reseñas con un promedio de 9.4 / 10',
+
+        imagenes: {
+            hero: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1400&q=80&fit=crop'
+        },
+
+        telefono: '(261) 000-0000',
+        whatsapp: '5492616423730',
+        email: 'info@cabanasdelvalle.com',
+        direccion: 'Potrerillos, Mendoza',
+        formspreeId: 'xpzvqkdl',
+
+        redes: {
+            instagram: '#',
+            facebook: '#',
+            whatsapp: '#'
+        },
+
+        // Demo banner config
+        demo: {
+            mostrar: true,
+            creador: 'Juan Barranco',
+            whatsappContacto: '5492616423730',
+            mensajeContacto: 'Hola Juan! Vi la demo de alojamiento y me interesa'
+        }
+    };
+
+    // =====================================================================
+    // RENDER ENGINE — Lee CONFIG y genera todo el HTML dinámicamente
+    // =====================================================================
+
+    function applyColors(colores) {
+        const root = document.documentElement;
+        root.style.setProperty('--green-primary', colores.primary);
+        root.style.setProperty('--green-dark', colores.primaryDark);
+        root.style.setProperty('--green-light', colores.primaryLight);
+        root.style.setProperty('--green-faint', colores.primaryFaint);
+        root.style.setProperty('--bg-dark', colores.bgDark);
+        root.style.setProperty('--bg-card', colores.bgCard);
+        root.style.setProperty('--bg-card-hover', colores.bgCardHover);
+        root.style.setProperty('--bg-section-alt', colores.bgSectionAlt);
+        root.style.setProperty('--text-primary', colores.textPrimary);
+        root.style.setProperty('--text-secondary', colores.textSecondary);
+        root.style.setProperty('--text-muted', colores.textMuted);
+        root.style.setProperty('--border-color', colores.borderColor);
+        root.style.setProperty('--gold', colores.gold);
+    }
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    const avatarGradients = [
+        'linear-gradient(135deg, #059669, #34d399)',
+        'linear-gradient(135deg, #0891b2, #22d3ee)',
+        'linear-gradient(135deg, #7c3aed, #a78bfa)',
+        'linear-gradient(135deg, #dc2626, #f87171)',
+        'linear-gradient(135deg, #d97706, #fbbf24)'
+    ];
+
+    function renderDemoBanner() {
+        if (!CONFIG.demo || !CONFIG.demo.mostrar) return '';
+        const whatsUrl = `https://wa.me/${CONFIG.demo.whatsappContacto}?text=${encodeURIComponent(CONFIG.demo.mensajeContacto)}`;
+        return `
+        <div class="demo-banner">
+            ✨ Esta es una demo creada por <strong>${escapeHtml(CONFIG.demo.creador)}</strong> — Todos los datos son ficticios e ilustrativos. ¿Querés algo así para tu alojamiento?
+            <a href="${whatsUrl}" target="_blank">→ Contactame</a>
+        </div>`;
+    }
+
+    function renderNavbar() {
+        const nombreParts = CONFIG.nombre.split(' ');
+        const lastWord = nombreParts.pop();
+        const firstWords = nombreParts.join(' ');
+        return `
+        <nav class="navbar">
+            <div class="navbar-inner">
+                <a href="#" class="navbar-logo">${CONFIG.logoEmoji} ${escapeHtml(firstWords)} <span>${escapeHtml(lastWord)}</span></a>
+                <button class="menu-toggle" id="menu-toggle-btn" aria-label="Menú">☰</button>
+                <ul class="navbar-links" id="navbar-links">
+                    <li><a href="#cabanas">Cabañas</a></li>
+                    <li><a href="#experiencias">Experiencias</a></li>
+                    <li><a href="#galeria">Galería</a></li>
+                    <li><a href="#llegar">Cómo llegar</a></li>
+                    <li><a href="#reviews">Opiniones</a></li>
+                    <li><a href="#reservas" class="navbar-cta">Reservar</a></li>
+                </ul>
+            </div>
+        </nav>`;
+    }
+
+    function renderHero() {
+        return `
+        <section class="hero" style="background-image: url('${CONFIG.imagenes.hero}')">
+            <div class="hero-content animate-on-scroll">
+                <span class="hero-emoji">${CONFIG.heroEmoji}</span>
+                <h1>${CONFIG.heroTitulo}</h1>
+                <p class="hero-sub">${escapeHtml(CONFIG.heroSubtitulo)}</p>
+                <p class="hero-location">📍 ${escapeHtml(CONFIG.heroUbicacion)}</p>
+                <div class="hero-buttons">
+                    <a href="#reservas" class="btn btn-primary">Reservar ahora</a>
+                    <a href="#cabanas" class="btn btn-secondary">Ver cabañas</a>
+                </div>
+            </div>
+        </section>`;
+    }
+
+    function renderCabanas() {
+        const cards = CONFIG.cabanas.map(cabana => {
+            const featuredClass = cabana.destacada ? ' featured' : '';
+            const amenidadesHtml = cabana.amenidades.map(a => `<li>${escapeHtml(a)}</li>`).join('');
+            return `
+                <div class="cabana-card${featuredClass} animate-on-scroll">
+                    <div class="cabana-image" style="background-image: url('${cabana.imagen}')">
+                        <span class="cabana-image-label">${cabana.emoji}</span>
+                    </div>
+                    <div class="cabana-body">
+                        <h3 class="cabana-name">${escapeHtml(cabana.nombre)}</h3>
+                        <p class="cabana-capacity">${cabana.capacidadIcono} ${escapeHtml(cabana.capacidad)}</p>
+                        <ul class="cabana-amenities">
+                            ${amenidadesHtml}
+                        </ul>
+                        <hr class="cabana-divider">
+                        <div class="cabana-price">
+                            <span class="cabana-price-amount">${escapeHtml(cabana.precio)}</span>
+                            <span class="cabana-price-unit">${escapeHtml(cabana.precioUnidad)}</span>
+                        </div>
+                        <a href="#reservas" class="cabana-book-btn">Consultar disponibilidad</a>
+                    </div>
+                </div>`;
+        }).join('');
+
+        return `
+        <section id="cabanas" class="section-alt">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <p class="section-label">Alojamiento</p>
+                    <h2 class="section-title">Nuestras cabañas</h2>
+                    <p class="section-desc">Tres opciones pensadas para que disfrutes la montaña con la comodidad que merecés</p>
+                </div>
+                <div class="cabanas-grid">
+                    ${cards}
+                </div>
+            </div>
+        </section>`;
+    }
+
+    function renderExperiencias() {
+        const cards = CONFIG.experiencias.map(exp => `
+            <div class="experiencia-card animate-on-scroll">
+                <div class="experiencia-img" style="background-image: url('${exp.imagen}')"></div>
+                <div class="experiencia-body">
+                    <span class="experiencia-icon">${exp.icono}</span>
+                    <h3 class="experiencia-name">${escapeHtml(exp.nombre)}</h3>
+                    <p class="experiencia-desc">${escapeHtml(exp.descripcion)}</p>
+                </div>
+            </div>`).join('');
+
+        return `
+        <section id="experiencias">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <p class="section-label">Aventura</p>
+                    <h2 class="section-title">Experiencias en la montaña</h2>
+                    <p class="section-desc">Actividades para todos los gustos, desde adrenalina pura hasta contemplación bajo las estrellas</p>
+                </div>
+                <div class="experiencias-grid">
+                    ${cards}
+                </div>
+            </div>
+        </section>`;
+    }
+
+    function renderGaleria() {
+        const items = CONFIG.galeria.map(item => `
+            <div class="galeria-item" style="background-image: url('${item.imagen}')">
+                <div class="galeria-label">
+                    ${escapeHtml(item.titulo)}
+                    <small>${escapeHtml(item.subtitulo)}</small>
+                </div>
+            </div>`).join('');
+
+        return `
+        <section id="galeria" class="section-alt">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <p class="section-label">Galería</p>
+                    <h2 class="section-title">Postales de ${escapeHtml(CONFIG.nombre)}</h2>
+                    <p class="section-desc">Cada rincón es una invitación a quedarte un día más</p>
+                </div>
+                <div class="galeria-grid animate-on-scroll">
+                    ${items}
+                </div>
+            </div>
+        </section>`;
+    }
+
+    function renderComoLlegar() {
+        const indicaciones = CONFIG.ubicacion.indicaciones.map(ind => `
+            <div class="llegar-detail">
+                <span class="llegar-detail-icon">${ind.icono}</span>
+                <div class="llegar-detail-text">
+                    <strong>${escapeHtml(ind.titulo)}</strong>
+                    <span>${escapeHtml(ind.descripcion)}</span>
+                </div>
+            </div>`).join('');
+
+        return `
+        <section id="llegar">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <p class="section-label">Ubicación</p>
+                    <h2 class="section-title">Cómo llegar</h2>
+                    <p class="section-desc">Estamos más cerca de lo que pensás</p>
+                </div>
+                <div class="llegar-content animate-on-scroll">
+                    <div class="llegar-map-placeholder" style="background-image: url('${CONFIG.ubicacion.mapImagen}')">
+                        <span class="map-icon">🗺️</span>
+                        <p>Mapa interactivo</p>
+                        <p style="font-size: 0.8rem;">${escapeHtml(CONFIG.ubicacion.localidad)}</p>
+                    </div>
+                    <div class="llegar-info">
+                        <h3>📍 Encontranos fácilmente</h3>
+                        ${indicaciones}
+                    </div>
+                </div>
+            </div>
+        </section>`;
+    }
+
+    function renderReservas() {
+        const cabanaOptions = CONFIG.cabanas.map(c =>
+            `<option value="${escapeHtml(c.nombre)}">${escapeHtml(c.nombre)} (${escapeHtml(c.capacidad.split('—')[0].trim())})</option>`
+        ).join('');
+
+        const maxCapacidad = Math.max(...CONFIG.cabanas.map(c => {
+            const match = c.capacidad.match(/(\d+)/);
+            return match ? parseInt(match[1]) : 6;
+        }));
+
+        const huespedesOptions = Array.from({length: maxCapacidad}, (_, i) => {
+            const n = i + 1;
+            const selected = n === 2 ? ' selected' : '';
+            return `<option value="${n}"${selected}>${n} ${n === 1 ? 'persona' : 'personas'}</option>`;
+        }).join('');
+
+        const formspreeUrl = `https://formspree.io/f/${CONFIG.formspreeId}`;
+
+        return `
+        <section id="reservas" class="section-alt">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <p class="section-label">Reservas</p>
+                    <h2 class="section-title">Reservá tu estadía</h2>
+                    <p class="section-desc">Elegí tus fechas y consultanos. ¡Respondemos en minutos!</p>
+                </div>
+                <div class="reservas-wrapper animate-on-scroll">
+                    <form class="reservas-form" id="reservas-form" action="${formspreeUrl}" method="POST">
+                        <input type="hidden" name="_subject" value="Nueva consulta de reserva — ${escapeHtml(CONFIG.nombre)}">
+                        <div class="form-group">
+                            <label for="nombre-cliente">Nombre</label>
+                            <input type="text" id="nombre-cliente" name="nombre" placeholder="Tu nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email-cliente">Email</label>
+                            <input type="email" id="email-cliente" name="email" placeholder="tu@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="checkin">Check-in</label>
+                            <input type="date" id="checkin" name="checkin">
+                        </div>
+                        <div class="form-group">
+                            <label for="checkout">Check-out</label>
+                            <input type="date" id="checkout" name="checkout">
+                        </div>
+                        <div class="form-group">
+                            <label for="huespedes">Huéspedes</label>
+                            <select id="huespedes" name="huespedes">
+                                ${huespedesOptions}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="cabana-type">Cabaña</label>
+                            <select id="cabana-type" name="cabana">
+                                ${cabanaOptions}
+                            </select>
+                        </div>
+                        <div class="form-group form-full">
+                            <label for="mensaje">Mensaje (opcional)</label>
+                            <textarea id="mensaje" name="mensaje" placeholder="¿Algún pedido especial o consulta?"></textarea>
+                        </div>
+                        <div class="reservas-actions">
+                            <button type="submit" class="btn-submit">
+                                📩 Enviar consulta de reserva
+                            </button>
+                            <div class="reservas-divider">o</div>
+                            <button type="button" class="btn-whatsapp" id="btn-whatsapp">
+                                💬 Reservar por WhatsApp
+                            </button>
+                        </div>
+                        <p class="reservas-note">
+                            Confirmación inmediata · Sin cargos de reserva · Cancelación gratuita hasta 48hs antes
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </section>`;
+    }
+
+    function renderReviews() {
+        const cards = CONFIG.reviews.map(review => {
+            const gradient = avatarGradients[review.colorIndex % avatarGradients.length];
+            const stars = '★'.repeat(review.estrellas) + '☆'.repeat(5 - review.estrellas);
+            return `
+                <div class="review-card animate-on-scroll">
+                    <div class="review-header">
+                        <div class="review-author">
+                            <div class="review-avatar" style="background: ${gradient}">${escapeHtml(review.iniciales)}</div>
+                            <div>
+                                <div class="review-name">${escapeHtml(review.nombre)}</div>
+                                <div class="review-origin">${escapeHtml(review.origen)}</div>
+                            </div>
+                        </div>
+                        <div class="review-score excellent">${escapeHtml(review.puntuacion)}</div>
+                    </div>
+                    <div class="review-stars">${stars}</div>
+                    <p class="review-text">${escapeHtml(review.texto)}</p>
+                    <p class="review-date">${escapeHtml(review.fecha)}</p>
+                </div>`;
+        }).join('');
+
+        return `
+        <section id="reviews">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <p class="section-label">Opiniones</p>
+                    <h2 class="section-title">Lo que dicen nuestros huéspedes</h2>
+                    <p class="section-desc">${escapeHtml(CONFIG.reviewsResumen)}</p>
+                </div>
+                <div class="reviews-grid">
+                    ${cards}
+                </div>
+            </div>
+        </section>`;
+    }
+
+    function renderFooter() {
+        const nombreParts = CONFIG.nombre.split(' ');
+        const lastWord = nombreParts.pop();
+        const firstWords = nombreParts.join(' ');
+
+        const cabanaLinks = CONFIG.cabanas.map(c =>
+            `<li><a href="#cabanas">${escapeHtml(c.nombre)}</a></li>`
+        ).join('');
+
+        const experienciaLinks = CONFIG.experiencias.slice(0, 4).map(e =>
+            `<li><a href="#experiencias">${escapeHtml(e.nombre)}</a></li>`
+        ).join('');
+
+        const socialLinks = [];
+        if (CONFIG.redes.instagram) socialLinks.push(`<a href="${CONFIG.redes.instagram}" title="Instagram">📷</a>`);
+        if (CONFIG.redes.facebook) socialLinks.push(`<a href="${CONFIG.redes.facebook}" title="Facebook">👤</a>`);
+        if (CONFIG.redes.whatsapp || CONFIG.whatsapp) socialLinks.push(`<a href="https://wa.me/${CONFIG.whatsapp}" title="WhatsApp">💬</a>`);
+
+        const year = new Date().getFullYear();
+
+        return `
+        <footer class="footer">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand-name">${CONFIG.logoEmoji} ${escapeHtml(firstWords)} <span>${escapeHtml(lastWord)}</span></div>
+                    <p class="footer-brand-desc">${escapeHtml(CONFIG.slogan)}. Naturaleza, confort y experiencias únicas en ${escapeHtml(CONFIG.direccion)}.</p>
+                    <div class="footer-social">
+                        ${socialLinks.join('')}
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Cabañas</h4>
+                    <ul>
+                        ${cabanaLinks}
+                        <li><a href="#reservas">Reservar</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Experiencias</h4>
+                    <ul>
+                        ${experienciaLinks}
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><a href="tel:${CONFIG.telefono.replace(/[^0-9+]/g, '')}">📞 ${escapeHtml(CONFIG.telefono)}</a></li>
+                        <li><a href="mailto:${CONFIG.email}">✉️ ${escapeHtml(CONFIG.email)}</a></li>
+                        <li><a href="#llegar">📍 ${escapeHtml(CONFIG.direccion)}</a></li>
+                        <li><a href="https://wa.me/${CONFIG.whatsapp}" target="_blank">💬 WhatsApp</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; ${year} ${escapeHtml(CONFIG.nombre)} — ${escapeHtml(CONFIG.direccion)}, Argentina. Todos los derechos reservados.</span>
+                <span>Sitio web creado por <a href="https://wa.me/${CONFIG.demo.whatsappContacto}?text=${encodeURIComponent(CONFIG.demo.mensajeContacto)}" target="_blank">${escapeHtml(CONFIG.demo.creador)}</a></span>
+            </div>
+        </footer>`;
+    }
+
+    // =====================================================================
+    // MAIN RENDER — Ensambla todas las secciones
+    // =====================================================================
+
+    function render() {
+        // Apply CSS variables from CONFIG.colores
+        applyColors(CONFIG.colores);
+
+        // Update page title
+        document.getElementById('page-title').textContent = `${CONFIG.nombre} — ${CONFIG.direccion}`;
+
+        // Render all sections into #app
+        const app = document.getElementById('app');
+        app.innerHTML = [
+            renderDemoBanner(),
+            renderNavbar(),
+            renderHero(),
+            renderCabanas(),
+            renderExperiencias(),
+            renderGaleria(),
+            renderComoLlegar(),
+            renderReservas(),
+            renderReviews(),
+            renderFooter()
+        ].join('');
+
+        // Initialize interactivity after rendering
+        initInteractivity();
+    }
+
+    // =====================================================================
+    // INTERACTIVITY — Event listeners y lógica post-render
+    // =====================================================================
+
+    function initInteractivity() {
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menu-toggle-btn');
+        const navLinks = document.getElementById('navbar-links');
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+            // Close menu on link click
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                });
+            });
+        }
+
+        // Date inputs logic
+        const today = new Date().toISOString().split('T')[0];
+        const checkinEl = document.getElementById('checkin');
+        const checkoutEl = document.getElementById('checkout');
+        if (checkinEl) checkinEl.min = today;
+        if (checkoutEl) checkoutEl.min = today;
+
+        if (checkinEl && checkoutEl) {
+            checkinEl.addEventListener('change', () => {
+                checkoutEl.min = checkinEl.value;
+                if (checkoutEl.value && checkoutEl.value <= checkinEl.value) {
+                    const next = new Date(checkinEl.value);
+                    next.setDate(next.getDate() + 1);
+                    checkoutEl.value = next.toISOString().split('T')[0];
+                }
+            });
+        }
+
+        // WhatsApp booking button
+        const btnWhatsApp = document.getElementById('btn-whatsapp');
+        if (btnWhatsApp) {
+            btnWhatsApp.addEventListener('click', enviarWhatsApp);
+        }
+
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        document.querySelectorAll('.animate-on-scroll').forEach((el) => {
+            observer.observe(el);
+        });
+    }
+
+    function enviarWhatsApp() {
+        const checkin = document.getElementById('checkin').value;
+        const checkout = document.getElementById('checkout').value;
+        const huespedes = document.getElementById('huespedes').value;
+        const cabana = document.getElementById('cabana-type');
+        const cabanaText = cabana.options[cabana.selectedIndex].text;
+        const nombreCliente = document.getElementById('nombre-cliente').value;
+        const mensaje = document.getElementById('mensaje').value;
+
+        let msg = `Hola! Me interesa reservar en ${CONFIG.nombre} 🏔️\n\n`;
+        if (nombreCliente) msg += '👤 Nombre: ' + nombreCliente + '\n';
+        if (checkin) msg += '📅 Check-in: ' + checkin + '\n';
+        if (checkout) msg += '📅 Check-out: ' + checkout + '\n';
+        msg += '👥 Huéspedes: ' + huespedes + '\n';
+        msg += '🏡 Cabaña: ' + cabanaText + '\n';
+        if (mensaje) msg += '\n💬 ' + mensaje + '\n';
+        msg += '\n¿Tienen disponibilidad?';
+
+        const url = 'https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(msg);
+        window.open(url, '_blank');
+    }
+
+    // =====================================================================
+    // BOOT — Ejecutar el render cuando el DOM esté listo
+    // =====================================================================
+    document.addEventListener('DOMContentLoaded', render);
+    </script>
+
+</body>
+</html>

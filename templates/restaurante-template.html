@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Cargando...</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --amber: #F59E0B;
+            --amber-light: #FBBF24;
+            --amber-dark: #D97706;
+            --amber-glow: rgba(245, 158, 11, 0.15);
+            --bg-dark: #0F0D0A;
+            --bg-card: #1A1714;
+            --bg-card-hover: #231F1A;
+            --bg-surface: #141210;
+            --text-primary: #FAF5EB;
+            --text-secondary: #A8A196;
+            --text-muted: #6B6560;
+            --border: rgba(245, 158, 11, 0.12);
+            --border-strong: rgba(245, 158, 11, 0.25);
+            --radius: 12px;
+            --radius-sm: 8px;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+            --shadow-glow: 0 0 40px rgba(245, 158, 11, 0.08);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== DEMO BANNER ===== */
+        .demo-banner {
+            background: linear-gradient(135deg, #1a1510 0%, #2a1f10 100%);
+            border-bottom: 1px solid var(--border-strong);
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .demo-banner a {
+            color: var(--amber);
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 6px;
+            transition: color 0.2s;
+        }
+
+        .demo-banner a:hover {
+            color: var(--amber-light);
+            text-decoration: underline;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            background: rgba(15, 13, 10, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            position: sticky;
+            top: 41px;
+            z-index: 999;
+        }
+
+        .navbar-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .navbar-logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--amber);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .navbar-logo span { color: var(--text-primary); }
+
+        .navbar-links { display: flex; gap: 28px; list-style: none; }
+
+        .navbar-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .navbar-links a:hover { color: var(--amber); }
+
+        .navbar-cta {
+            background: var(--amber);
+            color: #000;
+            padding: 8px 20px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .navbar-cta:hover {
+            background: var(--amber-light);
+            transform: translateY(-1px);
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 24px;
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(15, 13, 10, 0.72) 0%, rgba(15, 13, 10, 0.85) 60%, rgba(15, 13, 10, 0.95) 100%);
+            pointer-events: none;
+        }
+
+        .hero-content { position: relative; z-index: 1; max-width: 800px; }
+
+        .hero-emoji {
+            font-size: 3.5rem;
+            margin-bottom: 24px;
+            display: block;
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.9; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        .hero-title {
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -2px;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--amber-light) 50%, var(--amber) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.35rem);
+            font-weight: 300;
+            color: var(--text-secondary);
+            max-width: 560px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+
+        .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+        .btn-primary {
+            background: var(--amber);
+            color: #000;
+            padding: 14px 32px;
+            border-radius: 999px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--amber-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            padding: 14px 32px;
+            border-radius: 999px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: 1px solid var(--border-strong);
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--amber);
+            color: var(--amber);
+            background: var(--amber-glow);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            margin-top: 48px;
+            padding: 8px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .hero-badge span { color: var(--amber); font-weight: 600; }
+
+        /* ===== SECTIONS ===== */
+        section { padding: 100px 24px; }
+
+        .section-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: var(--amber);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+        }
+
+        .section-desc {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.7;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header .section-desc { margin: 0 auto; }
+
+        /* ===== NUESTRA PROPUESTA ===== */
+        .propuesta { background: var(--bg-surface); }
+
+        .propuesta-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .propuesta-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 0;
+            transition: all 0.3s;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .propuesta-card:hover {
+            border-color: var(--border-strong);
+            background: var(--bg-card-hover);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .propuesta-card-img {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .propuesta-card-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 40%, rgba(26, 23, 20, 0.9) 100%);
+        }
+
+        .propuesta-card-body {
+            padding: 28px 28px 36px;
+        }
+
+        .propuesta-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .propuesta-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .propuesta-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ===== MENU ===== */
+        .menu-section { background: var(--bg-dark); }
+
+        .menu-categories {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
+        }
+
+        .menu-tab {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 10px 22px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+            font-family: inherit;
+        }
+
+        .menu-tab:hover, .menu-tab.active {
+            background: var(--amber);
+            color: #000;
+            border-color: var(--amber);
+        }
+
+        .menu-category { display: none; }
+        .menu-category.active { display: block; }
+
+        .menu-category-header {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin-bottom: 32px;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .menu-category-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgba(15, 13, 10, 0.8) 0%, rgba(15, 13, 10, 0.5) 100%);
+        }
+
+        .menu-category-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            text-align: center;
+            color: var(--amber);
+            letter-spacing: -0.5px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .menu-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+            transition: all 0.25s;
+        }
+
+        .menu-item:hover {
+            border-color: var(--border-strong);
+            background: var(--bg-card-hover);
+        }
+
+        .menu-item-info { flex: 1; }
+
+        .menu-item-name {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .menu-item-desc {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .menu-item-price {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--amber);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        /* ===== RESERVAS ===== */
+        .reservas {
+            background: var(--bg-surface);
+            position: relative;
+        }
+
+        .reservas-hero-img {
+            width: 100%;
+            height: 280px;
+            background-size: cover;
+            background-position: center;
+            border-radius: var(--radius);
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reservas-hero-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(20, 18, 16, 0.3) 0%, rgba(20, 18, 16, 0.7) 100%);
+        }
+
+        .reservas-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: start;
+        }
+
+        .reservas-info h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .reservas-info p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+
+        .reservas-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #25D366;
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 999px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.25);
+        }
+
+        .reservas-whatsapp:hover {
+            background: #20bd5a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px rgba(37, 211, 102, 0.35);
+        }
+
+        .reservas-whatsapp svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .reservas-form {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 36px;
+        }
+
+        .form-group { margin-bottom: 20px; }
+
+        .form-group label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--amber);
+            box-shadow: 0 0 0 3px var(--amber-glow);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder { color: var(--text-muted); }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-submit {
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        /* ===== HORARIOS Y UBICACION ===== */
+        .ubicacion { background: var(--bg-dark); }
+
+        .ubicacion-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: start;
+        }
+
+        .horarios-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 36px;
+        }
+
+        .horarios-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--amber);
+        }
+
+        .horario-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+
+        .horario-row:last-child { border-bottom: none; }
+
+        .horario-dia { font-weight: 500; }
+
+        .horario-hora { color: var(--text-secondary); }
+
+        .horario-cerrado { color: #EF4444; font-weight: 600; }
+
+        .map-placeholder {
+            background-size: cover;
+            background-position: center;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            height: 100%;
+            min-height: 380px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-placeholder::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(15, 13, 10, 0.5) 0%, rgba(15, 13, 10, 0.8) 100%);
+        }
+
+        .map-pin {
+            font-size: 3rem;
+            position: relative;
+            z-index: 1;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .map-address {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .map-address strong {
+            display: block;
+            color: var(--text-primary);
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .map-link {
+            position: relative;
+            z-index: 1;
+            color: var(--amber);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: 1px solid var(--amber);
+            padding: 8px 20px;
+            border-radius: 999px;
+            transition: all 0.25s;
+        }
+
+        .map-link:hover {
+            background: var(--amber);
+            color: #000;
+        }
+
+        /* ===== REVIEWS ===== */
+        .reviews { background: var(--bg-surface); }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .review-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px;
+            transition: all 0.3s;
+        }
+
+        .review-card:hover {
+            border-color: var(--border-strong);
+            transform: translateY(-2px);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .review-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--amber-dark), var(--amber-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #000;
+            flex-shrink: 0;
+        }
+
+        .review-author { font-weight: 600; font-size: 0.95rem; }
+
+        .review-meta {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .review-stars {
+            color: var(--amber);
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+        }
+
+        .review-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            font-style: italic;
+        }
+
+        .review-source {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 16px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--bg-surface);
+            border-top: 1px solid var(--border);
+            padding: 64px 24px 32px;
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--amber);
+            margin-bottom: 12px;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
+
+        .footer-col h4 {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .footer-col ul { list-style: none; }
+
+        .footer-col li { margin-bottom: 10px; }
+
+        .footer-col a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: color 0.2s;
+        }
+
+        .footer-col a:hover { color: var(--amber); }
+
+        .footer-socials {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .footer-social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.25s;
+        }
+
+        .footer-social-link:hover {
+            border-color: var(--amber);
+            color: var(--amber);
+            background: var(--amber-glow);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .footer-dev a {
+            color: var(--amber);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer-dev a:hover { text-decoration: underline; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .propuesta-grid { grid-template-columns: 1fr; }
+            .menu-grid { grid-template-columns: 1fr; }
+            .reservas-wrapper { grid-template-columns: 1fr; }
+            .ubicacion-grid { grid-template-columns: 1fr; }
+            .reviews-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+        }
+
+        @media (max-width: 640px) {
+            section { padding: 64px 16px; }
+            .navbar-links { display: none; }
+            .mobile-toggle { display: block; }
+            .navbar-cta { display: none; }
+            .hero { min-height: 80vh; padding: 60px 16px; }
+            .hero-emoji { font-size: 2.5rem; }
+            .propuesta-card-img { height: 160px; }
+            .menu-category-header { height: 140px; }
+            .reservas-hero-img { height: 200px; }
+            .form-row { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+            .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+            .demo-banner { font-size: 0.78rem; padding: 8px 12px; }
+        }
+
+        /* ===== MOBILE NAV ===== */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 13, 10, 0.97);
+            z-index: 10000;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+        }
+
+        .mobile-nav.open { display: flex; }
+
+        .mobile-nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.4rem;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .mobile-nav a:hover { color: var(--amber); }
+
+        .mobile-nav-close {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 2rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Structural containers - populated by render engine -->
+<div id="demo-banner-container"></div>
+<nav class="navbar" id="navbar-container"></nav>
+<div class="mobile-nav" id="mobileNav"></div>
+<section class="hero" id="hero-container"></section>
+<section class="propuesta" id="propuesta"></section>
+<section class="menu-section" id="menu"></section>
+<section class="reservas" id="reservas"></section>
+<section class="ubicacion" id="ubicacion"></section>
+<section class="reviews" id="reviews"></section>
+<footer class="footer" id="footer-container"></footer>
+
+<script>
+// =============================================================================
+// CONFIGURACION — Modificar estos datos para personalizar el sitio
+// =============================================================================
+const CONFIG = {
+    nombre: 'Fuegos de Mendoza',
+    slogan: 'Parrilla & Cocina de Autor',
+    heroEmoji: '\u{1F525}\u{1F969}\u{1F525}',
+    heroTitulo: 'El sabor auténtico de Mendoza',
+    heroSubtitulo: 'Parrilla de leña, cocina de autor y los mejores vinos de la región. Una experiencia gastronómica que enciende todos los sentidos.',
+    heroBadge: '\u{1F4CD} Av. Arístides Villanueva 456 (dirección ilustrativa), Ciudad de Mendoza',
+    heroBadgeDestacado: 'Abierto de martes a domingo',
+
+    colores: {
+        primario: '#F59E0B',
+        primarioClaro: '#FBBF24',
+        primarioOscuro: '#D97706',
+        primarioGlow: 'rgba(245, 158, 11, 0.15)',
+        fondoOscuro: '#0F0D0A',
+        fondoTarjeta: '#1A1714',
+        fondoTarjetaHover: '#231F1A',
+        fondoSuperficie: '#141210',
+        textoPrimario: '#FAF5EB',
+        textoSecundario: '#A8A196',
+        textoMuted: '#6B6560',
+        borde: 'rgba(245, 158, 11, 0.12)',
+        bordeFuerte: 'rgba(245, 158, 11, 0.25)'
+    },
+
+    propuesta: {
+        etiqueta: 'Nuestra propuesta',
+        titulo: 'Fuego, tradición y creatividad',
+        descripcion: 'Combinamos la parrilla mendocina de toda la vida con técnicas de cocina de autor. Cada plato cuenta una historia que empieza en el fuego.',
+        items: [
+            {
+                imagen: 'https://images.unsplash.com/photo-1558030006-450675393462?w=500&q=80&fit=crop',
+                icono: '\u{1FAB5}',
+                titulo: 'Parrilla de leña',
+                descripcion: 'Trabajamos exclusivamente con leña de algarrobo y quebracho, aportando un ahumado sutil y único a cada corte. Cocción lenta sobre brasas vivas.'
+            },
+            {
+                imagen: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=500&q=80&fit=crop',
+                icono: '\u{1F468}\u200D\u{1F373}',
+                titulo: 'Cocina de autor',
+                descripcion: 'Nuestro chef fusiona las raíces culinarias mendocinas con técnicas contemporáneas, creando platos que sorprenden sin perder la esencia.'
+            },
+            {
+                imagen: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=500&q=80&fit=crop',
+                icono: '\u{1F377}',
+                titulo: 'Cava propia',
+                descripcion: 'Más de 80 etiquetas de bodegas mendocinas cuidadosamente seleccionadas. Cada vino tiene su maridaje perfecto en nuestra carta.'
+            }
+        ]
+    },
+
+    menuCategorias: [
+        {
+            id: 'entradas',
+            nombre: 'Entradas',
+            icono: '\u{1F957}',
+            imagen: 'https://images.unsplash.com/photo-1541014741259-de529411b96a?w=400&q=80&fit=crop',
+            platos: [
+                { nombre: 'Provoleta a la parrilla', descripcion: 'Provolone ahumado con orégano fresco, tomates cherry y reducción de aceto balsámico.', precio: '$6.900' },
+                { nombre: 'Empanadas mendocinas (x3)', descripcion: 'Las clásicas de carne cortada a cuchillo, con aceituna, huevo y comino. Horno de barro.', precio: '$5.400' },
+                { nombre: 'Tabla de fiambres regionales', descripcion: 'Bondiola, salame, queso de cabra, aceitunas curadas, pan de campo y miel de montaña.', precio: '$9.800' },
+                { nombre: 'Humita en chala', descripcion: 'Receta tradicional con choclo fresco, cebolla de verdeo y un toque de ají molido.', precio: '$5.200' }
+            ]
+        },
+        {
+            id: 'carnes',
+            nombre: 'Carnes a la parrilla',
+            icono: '\u{1F969}',
+            imagen: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=400&q=80&fit=crop',
+            platos: [
+                { nombre: 'Bife de chorizo 400g', descripcion: 'Corte grueso a la parrilla, sellado perfecto. Se acompaña con papas rústicas al romero.', precio: '$14.500' },
+                { nombre: 'Ojo de bife con manteca de hierbas', descripcion: '350g de puro sabor, terminado con manteca de tomillo, romero y ajo confitado.', precio: '$16.200' },
+                { nombre: 'Entraña a la llama', descripcion: 'Cocinada directamente sobre la llama, jugosa por dentro. Con chimichurri de la casa.', precio: '$13.800' },
+                { nombre: 'Cordero patagónico al asador', descripcion: 'Cocción lenta de 4 horas al asador vertical. Piel crocante, interior tierno. Para compartir.', precio: '$18.500' },
+                { nombre: 'Parrillada Fuegos (2 personas)', descripcion: 'Vacío, tira de asado, chorizo criollo, morcilla, chinchulín y provoleta. La experiencia completa.', precio: '$28.000' },
+                { nombre: 'Mollejas doradas', descripcion: 'Crocantes por fuera, cremosas por dentro. Con limón y sal parrillera.', precio: '$11.200' }
+            ]
+        },
+        {
+            id: 'pastas',
+            nombre: 'Pastas artesanales',
+            icono: '\u{1F35D}',
+            imagen: 'https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=400&q=80&fit=crop',
+            platos: [
+                { nombre: 'Sorrentinos de cordero braseado', descripcion: 'Rellenos de cordero cocido a baja temperatura, con salsa de tomates asados y albahaca.', precio: '$12.400' },
+                { nombre: 'Ñoquis de calabaza', descripcion: 'Ñoquis artesanales de calabaza asada, con manteca dorada, salvia crocante y nuez moscada.', precio: '$10.600' },
+                { nombre: 'Pappardelle al ragú de bondiola', descripcion: 'Pasta ancha al huevo con ragú de bondiola braseada 6 horas. Queso grana padano.', precio: '$11.800' },
+                { nombre: 'Ravioles de hongos de montaña', descripcion: 'Rellenos de hongos de pino recolectados en alta montaña. Salsa cremosa de parmesano.', precio: '$11.200' }
+            ]
+        },
+        {
+            id: 'postres',
+            nombre: 'Postres',
+            icono: '\u{1F36E}',
+            imagen: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&q=80&fit=crop',
+            platos: [
+                { nombre: 'Volcán de chocolate con Malbec', descripcion: 'Bizcocho tibio de chocolate amargo infusionado con Malbec. Centro líquido y helado de vainilla.', precio: '$7.800' },
+                { nombre: 'Flan casero con dulce de leche', descripcion: 'Receta de la abuela. Flan de huevo con dulce de leche artesanal y crema batida.', precio: '$5.900' },
+                { nombre: 'Panqueques de manzana flambeados', descripcion: 'Panqueques rellenos de manzana verde caramelizada, flambeados en la mesa con calvados.', precio: '$7.200' },
+                { nombre: 'Tabla de quesos con membrillo', descripcion: 'Selección de quesos mendocinos con dulce de membrillo casero, nueces y miel.', precio: '$8.400' }
+            ]
+        },
+        {
+            id: 'vinos',
+            nombre: 'Vinos de la casa',
+            icono: '\u{1F377}',
+            imagen: 'https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=400&q=80&fit=crop',
+            platos: [
+                { nombre: 'Malbec Reserva \u2014 Valle de Uco', descripcion: 'Notas de ciruela madura, chocolate y un toque de vainilla. 14 meses en barrica de roble francés.', precio: '$12.800' },
+                { nombre: 'Cabernet Sauvignon Gran Reserva', descripcion: 'Cuerpo completo, taninos firmes y elegantes. Ideal para acompañar carnes rojas.', precio: '$15.400' },
+                { nombre: 'Torrontés \u2014 Cafayate', descripcion: 'Aromático, floral y refrescante. Perfecto como aperitivo o con entradas.', precio: '$8.600' },
+                { nombre: 'Blend de autor \u2014 Malbec & Bonarda', descripcion: 'Creación exclusiva de nuestra cava. Frutal, sedoso y con final largo. Edición limitada.', precio: '$18.200' }
+            ]
+        }
+    ],
+
+    reviews: [
+        {
+            iniciales: 'ML',
+            autor: 'Martina López',
+            meta: 'Hace 2 semanas \u00B7 Reseña local',
+            estrellas: 5,
+            texto: 'Fuimos un sábado a la noche y la pasamos increíble. El bife de chorizo es el mejor que comí en Mendoza, y la carta de vinos es espectacular. El mozo nos recomendó un Malbec que era una joya. \u00A1Volvemos seguro!',
+            fuente: 'Google'
+        },
+        {
+            iniciales: 'CF',
+            autor: 'Carlos Fernández',
+            meta: 'Hace 1 mes \u00B7 Reseña local',
+            estrellas: 5,
+            texto: 'Llevé a mi señora por nuestro aniversario y no nos decepcionó. La ambientación es cálida, el cordero al asador es una obra de arte y el volcán de chocolate con Malbec\u2026 no tengo palabras. Nivel premium a precio justo.',
+            fuente: 'Google'
+        },
+        {
+            iniciales: 'SR',
+            autor: 'Sofía Ramírez',
+            meta: 'Hace 3 semanas \u00B7 Reseña local',
+            estrellas: 4,
+            texto: 'Muy buena experiencia. Las pastas artesanales son riquísimas, especialmente los sorrentinos de cordero. Lo único: un sábado a las 21 había bastante espera, así que recomiendo reservar con tiempo. El lugar es hermoso.',
+            fuente: 'Google'
+        },
+        {
+            iniciales: 'DT',
+            autor: 'Diego Torres',
+            meta: 'Hace 1 semana \u00B7 Reseña local',
+            estrellas: 5,
+            texto: 'Vine de Buenos Aires y un amigo mendocino me lo recomendó. La parrillada para dos es impresionante: abundante, con cortes de primera y las achuras perfectas. El blend de autor Malbec-Bonarda es adictivo. De lo mejor de Arístides.',
+            fuente: 'Google'
+        }
+    ],
+
+    reviewsHeader: {
+        etiqueta: 'Opiniones',
+        titulo: 'Lo que dicen nuestros comensales',
+        descripcion: 'Más de 340 reseñas en Google con un promedio de 4.8 estrellas.'
+    },
+
+    imagenes: {
+        hero: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1400&q=80&fit=crop',
+        reservas: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80&fit=crop',
+        mapa: 'https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=600&q=80&fit=crop'
+    },
+
+    telefono: '(261) 000-0000',
+    whatsapp: '5492616423730',
+    whatsappMensaje: 'Hola! Quiero hacer una reserva en ' + 'Fuegos de Mendoza',
+    email: 'info@fuegosdemendoza.com',
+    direccion: 'Av. Arístides Villanueva 456 (dirección ilustrativa)',
+    ciudad: 'Ciudad de Mendoza',
+    codigoPostal: 'M5500',
+    pais: 'Argentina',
+    googleMapsUrl: 'https://maps.google.com/?q=Mendoza+Argentina',
+
+    horarios: {
+        titulo: '\u{1F550} Horarios de atención',
+        filas: [
+            { dia: 'Lunes', hora: null, cerrado: true },
+            { dia: 'Martes a jueves', hora: '20:00 \u2013 00:00', cerrado: false },
+            { dia: 'Viernes y sábado', hora: '12:00 \u2013 15:30 / 20:00 \u2013 01:00', cerrado: false },
+            { dia: 'Domingo', hora: '12:00 \u2013 16:00', cerrado: false }
+        ]
+    },
+
+    reservas: {
+        etiqueta: 'Reservas',
+        titulo: 'Reservá tu mesa',
+        descripcion: 'Asegurá tu lugar para una noche inolvidable. Podés reservar completando el formulario o directamente por WhatsApp.',
+        whatsappTitulo: '\u00BFPreferís reservar por WhatsApp?',
+        whatsappTexto: 'Escribinos directamente y te confirmamos tu mesa en minutos. Aceptamos reservas para grupos de hasta 20 personas. Para eventos privados, consultanos por un presupuesto personalizado.',
+        datoExtra: 'Los viernes y sábados se agotan rápido. Te recomendamos reservar con al menos 48 horas de anticipación.',
+        horarioOptions: ['20:00', '20:30', '21:00', '21:30', '22:00', '22:30'],
+        comensalesOptions: ['1 persona', '2 personas', '3 personas', '4 personas', '5 personas', '6 personas', '7-10 personas', 'Más de 10']
+    },
+
+    formspreeId: 'TU_FORMSPREE_ID',
+
+    redes: {
+        instagram: { url: '#', icono: '\u{1F4F8}', nombre: 'Instagram', handle: '@fuegosdemendoza' },
+        facebook: { url: '#', icono: '\u{1F4D8}', nombre: 'Facebook', handle: '' },
+        tripadvisor: { url: '#', icono: '\u{1F30D}', nombre: 'TripAdvisor', handle: '' },
+        whatsapp: { url: '#', icono: '\u{1F4AC}', nombre: 'WhatsApp', handle: '' }
+    },
+
+    demoBanner: {
+        visible: true,
+        texto: 'Esta es una demo creada por <strong>Juan Barranco</strong> \u2014 Todos los datos son ficticios e ilustrativos. \u00BFQuerés algo así para tu restaurante?',
+        linkTexto: '\u2192 Contactame',
+        linkUrl: 'https://wa.me/5492616423730?text=Hola%20Juan!%20Vi%20la%20demo%20de%20restaurante%20y%20me%20interesa'
+    },
+
+    footer: {
+        descripcion: 'Parrilla de leña & cocina de autor en el corazón de la Ciudad de Mendoza. Una experiencia que combina tradición, fuego y creatividad en cada plato.',
+        copyright: '\u00A9 2026 Fuegos de Mendoza \u2014 Todos los derechos reservados.',
+        desarrollador: { nombre: 'Juan Barranco', url: 'https://wa.me/5492616423730?text=Hola%20Juan!%20Vi%20la%20demo%20de%20restaurante%20y%20me%20interesa' }
+    }
+};
+
+
+// =============================================================================
+// MOTOR DE RENDERIZADO
+// =============================================================================
+
+function esc(str) {
+    var div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+}
+
+function aplicarColores() {
+    var c = CONFIG.colores;
+    var root = document.documentElement.style;
+    root.setProperty('--amber', c.primario);
+    root.setProperty('--amber-light', c.primarioClaro);
+    root.setProperty('--amber-dark', c.primarioOscuro);
+    root.setProperty('--amber-glow', c.primarioGlow);
+    root.setProperty('--bg-dark', c.fondoOscuro);
+    root.setProperty('--bg-card', c.fondoTarjeta);
+    root.setProperty('--bg-card-hover', c.fondoTarjetaHover);
+    root.setProperty('--bg-surface', c.fondoSuperficie);
+    root.setProperty('--text-primary', c.textoPrimario);
+    root.setProperty('--text-secondary', c.textoSecundario);
+    root.setProperty('--text-muted', c.textoMuted);
+    root.setProperty('--border', c.borde);
+    root.setProperty('--border-strong', c.bordeFuerte);
+}
+
+function renderDemoBanner() {
+    var container = document.getElementById('demo-banner-container');
+    if (!CONFIG.demoBanner.visible) { container.style.display = 'none'; return; }
+    container.className = 'demo-banner';
+    container.innerHTML = '\u2728 ' + CONFIG.demoBanner.texto +
+        ' <a href="' + esc(CONFIG.demoBanner.linkUrl) + '" target="_blank" rel="noopener">' + esc(CONFIG.demoBanner.linkTexto) + '</a>';
+}
+
+function renderNavbar() {
+    var navLinks = [
+        { href: '#propuesta', texto: 'Nosotros' },
+        { href: '#menu', texto: 'Menú' },
+        { href: '#reservas', texto: 'Reservas' },
+        { href: '#ubicacion', texto: 'Ubicación' },
+        { href: '#reviews', texto: 'Opiniones' }
+    ];
+    var nombreParts = CONFIG.nombre.split(' ');
+    var primeraPalabra = esc(nombreParts[0]);
+    var resto = nombreParts.length > 1 ? ' <span>' + esc(nombreParts.slice(1).join(' ')) + '</span>' : '';
+
+    var linksHtml = navLinks.map(function(l) {
+        return '<li><a href="' + l.href + '">' + esc(l.texto) + '</a></li>';
+    }).join('');
+
+    document.getElementById('navbar-container').innerHTML =
+        '<div class="navbar-inner">' +
+            '<a href="#" class="navbar-logo">' + primeraPalabra + resto + '</a>' +
+            '<ul class="navbar-links">' + linksHtml + '</ul>' +
+            '<a href="#reservas" class="navbar-cta">Reservar mesa</a>' +
+            '<button class="mobile-toggle" onclick="document.getElementById(\'mobileNav\').classList.add(\'open\')" aria-label="Abrir menú">\u2630</button>' +
+        '</div>';
+}
+
+function renderMobileNav() {
+    var navLinks = [
+        { href: '#propuesta', texto: 'Nosotros' },
+        { href: '#menu', texto: 'Menú' },
+        { href: '#reservas', texto: 'Reservas' },
+        { href: '#ubicacion', texto: 'Ubicación' },
+        { href: '#reviews', texto: 'Opiniones' }
+    ];
+
+    var linksHtml = navLinks.map(function(l) {
+        return '<a href="' + l.href + '" onclick="this.parentElement.classList.remove(\'open\')">' + esc(l.texto) + '</a>';
+    }).join('');
+
+    document.getElementById('mobileNav').innerHTML =
+        '<button class="mobile-nav-close" onclick="this.parentElement.classList.remove(\'open\')" aria-label="Cerrar menú">\u2715</button>' +
+        linksHtml +
+        '<a href="#reservas" class="btn-primary" onclick="this.parentElement.classList.remove(\'open\')" style="margin-top:16px;">Reservar mesa</a>';
+}
+
+function renderHero() {
+    var hero = document.getElementById('hero-container');
+    hero.style.backgroundImage = "url('" + CONFIG.imagenes.hero + "')";
+    hero.innerHTML =
+        '<div class="hero-content">' +
+            '<span class="hero-emoji">' + CONFIG.heroEmoji + '</span>' +
+            '<h1 class="hero-title">' + esc(CONFIG.heroTitulo) + '</h1>' +
+            '<p class="hero-subtitle">' + esc(CONFIG.heroSubtitulo) + '</p>' +
+            '<div class="hero-buttons">' +
+                '<a href="#reservas" class="btn-primary">Reservar mesa</a>' +
+                '<a href="#menu" class="btn-secondary">Ver el menú</a>' +
+            '</div>' +
+            '<div class="hero-badge">' + esc(CONFIG.heroBadge) + ' \u2014 <span>' + esc(CONFIG.heroBadgeDestacado) + '</span></div>' +
+        '</div>';
+}
+
+function renderPropuesta() {
+    var p = CONFIG.propuesta;
+    var cardsHtml = p.items.map(function(item) {
+        return '<div class="propuesta-card">' +
+            '<div class="propuesta-card-img" style="background-image: url(\'' + esc(item.imagen) + '\');"></div>' +
+            '<div class="propuesta-card-body">' +
+                '<span class="propuesta-icon">' + item.icono + '</span>' +
+                '<h3>' + esc(item.titulo) + '</h3>' +
+                '<p>' + esc(item.descripcion) + '</p>' +
+            '</div>' +
+        '</div>';
+    }).join('');
+
+    document.getElementById('propuesta').innerHTML =
+        '<div class="section-container">' +
+            '<div class="section-header">' +
+                '<span class="section-label">' + esc(p.etiqueta) + '</span>' +
+                '<h2 class="section-title">' + esc(p.titulo) + '</h2>' +
+                '<p class="section-desc">' + esc(p.descripcion) + '</p>' +
+            '</div>' +
+            '<div class="propuesta-grid">' + cardsHtml + '</div>' +
+        '</div>';
+}
+
+function renderMenu() {
+    var cats = CONFIG.menuCategorias;
+
+    var tabsHtml = cats.map(function(cat, i) {
+        var activeClass = i === 0 ? ' active' : '';
+        return '<button class="menu-tab' + activeClass + '" data-cat="' + esc(cat.id) + '">' + esc(cat.nombre) + '</button>';
+    }).join('');
+
+    var catsHtml = cats.map(function(cat, i) {
+        var activeClass = i === 0 ? ' active' : '';
+        var platosHtml = cat.platos.map(function(plato) {
+            return '<div class="menu-item">' +
+                '<div class="menu-item-info">' +
+                    '<div class="menu-item-name">' + esc(plato.nombre) + '</div>' +
+                    '<div class="menu-item-desc">' + esc(plato.descripcion) + '</div>' +
+                '</div>' +
+                '<div class="menu-item-price">' + esc(plato.precio) + '</div>' +
+            '</div>';
+        }).join('');
+
+        return '<div class="menu-category' + activeClass + '" id="cat-' + esc(cat.id) + '">' +
+            '<div class="menu-category-header" style="background-image: url(\'' + esc(cat.imagen) + '\');">' +
+                '<h3 class="menu-category-title">' + cat.icono + ' ' + esc(cat.nombre) + '</h3>' +
+            '</div>' +
+            '<div class="menu-grid">' + platosHtml + '</div>' +
+        '</div>';
+    }).join('');
+
+    document.getElementById('menu').innerHTML =
+        '<div class="section-container">' +
+            '<div class="section-header">' +
+                '<span class="section-label">Nuestra carta</span>' +
+                '<h2 class="section-title">Menú</h2>' +
+                '<p class="section-desc">Selección de platos elaborados con productos frescos de la región, a fuego lento y con toda la pasión mendocina.</p>' +
+            '</div>' +
+            '<div class="menu-categories">' + tabsHtml + '</div>' +
+            catsHtml +
+        '</div>';
+
+    // Attach tab events
+    document.querySelectorAll('.menu-tab').forEach(function(tab) {
+        tab.addEventListener('click', function() {
+            document.querySelectorAll('.menu-category').forEach(function(el) { el.classList.remove('active'); });
+            document.querySelectorAll('.menu-tab').forEach(function(el) { el.classList.remove('active'); });
+            document.getElementById('cat-' + tab.dataset.cat).classList.add('active');
+            tab.classList.add('active');
+        });
+    });
+}
+
+function renderReservas() {
+    var r = CONFIG.reservas;
+    var whatsappUrl = 'https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(CONFIG.whatsappMensaje);
+
+    var horariosOptions = '<option value="">Elegir horario</option>' +
+        r.horarioOptions.map(function(h) { return '<option>' + esc(h) + '</option>'; }).join('');
+
+    var comensalesOptions = '<option value="">\u00BFCuántos?</option>' +
+        r.comensalesOptions.map(function(c) { return '<option>' + esc(c) + '</option>'; }).join('');
+
+    var formAction = CONFIG.formspreeId && CONFIG.formspreeId !== 'TU_FORMSPREE_ID'
+        ? 'https://formspree.io/f/' + CONFIG.formspreeId
+        : '#';
+
+    var formOnSubmit = CONFIG.formspreeId && CONFIG.formspreeId !== 'TU_FORMSPREE_ID'
+        ? ''
+        : ' onsubmit="event.preventDefault(); alert(\'\u00A1Gracias! Esta es una demo. En un sitio real, tu reserva quedaría registrada.\');"';
+
+    var whatsappSvg = '<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>';
+
+    document.getElementById('reservas').innerHTML =
+        '<div class="section-container">' +
+            '<div class="section-header">' +
+                '<span class="section-label">' + esc(r.etiqueta) + '</span>' +
+                '<h2 class="section-title">' + esc(r.titulo) + '</h2>' +
+                '<p class="section-desc">' + esc(r.descripcion) + '</p>' +
+            '</div>' +
+            '<div class="reservas-hero-img" style="background-image: url(\'' + esc(CONFIG.imagenes.reservas) + '\');"></div>' +
+            '<div class="reservas-wrapper">' +
+                '<div class="reservas-info">' +
+                    '<h3>' + esc(r.whatsappTitulo) + '</h3>' +
+                    '<p>' + esc(r.whatsappTexto) + '</p>' +
+                    '<a href="' + whatsappUrl + '" class="reservas-whatsapp" target="_blank" rel="noopener">' +
+                        whatsappSvg +
+                        ' Reservar por WhatsApp' +
+                    '</a>' +
+                    '<div style="margin-top: 40px; padding: 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);">' +
+                        '<p style="font-size: 0.88rem; color: var(--text-secondary); margin: 0; line-height: 1.6;">' +
+                            '<strong style="color: var(--amber);">\u{1F4A1} Dato:</strong> ' + esc(r.datoExtra) +
+                        '</p>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="reservas-form">' +
+                    '<form action="' + formAction + '" method="POST"' + formOnSubmit + '>' +
+                        '<div class="form-group">' +
+                            '<label for="nombre">Nombre completo</label>' +
+                            '<input type="text" id="nombre" name="nombre" placeholder="Ej: María González" required>' +
+                        '</div>' +
+                        '<div class="form-row">' +
+                            '<div class="form-group">' +
+                                '<label for="fecha">Fecha</label>' +
+                                '<input type="date" id="fecha" name="fecha" required>' +
+                            '</div>' +
+                            '<div class="form-group">' +
+                                '<label for="hora">Horario</label>' +
+                                '<select id="hora" name="hora">' + horariosOptions + '</select>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="form-row">' +
+                            '<div class="form-group">' +
+                                '<label for="comensales">Comensales</label>' +
+                                '<select id="comensales" name="comensales">' + comensalesOptions + '</select>' +
+                            '</div>' +
+                            '<div class="form-group">' +
+                                '<label for="telefono">Teléfono</label>' +
+                                '<input type="tel" id="telefono" name="telefono" placeholder="' + esc(CONFIG.telefono) + '">' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="form-group">' +
+                            '<label for="notas">Notas especiales</label>' +
+                            '<input type="text" id="notas" name="notas" placeholder="Cumpleaños, alergias, ubicación preferida...">' +
+                        '</div>' +
+                        '<input type="hidden" name="_subject" value="Nueva reserva \u2014 ' + esc(CONFIG.nombre) + '">' +
+                        '<button type="submit" class="btn-primary form-submit">Confirmar reserva</button>' +
+                    '</form>' +
+                '</div>' +
+            '</div>' +
+        '</div>';
+}
+
+function renderUbicacion() {
+    var h = CONFIG.horarios;
+
+    var horariosHtml = h.filas.map(function(fila) {
+        var horaHtml = fila.cerrado
+            ? '<span class="horario-cerrado">Cerrado</span>'
+            : '<span class="horario-hora">' + esc(fila.hora) + '</span>';
+        return '<div class="horario-row">' +
+            '<span class="horario-dia">' + esc(fila.dia) + '</span>' +
+            horaHtml +
+        '</div>';
+    }).join('');
+
+    var redesSociales = Object.values(CONFIG.redes);
+    var instHandle = CONFIG.redes.instagram ? CONFIG.redes.instagram.handle : '';
+
+    document.getElementById('ubicacion').innerHTML =
+        '<div class="section-container">' +
+            '<div class="section-header">' +
+                '<span class="section-label">Encontranos</span>' +
+                '<h2 class="section-title">Horarios y ubicación</h2>' +
+                '<p class="section-desc">Estamos en el corazón gastronómico de Mendoza, sobre la icónica ' + esc(CONFIG.direccion.split(',')[0]) + '.</p>' +
+            '</div>' +
+            '<div class="ubicacion-grid">' +
+                '<div class="horarios-card">' +
+                    '<h3>' + h.titulo + '</h3>' +
+                    horariosHtml +
+                    '<div style="margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border);">' +
+                        '<h3 style="margin-bottom: 16px;">\u{1F4DE} Contacto</h3>' +
+                        '<div class="horario-row">' +
+                            '<span class="horario-dia">Teléfono</span>' +
+                            '<span class="horario-hora">' + esc(CONFIG.telefono) + '</span>' +
+                        '</div>' +
+                        '<div class="horario-row">' +
+                            '<span class="horario-dia">Email</span>' +
+                            '<span class="horario-hora">' + esc(CONFIG.email) + '</span>' +
+                        '</div>' +
+                        (instHandle ? '<div class="horario-row">' +
+                            '<span class="horario-dia">Instagram</span>' +
+                            '<span class="horario-hora">' + esc(instHandle) + '</span>' +
+                        '</div>' : '') +
+                    '</div>' +
+                '</div>' +
+                '<div class="map-placeholder" style="background-image: url(\'' + esc(CONFIG.imagenes.mapa) + '\');">' +
+                    '<span class="map-pin">\u{1F4CD}</span>' +
+                    '<div class="map-address">' +
+                        '<strong>' + esc(CONFIG.nombre) + '</strong>' +
+                        esc(CONFIG.direccion) + '<br>' +
+                        esc(CONFIG.ciudad) + ', ' + esc(CONFIG.codigoPostal) +
+                    '</div>' +
+                    '<a href="' + esc(CONFIG.googleMapsUrl) + '" target="_blank" rel="noopener" class="map-link">Abrir en Google Maps \u2192</a>' +
+                '</div>' +
+            '</div>' +
+        '</div>';
+}
+
+function renderReviews() {
+    var rh = CONFIG.reviewsHeader;
+
+    var cardsHtml = CONFIG.reviews.map(function(review) {
+        var stars = '';
+        for (var i = 0; i < 5; i++) {
+            stars += i < review.estrellas ? '\u2605' : '\u2606';
+        }
+        return '<div class="review-card">' +
+            '<div class="review-header">' +
+                '<div class="review-avatar">' + esc(review.iniciales) + '</div>' +
+                '<div>' +
+                    '<div class="review-author">' + esc(review.autor) + '</div>' +
+                    '<div class="review-meta">' + esc(review.meta) + '</div>' +
+                '</div>' +
+            '</div>' +
+            '<div class="review-stars">' + stars + '</div>' +
+            '<p class="review-text">\u201C' + esc(review.texto) + '\u201D</p>' +
+            '<div class="review-source">' +
+                '<span style="color: #4285F4; font-weight: 700;">G</span> Reseña de ' + esc(review.fuente) +
+            '</div>' +
+        '</div>';
+    }).join('');
+
+    document.getElementById('reviews').innerHTML =
+        '<div class="section-container">' +
+            '<div class="section-header">' +
+                '<span class="section-label">' + esc(rh.etiqueta) + '</span>' +
+                '<h2 class="section-title">' + esc(rh.titulo) + '</h2>' +
+                '<p class="section-desc">' + esc(rh.descripcion) + '</p>' +
+            '</div>' +
+            '<div class="reviews-grid">' + cardsHtml + '</div>' +
+        '</div>';
+}
+
+function renderFooter() {
+    var f = CONFIG.footer;
+    var redesHtml = Object.values(CONFIG.redes).map(function(red) {
+        return '<a href="' + esc(red.url) + '" class="footer-social-link" aria-label="' + esc(red.nombre) + '" title="' + esc(red.nombre) + '">' + red.icono + '</a>';
+    }).join('');
+
+    document.getElementById('footer-container').innerHTML =
+        '<div class="footer-inner">' +
+            '<div class="footer-grid">' +
+                '<div class="footer-brand">' +
+                    '<h3>\u{1F525} ' + esc(CONFIG.nombre) + '</h3>' +
+                    '<p>' + esc(f.descripcion) + '</p>' +
+                    '<div class="footer-socials" style="margin-top: 20px;">' + redesHtml + '</div>' +
+                '</div>' +
+                '<div class="footer-col">' +
+                    '<h4>Navegación</h4>' +
+                    '<ul>' +
+                        '<li><a href="#propuesta">Nosotros</a></li>' +
+                        '<li><a href="#menu">Menú</a></li>' +
+                        '<li><a href="#reservas">Reservas</a></li>' +
+                        '<li><a href="#ubicacion">Ubicación</a></li>' +
+                        '<li><a href="#reviews">Opiniones</a></li>' +
+                    '</ul>' +
+                '</div>' +
+                '<div class="footer-col">' +
+                    '<h4>Contacto</h4>' +
+                    '<ul>' +
+                        '<li><span style="color: var(--text-muted); font-size: 0.88rem;">' + esc(CONFIG.telefono) + '</span></li>' +
+                        '<li><a href="mailto:' + esc(CONFIG.email) + '">' + esc(CONFIG.email) + '</a></li>' +
+                        (CONFIG.redes.instagram && CONFIG.redes.instagram.handle
+                            ? '<li><a href="' + esc(CONFIG.redes.instagram.url) + '">' + esc(CONFIG.redes.instagram.handle) + '</a></li>'
+                            : '') +
+                    '</ul>' +
+                '</div>' +
+                '<div class="footer-col">' +
+                    '<h4>Dirección</h4>' +
+                    '<ul>' +
+                        '<li><a href="' + esc(CONFIG.googleMapsUrl) + '" target="_blank" rel="noopener">' + esc(CONFIG.direccion) + '</a></li>' +
+                        '<li><a href="#">' + esc(CONFIG.ciudad) + '</a></li>' +
+                        '<li><a href="#">' + esc(CONFIG.codigoPostal) + ', ' + esc(CONFIG.pais) + '</a></li>' +
+                    '</ul>' +
+                '</div>' +
+            '</div>' +
+            '<div class="footer-bottom">' +
+                '<span>' + esc(f.copyright) + '</span>' +
+                '<span class="footer-dev">Sitio web por <a href="' + esc(f.desarrollador.url) + '" target="_blank" rel="noopener">' + esc(f.desarrollador.nombre) + '</a></span>' +
+            '</div>' +
+        '</div>';
+}
+
+function iniciarAnimaciones() {
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.propuesta-card, .menu-item, .review-card, .horarios-card, .map-placeholder, .reservas-form, .reservas-info').forEach(function(el) {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(24px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+}
+
+// =============================================================================
+// INICIALIZACION
+// =============================================================================
+(function() {
+    // Page title
+    document.getElementById('page-title').textContent = CONFIG.nombre + ' \u2014 ' + CONFIG.slogan;
+
+    // Apply custom colors
+    aplicarColores();
+
+    // Render all sections
+    renderDemoBanner();
+    renderNavbar();
+    renderMobileNav();
+    renderHero();
+    renderPropuesta();
+    renderMenu();
+    renderReservas();
+    renderUbicacion();
+    renderReviews();
+    renderFooter();
+
+    // Start scroll animations
+    iniciarAnimaciones();
+})();
+</script>
+
+</body>
+</html>

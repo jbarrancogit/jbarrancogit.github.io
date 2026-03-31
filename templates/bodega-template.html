@@ -1,0 +1,2274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Cargando...</title>
+    <meta name="description" id="page-description" content="">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --wine: #8B1A4A;
+            --wine-dark: #5E0F32;
+            --wine-light: #A8325E;
+            --wine-glow: #C2476F;
+            --gold: #D4A853;
+            --gold-light: #E8C97A;
+            --gold-dark: #B08A3A;
+            --cream: #FAF3E8;
+            --bg-dark: #0D0A0C;
+            --bg-card: #1A1318;
+            --bg-card-hover: #231C20;
+            --text-primary: #F5EDE4;
+            --text-secondary: #B8A99A;
+            --text-muted: #7A6E66;
+            --border-subtle: rgba(139, 26, 74, 0.2);
+            --border-wine: rgba(139, 26, 74, 0.4);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            background: rgba(13, 10, 12, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 0 2rem;
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .nav-logo {
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .nav-logo span {
+            color: var(--wine-light);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--wine-light);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 4rem 2rem;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(13, 10, 12, 0.65);
+            z-index: 0;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to top, var(--bg-dark), transparent);
+            z-index: 1;
+        }
+
+        .hero-particles {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .hero-particles span {
+            position: absolute;
+            display: block;
+            width: 3px;
+            height: 3px;
+            background: var(--wine-light);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFade 6s ease-in-out infinite;
+        }
+
+        .hero-particles span:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .hero-particles span:nth-child(2) { top: 60%; left: 85%; animation-delay: 1s; }
+        .hero-particles span:nth-child(3) { top: 35%; left: 70%; animation-delay: 2s; }
+        .hero-particles span:nth-child(4) { top: 75%; left: 25%; animation-delay: 3s; }
+        .hero-particles span:nth-child(5) { top: 15%; left: 55%; animation-delay: 4s; }
+        .hero-particles span:nth-child(6) { top: 80%; left: 60%; animation-delay: 1.5s; }
+        .hero-particles span:nth-child(7) { top: 45%; left: 15%; animation-delay: 3.5s; }
+        .hero-particles span:nth-child(8) { top: 50%; left: 90%; animation-delay: 0.5s; }
+
+        @keyframes particleFade {
+            0%, 100% { opacity: 0; transform: translateY(0) scale(1); }
+            50% { opacity: 0.6; transform: translateY(-20px) scale(1.5); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero-emoji {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            display: block;
+            animation: floatEmoji 4s ease-in-out infinite;
+        }
+
+        @keyframes floatEmoji {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 6px 20px;
+            border: 1px solid var(--border-wine);
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--wine-light);
+            margin-bottom: 2rem;
+            background: rgba(139, 26, 74, 0.1);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--gold) 50%, var(--text-primary) 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textShine 4s ease-in-out infinite;
+        }
+
+        @keyframes textShine {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 200% center; }
+        }
+
+        .hero h1 .line-accent {
+            display: block;
+            font-style: italic;
+            font-weight: 300;
+            font-size: 0.45em;
+            letter-spacing: 0.08em;
+            -webkit-text-fill-color: var(--wine-light);
+            margin-top: 0.3em;
+        }
+
+        .hero-tagline {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: var(--text-secondary);
+            font-weight: 300;
+            max-width: 550px;
+            margin: 1.5rem auto 2.5rem;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            border: none;
+            letter-spacing: 0.02em;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--wine), var(--wine-light));
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(139, 26, 74, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(139, 26, 74, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-wine);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(139, 26, 74, 0.1);
+            border-color: var(--wine-light);
+            transform: translateY(-2px);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 3rem;
+            z-index: 2;
+            animation: scrollBounce 2s ease-in-out infinite;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        @keyframes scrollBounce {
+            0%, 100% { transform: translateY(0); opacity: 0.5; }
+            50% { transform: translateY(8px); opacity: 1; }
+        }
+
+        /* ===== SECTIONS ===== */
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--wine-light);
+            margin-bottom: 1rem;
+            padding: 5px 14px;
+            border: 1px solid var(--border-wine);
+            border-radius: 20px;
+            background: rgba(139, 26, 74, 0.08);
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            line-height: 1.15;
+        }
+
+        .section-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        .section-header {
+            margin-bottom: 3.5rem;
+        }
+
+        .section-divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(to right, var(--wine), var(--gold));
+            margin: 1.5rem 0;
+            border-radius: 2px;
+        }
+
+        .section-center .section-subtitle {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-center {
+            text-align: center;
+        }
+
+        .section-center .section-divider {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===== HISTORIA ===== */
+        .historia-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .historia-visual {
+            aspect-ratio: 4 / 5;
+            border-radius: 16px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .historia-visual::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(13, 10, 12, 0.25);
+            z-index: 1;
+        }
+
+        .historia-visual-inner {
+            position: absolute;
+            inset: 0;
+            background: transparent;
+        }
+
+        .historia-visual-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(13, 10, 12, 0.95), transparent);
+            z-index: 2;
+        }
+
+        .historia-visual-overlay p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .historia-stat-row {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .historia-stat {
+            text-align: center;
+        }
+
+        .historia-stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--gold);
+            line-height: 1;
+        }
+
+        .historia-stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.3rem;
+        }
+
+        .historia-text p {
+            color: var(--text-secondary);
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .historia-text p:first-of-type::first-letter {
+            font-size: 3.5rem;
+            font-weight: 800;
+            float: left;
+            line-height: 1;
+            margin-right: 12px;
+            margin-top: 4px;
+            color: var(--wine-light);
+        }
+
+        .historia-quote {
+            border-left: 3px solid var(--wine);
+            padding: 1.2rem 1.5rem;
+            margin: 2rem 0;
+            background: rgba(139, 26, 74, 0.06);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .historia-quote p {
+            font-style: italic;
+            color: var(--text-primary) !important;
+            font-size: 1.05rem !important;
+        }
+
+        .historia-quote cite {
+            display: block;
+            margin-top: 0.8rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-style: normal;
+        }
+
+        /* ===== VINOS ===== */
+        .vinos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .vino-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 0;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vino-card-img {
+            width: 100%;
+            height: 160px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .vino-card-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(13, 10, 12, 0.1) 0%, rgba(13, 10, 12, 0.7) 100%);
+        }
+
+        .vino-card-body {
+            padding: 1.5rem 1.5rem 2rem;
+        }
+
+        .vino-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--wine-light), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .vino-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--border-wine);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            background: var(--bg-card-hover);
+        }
+
+        .vino-card:hover::before {
+            opacity: 1;
+        }
+
+        .vino-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .vino-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .vino-varietal {
+            font-size: 0.75rem;
+            color: var(--wine-light);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .vino-notes {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .vino-awards {
+            font-size: 0.7rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .vino-price {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .vino-price span {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        /* ===== VISITAS ===== */
+        .visitas-banner {
+            width: 100%;
+            height: 280px;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .visitas-banner::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(13, 10, 12, 0.2) 0%, rgba(13, 10, 12, 0.7) 100%);
+        }
+
+        .visitas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .visita-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .visita-card:hover {
+            border-color: var(--border-wine);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .visita-card.featured {
+            border-color: var(--wine);
+            position: relative;
+        }
+
+        .visita-card.featured::after {
+            content: attr(data-featured-label);
+            position: absolute;
+            top: 16px;
+            right: -30px;
+            background: var(--wine);
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            padding: 4px 40px;
+            transform: rotate(45deg);
+        }
+
+        .visita-header {
+            padding: 2rem 2rem 1rem;
+        }
+
+        .visita-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .visita-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .visita-duration {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .visita-body {
+            padding: 0 2rem;
+        }
+
+        .visita-body ul {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .visita-body li {
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .visita-body li::before {
+            content: '\2713';
+            color: var(--wine-light);
+            font-weight: 700;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .visita-footer {
+            padding: 1.5rem 2rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .visita-price {
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .visita-price span {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: #fff;
+            padding: 10px 22px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-whatsapp:hover {
+            background: #1FB855;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        /* ===== GALERIA ===== */
+        .galeria-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: auto auto;
+            gap: 1rem;
+        }
+
+        .galeria-item {
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 4 / 3;
+            cursor: pointer;
+        }
+
+        .galeria-item:nth-child(1) {
+            grid-column: 1 / 3;
+            grid-row: 1 / 3;
+            aspect-ratio: auto;
+        }
+
+        .galeria-bg {
+            position: absolute;
+            inset: 0;
+            transition: transform 0.6s ease;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .galeria-item:hover .galeria-bg {
+            transform: scale(1.05);
+        }
+
+        .galeria-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(13, 10, 12, 0.9) 0%, rgba(13, 10, 12, 0.1) 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            opacity: 0.7;
+            transition: opacity 0.4s ease;
+        }
+
+        .galeria-item:hover .galeria-overlay {
+            opacity: 1;
+        }
+
+        .galeria-overlay-emoji {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .galeria-overlay h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .galeria-overlay p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* ===== REVIEWS ===== */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .review-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+        }
+
+        .review-card:hover {
+            border-color: var(--border-wine);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .review-stars {
+            color: var(--gold);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .review-text {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .review-author {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .review-source {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.2rem;
+        }
+
+        /* ===== UBICACION ===== */
+        .ubicacion-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .ubicacion-map {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 4 / 3;
+            position: relative;
+        }
+
+        .ubicacion-map-placeholder {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #1A1318 0%, #2A1F24 50%, #1A1318 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .ubicacion-map-placeholder .map-emoji {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+
+        .ubicacion-map-placeholder p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .ubicacion-map-placeholder p strong {
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 0.3rem;
+            font-size: 1rem;
+        }
+
+        .ubicacion-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .ubicacion-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .ubicacion-item-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(139, 26, 74, 0.1);
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .ubicacion-item h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .ubicacion-item p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .ubicacion-horarios {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .ubicacion-horarios h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .horario-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            font-size: 0.85rem;
+        }
+
+        .horario-row:last-child {
+            border-bottom: none;
+        }
+
+        .horario-day {
+            color: var(--text-secondary);
+        }
+
+        .horario-time {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .horario-closed {
+            color: var(--wine-light);
+        }
+
+        /* ===== CONTACTO FORM ===== */
+        .contacto-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .contacto-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .contacto-form label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.3rem;
+        }
+
+        .contacto-form input,
+        .contacto-form textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border: 1px solid var(--border-subtle);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .contacto-form input:focus,
+        .contacto-form textarea:focus {
+            outline: none;
+            border-color: var(--wine-light);
+        }
+
+        .contacto-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .contacto-form .btn-primary {
+            align-self: flex-start;
+        }
+
+        .contacto-info-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .contacto-info-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .contacto-info-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            margin-bottom: 1.2rem;
+        }
+
+        .contacto-info-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .contacto-info-icon {
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .contacto-info-item h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.15rem;
+        }
+
+        .contacto-info-item p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .contacto-info-item a {
+            color: var(--wine-light);
+            text-decoration: none;
+        }
+
+        .contacto-info-item a:hover {
+            color: var(--wine-glow);
+        }
+
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .form-success.visible {
+            display: block;
+        }
+
+        .form-success-emoji {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .form-success h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-success p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* ===== CTA BANNER ===== */
+        .cta-banner {
+            text-align: center;
+            padding: 5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, rgba(139, 26, 74, 0.12), transparent 70%);
+        }
+
+        .cta-banner-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-banner h2 {
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .cta-banner p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            border-top: 1px solid var(--border-subtle);
+            padding: 4rem 2rem 2rem;
+            margin-top: 2rem;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-brand h3 span {
+            color: var(--wine-light);
+        }
+
+        .footer-brand p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 300px;
+        }
+
+        .footer-col h4 {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            margin-bottom: 1.2rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 0.6rem;
+        }
+
+        .footer-col a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-col a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background: rgba(139, 26, 74, 0.2);
+            border-color: var(--wine-light);
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .footer-bottom a {
+            color: var(--wine-light);
+            text-decoration: none;
+        }
+
+        .footer-bottom a:hover {
+            color: var(--wine-glow);
+        }
+
+        .footer-legal {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        /* ===== FADE-IN ANIMATION ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-stagger > .fade-in:nth-child(2) { transition-delay: 0.1s; }
+        .fade-in-stagger > .fade-in:nth-child(3) { transition-delay: 0.2s; }
+        .fade-in-stagger > .fade-in:nth-child(4) { transition-delay: 0.3s; }
+        .fade-in-stagger > .fade-in:nth-child(5) { transition-delay: 0.4s; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 968px) {
+            .historia-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .historia-visual {
+                aspect-ratio: 16 / 9;
+            }
+
+            .ubicacion-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contacto-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+
+            .galeria-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .galeria-item:nth-child(1) {
+                grid-column: 1 / 3;
+                grid-row: auto;
+                aspect-ratio: 16 / 9;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(13, 10, 12, 0.98);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 1.5rem 2rem;
+                gap: 1rem;
+                border-bottom: 1px solid var(--border-subtle);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .section {
+                padding: 4rem 1.5rem;
+            }
+
+            .historia-stat-row {
+                gap: 1.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .historia-stat-number {
+                font-size: 1.8rem;
+            }
+
+            .visitas-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 0.8rem;
+                text-align: center;
+            }
+
+            .galeria-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .galeria-item:nth-child(1) {
+                grid-column: auto;
+                grid-row: auto;
+            }
+
+            .galeria-item {
+                aspect-ratio: 16 / 9;
+            }
+
+            .visita-footer {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .vinos-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+
+            .vino-card-img {
+                height: 140px;
+            }
+
+            .visitas-banner {
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- All HTML is rendered dynamically from CONFIG -->
+    <div id="app"></div>
+
+    <script>
+    // =====================================================================
+    // CONFIG — Edit&aacute; este objeto para personalizar TODA la p&aacute;gina.
+    // Todos los textos, im&aacute;genes, colores y datos se leen desde ac&aacute;.
+    // =====================================================================
+    const CONFIG = {
+        // --- Identidad ---
+        nombre: 'Tierra del Sol',
+        slogan: 'Donde la tradici\u00f3n se encuentra con la excelencia',
+
+        // --- Colores del tema ---
+        colores: {
+            wine: '#8B1A4A',
+            wineDark: '#5E0F32',
+            wineLight: '#A8325E',
+            wineGlow: '#C2476F',
+            gold: '#D4A853',
+            goldLight: '#E8C97A',
+            goldDark: '#B08A3A',
+            cream: '#FAF3E8',
+            bgDark: '#0D0A0C',
+            bgCard: '#1A1318',
+            bgCardHover: '#231C20',
+            textPrimary: '#F5EDE4',
+            textSecondary: '#B8A99A',
+            textMuted: '#7A6E66'
+        },
+
+        // --- Vinos ---
+        vinos: [
+            {
+                nombre: 'Gran Reserva',
+                tipo: 'Malbec \u00b7 2019',
+                descripcion: 'Intenso color violeta. Aromas a frutos negros maduros, violetas y un sutil toque de vainilla. Taninos firmes y un final largo y elegante. 18 meses en barrica de roble franc\u00e9s.',
+                precio: '$18.500 ARS',
+                imagen: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=400&q=80&fit=crop',
+                icono: '\uD83C\uDF77',
+                premios: '\uD83C\uDFC5 92 pts \u2014 Robert Parker'
+            },
+            {
+                nombre: 'Reserva',
+                tipo: 'Cabernet Sauvignon \u00b7 2020',
+                descripcion: 'Color rojo profundo con destellos rub\u00ed. Notas de cassis, pimiento rojo y especias. Estructura firme con taninos sedosos. 12 meses en roble. Ideal para carnes rojas.',
+                precio: '$14.200 ARS',
+                imagen: 'https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=400&q=80&fit=crop',
+                icono: '\uD83C\uDF77',
+                premios: '\uD83C\uDFC5 90 pts \u2014 Wine Spectator'
+            },
+            {
+                nombre: 'Corte del Sol',
+                tipo: 'Blend Premium \u00b7 2020',
+                descripcion: 'Malbec 60%, Cabernet 25%, Merlot 15%. Aromas de ciruela, chocolate amargo y tabaco. Redondo en boca, con gran volumen y un final persistente y mineral.',
+                precio: '$22.800 ARS',
+                imagen: 'https://images.unsplash.com/photo-1547595628-c61a29f496f0?w=400&q=80&fit=crop',
+                icono: '\uD83E\uDD42',
+                premios: '\uD83C\uDFC5 Doble Oro \u2014 Catena Wine Trophy'
+            },
+            {
+                nombre: 'Brisa Andina',
+                tipo: 'Torront\u00e9s \u00b7 2023',
+                descripcion: 'Amarillo p\u00e1lido brillante. Aromas florales intensos: rosas, jazm\u00edn y durazno blanco. Fresco en boca con acidez vibrante. Perfecto para tardes de verano.',
+                precio: '$8.900 ARS',
+                imagen: 'https://images.unsplash.com/photo-1566995541428-f4e046f85f18?w=400&q=80&fit=crop',
+                icono: '\uD83E\uDD42',
+                premios: '\uD83C\uDFC5 Mejor Torront\u00e9s \u2014 Vendimia 2024'
+            },
+            {
+                nombre: 'Atardecer Ros\u00e9',
+                tipo: 'Malbec Ros\u00e9 \u00b7 2023',
+                descripcion: 'Delicado color rosa salm\u00f3n. Frutillas frescas, frambuesas y p\u00e9talos de rosa. Ligero y refrescante, con acidez equilibrada. Ideal como aperitivo.',
+                precio: '$9.500 ARS',
+                imagen: 'https://images.unsplash.com/photo-1558001373-7b93ee48ffa0?w=400&q=80&fit=crop',
+                icono: '\uD83C\uDF38',
+                premios: '\uD83C\uDFC5 91 pts \u2014 Descorchados'
+            }
+        ],
+
+        // --- Experiencias (degustaciones, tours) ---
+        experiencias: [
+            {
+                nombre: 'Experiencia Cl\u00e1sica',
+                tipo: 'degustacion',
+                icono: '\uD83C\uDF47',
+                duracion: 'Duraci\u00f3n: 1 hora 30 minutos',
+                incluye: [
+                    'Recorrido guiado por los vi\u00f1edos',
+                    'Visita a la sala de barricas',
+                    'Degustaci\u00f3n de 3 vinos de l\u00ednea',
+                    'Copa de cortes\u00eda para llevar'
+                ],
+                precio: '$12.000',
+                precioPorPersona: true,
+                featured: false,
+                featuredLabel: ''
+            },
+            {
+                nombre: 'Experiencia Premium',
+                tipo: 'degustacion',
+                icono: '\uD83C\uDFC6',
+                duracion: 'Duraci\u00f3n: 2 horas 30 minutos',
+                incluye: [
+                    'Todo lo de la Experiencia Cl\u00e1sica',
+                    'Degustaci\u00f3n de 5 vinos incluido Gran Reserva',
+                    'Maridaje con tabla de quesos artesanales',
+                    'Acceso a la cava privada',
+                    'Botella de Reserva de regalo'
+                ],
+                precio: '$28.000',
+                precioPorPersona: true,
+                featured: true,
+                featuredLabel: 'M\u00c1S ELEGIDA'
+            },
+            {
+                nombre: 'Experiencia Atardecer',
+                tipo: 'tour',
+                icono: '\uD83C\uDF05',
+                duracion: 'Viernes y s\u00e1bados \u00b7 18:00 hs',
+                incluye: [
+                    'Recorrido al atardecer por los vi\u00f1edos',
+                    'Degustaci\u00f3n de 4 vinos premium',
+                    'Picada gourmet con productos regionales',
+                    'M\u00fasica en vivo (s\u00e1bados)',
+                    'Foto profesional de recuerdo'
+                ],
+                precio: '$35.000',
+                precioPorPersona: true,
+                featured: false,
+                featuredLabel: ''
+            }
+        ],
+
+        // --- Historia ---
+        historia: {
+            imagenCaption: 'Vi\u00f1edos al pie de la Cordillera de los Andes, Luj\u00e1n de Cuyo',
+            titulo: 'Tres generaciones,<br>un mismo sue\u00f1o',
+            parrafos: [
+                'En 1945, Don Antonio Herrera lleg\u00f3 a Luj\u00e1n de Cuyo con un sue\u00f1o: crear vinos que reflejaran el alma de la tierra mendocina. Con sus propias manos plant\u00f3 las primeras cepas de Malbec en un terroir privilegiado, a 980 metros sobre el nivel del mar, al pie de la imponente Cordillera de los Andes.',
+                'Hoy, su nieta Valentina lidera la tercera generaci\u00f3n de esta familia vitivin\u00edcola, combinando las t\u00e9cnicas artesanales heredadas con innovaci\u00f3n enol\u00f3gica de vanguardia. Cada botella que sale de nuestra bodega lleva consigo 80 a\u00f1os de historia, pasi\u00f3n y un compromiso inquebrantable con la calidad.'
+            ],
+            cita: {
+                texto: 'El vino no se hace en la bodega, se hace en el vi\u00f1edo. Nosotros solo lo acompa\u00f1amos.',
+                autor: 'Don Antonio Herrera, fundador (1945)'
+            },
+            stats: [
+                { numero: '80', etiqueta: 'A\u00f1os de historia' },
+                { numero: '45', etiqueta: 'Hect\u00e1reas' },
+                { numero: '980', etiqueta: 'Metros de altitud' },
+                { numero: '3.\u00aa', etiqueta: 'Generaci\u00f3n' }
+            ]
+        },
+
+        // --- Galer\u00eda ---
+        galeria: [
+            {
+                imagen: 'https://images.unsplash.com/photo-1560493676-04071c5f467b?w=600&q=80&fit=crop',
+                icono: '\uD83C\uDFD4\uFE0F',
+                titulo: 'Vi\u00f1edos de altura',
+                descripcion: 'Nuestras 45 hect\u00e1reas al pie de la Cordillera, a 980 m.s.n.m.'
+            },
+            {
+                imagen: 'https://images.unsplash.com/photo-1507434965515-61970f2bd7c6?w=600&q=80&fit=crop',
+                icono: '\uD83C\uDF47',
+                titulo: 'Cosecha manual',
+                descripcion: 'Selecci\u00f3n racimo por racimo en vendimia'
+            },
+            {
+                imagen: 'https://images.unsplash.com/photo-1516594915307-8f71a2f3aac6?w=600&q=80&fit=crop',
+                icono: '\uD83E\uDEB5',
+                titulo: 'Sala de barricas',
+                descripcion: 'Roble franc\u00e9s y americano de primera selecci\u00f3n'
+            },
+            {
+                imagen: 'https://images.unsplash.com/photo-1528823872057-9c018a7a7553?w=600&q=80&fit=crop',
+                icono: '\uD83C\uDF77',
+                titulo: 'Sala de degustaci\u00f3n',
+                descripcion: 'Espacios dise\u00f1ados para una experiencia \u00fanica'
+            },
+            {
+                imagen: 'https://images.unsplash.com/photo-1504279577054-acfeccf8fc52?w=600&q=80&fit=crop',
+                icono: '\uD83C\uDF05',
+                titulo: 'Atardeceres mendocinos',
+                descripcion: 'Vistas inigualables desde nuestra terraza'
+            }
+        ],
+
+        // --- Reviews ---
+        reviews: [
+            {
+                estrellas: 5,
+                texto: 'Una experiencia inolvidable. Los vinos son excepcionales y el paisaje de los vi\u00f1edos al atardecer es m\u00e1gico. La atenci\u00f3n fue impecable.',
+                autor: 'Mar\u00eda L.',
+                fuente: 'Google Reviews'
+            },
+            {
+                estrellas: 5,
+                texto: 'El mejor Malbec que prob\u00e9 en Mendoza. La visita guiada es muy completa y se nota la pasi\u00f3n de la familia por lo que hacen.',
+                autor: 'Carlos D.',
+                fuente: 'TripAdvisor'
+            },
+            {
+                estrellas: 5,
+                texto: 'Fuimos con amigos a la Experiencia Atardecer y quedamos fascinados. La picada, los vinos y la m\u00fasica en vivo... perfecto.',
+                autor: 'Luciana R.',
+                fuente: 'Google Reviews'
+            }
+        ],
+
+        // --- Im\u00e1genes ---
+        imagenes: {
+            hero: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=1400&q=80&fit=crop',
+            historia: 'https://images.unsplash.com/photo-1464638681273-0962e9b53566?w=800&q=80&fit=crop',
+            visitasBanner: 'https://images.unsplash.com/photo-1474722883778-792e7990302f?w=600&q=80&fit=crop'
+        },
+
+        // --- Contacto ---
+        telefono: '(261) 000-0000',
+        whatsapp: '5492616423730',
+        email: 'info@tierradelsol.com.ar',
+
+        // --- Direcci\u00f3n ---
+        direccion: {
+            calle: 'Ruta Provincial 15, Km 32',
+            localidad: 'Luj\u00e1n de Cuyo, Mendoza, Argentina',
+            codigoPostal: 'CP M5507',
+            comoLlegar: 'A 25 minutos del centro de Mendoza por Ruta 7. Estacionamiento gratuito. Tambi\u00e9n ofrecemos servicio de transfer desde la ciudad.',
+            googleMapsUrl: 'https://maps.google.com/?q=Mendoza+Argentina'
+        },
+
+        // --- Horarios ---
+        horarios: {
+            lunesViernes: '10:00 \u2014 18:00',
+            sabados: '09:00 \u2014 19:00',
+            domingos: '10:00 \u2014 15:00',
+            feriados: 'Consultar disponibilidad'
+        },
+
+        // --- Formspree ---
+        formspreeId: 'xpznqwka',
+
+        // --- Redes sociales ---
+        redes: {
+            instagram: { url: '#', icono: '\uD83D\uDCF8', label: 'Instagram' },
+            facebook: { url: '#', icono: '\uD83D\uDC65', label: 'Facebook' },
+            youtube: { url: '#', icono: '\uD83C\uDFAC', label: 'YouTube' },
+            whatsapp: { url: '#', icono: '\uD83D\uDCAC', label: 'WhatsApp' }
+        }
+    };
+
+
+    // =====================================================================
+    // RENDER ENGINE — Lee CONFIG y genera din\u00e1micamente todo el HTML
+    // =====================================================================
+    (function() {
+        'use strict';
+
+        // --- Utilidades ---
+        function esc(str) {
+            if (str == null) return '';
+            var div = document.createElement('div');
+            div.textContent = String(str);
+            return div.innerHTML;
+        }
+
+        function waLink(numero, texto) {
+            return 'https://wa.me/' + numero + '?text=' + encodeURIComponent(texto);
+        }
+
+        function hexToRgba(hex, alpha) {
+            var r = parseInt(hex.slice(1, 3), 16);
+            var g = parseInt(hex.slice(3, 5), 16);
+            var b = parseInt(hex.slice(5, 7), 16);
+            return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + alpha + ')';
+        }
+
+        // Split nombre into logo parts: first word = principal, rest = acento
+        function logoPartes() {
+            var words = CONFIG.nombre.split(' ');
+            return {
+                principal: words[0],
+                acento: words.slice(1).join(' ')
+            };
+        }
+
+        // --- Aplicar colores CSS desde CONFIG.colores ---
+        function applyColors() {
+            var c = CONFIG.colores;
+            var s = document.documentElement.style;
+            s.setProperty('--wine', c.wine);
+            s.setProperty('--wine-dark', c.wineDark);
+            s.setProperty('--wine-light', c.wineLight);
+            s.setProperty('--wine-glow', c.wineGlow);
+            s.setProperty('--gold', c.gold);
+            s.setProperty('--gold-light', c.goldLight);
+            s.setProperty('--gold-dark', c.goldDark);
+            s.setProperty('--cream', c.cream);
+            s.setProperty('--bg-dark', c.bgDark);
+            s.setProperty('--bg-card', c.bgCard);
+            s.setProperty('--bg-card-hover', c.bgCardHover);
+            s.setProperty('--text-primary', c.textPrimary);
+            s.setProperty('--text-secondary', c.textSecondary);
+            s.setProperty('--text-muted', c.textMuted);
+            s.setProperty('--border-subtle', hexToRgba(c.wine, 0.2));
+            s.setProperty('--border-wine', hexToRgba(c.wine, 0.4));
+        }
+
+        // --- Aplicar meta tags ---
+        function applyMeta() {
+            var badge = CONFIG.direccion.localidad.split(',').map(function(s){ return s.trim(); }).join(' \u00b7 ');
+            document.getElementById('page-title').textContent = 'Bodega ' + CONFIG.nombre + ' \u2014 ' + badge;
+            document.getElementById('page-description').setAttribute('content',
+                'Bodega ' + CONFIG.nombre + ': ' + CONFIG.slogan + '. ' + badge + '.'
+            );
+        }
+
+        // --- Render: Navegaci\u00f3n ---
+        function renderNav() {
+            var logo = logoPartes();
+            return '<nav class="nav">' +
+                '<div class="nav-inner">' +
+                    '<a href="#" class="nav-logo">' + esc(logo.principal) + ' <span>' + esc(logo.acento) + '</span></a>' +
+                    '<ul class="nav-links" id="navLinks">' +
+                        '<li><a href="#historia">Historia</a></li>' +
+                        '<li><a href="#vinos">Vinos</a></li>' +
+                        '<li><a href="#visitas">Visitas</a></li>' +
+                        '<li><a href="#galeria">Galer\u00eda</a></li>' +
+                        '<li><a href="#reviews">Opiniones</a></li>' +
+                        '<li><a href="#ubicacion">Ubicaci\u00f3n</a></li>' +
+                        '<li><a href="#contacto">Contacto</a></li>' +
+                    '</ul>' +
+                    '<button class="nav-toggle" id="navToggle" aria-label="Abrir men\u00fa de navegaci\u00f3n">\u2630</button>' +
+                '</div>' +
+            '</nav>';
+        }
+
+        // --- Render: Hero ---
+        function renderHero() {
+            var badge = CONFIG.direccion.localidad.split(',').map(function(s){ return s.trim(); }).join(' \u00b7 ');
+            return '<section class="hero" style="background-image: url(\'' + CONFIG.imagenes.hero + '\');">' +
+                '<div class="hero-particles">' +
+                    '<span></span><span></span><span></span><span></span>' +
+                    '<span></span><span></span><span></span><span></span>' +
+                '</div>' +
+                '<div class="hero-content">' +
+                    '<span class="hero-emoji">\uD83C\uDF77</span>' +
+                    '<div class="hero-badge">' + esc(badge) + '</div>' +
+                    '<h1>' +
+                        'Bodega<br>' + esc(CONFIG.nombre) +
+                        '<span class="line-accent">' + esc(CONFIG.slogan) + '</span>' +
+                    '</h1>' +
+                    '<p class="hero-tagline">' + esc(CONFIG.historia.parrafos[0].substring(0, 120) + '...') + '</p>' +
+                    '<div class="hero-buttons">' +
+                        '<a href="#visitas" class="btn btn-primary">\uD83C\uDF47 Reserv\u00e1 tu visita</a>' +
+                        '<a href="#vinos" class="btn btn-secondary">Conoc\u00e9 nuestros vinos</a>' +
+                    '</div>' +
+                '</div>' +
+                '<a href="#historia" class="hero-scroll">\u2193 Descubr\u00ed nuestra historia</a>' +
+            '</section>';
+        }
+
+        // --- Render: Historia ---
+        function renderHistoria() {
+            var h = CONFIG.historia;
+            var statsHtml = '';
+            h.stats.forEach(function(s) {
+                statsHtml += '<div class="historia-stat">' +
+                    '<div class="historia-stat-number">' + esc(s.numero) + '</div>' +
+                    '<div class="historia-stat-label">' + esc(s.etiqueta) + '</div>' +
+                '</div>';
+            });
+
+            var parrafosHtml = '';
+            h.parrafos.forEach(function(p) {
+                parrafosHtml += '<p>' + esc(p) + '</p>';
+            });
+
+            return '<section class="section" id="historia">' +
+                '<div class="historia-grid">' +
+                    '<div class="historia-visual fade-in" style="background-image: url(\'' + CONFIG.imagenes.historia + '\');">' +
+                        '<div class="historia-visual-inner"></div>' +
+                        '<div class="historia-visual-overlay">' +
+                            '<p>' + esc(h.imagenCaption) + '</p>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="fade-in">' +
+                        '<div class="section-header">' +
+                            '<span class="section-label">Nuestra historia</span>' +
+                            '<h2 class="section-title">' + h.titulo + '</h2>' +
+                            '<div class="section-divider"></div>' +
+                        '</div>' +
+                        '<div class="historia-text">' +
+                            parrafosHtml +
+                            '<div class="historia-quote">' +
+                                '<p>\u00AB' + esc(h.cita.texto) + '\u00BB</p>' +
+                                '<cite>\u2014 ' + esc(h.cita.autor) + '</cite>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="historia-stat-row">' + statsHtml + '</div>' +
+                    '</div>' +
+                '</div>' +
+            '</section>';
+        }
+
+        // --- Render: Vinos ---
+        function renderVinos() {
+            var cardsHtml = '';
+            CONFIG.vinos.forEach(function(v) {
+                cardsHtml += '<div class="vino-card fade-in">' +
+                    '<div class="vino-card-img" style="background-image: url(\'' + v.imagen + '\');"></div>' +
+                    '<div class="vino-card-body">' +
+                        '<span class="vino-icon">' + v.icono + '</span>' +
+                        '<h3 class="vino-name">' + esc(v.nombre) + '</h3>' +
+                        '<div class="vino-varietal">' + esc(v.tipo) + '</div>' +
+                        '<p class="vino-notes">' + esc(v.descripcion) + '</p>' +
+                        '<div class="vino-awards">' + v.premios + '</div>' +
+                        '<div class="vino-price">' + esc(v.precio) + '</div>' +
+                    '</div>' +
+                '</div>';
+            });
+
+            return '<section class="section section-center" id="vinos">' +
+                '<div class="section-header fade-in">' +
+                    '<span class="section-label">Nuestros vinos</span>' +
+                    '<h2 class="section-title">Expresiones de nuestra tierra</h2>' +
+                    '<div class="section-divider"></div>' +
+                    '<p class="section-subtitle">Cada vino cuenta una historia \u00fanica, nacida de uvas cultivadas con dedicaci\u00f3n en nuestros vi\u00f1edos de altura.</p>' +
+                '</div>' +
+                '<div class="vinos-grid fade-in-stagger">' + cardsHtml + '</div>' +
+            '</section>';
+        }
+
+        // --- Render: Experiencias ---
+        function renderExperiencias() {
+            var cardsHtml = '';
+            CONFIG.experiencias.forEach(function(exp) {
+                var featuredClass = exp.featured ? ' featured' : '';
+                var featuredAttr = exp.featured ? ' data-featured-label="' + esc(exp.featuredLabel) + '"' : '';
+                var itemsHtml = '';
+                exp.incluye.forEach(function(item) {
+                    itemsHtml += '<li>' + esc(item) + '</li>';
+                });
+
+                var waText = 'Hola! Quiero reservar la ' + exp.nombre + ' en Bodega ' + CONFIG.nombre;
+
+                cardsHtml += '<div class="visita-card' + featuredClass + ' fade-in"' + featuredAttr + '>' +
+                    '<div class="visita-header">' +
+                        '<span class="visita-emoji">' + exp.icono + '</span>' +
+                        '<h3 class="visita-name">' + esc(exp.nombre) + '</h3>' +
+                        '<span class="visita-duration">' + esc(exp.duracion) + '</span>' +
+                    '</div>' +
+                    '<div class="visita-body">' +
+                        '<ul>' + itemsHtml + '</ul>' +
+                    '</div>' +
+                    '<div class="visita-footer">' +
+                        '<div class="visita-price">' + esc(exp.precio) + (exp.precioPorPersona ? ' <span>por persona</span>' : '') + '</div>' +
+                        '<a href="' + waLink(CONFIG.whatsapp, waText) + '" class="btn-whatsapp" target="_blank" rel="noopener">\uD83D\uDCF1 Reservar</a>' +
+                    '</div>' +
+                '</div>';
+            });
+
+            return '<section class="section" id="visitas">' +
+                '<div class="section-header section-center fade-in">' +
+                    '<span class="section-label">Visitas y degustaciones</span>' +
+                    '<h2 class="section-title">Viv\u00ed la experiencia<br>' + esc(CONFIG.nombre) + '</h2>' +
+                    '<div class="section-divider"></div>' +
+                    '<p class="section-subtitle">Recorr\u00e9 nuestros vi\u00f1edos, conoc\u00e9 nuestra bodega y degust\u00e1 nuestros vinos en un entorno \u00fanico al pie de los Andes.</p>' +
+                '</div>' +
+                '<div class="visitas-banner fade-in" style="background-image: url(\'' + CONFIG.imagenes.visitasBanner + '\');"></div>' +
+                '<div class="visitas-grid">' + cardsHtml + '</div>' +
+            '</section>';
+        }
+
+        // --- Render: Galer\u00eda ---
+        function renderGaleria() {
+            var itemsHtml = '';
+            CONFIG.galeria.forEach(function(g) {
+                itemsHtml += '<div class="galeria-item">' +
+                    '<div class="galeria-bg" style="background-image: url(\'' + g.imagen + '\');"></div>' +
+                    '<div class="galeria-overlay">' +
+                        '<span class="galeria-overlay-emoji">' + g.icono + '</span>' +
+                        '<h3>' + esc(g.titulo) + '</h3>' +
+                        '<p>' + esc(g.descripcion) + '</p>' +
+                    '</div>' +
+                '</div>';
+            });
+
+            return '<section class="section" id="galeria">' +
+                '<div class="section-header section-center fade-in">' +
+                    '<span class="section-label">Galer\u00eda</span>' +
+                    '<h2 class="section-title">Nuestro mundo en im\u00e1genes</h2>' +
+                    '<div class="section-divider"></div>' +
+                '</div>' +
+                '<div class="galeria-grid fade-in">' + itemsHtml + '</div>' +
+            '</section>';
+        }
+
+        // --- Render: Reviews ---
+        function renderReviews() {
+            if (!CONFIG.reviews || CONFIG.reviews.length === 0) return '';
+
+            var cardsHtml = '';
+            CONFIG.reviews.forEach(function(r) {
+                var stars = '';
+                for (var i = 0; i < r.estrellas; i++) stars += '\u2605';
+                cardsHtml += '<div class="review-card fade-in">' +
+                    '<div class="review-stars">' + stars + '</div>' +
+                    '<p class="review-text">\u00AB' + esc(r.texto) + '\u00BB</p>' +
+                    '<div class="review-author">' + esc(r.autor) + '</div>' +
+                    '<div class="review-source">' + esc(r.fuente) + '</div>' +
+                '</div>';
+            });
+
+            return '<section class="section" id="reviews">' +
+                '<div class="section-header section-center fade-in">' +
+                    '<span class="section-label">Opiniones</span>' +
+                    '<h2 class="section-title">Lo que dicen nuestros visitantes</h2>' +
+                    '<div class="section-divider"></div>' +
+                '</div>' +
+                '<div class="reviews-grid fade-in-stagger">' + cardsHtml + '</div>' +
+            '</section>';
+        }
+
+        // --- Render: Ubicaci\u00f3n ---
+        function renderUbicacion() {
+            var dir = CONFIG.direccion;
+            var hor = CONFIG.horarios;
+
+            var horariosData = [
+                { dia: 'Lunes a viernes', hora: hor.lunesViernes, cerrado: false },
+                { dia: 'S\u00e1bados', hora: hor.sabados, cerrado: false },
+                { dia: 'Domingos', hora: hor.domingos, cerrado: false },
+                { dia: 'Feriados', hora: hor.feriados, cerrado: true }
+            ];
+            var horariosHtml = '';
+            horariosData.forEach(function(h) {
+                var cls = h.cerrado ? 'horario-time horario-closed' : 'horario-time';
+                horariosHtml += '<div class="horario-row">' +
+                    '<span class="horario-day">' + esc(h.dia) + '</span>' +
+                    '<span class="' + cls + '">' + esc(h.hora) + '</span>' +
+                '</div>';
+            });
+
+            var localidadCorta = dir.localidad.split(',')[0].trim();
+
+            return '<section class="section" id="ubicacion">' +
+                '<div class="section-header section-center fade-in">' +
+                    '<span class="section-label">Ubicaci\u00f3n</span>' +
+                    '<h2 class="section-title">Visitanos en ' + esc(localidadCorta) + '</h2>' +
+                    '<div class="section-divider"></div>' +
+                '</div>' +
+                '<div class="ubicacion-grid fade-in">' +
+                    '<div class="ubicacion-map">' +
+                        '<div class="ubicacion-map-placeholder">' +
+                            '<span class="map-emoji">\uD83D\uDCCD</span>' +
+                            '<p><strong>Bodega ' + esc(CONFIG.nombre) + '</strong>' + esc(dir.calle) + '<br>' + esc(dir.localidad) + '</p>' +
+                            '<a href="' + dir.googleMapsUrl + '" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top: 1.2rem; font-size: 0.85rem; padding: 10px 24px;">' +
+                                '\uD83D\uDDFA\uFE0F Abrir en Google Maps' +
+                            '</a>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="ubicacion-info">' +
+                        '<div class="ubicacion-item">' +
+                            '<div class="ubicacion-item-icon">\uD83D\uDCCD</div>' +
+                            '<div>' +
+                                '<h4>Direcci\u00f3n</h4>' +
+                                '<p>' + esc(dir.calle) + '<br>' + esc(dir.localidad) + '<br>' + esc(dir.codigoPostal) + '</p>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="ubicacion-item">' +
+                            '<div class="ubicacion-item-icon">\uD83D\uDE97</div>' +
+                            '<div>' +
+                                '<h4>C\u00f3mo llegar</h4>' +
+                                '<p>' + esc(dir.comoLlegar) + '</p>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="ubicacion-item">' +
+                            '<div class="ubicacion-item-icon">\uD83D\uDCDE</div>' +
+                            '<div>' +
+                                '<h4>Reservas</h4>' +
+                                '<p>' + esc(CONFIG.telefono) + '<br>' + esc(CONFIG.email) + '</p>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="ubicacion-horarios">' +
+                            '<h4>\uD83D\uDD50 Horarios de visita</h4>' +
+                            horariosHtml +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+            '</section>';
+        }
+
+        // --- Render: Contacto (Formspree) ---
+        function renderContacto() {
+            var formAction = 'https://formspree.io/f/' + CONFIG.formspreeId;
+
+            return '<section class="section" id="contacto">' +
+                '<div class="section-header section-center fade-in">' +
+                    '<span class="section-label">Contacto</span>' +
+                    '<h2 class="section-title">Escribinos</h2>' +
+                    '<div class="section-divider"></div>' +
+                    '<p class="section-subtitle">\u00bfTen\u00e9s consultas, quer\u00e9s reservar una visita o hacer un pedido especial? Complet\u00e1 el formulario y te respondemos a la brevedad.</p>' +
+                '</div>' +
+                '<div class="contacto-grid fade-in">' +
+                    '<div>' +
+                        '<form class="contacto-form" id="contactForm" action="' + formAction + '" method="POST">' +
+                            '<div>' +
+                                '<label for="contact-name">Nombre</label>' +
+                                '<input type="text" id="contact-name" name="nombre" placeholder="Tu nombre completo" required>' +
+                            '</div>' +
+                            '<div>' +
+                                '<label for="contact-email">Email</label>' +
+                                '<input type="email" id="contact-email" name="email" placeholder="tu@email.com" required>' +
+                            '</div>' +
+                            '<div>' +
+                                '<label for="contact-phone">Tel\u00e9fono</label>' +
+                                '<input type="tel" id="contact-phone" name="telefono" placeholder="(261) 000-0000">' +
+                            '</div>' +
+                            '<div>' +
+                                '<label for="contact-message">Mensaje</label>' +
+                                '<textarea id="contact-message" name="mensaje" placeholder="Contanos en qu\u00e9 podemos ayudarte..." required></textarea>' +
+                            '</div>' +
+                            '<button type="submit" class="btn btn-primary">\u2709\uFE0F Enviar mensaje</button>' +
+                        '</form>' +
+                        '<div class="form-success" id="formSuccess">' +
+                            '<span class="form-success-emoji">\u2705</span>' +
+                            '<h3>\u00a1Mensaje enviado!</h3>' +
+                            '<p>Te responderemos a la brevedad. Muchas gracias por contactarnos.</p>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="contacto-info-card">' +
+                        '<h3>Informaci\u00f3n de contacto</h3>' +
+                        '<div class="contacto-info-item">' +
+                            '<span class="contacto-info-icon">\uD83D\uDCDE</span>' +
+                            '<div>' +
+                                '<h4>Tel\u00e9fono</h4>' +
+                                '<p>' + esc(CONFIG.telefono) + '</p>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="contacto-info-item">' +
+                            '<span class="contacto-info-icon">\uD83D\uDCF1</span>' +
+                            '<div>' +
+                                '<h4>WhatsApp</h4>' +
+                                '<p><a href="' + waLink(CONFIG.whatsapp, 'Hola! Quiero informaci\u00f3n sobre Bodega ' + CONFIG.nombre) + '" target="_blank" rel="noopener">Envianos un mensaje</a></p>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="contacto-info-item">' +
+                            '<span class="contacto-info-icon">\u2709\uFE0F</span>' +
+                            '<div>' +
+                                '<h4>Email</h4>' +
+                                '<p><a href="mailto:' + CONFIG.email + '">' + esc(CONFIG.email) + '</a></p>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="contacto-info-item">' +
+                            '<span class="contacto-info-icon">\uD83D\uDCCD</span>' +
+                            '<div>' +
+                                '<h4>Direcci\u00f3n</h4>' +
+                                '<p>' + esc(CONFIG.direccion.calle) + '<br>' + esc(CONFIG.direccion.localidad) + '</p>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+            '</section>';
+        }
+
+        // --- Render: CTA Banner ---
+        function renderCTA() {
+            var waText = 'Hola! Quiero reservar una visita en Bodega ' + CONFIG.nombre;
+            return '<section class="cta-banner fade-in">' +
+                '<div class="cta-banner-content">' +
+                    '<span style="font-size: 3rem; display: block; margin-bottom: 1rem;">\uD83C\uDF77\uD83C\uDF47\u2728</span>' +
+                    '<h2>\u00bfListo para vivir la experiencia?</h2>' +
+                    '<p>Reserv\u00e1 tu visita y descubr\u00ed por qu\u00e9 nuestros vinos enamoran desde la primera copa.</p>' +
+                    '<a href="' + waLink(CONFIG.whatsapp, waText) + '" class="btn btn-primary" target="_blank" rel="noopener">\uD83D\uDCF1 Reservar por WhatsApp</a>' +
+                '</div>' +
+            '</section>';
+        }
+
+        // --- Render: Footer ---
+        function renderFooter() {
+            var logo = logoPartes();
+            var redesHtml = '';
+            var redesKeys = Object.keys(CONFIG.redes);
+            redesKeys.forEach(function(key) {
+                var red = CONFIG.redes[key];
+                redesHtml += '<a href="' + red.url + '" aria-label="' + esc(red.label) + '" title="' + esc(red.label) + '">' + red.icono + '</a>';
+            });
+
+            var year = new Date().getFullYear();
+            var footerDesc = CONFIG.historia.parrafos.length > 1
+                ? CONFIG.historia.parrafos[1].substring(0, 140) + '...'
+                : CONFIG.slogan;
+
+            return '<footer class="footer">' +
+                '<div class="footer-inner">' +
+                    '<div class="footer-grid">' +
+                        '<div class="footer-brand">' +
+                            '<h3>' + esc(logo.principal) + ' <span>' + esc(logo.acento) + '</span></h3>' +
+                            '<p>' + esc(footerDesc) + '</p>' +
+                            '<div class="footer-social">' + redesHtml + '</div>' +
+                        '</div>' +
+                        '<div class="footer-col">' +
+                            '<h4>Navegaci\u00f3n</h4>' +
+                            '<ul>' +
+                                '<li><a href="#historia">Nuestra historia</a></li>' +
+                                '<li><a href="#vinos">Nuestros vinos</a></li>' +
+                                '<li><a href="#visitas">Visitas</a></li>' +
+                                '<li><a href="#galeria">Galer\u00eda</a></li>' +
+                            '</ul>' +
+                        '</div>' +
+                        '<div class="footer-col">' +
+                            '<h4>Contacto</h4>' +
+                            '<ul>' +
+                                '<li>' + esc(CONFIG.telefono) + '</li>' +
+                                '<li><a href="mailto:' + CONFIG.email + '">' + esc(CONFIG.email) + '</a></li>' +
+                            '</ul>' +
+                        '</div>' +
+                        '<div class="footer-col">' +
+                            '<h4>Legal</h4>' +
+                            '<ul>' +
+                                '<li><a href="#">Pol\u00edtica de privacidad</a></li>' +
+                                '<li><a href="#">T\u00e9rminos y condiciones</a></li>' +
+                                '<li><a href="#">Beber con moderaci\u00f3n</a></li>' +
+                            '</ul>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="footer-bottom">' +
+                        '<p>&copy; ' + year + ' Bodega ' + esc(CONFIG.nombre) + '. Todos los derechos reservados.</p>' +
+                    '</div>' +
+                    '<p class="footer-legal">Beber con moderaci\u00f3n. Prohibida su venta a menores de 18 a\u00f1os.</p>' +
+                '</div>' +
+            '</footer>';
+        }
+
+        // --- Render completo ---
+        function renderAll() {
+            applyColors();
+            applyMeta();
+
+            var html = renderNav() +
+                       renderHero() +
+                       renderHistoria() +
+                       renderVinos() +
+                       renderExperiencias() +
+                       renderGaleria() +
+                       renderReviews() +
+                       renderUbicacion() +
+                       renderContacto() +
+                       renderCTA() +
+                       renderFooter();
+
+            document.getElementById('app').innerHTML = html;
+
+            // Post-render: attach event listeners
+            initNavToggle();
+            initFadeIn();
+            initSmoothScroll();
+            initFormspree();
+        }
+
+        // --- Interactividad ---
+        function initNavToggle() {
+            var toggle = document.getElementById('navToggle');
+            var links = document.getElementById('navLinks');
+            if (toggle && links) {
+                toggle.addEventListener('click', function() {
+                    links.classList.toggle('active');
+                });
+                links.querySelectorAll('a').forEach(function(link) {
+                    link.addEventListener('click', function() {
+                        links.classList.remove('active');
+                    });
+                });
+            }
+        }
+
+        function initFadeIn() {
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            document.querySelectorAll('.fade-in').forEach(function(el) {
+                observer.observe(el);
+            });
+        }
+
+        function initSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+                anchor.addEventListener('click', function(e) {
+                    var href = this.getAttribute('href');
+                    if (href === '#') return;
+                    var target = document.querySelector(href);
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        }
+
+        function initFormspree() {
+            var form = document.getElementById('contactForm');
+            if (!form) return;
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                var data = new FormData(form);
+                fetch(form.action, {
+                    method: 'POST',
+                    body: data,
+                    headers: { 'Accept': 'application/json' }
+                }).then(function(response) {
+                    if (response.ok) {
+                        form.reset();
+                        form.style.display = 'none';
+                        document.getElementById('formSuccess').classList.add('visible');
+                    } else {
+                        alert('Hubo un error al enviar el formulario. Por favor, intent\u00e1 de nuevo.');
+                    }
+                }).catch(function() {
+                    alert('Error de conexi\u00f3n. Verific\u00e1 tu internet e intent\u00e1 de nuevo.');
+                });
+            });
+        }
+
+        // --- Iniciar ---
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderAll);
+        } else {
+            renderAll();
+        }
+    })();
+    </script>
+</body>
+</html>
