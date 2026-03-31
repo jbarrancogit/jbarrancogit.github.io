@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 48" fill="none">
+  <!-- JB Monogram Circle -->
+  <circle cx="24" cy="24" r="22" fill="#3b82f6" opacity="0.12" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="24" y="30" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-weight="800" font-size="22" fill="#3b82f6">JB</text>
+  <!-- Text -->
+  <text x="56" y="21" font-family="Inter, system-ui, sans-serif" font-weight="800" font-size="17" fill="#f4f4f5">Juan<tspan fill="#3b82f6">.</tspan>Barranco</text>
+  <text x="56" y="37" font-family="Inter, system-ui, sans-serif" font-weight="500" font-size="9.5" fill="#a1a1aa" letter-spacing="0.5">SOLUCIONES DIGITALES</text>
+</svg>
