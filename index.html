@@ -1610,7 +1610,8 @@
           <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); font-weight: 600; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border);">3. ¿Qué necesitás?</p>
           <div style="margin-bottom: 20px;">
             <label style="display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 10px;">Plan de interés <span style="color: var(--red);">*</span></label>
-            <div style="display: flex; flex-direction: column; gap: 8px;">
+            <p style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Páginas web</p>
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
               <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
                 <input type="radio" name="plan" value="starter" required style="width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer;">
                 <span style="font-size: 0.88rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">Starter ($79.200 · ~USD 65)</strong> — Página web profesional</span>
@@ -1623,6 +1624,23 @@
                 <input type="radio" name="plan" value="premium" style="width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer;">
                 <span style="font-size: 0.88rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">Premium ($384.000 · ~USD 320)</strong> — Todo + catálogo + bilingüe</span>
               </label>
+            </div>
+            <p style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Servicios de datos</p>
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
+              <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                <input type="radio" name="plan" value="analytics_setup" style="width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer;">
+                <span style="font-size: 0.88rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">Analytics Setup ($44.000 · ~USD 35)</strong> — GA4 + dashboard de métricas</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                <input type="radio" name="plan" value="data_pro" style="width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer;">
+                <span style="font-size: 0.88rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">Data Pro ($152.000 · ~USD 125)</strong> — Pipeline ETL + dashboard ejecutivo</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                <input type="radio" name="plan" value="data_enterprise" style="width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer;">
+                <span style="font-size: 0.88rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">Data Enterprise (desde $304.000 · ~USD 250+)</strong> — DW + pipelines + automatizaciones</span>
+              </label>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
               <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
                 <input type="radio" name="plan" value="no_se" style="width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer;">
                 <span style="font-size: 0.88rem; color: var(--text-secondary);">No sé todavía, quiero que me asesores</span>
