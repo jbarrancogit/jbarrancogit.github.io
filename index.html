@@ -1241,6 +1241,19 @@
           <a href="mailto:jbarranco.sistemas@gmail.com" class="btn btn-secondary">Enviar email</a>
         </div>
         <p class="cta-guarantee">&#128274; Sin compromiso. Si el prototipo no te convence, no pagas nada.</p>
+
+        <!-- Formulario de contacto -->
+        <form action="https://formspree.io/f/TU_FORM_ID" method="POST" style="margin-top: 28px; text-align: left; max-width: 440px; margin-left: auto; margin-right: auto;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+            <input type="text" name="nombre" placeholder="Tu nombre" required style="padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-primary); color: var(--text-primary); font-family: inherit; font-size: 0.88rem;">
+            <input type="tel" name="telefono" placeholder="Tu WhatsApp" style="padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-primary); color: var(--text-primary); font-family: inherit; font-size: 0.88rem;">
+          </div>
+          <input type="email" name="email" placeholder="Tu email" required style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-primary); color: var(--text-primary); font-family: inherit; font-size: 0.88rem; margin-bottom: 10px;">
+          <textarea name="mensaje" placeholder="Contame sobre tu negocio y qué necesitás..." rows="3" required style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-primary); color: var(--text-primary); font-family: inherit; font-size: 0.88rem; resize: vertical; margin-bottom: 10px;"></textarea>
+          <input type="hidden" name="_subject" value="Nueva consulta desde landing — Juan Barranco">
+          <button type="submit" style="width: 100%; padding: 12px; border-radius: 8px; background: var(--accent); color: #fff; font-weight: 700; font-size: 0.92rem; border: none; cursor: pointer; font-family: inherit; transition: all 0.2s;">Enviar consulta</button>
+          <p style="text-align: center; font-size: 0.72rem; color: var(--text-muted); margin-top: 8px;">O escribime directo por WhatsApp o email.</p>
+        </form>
       </div>
     </div>
   </section>

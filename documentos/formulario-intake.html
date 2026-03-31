@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de Inicio — Juan Barranco | Desarrollo Web</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #09090b; --bg2: #0f0f12; --card: #16161a;
+      --accent: #3b82f6; --accent-light: #60a5fa;
+      --text: #f4f4f5; --text2: #a1a1aa; --muted: #71717a;
+      --border: #27272a; --green: #22c55e; --red: #ef4444;
+      --radius: 12px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif; background: var(--bg);
+      color: var(--text); line-height: 1.6; min-height: 100vh;
+    }
+    .container { max-width: 720px; margin: 0 auto; padding: 40px 24px 80px; }
+
+    /* Header */
+    .header { text-align: center; margin-bottom: 48px; }
+    .header-icon {
+      width: 56px; height: 56px; border-radius: 14px; margin: 0 auto 16px;
+      background: #111827; border: 1px solid #1e293b;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 1.1rem; color: var(--accent);
+      box-shadow: 0 2px 12px rgba(59,130,246,0.2);
+    }
+    .header h1 { font-size: 1.6rem; font-weight: 800; margin-bottom: 8px; }
+    .header p { color: var(--text2); font-size: 0.92rem; max-width: 500px; margin: 0 auto; }
+
+    /* Form */
+    .form-section {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 32px; margin-bottom: 24px;
+    }
+    .form-section-title {
+      font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--accent); font-weight: 600; margin-bottom: 20px;
+      padding-bottom: 10px; border-bottom: 1px solid var(--border);
+    }
+    .field { margin-bottom: 20px; }
+    .field:last-child { margin-bottom: 0; }
+    label {
+      display: block; font-size: 0.88rem; font-weight: 600;
+      margin-bottom: 6px; color: var(--text);
+    }
+    label .required { color: var(--red); margin-left: 2px; }
+    label .hint {
+      font-weight: 400; font-size: 0.78rem; color: var(--muted);
+      display: block; margin-top: 2px;
+    }
+    input[type="text"], input[type="email"], input[type="tel"], input[type="url"],
+    textarea, select {
+      width: 100%; padding: 10px 14px; border-radius: 8px;
+      border: 1px solid var(--border); background: var(--bg);
+      color: var(--text); font-family: 'Inter', sans-serif; font-size: 0.9rem;
+      transition: border-color 0.2s;
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: none; border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+    }
+    textarea { resize: vertical; min-height: 80px; }
+    select { cursor: pointer; }
+    select option { background: var(--bg); color: var(--text); }
+
+    .checkbox-group { display: flex; flex-direction: column; gap: 8px; }
+    .checkbox-item {
+      display: flex; align-items: flex-start; gap: 10px; cursor: pointer;
+    }
+    .checkbox-item input[type="checkbox"] {
+      width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent);
+      cursor: pointer; flex-shrink: 0;
+    }
+    .checkbox-item span { font-size: 0.88rem; color: var(--text2); }
+
+    .radio-group { display: flex; flex-direction: column; gap: 8px; }
+    .radio-item {
+      display: flex; align-items: center; gap: 10px; cursor: pointer;
+    }
+    .radio-item input[type="radio"] {
+      width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer;
+    }
+    .radio-item span { font-size: 0.88rem; color: var(--text2); }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 500px) { .two-col { grid-template-columns: 1fr; } }
+
+    /* Upload hint */
+    .upload-area {
+      border: 2px dashed var(--border); border-radius: 8px; padding: 20px;
+      text-align: center; color: var(--muted); font-size: 0.85rem;
+      transition: border-color 0.2s; cursor: pointer;
+    }
+    .upload-area:hover { border-color: var(--accent); }
+    .upload-area input { display: none; }
+    .upload-icon { font-size: 1.5rem; margin-bottom: 6px; }
+
+    /* Submit */
+    .submit-section { text-align: center; margin-top: 32px; }
+    .btn-submit {
+      background: var(--accent); color: #fff; border: none;
+      padding: 14px 40px; border-radius: 8px; font-weight: 700;
+      font-size: 1rem; cursor: pointer; font-family: 'Inter', sans-serif;
+      transition: all 0.2s;
+    }
+    .btn-submit:hover { background: var(--accent-light); transform: translateY(-1px); }
+    .submit-note { color: var(--muted); font-size: 0.78rem; margin-top: 12px; }
+
+    /* Print styles */
+    @media print {
+      body { background: #fff; color: #000; }
+      .container { max-width: 100%; padding: 20px; }
+      .form-section { border: 1px solid #ddd; break-inside: avoid; }
+      input, textarea, select { border: 1px solid #ccc; background: #fff; color: #000; }
+      .btn-submit { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-icon">JB</div>
+    <h1>Formulario de inicio de proyecto</h1>
+    <p>Completá este formulario para que pueda preparar tu prototipo. Cuanta más información me des, más rápido y preciso va a ser el resultado.</p>
+  </div>
+
+  <form id="intakeForm" action="https://formspree.io/f/TU_FORM_ID" method="POST">
+
+    <!-- 1. Datos del cliente -->
+    <div class="form-section">
+      <div class="form-section-title">1. Datos del cliente</div>
+      <div class="two-col">
+        <div class="field">
+          <label>Nombre completo <span class="required">*</span></label>
+          <input type="text" name="nombre" required placeholder="Juan Pérez">
+        </div>
+        <div class="field">
+          <label>Teléfono / WhatsApp <span class="required">*</span></label>
+          <input type="tel" name="telefono" required placeholder="+54 9 261 ___-____">
+        </div>
+      </div>
+      <div class="field">
+        <label>Email <span class="required">*</span></label>
+        <input type="email" name="email" required placeholder="tu@email.com">
+      </div>
+    </div>
+
+    <!-- 2. Datos del negocio -->
+    <div class="form-section">
+      <div class="form-section-title">2. Sobre tu negocio</div>
+      <div class="field">
+        <label>Nombre del negocio <span class="required">*</span></label>
+        <input type="text" name="negocio_nombre" required placeholder="Ej: Bodega El Refugio, Consultorio Dra. López">
+      </div>
+      <div class="two-col">
+        <div class="field">
+          <label>Rubro / Sector <span class="required">*</span></label>
+          <select name="rubro" required>
+            <option value="">Seleccioná...</option>
+            <option value="gastronomia">Gastronomía (restaurante, bar, café)</option>
+            <option value="bodega">Bodega / Viñedo</option>
+            <option value="alojamiento">Alojamiento (cabañas, hotel, hostel)</option>
+            <option value="salud">Salud (consultorio, clínica)</option>
+            <option value="belleza">Belleza (peluquería, barbería, spa)</option>
+            <option value="comercio">Comercio (tienda, kiosco, almacén)</option>
+            <option value="profesional">Servicios profesionales (abogado, contador, etc.)</option>
+            <option value="turismo">Turismo y aventura</option>
+            <option value="educacion">Educación</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Ubicación <span class="required">*</span></label>
+          <input type="text" name="ubicacion" required placeholder="Ej: Godoy Cruz, Mendoza">
+        </div>
+      </div>
+      <div class="field">
+        <label>Describí brevemente tu negocio <span class="required">*</span>
+          <span class="hint">¿Qué hacés? ¿Quiénes son tus clientes? ¿Qué te diferencia?</span>
+        </label>
+        <textarea name="descripcion" required rows="4" placeholder="Ej: Somos una bodega familiar con 30 años de historia. Hacemos Malbec, Cabernet y un blend premium. Recibimos turistas de todo el mundo..."></textarea>
+      </div>
+      <div class="two-col">
+        <div class="field">
+          <label>Horarios de atención</label>
+          <input type="text" name="horarios" placeholder="Ej: Lun a Vie 9-18, Sáb 10-14">
+        </div>
+        <div class="field">
+          <label>Dirección física</label>
+          <input type="text" name="direccion" placeholder="Calle, número, localidad">
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Qué necesita -->
+    <div class="form-section">
+      <div class="form-section-title">3. ¿Qué necesitás?</div>
+      <div class="field">
+        <label>Plan de interés</label>
+        <div class="radio-group">
+          <label class="radio-item">
+            <input type="radio" name="plan" value="starter">
+            <span><strong>Starter ($99.000)</strong> — Página web profesional</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="plan" value="profesional">
+            <span><strong>Profesional ($280.000)</strong> — Sitio + reservas/turnos</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="plan" value="premium">
+            <span><strong>Premium ($480.000)</strong> — Todo + catálogo + bilingüe</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="plan" value="no_se">
+            <span>No sé todavía, quiero que me asesores</span>
+          </label>
+        </div>
+      </div>
+      <div class="field">
+        <label>¿Qué secciones te gustaría que tenga tu sitio?
+          <span class="hint">Marcá todas las que apliquen</span>
+        </label>
+        <div class="checkbox-group">
+          <label class="checkbox-item"><input type="checkbox" name="secciones" value="inicio"><span>Página de inicio con presentación</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="secciones" value="nosotros"><span>Sobre nosotros / Historia</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="secciones" value="servicios"><span>Servicios / Productos / Menú / Carta</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="secciones" value="galeria"><span>Galería de fotos</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="secciones" value="reservas"><span>Sistema de reservas / turnos online</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="secciones" value="tienda"><span>Catálogo / tienda con pagos</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="secciones" value="contacto"><span>Formulario de contacto</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="secciones" value="testimonios"><span>Testimonios / Reseñas</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="secciones" value="ubicacion"><span>Ubicación y horarios</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="secciones" value="ingles"><span>Versión en inglés</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="secciones" value="otro"><span>Otra (especificá abajo)</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label>¿Qué querés lograr con tu sitio web?
+          <span class="hint">Ej: que me encuentren en Google, recibir reservas automáticas, mostrar mi catálogo, etc.</span>
+        </label>
+        <textarea name="objetivo" rows="3" placeholder="Contame qué problema querés resolver o qué resultado esperás..."></textarea>
+      </div>
+    </div>
+
+    <!-- 4. Contenido -->
+    <div class="form-section">
+      <div class="form-section-title">4. Contenido que tenés listo</div>
+      <div class="field">
+        <label>¿Qué material tenés disponible hoy?
+          <span class="hint">Marcá lo que ya tengas. Lo que no tengas, lo resolvemos juntos.</span>
+        </label>
+        <div class="checkbox-group">
+          <label class="checkbox-item"><input type="checkbox" name="contenido" value="textos"><span>Textos y descripciones del negocio</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="contenido" value="fotos"><span>Fotos profesionales del negocio/productos</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="contenido" value="logo"><span>Logotipo del negocio</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="contenido" value="precios"><span>Lista de productos/servicios con precios</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="contenido" value="redes"><span>Redes sociales activas (Instagram, Facebook, etc.)</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="contenido" value="dominio"><span>Ya tengo un dominio web</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="contenido" value="gmb"><span>Ya tengo Google My Business</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="contenido" value="nada"><span>No tengo nada todavía</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Si tenés dominio, ¿cuál es?</label>
+        <input type="url" name="dominio_actual" placeholder="Ej: www.minegocio.com.ar">
+      </div>
+      <div class="field">
+        <label>¿Qué dominio te gustaría? (si no tenés uno)
+          <span class="hint">Sugerí 2-3 opciones. Verificamos disponibilidad juntos.</span>
+        </label>
+        <input type="text" name="dominio_deseado" placeholder="Ej: bodegaelrefugio.com.ar, elrefugiowines.com">
+      </div>
+    </div>
+
+    <!-- 5. Estilo -->
+    <div class="form-section">
+      <div class="form-section-title">5. Estilo y referencias</div>
+      <div class="field">
+        <label>¿Tenés algún sitio web que te guste como referencia?
+          <span class="hint">Puede ser de tu rubro o de otro. Pegá los links acá.</span>
+        </label>
+        <textarea name="referencias" rows="3" placeholder="Ej: Me gusta cómo se ve www.ejemplo.com porque..."></textarea>
+      </div>
+      <div class="field">
+        <label>¿Tenés preferencia de colores?</label>
+        <input type="text" name="colores" placeholder="Ej: dorado y negro, los de mi logo, algo moderno y oscuro">
+      </div>
+      <div class="field">
+        <label>¿Algo más que quieras contarme?</label>
+        <textarea name="notas" rows="3" placeholder="Cualquier detalle, idea, preocupación o pregunta..."></textarea>
+      </div>
+    </div>
+
+    <!-- Hidden -->
+    <input type="hidden" name="_subject" value="Nuevo formulario de intake — Proyecto web">
+    <input type="hidden" name="_next" value="https://jbarrancogit.github.io">
+
+    <!-- Submit -->
+    <div class="submit-section">
+      <button type="submit" class="btn-submit">Enviar información</button>
+      <p class="submit-note">Al enviar, me llega tu información por email y te contacto en menos de 24 horas para coordinar el prototipo.</p>
+    </div>
+
+  </form>
+</div>
+
+<script>
+  // Highlight focused sections
+  document.querySelectorAll('.form-section').forEach(section => {
+    section.addEventListener('focusin', () => section.style.borderColor = '#3b82f6');
+    section.addEventListener('focusout', () => section.style.borderColor = '');
+  });
+</script>
+</body>
+</html>
