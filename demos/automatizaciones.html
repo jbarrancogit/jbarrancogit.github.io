@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Centro de Automatizaciones — Olivares del Sol</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--primary:#f59e0b;--primary-dim:#b47308;--bg:#0a0a0f;--surface:#12121a;--surface2:#1a1a25;--surface3:#22222f;--text:#e8e8ed;--text-dim:#8888a0;--success:#22c55e;--error:#ef4444;--info:#3b82f6;--radius:12px;--shadow:0 4px 24px rgba(0,0,0,.4)}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+a{color:var(--primary);text-decoration:none}a:hover{text-decoration:underline}
+
+/* Disclaimer */
+.disclaimer{background:linear-gradient(90deg,var(--primary),#d97706);color:#000;text-align:center;padding:8px 16px;font-size:.8rem;font-weight:600;letter-spacing:.3px}
+
+/* Header */
+.header{background:var(--surface);border-bottom:1px solid rgba(245,158,11,.15);padding:20px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.header-left h1{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,var(--primary),#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header-left p{font-size:.85rem;color:var(--text-dim);margin-top:2px}
+.status-pills{display:flex;gap:10px;flex-wrap:wrap}
+.pill{display:flex;align-items:center;gap:6px;background:var(--surface2);padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:500}
+.pill .dot{width:8px;height:8px;border-radius:50%}
+.pill .dot.green{background:var(--success);box-shadow:0 0 6px var(--success)}
+.pill .dot.yellow{background:var(--primary);box-shadow:0 0 6px var(--primary)}
+.pill .dot.red{background:var(--error);box-shadow:0 0 6px var(--error)}
+
+/* Layout */
+.container{max-width:1280px;margin:0 auto;padding:24px 20px}
+.section-title{font-size:1.15rem;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.section-title span{font-size:1.2rem}
+
+/* KPI Cards */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:32px}
+.kpi-card{background:var(--surface);border:1px solid rgba(245,158,11,.1);border-radius:var(--radius);padding:20px;position:relative;overflow:hidden;transition:transform .2s,border-color .2s}
+.kpi-card:hover{transform:translateY(-2px);border-color:rgba(245,158,11,.3)}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),transparent)}
+.kpi-icon{font-size:1.6rem;margin-bottom:8px}
+.kpi-value{font-size:2rem;font-weight:800;color:var(--primary)}
+.kpi-label{font-size:.82rem;color:var(--text-dim);margin-top:2px}
+
+/* Automation Cards */
+.auto-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin-bottom:40px}
+.auto-card{background:var(--surface);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:18px;transition:border-color .2s}
+.auto-card:hover{border-color:rgba(245,158,11,.25)}
+.auto-card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.auto-card-info{display:flex;align-items:center;gap:10px}
+.auto-card-info .icon{font-size:1.5rem;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:var(--surface2);border-radius:10px}
+.auto-card-info h3{font-size:.92rem;font-weight:600}
+.auto-card p{font-size:.8rem;color:var(--text-dim);margin-bottom:12px}
+.auto-meta{display:flex;justify-content:space-between;align-items:center;font-size:.75rem;color:var(--text-dim);margin-bottom:10px}
+.rate-bar{height:6px;background:var(--surface3);border-radius:3px;overflow:hidden;margin-top:4px}
+.rate-bar-fill{height:100%;border-radius:3px;transition:width .5s}
+
+/* Toggle */
+.toggle{position:relative;width:44px;height:24px;cursor:pointer}
+.toggle input{display:none}
+.toggle .slider{position:absolute;inset:0;background:var(--surface3);border-radius:12px;transition:.3s}
+.toggle .slider::before{content:'';position:absolute;width:18px;height:18px;left:3px;bottom:3px;background:#555;border-radius:50%;transition:.3s}
+.toggle input:checked+.slider{background:rgba(245,158,11,.25)}
+.toggle input:checked+.slider::before{transform:translateX(20px);background:var(--primary);box-shadow:0 0 8px rgba(245,158,11,.5)}
+
+/* Workflow */
+.workflow-section{background:var(--surface);border:1px solid rgba(245,158,11,.1);border-radius:var(--radius);padding:24px;margin-bottom:40px;overflow-x:auto}
+.workflow-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px}
+.btn-sim{background:linear-gradient(135deg,var(--primary),#d97706);color:#000;border:none;padding:10px 22px;border-radius:8px;font-weight:700;font-size:.85rem;cursor:pointer;transition:transform .15s,box-shadow .15s;font-family:inherit}
+.btn-sim:hover{transform:scale(1.04);box-shadow:0 4px 20px rgba(245,158,11,.35)}
+.workflow-canvas{display:flex;flex-direction:column;align-items:center;gap:0;padding:10px 0;min-width:600px}
+.wf-row{display:flex;align-items:center;justify-content:center;gap:0;position:relative}
+.wf-node{background:var(--surface2);border:2px solid var(--surface3);border-radius:12px;padding:12px 18px;text-align:center;font-size:.82rem;font-weight:500;min-width:150px;max-width:200px;transition:border-color .3s,box-shadow .3s,background .3s;position:relative;z-index:1}
+.wf-node.trigger{border-color:var(--info);background:rgba(59,130,246,.08)}
+.wf-node.condition{border-color:var(--primary);background:rgba(245,158,11,.06);transform:rotate(0deg);border-radius:12px}
+.wf-node.action{border-color:var(--success);background:rgba(34,197,94,.06)}
+.wf-node.alert{border-color:var(--error);background:rgba(239,68,68,.06)}
+.wf-node.active{box-shadow:0 0 20px rgba(245,158,11,.5);border-color:var(--primary)!important;background:rgba(245,158,11,.12)!important}
+.wf-node .node-icon{font-size:1.3rem;display:block;margin-bottom:4px}
+.wf-node .node-label{font-size:.78rem;color:var(--text-dim)}
+.wf-arrow{display:flex;flex-direction:column;align-items:center;color:var(--text-dim);font-size:.7rem;padding:4px 0}
+.wf-arrow .arrow-line{width:2px;height:20px;background:var(--surface3)}
+.wf-arrow .arrow-tip{font-size:.9rem}
+.wf-arrow-h{display:flex;align-items:center;color:var(--text-dim);padding:0 6px}
+.wf-arrow-h .arrow-line-h{width:30px;height:2px;background:var(--surface3)}
+.wf-arrow-h .arrow-tip{font-size:.9rem}
+.wf-branch{display:flex;gap:30px;align-items:flex-start;justify-content:center;position:relative}
+.wf-branch-col{display:flex;flex-direction:column;align-items:center;gap:0}
+.wf-branch-label{font-size:.72rem;font-weight:700;padding:2px 10px;border-radius:10px;margin-bottom:4px}
+.wf-branch-label.yes{background:rgba(34,197,94,.15);color:var(--success)}
+.wf-branch-label.no{background:rgba(239,68,68,.15);color:var(--error)}
+.wf-branch-connector{position:relative;width:100%;display:flex;justify-content:center}
+.wf-branch-connector::before{content:'';position:absolute;top:50%;left:25%;right:25%;height:2px;background:var(--surface3)}
+
+/* Table */
+.history-section{margin-bottom:40px}
+.table-wrap{background:var(--surface);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);overflow:hidden;max-height:420px;overflow-y:auto}
+.table-wrap::-webkit-scrollbar{width:6px}
+.table-wrap::-webkit-scrollbar-track{background:var(--surface)}
+.table-wrap::-webkit-scrollbar-thumb{background:var(--surface3);border-radius:3px}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+th{background:var(--surface2);padding:12px 16px;text-align:left;font-weight:600;color:var(--text-dim);position:sticky;top:0;z-index:2;font-size:.78rem;text-transform:uppercase;letter-spacing:.5px}
+td{padding:10px 16px;border-top:1px solid rgba(255,255,255,.04)}
+.badge{padding:3px 10px;border-radius:10px;font-size:.72rem;font-weight:600}
+.badge.ok{background:rgba(34,197,94,.15);color:var(--success)}
+.badge.err{background:rgba(239,68,68,.15);color:var(--error)}
+tr.new-row td{animation:rowFlash .8s ease}
+@keyframes rowFlash{0%{background:rgba(245,158,11,.12)}100%{background:transparent}}
+
+/* Chart */
+.chart-section{margin-bottom:40px}
+.chart-wrap{background:var(--surface);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:20px;height:300px}
+
+/* Footer */
+.footer{background:var(--surface);border-top:1px solid rgba(245,158,11,.1);padding:28px 20px;text-align:center;margin-top:20px}
+.footer .cta{display:inline-block;background:linear-gradient(135deg,var(--primary),#d97706);color:#000;padding:14px 32px;border-radius:10px;font-weight:700;font-size:1rem;margin-top:12px;transition:transform .15s,box-shadow .15s}
+.footer .cta:hover{transform:scale(1.04);box-shadow:0 4px 20px rgba(245,158,11,.35);text-decoration:none}
+.footer p{color:var(--text-dim);font-size:.85rem}
+.footer .back-link{display:block;margin-top:14px;font-size:.8rem;color:var(--text-dim)}
+
+@media(max-width:700px){
+  .header{padding:16px}
+  .container{padding:16px 12px}
+  .auto-grid{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .wf-branch{flex-direction:column;gap:20px;align-items:center}
+}
+</style>
+</head>
+<body>
+
+<div class="disclaimer">Demo ilustrativa — Juan Barranco | jbarrancogit.github.io</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-left">
+    <h1>🫒 Centro de Automatizaciones</h1>
+    <p>Olivares del Sol — Panel de control en tiempo real</p>
+  </div>
+  <div class="status-pills">
+    <div class="pill"><span class="dot green"></span><span id="pillActive">10 activas</span></div>
+    <div class="pill"><span class="dot yellow"></span><span id="pillPaused">2 pausadas</span></div>
+    <div class="pill"><span class="dot red"></span><span id="pillErrors">0 errores</span></div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- KPI Cards -->
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-icon">⚡</div>
+      <div class="kpi-value" id="kpiActive">12</div>
+      <div class="kpi-label">Automatizaciones activas</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon">🔄</div>
+      <div class="kpi-value" id="kpiExec">847</div>
+      <div class="kpi-label">Ejecuciones hoy</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon">⏱️</div>
+      <div class="kpi-value">6.2 <span style="font-size:1rem;font-weight:400">hs/día</span></div>
+      <div class="kpi-label">Tiempo ahorrado</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon">✅</div>
+      <div class="kpi-value" style="color:var(--success)">99.1%</div>
+      <div class="kpi-label">Tasa de éxito</div>
+    </div>
+  </div>
+
+  <!-- Automatizaciones activas -->
+  <div class="section-title"><span>🤖</span> Automatizaciones activas</div>
+  <div class="auto-grid" id="autoGrid"></div>
+
+  <!-- Workflow Builder -->
+  <div class="workflow-section">
+    <div class="workflow-header">
+      <div>
+        <div class="section-title" style="margin-bottom:4px"><span>🔀</span> Constructor de flujo visual</div>
+        <p style="font-size:.82rem;color:var(--text-dim)">Flujo: Procesamiento de nuevo pedido</p>
+      </div>
+      <button class="btn-sim" onclick="runWorkflow()">▶ Simular ejecución</button>
+    </div>
+    <div class="workflow-canvas">
+      <!-- Trigger -->
+      <div class="wf-row">
+        <div class="wf-node trigger" data-step="0">
+          <span class="node-icon">📥</span>
+          Nuevo pedido recibido
+          <span class="node-label">Disparador</span>
+        </div>
+      </div>
+      <div class="wf-arrow"><span class="arrow-line"></span><span class="arrow-tip">▼</span></div>
+      <!-- Condition -->
+      <div class="wf-row">
+        <div class="wf-node condition" data-step="1">
+          <span class="node-icon">❓</span>
+          ¿Stock disponible?
+          <span class="node-label">Condición</span>
+        </div>
+      </div>
+      <div class="wf-arrow"><span class="arrow-line"></span><span class="arrow-tip">▼</span></div>
+      <!-- Branch -->
+      <div class="wf-branch">
+        <!-- Yes branch -->
+        <div class="wf-branch-col">
+          <span class="wf-branch-label yes">Sí</span>
+          <div class="wf-arrow"><span class="arrow-line"></span><span class="arrow-tip">▼</span></div>
+          <div class="wf-node action" data-step="2y">
+            <span class="node-icon">🧾</span>
+            Generar factura
+            <span class="node-label">Acción</span>
+          </div>
+          <div class="wf-arrow"><span class="arrow-line"></span><span class="arrow-tip">▼</span></div>
+          <div class="wf-node action" data-step="3y">
+            <span class="node-icon">💬</span>
+            Enviar confirmación WhatsApp
+            <span class="node-label">Notificación</span>
+          </div>
+          <div class="wf-arrow"><span class="arrow-line"></span><span class="arrow-tip">▼</span></div>
+          <div class="wf-node action" data-step="4y">
+            <span class="node-icon">📦</span>
+            Actualizar inventario
+            <span class="node-label">Acción</span>
+          </div>
+        </div>
+        <!-- No branch -->
+        <div class="wf-branch-col">
+          <span class="wf-branch-label no">No</span>
+          <div class="wf-arrow"><span class="arrow-line"></span><span class="arrow-tip">▼</span></div>
+          <div class="wf-node alert" data-step="2n">
+            <span class="node-icon">🚨</span>
+            Alerta al equipo
+            <span class="node-label">Alerta</span>
+          </div>
+          <div class="wf-arrow"><span class="arrow-line"></span><span class="arrow-tip">▼</span></div>
+          <div class="wf-node alert" data-step="3n">
+            <span class="node-icon">💡</span>
+            Sugerir alternativas al cliente
+            <span class="node-label">Acción</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Historial de ejecuciones -->
+  <div class="history-section">
+    <div class="section-title"><span>📋</span> Historial de ejecuciones</div>
+    <div class="table-wrap" id="tableWrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Automatización</th>
+            <th>Hora</th>
+            <th>Duración</th>
+            <th>Resultado</th>
+            <th>Detalle</th>
+          </tr>
+        </thead>
+        <tbody id="historyBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Gráfico -->
+  <div class="chart-section">
+    <div class="section-title"><span>📊</span> Ejecuciones por hora (últimas 24 h)</div>
+    <div class="chart-wrap">
+      <canvas id="activityChart"></canvas>
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <p>¿Querés automatizar tu negocio y ahorrar horas cada día?</p>
+  <a class="cta" href="https://wa.me/5492616423730?text=Hola%20Juan%2C%20me%20interesa%20automatizar%20mi%20negocio" target="_blank" rel="noopener">💬 Hablemos por WhatsApp</a>
+  <a class="back-link" href="../index.html">← Volver al sitio principal</a>
+</footer>
+
+<script>
+/* ========== Automations Data ========== */
+const automations = [
+  { id:1, icon:'💬', name:'Respuesta automática WhatsApp', desc:'Responde consultas de clientes con catálogo y precios', active:true, lastRun:'Hace 2 min', rate:98.5 },
+  { id:2, icon:'🧾', name:'Facturación automática', desc:'Genera facturas al confirmar pedido', active:true, lastRun:'Hace 5 min', rate:99.8 },
+  { id:3, icon:'📦', name:'Alerta de stock bajo', desc:'Notifica cuando un producto baja del mínimo', active:true, lastRun:'Hace 12 min', rate:100 },
+  { id:4, icon:'📧', name:'Reporte diario', desc:'Envía resumen de ventas por email cada noche', active:false, lastRun:'Hace 3 hs', rate:97.2 },
+  { id:5, icon:'🔄', name:'Sincronización de inventario', desc:'Actualiza stock entre depósito y tienda cada hora', active:true, lastRun:'Hace 18 min', rate:99.4 },
+  { id:6, icon:'🚚', name:'Seguimiento de envíos', desc:'Actualiza estado y notifica al cliente automáticamente', active:false, lastRun:'Hace 45 min', rate:96.8 }
+];
+
+function renderAutomations() {
+  const grid = document.getElementById('autoGrid');
+  grid.innerHTML = '';
+  automations.forEach((a, i) => {
+    const rateColor = a.rate >= 99 ? 'var(--success)' : a.rate >= 97 ? 'var(--primary)' : 'var(--error)';
+    grid.innerHTML += `
+      <div class="auto-card">
+        <div class="auto-card-head">
+          <div class="auto-card-info">
+            <div class="icon">${a.icon}</div>
+            <h3>${a.name}</h3>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" ${a.active?'checked':''} onchange="toggleAuto(${i})">
+            <span class="slider"></span>
+          </label>
+        </div>
+        <p>${a.desc}</p>
+        <div class="auto-meta">
+          <span>Última ejecución: ${a.lastRun}</span>
+          <span>Éxito: ${a.rate}%</span>
+        </div>
+        <div class="rate-bar"><div class="rate-bar-fill" style="width:${a.rate}%;background:${rateColor}"></div></div>
+      </div>`;
+  });
+  updatePills();
+}
+
+function toggleAuto(i) {
+  automations[i].active = !automations[i].active;
+  updatePills();
+}
+
+function updatePills() {
+  const active = automations.filter(a => a.active).length;
+  const paused = automations.length - active;
+  document.getElementById('pillActive').textContent = active + ' activas';
+  document.getElementById('pillPaused').textContent = paused + ' pausadas';
+}
+
+renderAutomations();
+
+/* ========== Workflow Animation ========== */
+let wfRunning = false;
+
+function runWorkflow() {
+  if (wfRunning) return;
+  wfRunning = true;
+  const nodes = document.querySelectorAll('.wf-node');
+  nodes.forEach(n => n.classList.remove('active'));
+
+  // Choose yes path randomly ~70% of the time
+  const yesPath = Math.random() < 0.7;
+  const sequence = yesPath
+    ? ['0','1','2y','3y','4y']
+    : ['0','1','2n','3n'];
+
+  let step = 0;
+  function nextStep() {
+    if (step > 0) {
+      const prevSel = `[data-step="${sequence[step-1]}"]`;
+      document.querySelector(prevSel)?.classList.remove('active');
+    }
+    if (step >= sequence.length) { wfRunning = false; return; }
+    const sel = `[data-step="${sequence[step]}"]`;
+    document.querySelector(sel)?.classList.add('active');
+    step++;
+    setTimeout(nextStep, 700);
+  }
+  nextStep();
+}
+
+// Auto-run workflow every 8 seconds
+setInterval(() => { if (!wfRunning) runWorkflow(); }, 8000);
+setTimeout(runWorkflow, 1200);
+
+/* ========== History Table ========== */
+const autoNames = automations.map(a => a.name);
+const details = [
+  'Pedido #4821 procesado','Cliente notificado por WhatsApp','Factura FE-00923 generada',
+  'Stock de aceite extra virgen 500ml bajo mínimo','Inventario sincronizado correctamente',
+  'Envío #TR-2845 actualizado','Reporte de ventas enviado','Consulta respondida automáticamente',
+  'Pedido #4820 procesado','Alerta enviada al equipo de logística',
+  'Factura FE-00922 generada','Stock de aceitunas verdes actualizado',
+  'Cliente contactado con alternativas','Envío #TR-2844 en tránsito',
+  'Sincronización completa: 142 productos','Consulta de precios respondida',
+  'Pedido #4819 facturado','Alerta: aceite orgánico por debajo del mínimo',
+  'Reporte semanal generado','Envío #TR-2843 entregado'
+];
+
+let execCount = parseInt(document.getElementById('kpiExec').textContent);
+const historyBody = document.getElementById('historyBody');
+
+function padTime(d) {
+  return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+':'+String(d.getSeconds()).padStart(2,'0');
+}
+
+function addHistoryRow(prepend, animate) {
+  const isError = Math.random() < 0.06;
+  const name = autoNames[Math.floor(Math.random()*autoNames.length)];
+  const now = new Date();
+  if (!prepend) now.setMinutes(now.getMinutes() - Math.floor(Math.random()*60));
+  const dur = (Math.random()*2.8+0.1).toFixed(1)+'s';
+  const detail = details[Math.floor(Math.random()*details.length)];
+  const tr = document.createElement('tr');
+  if (animate) tr.classList.add('new-row');
+  tr.innerHTML = `
+    <td>${name}</td>
+    <td>${padTime(now)}</td>
+    <td>${dur}</td>
+    <td><span class="badge ${isError?'err':'ok'}">${isError?'Error':'Exitoso'}</span></td>
+    <td style="color:var(--text-dim)">${detail}</td>`;
+  if (prepend) {
+    historyBody.prepend(tr);
+    // Keep max 30 rows
+    while (historyBody.children.length > 30) historyBody.removeChild(historyBody.lastChild);
+    if (!isError) {
+      execCount++;
+      document.getElementById('kpiExec').textContent = execCount;
+    }
+    // Update error pill
+    const errRows = historyBody.querySelectorAll('.badge.err');
+    document.getElementById('pillErrors').textContent = errRows.length + ' errores';
+  } else {
+    historyBody.appendChild(tr);
+  }
+}
+
+// Initial 15 rows
+for (let i = 0; i < 15; i++) addHistoryRow(false, false);
+
+// Add a new row every 5 seconds
+setInterval(() => addHistoryRow(true, true), 5000);
+
+/* ========== Chart.js ========== */
+const hours = [];
+const data = [];
+const now = new Date();
+for (let i = 23; i >= 0; i--) {
+  const h = (now.getHours() - i + 24) % 24;
+  hours.push(String(h).padStart(2,'0')+':00');
+  // Simulate realistic pattern: more activity during business hours
+  let base;
+  if (h >= 8 && h <= 12) base = 50 + Math.random()*30;
+  else if (h >= 13 && h <= 18) base = 40 + Math.random()*25;
+  else if (h >= 6 && h <= 20) base = 20 + Math.random()*15;
+  else base = 5 + Math.random()*10;
+  data.push(Math.round(base));
+}
+
+new Chart(document.getElementById('activityChart'), {
+  type: 'bar',
+  data: {
+    labels: hours,
+    datasets: [{
+      label: 'Ejecuciones',
+      data: data,
+      backgroundColor: data.map((_, i) => {
+        const h = parseInt(hours[i]);
+        return (h >= 8 && h <= 18) ? 'rgba(245,158,11,0.7)' : 'rgba(245,158,11,0.3)';
+      }),
+      borderColor: 'rgba(245,158,11,0.9)',
+      borderWidth: 1,
+      borderRadius: 4
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#1a1a25',
+        titleColor: '#f59e0b',
+        bodyColor: '#e8e8ed',
+        borderColor: 'rgba(245,158,11,0.3)',
+        borderWidth: 1,
+        callbacks: { label: ctx => ctx.parsed.y + ' ejecuciones' }
+      }
+    },
+    scales: {
+      x: {
+        ticks: { color: '#8888a0', font: { size: 10 }, maxRotation: 45 },
+        grid: { color: 'rgba(255,255,255,0.04)' }
+      },
+      y: {
+        ticks: { color: '#8888a0', font: { size: 11 } },
+        grid: { color: 'rgba(255,255,255,0.04)' }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>
