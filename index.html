@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Páginas web para negocios en Mendoza. Ingeniero de software con experiencia en Disney Paris (Globant). Sitios rápidos, profesionales y accesibles. Prototipo gratuito en 48 hs.">
+  <meta name="description" content="Páginas web para negocios en Mendoza. Ingeniero de software con experiencia en empresas internacionales. Sitios rápidos, profesionales y accesibles. Prototipo gratuito en 48 hs.">
   <meta name="keywords" content="página web mendoza, desarrollo web mendoza, diseño web mendoza, página web para negocios, tienda online mendoza, sitio web mendoza">
   <meta property="og:title" content="Páginas Web para Negocios en Mendoza — Juan Barranco">
-  <meta property="og:description" content="Ingeniero de software con experiencia en Disney Paris. Páginas web profesionales desde $99.000. Prototipo gratis en 48 hs.">
+  <meta property="og:description" content="Ingeniero de software con experiencia internacional. Páginas web profesionales desde $99.000. Prototipo gratis en 48 hs.">
   <meta property="og:type" content="website">
   <title>Páginas Web para Negocios en Mendoza — Juan Barranco | Prototipo Gratis</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -291,6 +291,37 @@
       border-radius: 100px; color: var(--text-muted); font-weight: 500;
     }
 
+    /* ENGANCHE / VALUE PROPS */
+    .value-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;
+    }
+    .value-card {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 28px; transition: all var(--transition);
+    }
+    .value-card:hover { border-color: var(--accent); }
+    .value-icon { font-size: 2rem; margin-bottom: 12px; }
+    .value-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .value-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+    .value-card .value-example {
+      margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);
+      font-size: 0.78rem; color: var(--text-muted); font-style: italic;
+    }
+    .value-card .value-example a { color: var(--accent-light); font-style: normal; font-weight: 600; }
+
+    /* DATA CAPABILITIES */
+    .data-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;
+    }
+    .data-card {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 24px; transition: all var(--transition); text-align: center;
+    }
+    .data-card:hover { border-color: var(--accent); }
+    .data-icon { font-size: 2.2rem; margin-bottom: 10px; }
+    .data-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+    .data-card p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; }
+
     /* DEMOS */
     .demos-grid {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;
@@ -422,7 +453,7 @@
       .exp-grid, .faq-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 480px) {
-      .services-grid, .pricing-grid, .portfolio-grid, .problem-grid, .steps-grid, .demos-grid { grid-template-columns: 1fr; }
+      .services-grid, .pricing-grid, .portfolio-grid, .problem-grid, .steps-grid, .demos-grid, .value-grid, .data-grid { grid-template-columns: 1fr; }
     }
 
     /* ANIMATIONS */
@@ -458,14 +489,14 @@
           <img src="https://avatars.githubusercontent.com/u/258823180?v=4" alt="Juan Ignacio Barranco" class="hero-avatar" width="72" height="72" loading="eager">
           <div class="hero-profile-info">
             <span class="hero-profile-name">Juan Ignacio Barranco</span>
-            <span class="hero-profile-role">Ingeniero de Software — Ex-Globant (Disney Paris)</span>
+            <span class="hero-profile-role">Ingeniero de Software — Full-stack Developer en Nevra</span>
           </div>
         </div>
         <h1>
           Tu negocio es bueno. Tus clientes deberían poder <span class="highlight">encontrarte.</span>
         </h1>
         <p class="hero-sub">
-          Soy ingeniero de software. Ayudé a construir el monitoreo de reservas y el backend de <strong>Disney Paris</strong> cuando trabajaba en Globant. Hoy uso esa experiencia para que negocios de Mendoza tengan presencia digital profesional — <strong>desde $99.000</strong>, con un prototipo gratis en 48 horas para que veas cómo queda antes de pagar un peso.
+          Soy ingeniero de software con experiencia en empresas internacionales y clientes de Estados Unidos. Construyo páginas web, sistemas de reservas, dashboards de datos y automatizaciones para negocios de Mendoza — <strong>desde $99.000</strong>, con un prototipo gratis en 48 horas para que veas cómo queda antes de pagar un peso.
         </p>
         <div class="hero-buttons">
           <a href="https://wa.me/5492616423730?text=Hola%20Juan!%20Quiero%20ver%20un%20prototipo%20para%20mi%20negocio" class="btn btn-primary" target="_blank">
@@ -484,7 +515,7 @@
       <div class="trust-grid">
         <div class="trust-item">
           <span class="trust-name">Globant</span>
-          <span class="trust-role">Backend — Disney Paris</span>
+          <span class="trust-role">Backend Engineer</span>
         </div>
         <div class="trust-item">
           <span class="trust-name">Nevra</span>
@@ -605,7 +636,7 @@
         <div class="service-card fade-up">
           <div class="service-icon" style="background: var(--green-glow); color: var(--green);">&#128197;</div>
           <h3>Sistema de Reservas y Turnos</h3>
-          <p>Tus clientes reservan solos desde el celular, sin necesidad de llamar. Vos recibís la confirmación automática. El mismo enfoque de ingeniería que apliqué en el sistema de reservas de Disney Paris.</p>
+          <p>Tus clientes reservan solos desde el celular, sin necesidad de llamar. Vos recibís la confirmación automática. Ingeniería real aplicada a tu negocio, no un plugin genérico.</p>
           <span class="service-tag">Ideal para gastronomía y servicios</span>
         </div>
 
@@ -626,7 +657,7 @@
         <div class="service-card fade-up">
           <div class="service-icon" style="background: rgba(236, 72, 153, 0.12); color: #ec4899;">&#127757;</div>
           <h3>Sitio Bilingüe (ES/EN)</h3>
-          <p>Contenido profesional en inglés real, no Google Translate. Trabajé en inglés para Globant, Upwork y Fiverr. Ideal para bodegas, turismo y alojamientos que buscan atraer visitantes internacionales.</p>
+          <p>Contenido profesional en inglés real, no Google Translate. Trabajo en inglés a diario con clientes internacionales. Ideal para bodegas, turismo y alojamientos que buscan atraer visitantes de afuera.</p>
           <span class="service-tag">Turismo y exportación</span>
         </div>
 
@@ -640,17 +671,102 @@
     </div>
   </section>
 
+  <!-- QUÉ GANÁS (ENGANCHE) -->
+  <section>
+    <div class="container">
+      <p class="section-label fade-up">¿Qué ganás concretamente?</p>
+      <h2 class="section-title fade-up">No es solo "tener una página". Es dejar de perder clientes.</h2>
+      <p class="section-desc fade-up">Cada una de estas soluciones resuelve un problema real que ves todos los días en tu negocio.</p>
+
+      <div class="value-grid">
+        <div class="value-card fade-up">
+          <div class="value-icon">📱</div>
+          <h3>Dejá de responder lo mismo 30 veces al día</h3>
+          <p>¿Cuántos mensajes de WhatsApp respondés por día preguntándote horarios, precios y disponibilidad? Un sistema inteligente responde automáticamente, filtra las consultas y te manda solo los que están listos para comprar.</p>
+          <div class="value-example">Ejemplo real: <a href="demos/restaurante.html" target="_blank">Menú y reservas automatizadas →</a></div>
+        </div>
+
+        <div class="value-card fade-up">
+          <div class="value-icon">🔍</div>
+          <h3>Que te encuentren cuando buscan tu rubro</h3>
+          <p>Buscá tu rubro + tu zona en Google. Si no aparecés, esos clientes van al que sí aparece. Un sitio bien hecho con SEO te pone ahí donde la gente busca. Es así de directo.</p>
+          <div class="value-example">Ejemplo real: <a href="demos/profesional.html" target="_blank">Consultorio posicionado en Google →</a></div>
+        </div>
+
+        <div class="value-card fade-up">
+          <div class="value-icon">📊</div>
+          <h3>Tomá decisiones con datos, no con intuición</h3>
+          <p>¿Sabés de dónde vienen tus clientes? ¿Qué producto miran más? ¿Cuántas consultas se convierten en ventas? Un dashboard de analytics te da esa información. Dejás de adivinar y empezás a decidir con números reales.</p>
+          <div class="value-example">Ejemplo real: <a href="https://jbarrancogit.github.io/dashboard-ssl-utn/" target="_blank">Dashboard con análisis estadístico →</a></div>
+        </div>
+
+        <div class="value-card fade-up">
+          <div class="value-icon">🌎</div>
+          <h3>Si tenés turistas, hablales en su idioma</h3>
+          <p>Miles de turistas buscan "wineries in Mendoza" o "cabins near Andes" en Google. Si tu sitio está solo en español, no existís para ellos. Un sitio bilingüe profesional abre un mercado enorme.</p>
+          <div class="value-example">Ejemplo real: <a href="demos/bodega.html" target="_blank">Bodega con potencial bilingüe →</a></div>
+        </div>
+
+        <div class="value-card fade-up">
+          <div class="value-icon">⏰</div>
+          <h3>Recibí reservas y pedidos las 24 horas</h3>
+          <p>Tu negocio vende mientras dormís. Tus clientes reservan turnos, hacen pedidos o consultan disponibilidad a cualquier hora desde el celular. Sin que tengas que estar atrás del teléfono.</p>
+          <div class="value-example">Ejemplo real: <a href="demos/alojamiento.html" target="_blank">Sistema de reservas para cabañas →</a></div>
+        </div>
+
+        <div class="value-card fade-up">
+          <div class="value-icon">💰</div>
+          <h3>Se paga solo con un cliente nuevo por mes</h3>
+          <p>Si tu sitio te genera un solo cliente nuevo por mes, en pocos meses ya recuperaste toda la inversión. Después es ganancia pura. Es la publicidad más barata que existe: trabaja todos los días sin que le pagues sueldo.</p>
+          <div class="value-example">Plan Starter: $99.000 pago único → menos de $9.000/mes en un año</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DATOS E INTELIGENCIA -->
+  <section style="background: var(--bg-secondary);">
+    <div class="container">
+      <p class="section-label fade-up">Más que una página web</p>
+      <h2 class="section-title fade-up">Dashboards, analytics y datos para tu negocio</h2>
+      <p class="section-desc fade-up">Además de sitios web, construyo herramientas de datos. Pipelines, dashboards interactivos y analytics — lo mismo que hago para clientes de USA en Upwork, aplicado a tu negocio en Mendoza.</p>
+
+      <div class="data-grid">
+        <div class="data-card fade-up">
+          <div class="data-icon">📈</div>
+          <h3>Dashboard de métricas</h3>
+          <p>Visualizá en tiempo real: visitas a tu web, consultas, conversiones, productos más vistos. Todo en un panel simple que se entiende sin ser técnico.</p>
+        </div>
+        <div class="data-card fade-up">
+          <div class="data-icon">🔄</div>
+          <h3>Pipelines de datos</h3>
+          <p>Extraigo y proceso datos de tus sistemas existentes (ventas, redes sociales, consultas) para que tengas toda la información unificada y actualizada.</p>
+        </div>
+        <div class="data-card fade-up">
+          <div class="data-icon">🏭</div>
+          <h3>Data Warehouse</h3>
+          <p>Le construí el Data Warehouse completo a Entre Dos SRL para analizar el rendimiento de sus franquicias. Puedo hacer lo mismo para tu negocio, a escala.</p>
+        </div>
+        <div class="data-card fade-up">
+          <div class="data-icon">🤖</div>
+          <h3>Automatizaciones inteligentes</h3>
+          <p>Respuestas automáticas de WhatsApp, presupuestadores online, formularios que filtran consultas. La tecnología haciendo el trabajo repetitivo por vos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- DIFFERENTIATORS -->
   <section>
     <div class="container">
       <p class="section-label fade-up">Por qué trabajar conmigo</p>
-      <h2 class="section-title fade-up">No soy un diseñador web. Soy ingeniero de software.</h2>
-      <p class="section-desc fade-up">La diferencia: lo que entrego es software testeado, rápido y hecho a medida. No depende de plugins, no se rompe, y está pensado para durar.</p>
+      <h2 class="section-title fade-up">Un desarrollador de verdad, no una agencia cara ni un template barato</h2>
+      <p class="section-desc fade-up">Programo todo personalmente, con código propio y estándares profesionales. Sin intermediarios, sin plugins frágiles, sin sorpresas.</p>
 
       <div class="diff-grid">
         <div class="diff-item fade-up">
-          <h3>Experiencia en Disney Paris y multinacionales</h3>
-          <p>Ayudé a construir el backend y monitoreo de reservas de Disney Paris en Globant. Trabajé para ADP, empresas de USA y hoy estoy en Nevra como full-stack developer. Los mismos estándares de calidad, aplicados a tu proyecto.</p>
+          <h3>Experiencia internacional real</h3>
+          <p>Trabajé para Globant, ADP, clientes de Estados Unidos en Upwork y hoy estoy en Nevra como full-stack developer. Cada proyecto que hago tiene el mismo estándar de calidad que le entrego a empresas de afuera.</p>
         </div>
         <div class="diff-item fade-up">
           <h3>Sin costos ocultos de servidor</h3>
@@ -666,7 +782,7 @@
         </div>
         <div class="diff-item fade-up">
           <h3>Inglés profesional, no traductor</h3>
-          <p>Trabajé en inglés con equipos de Globant, clientes de Upwork y en Fiverr. Si necesitás un sitio bilingüe para turismo o exportación, el contenido lo escribo yo con nivel profesional.</p>
+          <p>Trabajo en inglés a diario con clientes internacionales en Upwork y en mi empresa actual. Si necesitás un sitio bilingüe para turismo o exportación, el contenido lo escribo yo con nivel profesional.</p>
         </div>
         <div class="diff-item fade-up">
           <h3>Inhackeable por diseño</h3>
@@ -750,13 +866,13 @@
           </div>
         </div>
 
-        <div class="exp-item featured fade-up">
+        <div class="exp-item fade-up">
           <div class="exp-dot"></div>
           <div class="exp-body">
             <h3>Globant</h3>
-            <span class="exp-role">Backend Software Engineer — Disney Paris</span>
+            <span class="exp-role">Backend Software Engineer</span>
             <p class="exp-date">Septiembre 2022 — Enero 2023</p>
-            <p>Desarrollo del monitoreo de reservas y backend de Disney Paris. REST APIs en AWS, microservicios con Spring Boot.</p>
+            <p>Desarrollo backend para cliente internacional. REST APIs en AWS, microservicios con Spring Boot.</p>
           </div>
         </div>
 
@@ -782,11 +898,11 @@
 
       <div class="portfolio-grid">
         <div class="portfolio-card fade-up">
-          <div class="portfolio-img">&#127920;</div>
+          <div class="portfolio-img">&#128187;</div>
           <div class="portfolio-info">
-            <h3>Monitoreo y Backend de Reservas</h3>
-            <p class="portfolio-company">Globant → Disney Paris</p>
-            <p>Ayudé a construir el sistema de monitoreo y el backend que procesa reservas de millones de usuarios en Disney Paris. REST APIs en AWS, microservicios, Spring Boot.</p>
+            <h3>Backend de Reservas — Cliente internacional</h3>
+            <p class="portfolio-company">Globant</p>
+            <p>Sistema de monitoreo y backend para plataforma de reservas de alto volumen. REST APIs en AWS, microservicios con Spring Boot, millones de transacciones.</p>
             <div class="portfolio-tags">
               <span class="portfolio-tag">Java</span>
               <span class="portfolio-tag">Spring Boot</span>
@@ -1004,7 +1120,7 @@
       </div>
 
       <div class="price-why fade-up">
-        <p><strong>¿Por qué tan accesible si trabajaste en Disney?</strong> Porque programo todo yo, uso plataformas profesionales que no cobran hosting mensual y no tengo gastos de agencia. Tu inversión va 100% a desarrollo real, no a intermediarios.</p>
+        <p><strong>¿Por qué tan accesible si tenés experiencia internacional?</strong> Porque programo todo yo, uso plataformas profesionales que no cobran hosting mensual y no tengo gastos de agencia. Mi estrategia es tener muchos clientes contentos, no pocos clientes caros. Tu inversión va 100% a desarrollo real.</p>
       </div>
     </div>
   </section>
