@@ -14,7 +14,7 @@ En la ciudad de Mendoza, a los ______ días del mes de ______________ de 20____,
 
 El Desarrollador se compromete a diseñar, desarrollar y entregar al Cliente un sitio web profesional según las especificaciones detalladas en el **Anexo A — Alcance del proyecto**, que forma parte integrante de este contrato.
 
-El plan contratado es: **[ ] Starter** / **[ ] Profesional** / **[ ] Premium**
+El plan/servicio contratado es: **[ ] Starter** / **[ ] Profesional** / **[ ] Premium** / **[ ] Analytics Setup** / **[ ] Data Pro** / **[ ] Data Enterprise**
 
 ---
 
@@ -23,7 +23,7 @@ El plan contratado es: **[ ] Starter** / **[ ] Profesional** / **[ ] Premium**
 **2.1. Incluye:**
 El trabajo comprende exclusivamente lo detallado en el Anexo A. A modo de referencia según el plan contratado:
 
-**Plan Starter ($99.000):**
+**Plan Starter ($79.200 ARS · ~USD 65 — precio lanzamiento):**
 - Sitio web profesional a medida (hasta 5 secciones)
 - Diseño responsive (celular, PC, tablet)
 - Formulario de contacto funcional
@@ -34,17 +34,37 @@ El trabajo comprende exclusivamente lo detallado en el Anexo A. A modo de refere
 - Registro de dominio .com.ar (primer año)
 - Publicación en hosting sin costo mensual (plataforma estática)
 
-**Plan Profesional ($280.000) — incluye todo lo anterior más:**
+**Plan Profesional ($224.000 ARS · ~USD 185 — precio lanzamiento) — incluye todo lo anterior más:**
 - Sitio de 5 o más secciones
 - Sistema de reservas o turnos online integrado
 - SEO avanzado + configuración completa de Google Analytics
 - Capacitación básica para que el Cliente pueda actualizar contenido
 
-**Plan Premium ($480.000) — incluye todo lo anterior más:**
+**Plan Premium ($384.000 ARS · ~USD 320 — precio lanzamiento) — incluye todo lo anterior más:**
 - Catálogo de productos/servicios con integración de Mercado Pago
 - Versión bilingüe del sitio (español e inglés)
 - Configuración avanzada de Google Analytics con eventos personalizados
 - Formularios inteligentes con notificaciones automáticas por email
+
+**Servicios de datos (se contratan por separado o como complemento):**
+
+**Analytics Setup ($44.000 ARS · ~USD 35):**
+- Google Analytics 4 configurado a medida con eventos personalizados
+- Dashboard de métricas en Looker Studio
+- Capacitación para interpretar los datos
+
+**Data Pro ($152.000 ARS · ~USD 125):**
+- Pipeline de datos personalizado (ETL)
+- Dashboard ejecutivo interactivo
+- Conexión a sistemas existentes del Cliente
+- Reportes automatizados por email
+
+**Data Enterprise (desde $304.000 ARS · ~USD 250+):**
+- Data Warehouse completo diseñado para el negocio del Cliente
+- Pipelines ETL con múltiples fuentes de datos
+- Automatizaciones personalizadas (alertas, reportes, flujos)
+- Dashboards ejecutivos interactivos
+- Documentación técnica completa
 
 **2.2. No incluye (salvo acuerdo escrito por separado):**
 - Creación de contenido (textos, fotografías, logotipo) — el Cliente los provee
@@ -68,11 +88,13 @@ El trabajo comprende exclusivamente lo detallado en el Anexo A. A modo de refere
 - [ ] **3 cuotas:** $____________ cada una. Primera cuota al aprobar el prototipo, las siguientes a 30 y 60 días.
 - [ ] **Otra:** ____________________________________________
 
-**3.3.** Medios de pago aceptados: transferencia bancaria, efectivo, Mercado Pago.
+**3.3.** Medios de pago aceptados: transferencia bancaria, efectivo, Mercado Pago, stablecoins (USDT, USDC, DAI — red Tron o Polygon). Los pagos en criptomonedas se liquidan al tipo de cambio del momento de acreditación.
 
 **3.4.** El Desarrollador no emite factura fiscal al momento de la firma del presente contrato. Si en el futuro se inscribiera como contribuyente, podrá emitir el comprobante correspondiente. Esto no afecta la validez del presente contrato ni las obligaciones asumidas por las partes.
 
 **3.5.** La falta de pago en los plazos acordados habilita al Desarrollador a suspender el trabajo en curso y retener la entrega de archivos hasta su regularización.
+
+**3.6.** Los precios indicados en este contrato corresponden a la promoción de lanzamiento (20% de descuento sobre precios de lista), válida para los primeros 10 clientes que firmen contrato. Precios de lista: Starter $99.000, Profesional $280.000, Premium $480.000. Los precios en USD son referenciales al tipo de cambio del momento de pago.
 
 ---
 

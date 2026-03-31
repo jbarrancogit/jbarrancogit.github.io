@@ -481,7 +481,12 @@
     }
     @media (max-width: 480px) {
       .services-grid, .pricing-grid, .portfolio-grid, .problem-grid, .steps-grid, .demos-grid, .value-grid, .data-grid, .data-pricing-grid { grid-template-columns: 1fr; }
+      #iniciar [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
     }
+    #iniciar input:focus, #iniciar textarea:focus, #iniciar select:focus {
+      outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+    }
+    #iniciar select option { background: var(--bg-primary); color: var(--text-primary); }
 
     /* SECTION VISUAL ACCENTS */
     .section-glow { position: relative; overflow: hidden; }
@@ -601,6 +606,7 @@
         <li><a href="#proyectos">Proyectos</a></li>
         <li><a href="#demos">Demos</a></li>
         <li><a href="#precios">Precios</a></li>
+        <li><a href="#iniciar">Iniciar</a></li>
       </ul>
       <a href="https://wa.me/5492616423730?text=Hola%20Juan!%20Quiero%20mi%20prototipo%20gratis" class="nav-cta" target="_blank">Prototipo gratis</a>
       <button class="nav-toggle" id="navToggle" aria-label="Menu">
@@ -1406,6 +1412,191 @@
           <p>Sí. Los planes Profesional y Premium se pueden pagar en 3 cuotas sin interés. También acepto transferencia bancaria, efectivo o Mercado Pago.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- INTAKE FORM -->
+  <section id="iniciar" class="section-glow bg-grid" style="background: var(--bg-secondary);">
+    <div class="container">
+      <p class="section-label fade-up">EMPEZÁ TU PROYECTO</p>
+      <h2 class="section-title fade-up" style="max-width: 600px; margin-left: auto; margin-right: auto;">Completá el formulario y<br>te preparo tu prototipo gratis</h2>
+      <p class="section-sub fade-up" style="max-width: 540px; margin-left: auto; margin-right: auto; text-align: center;">Cuanta más información me des, más rápido y preciso va a ser el resultado. Te contacto en menos de 24 horas.</p>
+
+      <form id="intakeForm" action="https://formspree.io/f/TU_FORM_ID" method="POST" style="max-width: 720px; margin: 48px auto 0;">
+
+        <!-- 1. Datos del cliente -->
+        <div style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: var(--radius); padding: 32px; margin-bottom: 24px; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: var(--glass-shadow);" class="fade-up">
+          <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); font-weight: 600; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border);">1. Datos del cliente</p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+            <div>
+              <label style="display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px;">Nombre completo <span style="color: var(--red);">*</span></label>
+              <input type="text" name="nombre" required placeholder="Juan Pérez" style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-primary); color: var(--text-primary); font-family: inherit; font-size: 0.9rem;">
+            </div>
+            <div>
+              <label style="display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px;">Teléfono / WhatsApp <span style="color: var(--red);">*</span></label>
+              <input type="tel" name="telefono" required placeholder="+54 9 261 ___-____" style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-primary); color: var(--text-primary); font-family: inherit; font-size: 0.9rem;">
+            </div>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px;">Email <span style="color: var(--red);">*</span></label>
+            <input type="email" name="email" required placeholder="tu@email.com" style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-primary); color: var(--text-primary); font-family: inherit; font-size: 0.9rem;">
+          </div>
+        </div>
+
+        <!-- 2. Sobre tu negocio -->
+        <div style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: var(--radius); padding: 32px; margin-bottom: 24px; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: var(--glass-shadow);" class="fade-up">
+          <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); font-weight: 600; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border);">2. Sobre tu negocio</p>
+          <div style="margin-bottom: 16px;">
+            <label style="display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px;">Nombre del negocio <span style="color: var(--red);">*</span></label>
+            <input type="text" name="negocio_nombre" required placeholder="Ej: Bodega El Refugio, Consultorio Dra. López" style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-primary); color: var(--text-primary); font-family: inherit; font-size: 0.9rem;">
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+            <div>
+              <label style="display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px;">Rubro / Sector <span style="color: var(--red);">*</span></label>
+              <select name="rubro" required style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-primary); color: var(--text-primary); font-family: inherit; font-size: 0.9rem; cursor: pointer;">
+                <option value="">Seleccioná...</option>
+                <option value="gastronomia">Gastronomía (restaurante, bar, café)</option>
+                <option value="bodega">Bodega / Viñedo</option>
+                <option value="alojamiento">Alojamiento (cabañas, hotel, hostel)</option>
+                <option value="salud">Salud (consultorio, clínica)</option>
+                <option value="belleza">Belleza (peluquería, barbería, spa)</option>
+                <option value="comercio">Comercio (tienda, kiosco, almacén)</option>
+                <option value="profesional">Servicios profesionales (abogado, contador, etc.)</option>
+                <option value="turismo">Turismo y aventura</option>
+                <option value="educacion">Educación</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+            <div>
+              <label style="display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px;">Ubicación <span style="color: var(--red);">*</span></label>
+              <input type="text" name="ubicacion" required placeholder="Ej: Godoy Cruz, Mendoza" style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-primary); color: var(--text-primary); font-family: inherit; font-size: 0.9rem;">
+            </div>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <label style="display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px;">Describí brevemente tu negocio <span style="color: var(--red);">*</span>
+              <span style="font-weight: 400; font-size: 0.78rem; color: var(--text-muted); display: block; margin-top: 2px;">¿Qué hacés? ¿Quiénes son tus clientes? ¿Qué te diferencia?</span>
+            </label>
+            <textarea name="descripcion" required rows="4" placeholder="Ej: Somos una bodega familiar con 30 años de historia. Hacemos Malbec, Cabernet y un blend premium..." style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-primary); color: var(--text-primary); font-family: inherit; font-size: 0.9rem; resize: vertical;"></textarea>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div>
+              <label style="display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px;">Horarios de atención <span style="color: var(--red);">*</span></label>
+              <input type="text" name="horarios" required placeholder="Ej: Lun a Vie 9-18, Sáb 10-14" style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-primary); color: var(--text-primary); font-family: inherit; font-size: 0.9rem;">
+            </div>
+            <div>
+              <label style="display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px;">Dirección física <span style="color: var(--red);">*</span></label>
+              <input type="text" name="direccion" required placeholder="Calle, número, localidad" style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-primary); color: var(--text-primary); font-family: inherit; font-size: 0.9rem;">
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Qué necesita -->
+        <div style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: var(--radius); padding: 32px; margin-bottom: 24px; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: var(--glass-shadow);" class="fade-up">
+          <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); font-weight: 600; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border);">3. ¿Qué necesitás?</p>
+          <div style="margin-bottom: 20px;">
+            <label style="display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 10px;">Plan de interés <span style="color: var(--red);">*</span></label>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                <input type="radio" name="plan" value="starter" required style="width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer;">
+                <span style="font-size: 0.88rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">Starter ($79.200 · ~USD 65)</strong> — Página web profesional</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                <input type="radio" name="plan" value="profesional" style="width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer;">
+                <span style="font-size: 0.88rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">Profesional ($224.000 · ~USD 185)</strong> — Sitio + reservas/turnos</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                <input type="radio" name="plan" value="premium" style="width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer;">
+                <span style="font-size: 0.88rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">Premium ($384.000 · ~USD 320)</strong> — Todo + catálogo + bilingüe</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                <input type="radio" name="plan" value="no_se" style="width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer;">
+                <span style="font-size: 0.88rem; color: var(--text-secondary);">No sé todavía, quiero que me asesores</span>
+              </label>
+            </div>
+          </div>
+          <div style="margin-bottom: 20px;">
+            <label style="display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 10px;">¿Qué secciones te gustaría? <span style="color: var(--red);">*</span>
+              <span style="font-weight: 400; font-size: 0.78rem; color: var(--text-muted); display: block; margin-top: 2px;">Marcá todas las que apliquen</span>
+            </label>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;"><input type="checkbox" name="secciones" value="inicio" style="width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); cursor: pointer;"><span style="font-size: 0.88rem; color: var(--text-secondary);">Página de inicio con presentación</span></label>
+              <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;"><input type="checkbox" name="secciones" value="nosotros" style="width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); cursor: pointer;"><span style="font-size: 0.88rem; color: var(--text-secondary);">Sobre nosotros / Historia</span></label>
+              <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;"><input type="checkbox" name="secciones" value="servicios" style="width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); cursor: pointer;"><span style="font-size: 0.88rem; color: var(--text-secondary);">Servicios / Productos / Menú / Carta</span></label>
+              <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;"><input type="checkbox" name="secciones" value="galeria" style="width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); cursor: pointer;"><span style="font-size: 0.88rem; color: var(--text-secondary);">Galería de fotos</span></label>
+              <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;"><input type="checkbox" name="secciones" value="reservas" style="width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); cursor: pointer;"><span style="font-size: 0.88rem; color: var(--text-secondary);">Sistema de reservas / turnos online</span></label>
+              <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;"><input type="checkbox" name="secciones" value="tienda" style="width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); cursor: pointer;"><span style="font-size: 0.88rem; color: var(--text-secondary);">Catálogo / tienda con pagos</span></label>
+              <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;"><input type="checkbox" name="secciones" value="contacto" style="width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); cursor: pointer;"><span style="font-size: 0.88rem; color: var(--text-secondary);">Formulario de contacto</span></label>
+              <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;"><input type="checkbox" name="secciones" value="testimonios" style="width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); cursor: pointer;"><span style="font-size: 0.88rem; color: var(--text-secondary);">Testimonios / Reseñas</span></label>
+              <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;"><input type="checkbox" name="secciones" value="ubicacion" style="width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); cursor: pointer;"><span style="font-size: 0.88rem; color: var(--text-secondary);">Ubicación y horarios</span></label>
+              <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;"><input type="checkbox" name="secciones" value="ingles" style="width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); cursor: pointer;"><span style="font-size: 0.88rem; color: var(--text-secondary);">Versión en inglés</span></label>
+            </div>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px;">¿Qué querés lograr con tu sitio web? <span style="color: var(--red);">*</span>
+              <span style="font-weight: 400; font-size: 0.78rem; color: var(--text-muted); display: block; margin-top: 2px;">Ej: que me encuentren en Google, recibir reservas automáticas, mostrar mi catálogo, etc.</span>
+            </label>
+            <textarea name="objetivo" required rows="3" placeholder="Contame qué problema querés resolver o qué resultado esperás..." style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-primary); color: var(--text-primary); font-family: inherit; font-size: 0.9rem; resize: vertical;"></textarea>
+          </div>
+        </div>
+
+        <!-- 4. Contenido -->
+        <div style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: var(--radius); padding: 32px; margin-bottom: 24px; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: var(--glass-shadow);" class="fade-up">
+          <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); font-weight: 600; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border);">4. Contenido que tenés listo</p>
+          <div style="margin-bottom: 16px;">
+            <label style="display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 10px;">¿Qué material tenés disponible hoy? <span style="color: var(--red);">*</span>
+              <span style="font-weight: 400; font-size: 0.78rem; color: var(--text-muted); display: block; margin-top: 2px;">Marcá lo que ya tengas. Lo que no tengas, lo resolvemos juntos.</span>
+            </label>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;"><input type="checkbox" name="contenido" value="textos" style="width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); cursor: pointer;"><span style="font-size: 0.88rem; color: var(--text-secondary);">Textos y descripciones del negocio</span></label>
+              <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;"><input type="checkbox" name="contenido" value="fotos" style="width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); cursor: pointer;"><span style="font-size: 0.88rem; color: var(--text-secondary);">Fotos profesionales del negocio/productos</span></label>
+              <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;"><input type="checkbox" name="contenido" value="logo" style="width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); cursor: pointer;"><span style="font-size: 0.88rem; color: var(--text-secondary);">Logotipo del negocio</span></label>
+              <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;"><input type="checkbox" name="contenido" value="precios" style="width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); cursor: pointer;"><span style="font-size: 0.88rem; color: var(--text-secondary);">Lista de productos/servicios con precios</span></label>
+              <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;"><input type="checkbox" name="contenido" value="redes" style="width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); cursor: pointer;"><span style="font-size: 0.88rem; color: var(--text-secondary);">Redes sociales activas (Instagram, Facebook, etc.)</span></label>
+              <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;"><input type="checkbox" name="contenido" value="dominio" style="width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); cursor: pointer;"><span style="font-size: 0.88rem; color: var(--text-secondary);">Ya tengo un dominio web</span></label>
+              <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;"><input type="checkbox" name="contenido" value="gmb" style="width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); cursor: pointer;"><span style="font-size: 0.88rem; color: var(--text-secondary);">Ya tengo Google My Business</span></label>
+              <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;"><input type="checkbox" name="contenido" value="nada" style="width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); cursor: pointer;"><span style="font-size: 0.88rem; color: var(--text-secondary);">No tengo nada todavía</span></label>
+            </div>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <label style="display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px;">Si tenés dominio, ¿cuál es? <span style="color: var(--red);">*</span></label>
+            <input type="url" name="dominio_actual" required placeholder="Ej: www.minegocio.com.ar (o escribí 'no tengo')" style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-primary); color: var(--text-primary); font-family: inherit; font-size: 0.9rem;">
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px;">¿Qué dominio te gustaría? <span style="color: var(--red);">*</span>
+              <span style="font-weight: 400; font-size: 0.78rem; color: var(--text-muted); display: block; margin-top: 2px;">Sugerí 2-3 opciones. Verificamos disponibilidad juntos.</span>
+            </label>
+            <input type="text" name="dominio_deseado" required placeholder="Ej: bodegaelrefugio.com.ar, elrefugiowines.com" style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-primary); color: var(--text-primary); font-family: inherit; font-size: 0.9rem;">
+          </div>
+        </div>
+
+        <!-- 5. Estilo y referencias -->
+        <div style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: var(--radius); padding: 32px; margin-bottom: 24px; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: var(--glass-shadow);" class="fade-up">
+          <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); font-weight: 600; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border);">5. Estilo y referencias</p>
+          <div style="margin-bottom: 16px;">
+            <label style="display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px;">¿Tenés algún sitio web que te guste como referencia? <span style="color: var(--red);">*</span>
+              <span style="font-weight: 400; font-size: 0.78rem; color: var(--text-muted); display: block; margin-top: 2px;">Puede ser de tu rubro o de otro. Pegá los links acá.</span>
+            </label>
+            <textarea name="referencias" required rows="3" placeholder="Ej: Me gusta cómo se ve www.ejemplo.com porque..." style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-primary); color: var(--text-primary); font-family: inherit; font-size: 0.9rem; resize: vertical;"></textarea>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <label style="display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px;">¿Tenés preferencia de colores? <span style="color: var(--red);">*</span></label>
+            <input type="text" name="colores" required placeholder="Ej: dorado y negro, los de mi logo, algo moderno y oscuro" style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-primary); color: var(--text-primary); font-family: inherit; font-size: 0.9rem;">
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px;">¿Algo más que quieras contarme? <span style="color: var(--red);">*</span></label>
+            <textarea name="notas" required rows="3" placeholder="Cualquier detalle, idea, preocupación o pregunta..." style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-primary); color: var(--text-primary); font-family: inherit; font-size: 0.9rem; resize: vertical;"></textarea>
+          </div>
+        </div>
+
+        <input type="hidden" name="_subject" value="Nuevo formulario de intake — Proyecto web">
+        <input type="hidden" name="_next" value="https://jbarrancogit.github.io">
+
+        <div style="text-align: center;" class="fade-up">
+          <button type="submit" class="btn btn-primary" style="width: 100%; max-width: 400px; font-size: 1rem;">Enviar información</button>
+          <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 12px;">Al enviar, me llega tu información por email y te contacto en menos de 24 horas para coordinar el prototipo.</p>
+        </div>
+
+      </form>
     </div>
   </section>
 

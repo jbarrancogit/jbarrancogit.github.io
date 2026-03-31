@@ -191,12 +191,12 @@
       </div>
       <div class="two-col">
         <div class="field">
-          <label>Horarios de atención</label>
-          <input type="text" name="horarios" placeholder="Ej: Lun a Vie 9-18, Sáb 10-14">
+          <label>Horarios de atención <span class="required">*</span></label>
+          <input type="text" name="horarios" required placeholder="Ej: Lun a Vie 9-18, Sáb 10-14">
         </div>
         <div class="field">
-          <label>Dirección física</label>
-          <input type="text" name="direccion" placeholder="Calle, número, localidad">
+          <label>Dirección física <span class="required">*</span></label>
+          <input type="text" name="direccion" required placeholder="Calle, número, localidad">
         </div>
       </div>
     </div>
@@ -205,19 +205,19 @@
     <div class="form-section">
       <div class="form-section-title">3. ¿Qué necesitás?</div>
       <div class="field">
-        <label>Plan de interés</label>
+        <label>Plan de interés <span class="required">*</span></label>
         <div class="radio-group">
           <label class="radio-item">
-            <input type="radio" name="plan" value="starter">
-            <span><strong>Starter ($99.000)</strong> — Página web profesional</span>
+            <input type="radio" name="plan" value="starter" required>
+            <span><strong>Starter ($79.200 · ~USD 65)</strong> — Página web profesional</span>
           </label>
           <label class="radio-item">
             <input type="radio" name="plan" value="profesional">
-            <span><strong>Profesional ($280.000)</strong> — Sitio + reservas/turnos</span>
+            <span><strong>Profesional ($224.000 · ~USD 185)</strong> — Sitio + reservas/turnos</span>
           </label>
           <label class="radio-item">
             <input type="radio" name="plan" value="premium">
-            <span><strong>Premium ($480.000)</strong> — Todo + catálogo + bilingüe</span>
+            <span><strong>Premium ($384.000 · ~USD 320)</strong> — Todo + catálogo + bilingüe</span>
           </label>
           <label class="radio-item">
             <input type="radio" name="plan" value="no_se">
@@ -226,7 +226,7 @@
         </div>
       </div>
       <div class="field">
-        <label>¿Qué secciones te gustaría que tenga tu sitio?
+        <label>¿Qué secciones te gustaría que tenga tu sitio? <span class="required">*</span>
           <span class="hint">Marcá todas las que apliquen</span>
         </label>
         <div class="checkbox-group">
@@ -244,10 +244,10 @@
         </div>
       </div>
       <div class="field">
-        <label>¿Qué querés lograr con tu sitio web?
+        <label>¿Qué querés lograr con tu sitio web? <span class="required">*</span>
           <span class="hint">Ej: que me encuentren en Google, recibir reservas automáticas, mostrar mi catálogo, etc.</span>
         </label>
-        <textarea name="objetivo" rows="3" placeholder="Contame qué problema querés resolver o qué resultado esperás..."></textarea>
+        <textarea name="objetivo" required rows="3" placeholder="Contame qué problema querés resolver o qué resultado esperás..."></textarea>
       </div>
     </div>
 
@@ -255,7 +255,7 @@
     <div class="form-section">
       <div class="form-section-title">4. Contenido que tenés listo</div>
       <div class="field">
-        <label>¿Qué material tenés disponible hoy?
+        <label>¿Qué material tenés disponible hoy? <span class="required">*</span>
           <span class="hint">Marcá lo que ya tengas. Lo que no tengas, lo resolvemos juntos.</span>
         </label>
         <div class="checkbox-group">
@@ -270,14 +270,14 @@
         </div>
       </div>
       <div class="field">
-        <label>Si tenés dominio, ¿cuál es?</label>
-        <input type="url" name="dominio_actual" placeholder="Ej: www.minegocio.com.ar">
+        <label>Si tenés dominio, ¿cuál es? <span class="required">*</span></label>
+        <input type="url" name="dominio_actual" required placeholder="Ej: www.minegocio.com.ar">
       </div>
       <div class="field">
-        <label>¿Qué dominio te gustaría? (si no tenés uno)
+        <label>¿Qué dominio te gustaría? (si no tenés uno) <span class="required">*</span>
           <span class="hint">Sugerí 2-3 opciones. Verificamos disponibilidad juntos.</span>
         </label>
-        <input type="text" name="dominio_deseado" placeholder="Ej: bodegaelrefugio.com.ar, elrefugiowines.com">
+        <input type="text" name="dominio_deseado" required placeholder="Ej: bodegaelrefugio.com.ar, elrefugiowines.com">
       </div>
     </div>
 
@@ -285,18 +285,18 @@
     <div class="form-section">
       <div class="form-section-title">5. Estilo y referencias</div>
       <div class="field">
-        <label>¿Tenés algún sitio web que te guste como referencia?
+        <label>¿Tenés algún sitio web que te guste como referencia? <span class="required">*</span>
           <span class="hint">Puede ser de tu rubro o de otro. Pegá los links acá.</span>
         </label>
-        <textarea name="referencias" rows="3" placeholder="Ej: Me gusta cómo se ve www.ejemplo.com porque..."></textarea>
+        <textarea name="referencias" required rows="3" placeholder="Ej: Me gusta cómo se ve www.ejemplo.com porque..."></textarea>
       </div>
       <div class="field">
-        <label>¿Tenés preferencia de colores?</label>
-        <input type="text" name="colores" placeholder="Ej: dorado y negro, los de mi logo, algo moderno y oscuro">
+        <label>¿Tenés preferencia de colores? <span class="required">*</span></label>
+        <input type="text" name="colores" required placeholder="Ej: dorado y negro, los de mi logo, algo moderno y oscuro">
       </div>
       <div class="field">
-        <label>¿Algo más que quieras contarme?</label>
-        <textarea name="notas" rows="3" placeholder="Cualquier detalle, idea, preocupación o pregunta..."></textarea>
+        <label>¿Algo más que quieras contarme? <span class="required">*</span></label>
+        <textarea name="notas" required rows="3" placeholder="Cualquier detalle, idea, preocupación o pregunta..."></textarea>
       </div>
     </div>
 
