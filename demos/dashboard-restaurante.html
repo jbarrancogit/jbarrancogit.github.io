@@ -7,27 +7,39 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --bg-primary: #0F1117;
-            --bg-secondary: #1A1D27;
-            --bg-card: #1E2130;
-            --bg-sidebar: #141620;
-            --border: #2A2D3A;
-            --text-primary: #F1F1F4;
-            --text-secondary: #9CA3AF;
-            --text-muted: #6B7280;
+            --bg-primary: #0B0D13;
+            --bg-secondary: #12151E;
+            --bg-card: #161923;
+            --bg-card-hover: #1B1F2B;
+            --bg-sidebar: #0E1019;
+            --bg-input: #1A1D28;
+            --border: #22263A;
+            --border-light: #2A2F45;
+            --text-primary: #F3F4F6;
+            --text-secondary: #A1A7B8;
+            --text-muted: #626880;
             --accent: #F59E0B;
-            --accent-hover: #D97706;
-            --accent-glow: rgba(245, 158, 11, 0.15);
-            --green: #22C55E;
-            --red: #EF4444;
+            --accent-hover: #E8930A;
+            --accent-dim: rgba(245, 158, 11, 0.12);
+            --accent-glow: rgba(245, 158, 11, 0.18);
+            --green: #34D399;
+            --green-dim: rgba(52, 211, 153, 0.12);
+            --red: #F87171;
+            --red-dim: rgba(248, 113, 113, 0.12);
+            --blue: #60A5FA;
+            --blue-dim: rgba(96, 165, 250, 0.12);
+            --purple: #A78BFA;
+            --pink: #F472B6;
             --sidebar-width: 260px;
+            --banner-h: 42px;
+            --radius: 12px;
+            --radius-sm: 8px;
+            --shadow-card: 0 1px 3px rgba(0,0,0,.2), 0 4px 16px rgba(0,0,0,.15);
+            --shadow-card-hover: 0 4px 24px rgba(0,0,0,.35);
+            --transition: .25s cubic-bezier(.4,0,.2,1);
         }
 
         body {
@@ -36,528 +48,417 @@
             color: var(--text-primary);
             min-height: 100vh;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Demo Banner */
+        /* ====================== DEMO BANNER ====================== */
         .demo-banner {
-            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 50%, #B45309 100%);
             color: #000;
             text-align: center;
             padding: 10px 20px;
-            font-size: 0.85rem;
+            font-size: .82rem;
             font-weight: 500;
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 6px;
             flex-wrap: wrap;
+            height: var(--banner-h);
+            letter-spacing: -.01em;
         }
-
         .demo-banner a {
             color: #000;
             font-weight: 700;
             text-decoration: underline;
             text-underline-offset: 2px;
-            transition: opacity 0.2s;
+            transition: opacity var(--transition);
         }
+        .demo-banner a:hover { opacity: .75; }
 
-        .demo-banner a:hover {
-            opacity: 0.8;
-        }
-
-        /* Sidebar */
+        /* ====================== SIDEBAR ====================== */
         .sidebar {
             position: fixed;
-            top: 40px;
-            left: 0;
-            bottom: 0;
+            top: var(--banner-h);
+            left: 0; bottom: 0;
             width: var(--sidebar-width);
             background: var(--bg-sidebar);
             border-right: 1px solid var(--border);
-            padding: 24px 0;
+            padding: 20px 0;
             overflow-y: auto;
             z-index: 900;
-            transition: transform 0.3s ease;
+            transition: transform .3s ease;
+            display: flex;
+            flex-direction: column;
         }
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-track { background: transparent; }
+        .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 
         .sidebar-brand {
-            padding: 0 24px 24px;
+            padding: 4px 22px 20px;
             border-bottom: 1px solid var(--border);
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
+        .sidebar-brand .logo-icon { font-size: 1.6rem; margin-bottom: 2px; }
+        .sidebar-brand h2 { font-size: 1.05rem; font-weight: 700; color: var(--text-primary); line-height: 1.3; }
+        .sidebar-brand p { font-size: .72rem; color: var(--text-muted); margin-top: 2px; }
 
-        .sidebar-brand .logo-icon {
-            font-size: 1.8rem;
-            margin-bottom: 4px;
-        }
-
-        .sidebar-brand h2 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            line-height: 1.3;
-        }
-
-        .sidebar-brand p {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
-
-        .sidebar-section {
-            padding: 0 12px;
-            margin-bottom: 8px;
-        }
-
+        .sidebar-section { padding: 0 10px; margin-bottom: 6px; }
         .sidebar-section-label {
-            font-size: 0.65rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-muted);
-            padding: 8px 12px 4px;
+            font-size: .62rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: .1em; color: var(--text-muted); padding: 10px 12px 4px;
         }
 
         .sidebar-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 12px;
-            border-radius: 8px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: all 0.2s;
-            cursor: pointer;
+            display: flex; align-items: center; gap: 11px;
+            padding: 9px 12px; border-radius: var(--radius-sm);
+            color: var(--text-secondary); text-decoration: none;
+            font-size: .855rem; font-weight: 500;
+            transition: all var(--transition); cursor: pointer;
+            position: relative;
         }
-
-        .sidebar-link:hover {
-            background: rgba(245, 158, 11, 0.08);
-            color: var(--text-primary);
-        }
-
+        .sidebar-link:hover { background: rgba(245,158,11,.06); color: var(--text-primary); }
         .sidebar-link.active {
-            background: var(--accent-glow);
-            color: var(--accent);
+            background: var(--accent-dim); color: var(--accent);
         }
-
-        .sidebar-link svg {
-            width: 20px;
-            height: 20px;
-            flex-shrink: 0;
+        .sidebar-link.active::before {
+            content: '';
+            position: absolute; left: -10px; top: 50%; transform: translateY(-50%);
+            width: 3px; height: 22px; border-radius: 0 3px 3px 0;
+            background: var(--accent);
         }
+        .sidebar-link svg { width: 19px; height: 19px; flex-shrink: 0; }
 
-        /* Mobile menu toggle */
+        .sidebar-spacer { flex: 1; }
+
+        /* ====================== MOBILE ====================== */
         .mobile-toggle {
-            display: none;
-            position: fixed;
-            top: 50px;
-            left: 12px;
-            z-index: 950;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            color: var(--text-primary);
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 1.2rem;
+            display: none; position: fixed;
+            top: calc(var(--banner-h) + 8px); left: 12px; z-index: 950;
+            background: var(--bg-card); border: 1px solid var(--border);
+            color: var(--text-primary); width: 40px; height: 40px;
+            border-radius: var(--radius-sm); align-items: center;
+            justify-content: center; cursor: pointer; font-size: 1.2rem;
         }
+        .sidebar-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,.55); z-index: 890;
+            backdrop-filter: blur(2px);
+        }
+        .sidebar-overlay.active { display: block; }
 
-        /* Main Content */
+        /* ====================== MAIN CONTENT ====================== */
         .main-content {
             margin-left: var(--sidebar-width);
-            margin-top: 40px;
-            padding: 32px;
-            min-height: calc(100vh - 40px);
+            margin-top: var(--banner-h);
+            padding: 32px 36px;
+            min-height: calc(100vh - var(--banner-h));
         }
 
-        .page-header {
-            margin-bottom: 32px;
+        /* ====================== VIEW SECTIONS ====================== */
+        .view-section {
+            display: none;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity .35s ease, transform .35s ease;
+        }
+        .view-section.active {
+            display: block;
+        }
+        .view-section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
+        /* ====================== PAGE HEADER ====================== */
+        .page-header { margin-bottom: 28px; }
         .page-header h1 {
-            font-size: 1.75rem;
-            font-weight: 800;
-            color: var(--text-primary);
-            margin-bottom: 4px;
+            font-size: 1.6rem; font-weight: 800; color: var(--text-primary);
+            margin-bottom: 4px; letter-spacing: -.02em;
         }
-
-        .page-header p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
+        .page-header p { color: var(--text-muted); font-size: .88rem; }
         .page-header .date-range {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-top: 12px;
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--bg-card); border: 1px solid var(--border);
+            padding: 7px 14px; border-radius: var(--radius-sm);
+            font-size: .82rem; color: var(--text-secondary); margin-top: 10px;
         }
 
-        /* KPI Grid */
+        /* ====================== KPI GRID ====================== */
         .kpi-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-bottom: 32px;
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 18px; margin-bottom: 28px;
         }
-
         .kpi-card {
-            background: var(--bg-card);
+            background: linear-gradient(165deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 24px;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.2s, box-shadow 0.2s;
+            border-radius: var(--radius); padding: 22px 24px;
+            position: relative; overflow: hidden;
+            transition: transform var(--transition), box-shadow var(--transition);
+            box-shadow: var(--shadow-card);
         }
-
         .kpi-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-card-hover);
         }
-
         .kpi-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent), transparent);
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
         }
-
         .kpi-label {
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            margin-bottom: 8px;
+            font-size: .73rem; font-weight: 600; color: var(--text-muted);
+            text-transform: uppercase; letter-spacing: .05em; margin-bottom: 8px;
         }
-
         .kpi-value {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--text-primary);
-            margin-bottom: 8px;
-            line-height: 1;
+            font-size: 1.7rem; font-weight: 800; color: var(--text-primary);
+            margin-bottom: 8px; line-height: 1; letter-spacing: -.02em;
         }
-
         .kpi-change {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            padding: 3px 8px;
+            display: inline-flex; align-items: center; gap: 4px;
+            font-size: .76rem; font-weight: 600; padding: 3px 8px;
             border-radius: 6px;
         }
-
-        .kpi-change.positive {
-            color: var(--green);
-            background: rgba(34, 197, 94, 0.1);
-        }
-
-        .kpi-change.negative {
-            color: var(--red);
-            background: rgba(239, 68, 68, 0.1);
-        }
-
+        .kpi-change.positive { color: var(--green); background: var(--green-dim); }
+        .kpi-change.negative { color: var(--red); background: var(--red-dim); }
         .kpi-icon {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 44px;
-            height: 44px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--accent-glow);
-            font-size: 1.3rem;
+            position: absolute; top: 18px; right: 18px;
+            width: 42px; height: 42px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            background: var(--accent-dim); font-size: 1.2rem;
         }
 
-        /* Charts Grid */
+        /* ====================== CHARTS ====================== */
         .charts-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-bottom: 32px;
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 18px; margin-bottom: 28px;
         }
-
         .chart-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 24px;
-            transition: box-shadow 0.2s;
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 22px;
+            transition: box-shadow var(--transition);
+            box-shadow: var(--shadow-card);
         }
-
-        .chart-card:hover {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .chart-card.full-width {
-            grid-column: 1 / -1;
-        }
+        .chart-card:hover { box-shadow: var(--shadow-card-hover); }
+        .chart-card.full-width { grid-column: 1 / -1; }
 
         .chart-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 18px;
         }
-
-        .chart-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .chart-subtitle {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
-
+        .chart-title { font-size: .95rem; font-weight: 700; color: var(--text-primary); }
+        .chart-subtitle { font-size: .73rem; color: var(--text-muted); margin-top: 2px; }
         .chart-badge {
-            font-size: 0.7rem;
-            font-weight: 600;
-            padding: 4px 10px;
-            border-radius: 6px;
-            background: var(--accent-glow);
-            color: var(--accent);
+            font-size: .68rem; font-weight: 600; padding: 4px 10px;
+            border-radius: 6px; background: var(--accent-dim); color: var(--accent);
         }
+        .chart-container { position: relative; width: 100%; height: 280px; }
+        .chart-container.doughnut { height: 300px; max-width: 340px; margin: 0 auto; }
+        .chart-container.h-220 { height: 220px; }
 
-        .chart-container {
-            position: relative;
-            width: 100%;
-            height: 280px;
-        }
-
-        .chart-container.doughnut {
-            height: 300px;
-            max-width: 360px;
-            margin: 0 auto;
-        }
-
-        /* Table */
-        .table-wrapper {
-            overflow-x: auto;
-        }
-
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.875rem;
-        }
-
+        /* ====================== TABLES ====================== */
+        .table-wrapper { overflow-x: auto; border-radius: var(--radius-sm); }
+        .data-table { width: 100%; border-collapse: collapse; font-size: .85rem; }
         .data-table thead th {
-            text-align: left;
-            padding: 12px 16px;
-            font-weight: 600;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-muted);
-            border-bottom: 1px solid var(--border);
-            white-space: nowrap;
+            text-align: left; padding: 11px 16px;
+            font-weight: 600; font-size: .72rem; text-transform: uppercase;
+            letter-spacing: .06em; color: var(--text-muted);
+            border-bottom: 1px solid var(--border); white-space: nowrap;
+            background: rgba(0,0,0,.15);
         }
-
-        .data-table tbody tr {
-            transition: background 0.15s;
-        }
-
-        .data-table tbody tr:hover {
-            background: rgba(245, 158, 11, 0.04);
-        }
-
+        .data-table tbody tr { transition: background var(--transition); }
+        .data-table tbody tr:hover { background: rgba(245,158,11,.04); }
         .data-table tbody td {
-            padding: 14px 16px;
-            border-bottom: 1px solid rgba(42, 45, 58, 0.5);
-            color: var(--text-secondary);
-            white-space: nowrap;
+            padding: 12px 16px; border-bottom: 1px solid rgba(34,38,58,.4);
+            color: var(--text-secondary); white-space: nowrap;
         }
-
-        .data-table tbody td:first-child {
-            color: var(--text-primary);
-            font-weight: 500;
-        }
-
+        .data-table tbody td:first-child { color: var(--text-primary); font-weight: 500; }
         .table-rank {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 26px;
-            height: 26px;
-            border-radius: 6px;
-            background: var(--accent-glow);
-            color: var(--accent);
-            font-weight: 700;
-            font-size: 0.75rem;
-            margin-right: 10px;
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 26px; height: 26px; border-radius: 6px;
+            background: var(--accent-dim); color: var(--accent);
+            font-weight: 700; font-size: .73rem; margin-right: 8px;
         }
-
-        .trend-up {
-            color: var(--green);
-            font-weight: 600;
-        }
-
-        .trend-down {
-            color: var(--red);
-            font-weight: 600;
-        }
-
+        .trend-up { color: var(--green); font-weight: 600; }
+        .trend-down { color: var(--red); font-weight: 600; }
         .category-badge {
-            display: inline-block;
-            padding: 3px 10px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            background: rgba(245, 158, 11, 0.1);
+            display: inline-block; padding: 3px 10px; border-radius: 6px;
+            font-size: .73rem; font-weight: 500;
+            background: var(--accent-dim); color: var(--accent);
+        }
+
+        /* ====================== STATUS BADGES ====================== */
+        .status-badge {
+            display: inline-block; padding: 3px 10px; border-radius: 6px;
+            font-size: .73rem; font-weight: 600;
+        }
+        .status-badge.confirmada { background: var(--green-dim); color: var(--green); }
+        .status-badge.pendiente { background: rgba(245,158,11,.12); color: var(--accent); }
+        .status-badge.cancelada { background: var(--red-dim); color: var(--red); }
+
+        .rating-stars { color: var(--accent); font-size: .8rem; letter-spacing: 1px; }
+
+        /* ====================== FILTER TABS ====================== */
+        .filter-tabs {
+            display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;
+        }
+        .filter-tab {
+            padding: 7px 16px; border-radius: var(--radius-sm);
+            font-size: .8rem; font-weight: 500; cursor: pointer;
+            background: var(--bg-input); border: 1px solid var(--border);
+            color: var(--text-secondary); transition: all var(--transition);
+        }
+        .filter-tab:hover { border-color: var(--accent); color: var(--text-primary); }
+        .filter-tab.active {
+            background: var(--accent-dim); border-color: var(--accent);
             color: var(--accent);
         }
 
-        /* Footer */
+        /* ====================== MENU CATEGORY CARDS ====================== */
+        .menu-categories-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px; margin-bottom: 28px;
+        }
+        .menu-cat-card {
+            background: linear-gradient(165deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
+            border: 1px solid var(--border); border-radius: var(--radius);
+            padding: 20px; text-align: center;
+            transition: transform var(--transition), box-shadow var(--transition);
+            box-shadow: var(--shadow-card);
+        }
+        .menu-cat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-card-hover); }
+        .menu-cat-icon { font-size: 2rem; margin-bottom: 10px; }
+        .menu-cat-name { font-size: .95rem; font-weight: 700; margin-bottom: 6px; color: var(--text-primary); }
+        .menu-cat-stat { font-size: .75rem; color: var(--text-muted); margin-bottom: 3px; }
+        .menu-cat-stat span { color: var(--accent); font-weight: 600; }
+
+        /* ====================== SETTINGS FORM ====================== */
+        .settings-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+        }
+        .settings-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 24px;
+            box-shadow: var(--shadow-card);
+        }
+        .settings-card h3 {
+            font-size: 1rem; font-weight: 700; margin-bottom: 20px; color: var(--text-primary);
+        }
+        .form-group { margin-bottom: 16px; }
+        .form-group label {
+            display: block; font-size: .78rem; font-weight: 600;
+            color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase;
+            letter-spacing: .04em;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 10px 14px; border-radius: var(--radius-sm);
+            border: 1px solid var(--border); background: var(--bg-input);
+            color: var(--text-primary); font-family: inherit; font-size: .88rem;
+            transition: border-color var(--transition);
+            outline: none;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--accent);
+        }
+        .form-group textarea { resize: vertical; min-height: 80px; }
+
+        .toggle-row {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 0; border-bottom: 1px solid var(--border);
+        }
+        .toggle-row:last-child { border-bottom: none; }
+        .toggle-label { font-size: .88rem; color: var(--text-secondary); }
+        .toggle-desc { font-size: .73rem; color: var(--text-muted); margin-top: 2px; }
+        .toggle-switch {
+            position: relative; width: 44px; height: 24px; cursor: pointer;
+        }
+        .toggle-switch input { display: none; }
+        .toggle-slider {
+            position: absolute; inset: 0; background: var(--border);
+            border-radius: 12px; transition: background var(--transition);
+        }
+        .toggle-slider::before {
+            content: ''; position: absolute; left: 3px; top: 3px;
+            width: 18px; height: 18px; border-radius: 50%;
+            background: #fff; transition: transform var(--transition);
+        }
+        .toggle-switch input:checked + .toggle-slider { background: var(--accent); }
+        .toggle-switch input:checked + .toggle-slider::before { transform: translateX(20px); }
+
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 24px; border-radius: var(--radius-sm);
+            background: var(--accent); color: #000; font-weight: 700;
+            font-size: .88rem; border: none; cursor: pointer;
+            transition: background var(--transition), transform var(--transition);
+        }
+        .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
+        .btn-outline {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 24px; border-radius: var(--radius-sm);
+            background: transparent; color: var(--accent);
+            font-weight: 600; font-size: .88rem;
+            border: 1px solid var(--accent); cursor: pointer;
+            transition: all var(--transition);
+        }
+        .btn-outline:hover { background: var(--accent-dim); }
+
+        /* ====================== FOOTER ====================== */
         .dashboard-footer {
-            text-align: center;
-            padding: 32px 0 16px;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            border-top: 1px solid var(--border);
-            margin-top: 16px;
+            text-align: center; padding: 28px 0 14px;
+            color: var(--text-muted); font-size: .78rem;
+            border-top: 1px solid var(--border); margin-top: 16px;
         }
-
         .dashboard-footer a {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 600;
+            color: var(--accent); text-decoration: none; font-weight: 600;
         }
+        .dashboard-footer a:hover { text-decoration: underline; }
 
-        .dashboard-footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Animations */
+        /* ====================== ANIMATIONS ====================== */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(18px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
         .animate-in {
-            animation: fadeInUp 0.5s ease forwards;
-            opacity: 0;
+            animation: fadeInUp .45s ease forwards; opacity: 0;
         }
+        .animate-in:nth-child(1) { animation-delay: .04s; }
+        .animate-in:nth-child(2) { animation-delay: .08s; }
+        .animate-in:nth-child(3) { animation-delay: .12s; }
+        .animate-in:nth-child(4) { animation-delay: .16s; }
+        .animate-in:nth-child(5) { animation-delay: .20s; }
+        .animate-in:nth-child(6) { animation-delay: .24s; }
+        .animate-in:nth-child(7) { animation-delay: .28s; }
+        .animate-in:nth-child(8) { animation-delay: .32s; }
 
-        .animate-in:nth-child(1) { animation-delay: 0.05s; }
-        .animate-in:nth-child(2) { animation-delay: 0.1s; }
-        .animate-in:nth-child(3) { animation-delay: 0.15s; }
-        .animate-in:nth-child(4) { animation-delay: 0.2s; }
-        .animate-in:nth-child(5) { animation-delay: 0.25s; }
-        .animate-in:nth-child(6) { animation-delay: 0.3s; }
-        .animate-in:nth-child(7) { animation-delay: 0.35s; }
-        .animate-in:nth-child(8) { animation-delay: 0.4s; }
-
-        /* Responsive */
+        /* ====================== RESPONSIVE ====================== */
         @media (max-width: 1200px) {
-            .kpi-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+            .settings-grid { grid-template-columns: 1fr; }
         }
-
         @media (max-width: 768px) {
-            .sidebar {
-                transform: translateX(-100%);
-            }
-
-            .sidebar.open {
-                transform: translateX(0);
-            }
-
-            .mobile-toggle {
-                display: flex;
-            }
-
-            .main-content {
-                margin-left: 0;
-                padding: 20px 16px;
-                padding-top: 60px;
-            }
-
-            .kpi-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .charts-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .page-header h1 {
-                font-size: 1.3rem;
-            }
-
-            .kpi-value {
-                font-size: 1.5rem;
-            }
-
-            .chart-container {
-                height: 240px;
-            }
-
-            .demo-banner {
-                font-size: 0.75rem;
-                padding: 8px 12px;
-            }
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
+            .mobile-toggle { display: flex; }
+            .main-content { margin-left: 0; padding: 20px 16px; padding-top: 56px; }
+            .kpi-grid { grid-template-columns: 1fr; }
+            .charts-grid { grid-template-columns: 1fr; }
+            .page-header h1 { font-size: 1.25rem; }
+            .kpi-value { font-size: 1.4rem; }
+            .chart-container { height: 220px; }
+            .demo-banner { font-size: .72rem; padding: 8px 12px; }
+            .menu-categories-grid { grid-template-columns: repeat(2, 1fr); }
         }
-
         @media (max-width: 480px) {
-            .main-content {
-                padding: 16px 12px;
-                padding-top: 56px;
-            }
-
-            .chart-card {
-                padding: 16px;
-            }
-
-            .kpi-card {
-                padding: 18px;
-            }
-        }
-
-        /* Overlay for mobile sidebar */
-        .sidebar-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 890;
-        }
-
-        .sidebar-overlay.active {
-            display: block;
+            .main-content { padding: 14px 12px; padding-top: 52px; }
+            .chart-card { padding: 16px; }
+            .kpi-card { padding: 16px; }
+            .menu-categories-grid { grid-template-columns: 1fr; }
+            .filter-tabs { gap: 6px; }
         }
     </style>
 </head>
@@ -565,8 +466,8 @@
 
     <!-- Demo Banner -->
     <div class="demo-banner">
-        ✨ Esta es una demo creada por Juan Barranco — Todos los datos son ficticios e ilustrativos.
-        <a href="https://wa.me/5492616423730?text=Hola%20Juan!%20Vi%20el%20dashboard%20de%20restaurante%20y%20me%20interesa" target="_blank" rel="noopener">¿Querés un dashboard así para tu restaurante? → Contactame</a>
+        Esta es una demo creada por Juan Barranco — Todos los datos son ficticios e ilustrativos.
+        <a href="https://wa.me/5492616423730?text=Hola%20Juan!%20Vi%20el%20dashboard%20de%20restaurante%20y%20me%20interesa" target="_blank" rel="noopener">¿Querés un dashboard así? → Contactame por WhatsApp</a>
     </div>
 
     <!-- Mobile Toggle -->
@@ -585,19 +486,19 @@
 
         <div class="sidebar-section">
             <div class="sidebar-section-label">Principal</div>
-            <a class="sidebar-link active" href="#dashboard">
+            <a class="sidebar-link active" data-view="dashboard" onclick="switchView('dashboard')">
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
                 Dashboard
             </a>
-            <a class="sidebar-link" href="#ventas">
+            <a class="sidebar-link" data-view="ventas" onclick="switchView('ventas')">
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
                 Ventas
             </a>
-            <a class="sidebar-link" href="#reservas">
+            <a class="sidebar-link" data-view="reservas" onclick="switchView('reservas')">
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
                 Reservas
             </a>
-            <a class="sidebar-link" href="#menu">
+            <a class="sidebar-link" data-view="menu" onclick="switchView('menu')">
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
                 Menú
             </a>
@@ -605,15 +506,11 @@
 
         <div class="sidebar-section">
             <div class="sidebar-section-label">Análisis</div>
-            <a class="sidebar-link" href="#clientes">
+            <a class="sidebar-link" data-view="clientes" onclick="switchView('clientes')">
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
                 Clientes
             </a>
-            <a class="sidebar-link" href="#costos">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                Costos
-            </a>
-            <a class="sidebar-link" href="#reportes">
+            <a class="sidebar-link" data-view="reportes" onclick="switchView('reportes')">
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
                 Reportes
             </a>
@@ -621,507 +518,919 @@
 
         <div class="sidebar-section">
             <div class="sidebar-section-label">Configuración</div>
-            <a class="sidebar-link" href="#ajustes">
+            <a class="sidebar-link" data-view="ajustes" onclick="switchView('ajustes')">
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
                 Ajustes
             </a>
         </div>
+
+        <div class="sidebar-spacer"></div>
     </nav>
 
     <!-- Main Content -->
     <main class="main-content">
 
-        <!-- Page Header -->
-        <div class="page-header animate-in">
-            <h1>Fuegos de Mendoza — Panel de Control</h1>
-            <p>Resumen operativo y métricas del restaurante</p>
-            <div class="date-range">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-                Marzo 2026
+        <!-- ============================================================ -->
+        <!-- VIEW: DASHBOARD -->
+        <!-- ============================================================ -->
+        <section id="view-dashboard" class="view-section active visible">
+            <div class="page-header">
+                <h1>Dashboard</h1>
+                <p>Resumen operativo y métricas del restaurante</p>
+                <div class="date-range">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                    Marzo 2026
+                </div>
             </div>
-        </div>
 
-        <!-- KPI Cards -->
-        <div class="kpi-grid">
-            <div class="kpi-card animate-in">
-                <div class="kpi-icon">💰</div>
-                <div class="kpi-label">Facturación del mes</div>
-                <div class="kpi-value">$6.230.000</div>
-                <span class="kpi-change positive">↑ +15% vs. mes anterior</span>
+            <div class="kpi-grid">
+                <div class="kpi-card animate-in">
+                    <div class="kpi-icon">💰</div>
+                    <div class="kpi-label">Facturación del mes</div>
+                    <div class="kpi-value">$6.230.000</div>
+                    <span class="kpi-change positive">↑ +15% vs. mes anterior</span>
+                </div>
+                <div class="kpi-card animate-in">
+                    <div class="kpi-icon">📅</div>
+                    <div class="kpi-label">Reservas completadas</div>
+                    <div class="kpi-value">412</div>
+                    <span class="kpi-change positive">↑ +18% vs. mes anterior</span>
+                </div>
+                <div class="kpi-card animate-in">
+                    <div class="kpi-icon">🎫</div>
+                    <div class="kpi-label">Ticket promedio</div>
+                    <div class="kpi-value">$15.120</div>
+                    <span class="kpi-change positive">↑ +5% vs. mes anterior</span>
+                </div>
+                <div class="kpi-card animate-in">
+                    <div class="kpi-icon">📊</div>
+                    <div class="kpi-label">Ocupación promedio</div>
+                    <div class="kpi-value">78%</div>
+                    <span class="kpi-change positive">↑ +7% vs. mes anterior</span>
+                </div>
             </div>
-            <div class="kpi-card animate-in">
-                <div class="kpi-icon">📅</div>
-                <div class="kpi-label">Reservas completadas</div>
-                <div class="kpi-value">412</div>
-                <span class="kpi-change positive">↑ +18% vs. mes anterior</span>
-            </div>
-            <div class="kpi-card animate-in">
-                <div class="kpi-icon">🎫</div>
-                <div class="kpi-label">Ticket promedio</div>
-                <div class="kpi-value">$15.120</div>
-                <span class="kpi-change positive">↑ +5% vs. mes anterior</span>
-            </div>
-            <div class="kpi-card animate-in">
-                <div class="kpi-icon">📊</div>
-                <div class="kpi-label">Ocupación promedio</div>
-                <div class="kpi-value">78%</div>
-                <span class="kpi-change positive">↑ +7% vs. mes anterior</span>
-            </div>
-        </div>
 
-        <!-- Charts Row 1: Facturación + Categorías -->
-        <div class="charts-grid">
-            <div class="chart-card animate-in">
-                <div class="chart-header">
-                    <div>
-                        <div class="chart-title">Facturación semanal</div>
-                        <div class="chart-subtitle">Últimas 12 semanas</div>
+            <div class="charts-grid">
+                <div class="chart-card animate-in">
+                    <div class="chart-header">
+                        <div>
+                            <div class="chart-title">Facturación semanal</div>
+                            <div class="chart-subtitle">Últimas 12 semanas</div>
+                        </div>
+                        <span class="chart-badge">Actualizado hoy</span>
                     </div>
-                    <span class="chart-badge">Actualizado hoy</span>
-                </div>
-                <div class="chart-container">
-                    <canvas id="revenueChart"></canvas>
-                </div>
-            </div>
-
-            <div class="chart-card animate-in">
-                <div class="chart-header">
-                    <div>
-                        <div class="chart-title">Ventas por categoría</div>
-                        <div class="chart-subtitle">Distribución porcentual del mes</div>
+                    <div class="chart-container">
+                        <canvas id="revenueChart"></canvas>
                     </div>
                 </div>
-                <div class="chart-container doughnut">
-                    <canvas id="categoryChart"></canvas>
-                </div>
-            </div>
-        </div>
-
-        <!-- Charts Row 2: Reservas + Horarios pico -->
-        <div class="charts-grid">
-            <div class="chart-card animate-in">
-                <div class="chart-header">
-                    <div>
-                        <div class="chart-title">Reservas por día de la semana</div>
-                        <div class="chart-subtitle">Promedio del último mes</div>
+                <div class="chart-card animate-in">
+                    <div class="chart-header">
+                        <div>
+                            <div class="chart-title">Ventas por categoría</div>
+                            <div class="chart-subtitle">Distribución porcentual del mes</div>
+                        </div>
+                    </div>
+                    <div class="chart-container doughnut">
+                        <canvas id="categoryChart"></canvas>
                     </div>
                 </div>
-                <div class="chart-container">
-                    <canvas id="reservationsChart"></canvas>
-                </div>
             </div>
 
-            <div class="chart-card animate-in">
-                <div class="chart-header">
-                    <div>
-                        <div class="chart-title">Horarios pico</div>
-                        <div class="chart-subtitle">Distribución horaria de comensales</div>
+            <div class="charts-grid">
+                <div class="chart-card animate-in">
+                    <div class="chart-header">
+                        <div>
+                            <div class="chart-title">Reservas por día de la semana</div>
+                            <div class="chart-subtitle">Promedio del último mes</div>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="reservationsChart"></canvas>
                     </div>
                 </div>
-                <div class="chart-container">
-                    <canvas id="peakHoursChart"></canvas>
+                <div class="chart-card animate-in">
+                    <div class="chart-header">
+                        <div>
+                            <div class="chart-title">Horarios pico</div>
+                            <div class="chart-subtitle">Distribución horaria de comensales</div>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="peakHoursChart"></canvas>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Table: Platos más pedidos -->
-        <div class="chart-card full-width animate-in" style="margin-bottom: 32px;">
-            <div class="chart-header">
-                <div>
-                    <div class="chart-title">Platos más pedidos</div>
-                    <div class="chart-subtitle">Top 8 del mes en curso</div>
+            <div class="chart-card full-width animate-in" style="margin-bottom:28px;">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">Platos más pedidos</div>
+                        <div class="chart-subtitle">Top 8 del mes en curso</div>
+                    </div>
+                    <span class="chart-badge">8 platos</span>
                 </div>
-                <span class="chart-badge">8 platos</span>
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>#</th><th>Plato</th><th>Categoría</th><th>Pedidos/mes</th><th>Ingreso</th><th>Tendencia</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><span class="table-rank">1</span></td><td>Bife de chorizo a la parrilla</td><td><span class="category-badge">Carnes</span></td><td>342</td><td>$3.420.000</td><td><span class="trend-up">↑ +12%</span></td></tr>
+                            <tr><td><span class="table-rank">2</span></td><td>Entraña con chimichurri</td><td><span class="category-badge">Carnes</span></td><td>287</td><td>$2.583.000</td><td><span class="trend-up">↑ +8%</span></td></tr>
+                            <tr><td><span class="table-rank">3</span></td><td>Sorrentinos de cordero</td><td><span class="category-badge">Pastas</span></td><td>198</td><td>$1.584.000</td><td><span class="trend-up">↑ +22%</span></td></tr>
+                            <tr><td><span class="table-rank">4</span></td><td>Malbec Reserva (botella)</td><td><span class="category-badge">Vinos</span></td><td>186</td><td>$1.674.000</td><td><span class="trend-up">↑ +6%</span></td></tr>
+                            <tr><td><span class="table-rank">5</span></td><td>Provoleta con tomate seco</td><td><span class="category-badge">Entradas</span></td><td>164</td><td>$820.000</td><td><span class="trend-up">↑ +15%</span></td></tr>
+                            <tr><td><span class="table-rank">6</span></td><td>Ñoquis con salsa de nuez</td><td><span class="category-badge">Pastas</span></td><td>153</td><td>$1.071.000</td><td><span class="trend-down">↓ -3%</span></td></tr>
+                            <tr><td><span class="table-rank">7</span></td><td>Empanadas mendocinas (x3)</td><td><span class="category-badge">Entradas</span></td><td>141</td><td>$564.000</td><td><span class="trend-up">↑ +10%</span></td></tr>
+                            <tr><td><span class="table-rank">8</span></td><td>Volcán de chocolate</td><td><span class="category-badge">Postres</span></td><td>128</td><td>$640.000</td><td><span class="trend-down">↓ -2%</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="table-wrapper">
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Plato</th>
-                            <th>Categoría</th>
-                            <th>Pedidos/mes</th>
-                            <th>Ingreso</th>
-                            <th>Tendencia</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><span class="table-rank">1</span></td>
-                            <td>Bife de chorizo a la parrilla</td>
-                            <td><span class="category-badge">Carnes</span></td>
-                            <td>342</td>
-                            <td>$3.420.000</td>
-                            <td><span class="trend-up">↑ +12%</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="table-rank">2</span></td>
-                            <td>Entraña con chimichurri</td>
-                            <td><span class="category-badge">Carnes</span></td>
-                            <td>287</td>
-                            <td>$2.583.000</td>
-                            <td><span class="trend-up">↑ +8%</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="table-rank">3</span></td>
-                            <td>Sorrentinos de cordero</td>
-                            <td><span class="category-badge">Pastas</span></td>
-                            <td>198</td>
-                            <td>$1.584.000</td>
-                            <td><span class="trend-up">↑ +22%</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="table-rank">4</span></td>
-                            <td>Malbec Reserva (botella)</td>
-                            <td><span class="category-badge">Vinos</span></td>
-                            <td>186</td>
-                            <td>$1.674.000</td>
-                            <td><span class="trend-up">↑ +6%</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="table-rank">5</span></td>
-                            <td>Provoleta con tomate seco</td>
-                            <td><span class="category-badge">Entradas</span></td>
-                            <td>164</td>
-                            <td>$820.000</td>
-                            <td><span class="trend-up">↑ +15%</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="table-rank">6</span></td>
-                            <td>Ñoquis con salsa de nuez</td>
-                            <td><span class="category-badge">Pastas</span></td>
-                            <td>153</td>
-                            <td>$1.071.000</td>
-                            <td><span class="trend-down">↓ -3%</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="table-rank">7</span></td>
-                            <td>Empanadas mendocinas (x3)</td>
-                            <td><span class="category-badge">Entradas</span></td>
-                            <td>141</td>
-                            <td>$564.000</td>
-                            <td><span class="trend-up">↑ +10%</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="table-rank">8</span></td>
-                            <td>Volcán de chocolate</td>
-                            <td><span class="category-badge">Postres</span></td>
-                            <td>128</td>
-                            <td>$640.000</td>
-                            <td><span class="trend-down">↓ -2%</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        </section>
 
-        <!-- Chart: Origen de reservas -->
-        <div class="charts-grid">
+        <!-- ============================================================ -->
+        <!-- VIEW: VENTAS -->
+        <!-- ============================================================ -->
+        <section id="view-ventas" class="view-section">
+            <div class="page-header">
+                <h1>Ventas</h1>
+                <p>Análisis detallado de ventas del restaurante</p>
+                <div class="date-range">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                    Marzo 2026
+                </div>
+            </div>
+
+            <div class="kpi-grid">
+                <div class="kpi-card animate-in">
+                    <div class="kpi-icon">💵</div>
+                    <div class="kpi-label">Total del mes</div>
+                    <div class="kpi-value">$6.230.000</div>
+                    <span class="kpi-change positive">↑ +15% vs. febrero</span>
+                </div>
+                <div class="kpi-card animate-in">
+                    <div class="kpi-icon">📈</div>
+                    <div class="kpi-label">Promedio diario</div>
+                    <div class="kpi-value">$207.667</div>
+                    <span class="kpi-change positive">↑ +9% vs. febrero</span>
+                </div>
+                <div class="kpi-card animate-in">
+                    <div class="kpi-icon">🏆</div>
+                    <div class="kpi-label">Mejor día</div>
+                    <div class="kpi-value">$385.000</div>
+                    <span class="kpi-change positive">Sábado 14/03</span>
+                </div>
+                <div class="kpi-card animate-in">
+                    <div class="kpi-icon">📉</div>
+                    <div class="kpi-label">Peor día</div>
+                    <div class="kpi-value">$78.400</div>
+                    <span class="kpi-change negative">Lunes 03/03</span>
+                </div>
+            </div>
+
+            <div class="chart-card full-width animate-in" style="margin-bottom:28px;">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">Ventas diarias</div>
+                        <div class="chart-subtitle">Últimos 30 días</div>
+                    </div>
+                    <span class="chart-badge">30 días</span>
+                </div>
+                <div class="chart-container" style="height:320px;">
+                    <canvas id="ventasDailyChart"></canvas>
+                </div>
+            </div>
+
             <div class="chart-card full-width animate-in">
                 <div class="chart-header">
                     <div>
-                        <div class="chart-title">Origen de reservas</div>
-                        <div class="chart-subtitle">Canal de adquisición — Marzo 2026</div>
+                        <div class="chart-title">Últimas 10 ventas</div>
+                        <div class="chart-subtitle">Transacciones más recientes</div>
                     </div>
                 </div>
-                <div class="chart-container">
-                    <canvas id="sourceChart"></canvas>
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Fecha</th><th>Mesa</th><th>Ítems</th><th>Total</th><th>Método de pago</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>30/03 21:45</td><td>Mesa 7</td><td>4</td><td>$62.400</td><td>Tarjeta débito</td></tr>
+                            <tr><td>30/03 21:20</td><td>Mesa 3</td><td>6</td><td>$89.200</td><td>Tarjeta crédito</td></tr>
+                            <tr><td>30/03 20:55</td><td>Mesa 12</td><td>3</td><td>$45.600</td><td>Efectivo</td></tr>
+                            <tr><td>30/03 20:30</td><td>Mesa 1</td><td>5</td><td>$73.800</td><td>Mercado Pago</td></tr>
+                            <tr><td>30/03 20:10</td><td>Mesa 9</td><td>2</td><td>$31.200</td><td>Tarjeta débito</td></tr>
+                            <tr><td>30/03 19:45</td><td>Mesa 5</td><td>7</td><td>$104.500</td><td>Tarjeta crédito</td></tr>
+                            <tr><td>30/03 14:20</td><td>Mesa 8</td><td>3</td><td>$38.900</td><td>Efectivo</td></tr>
+                            <tr><td>30/03 13:50</td><td>Mesa 2</td><td>4</td><td>$56.100</td><td>Mercado Pago</td></tr>
+                            <tr><td>30/03 13:15</td><td>Mesa 11</td><td>2</td><td>$28.700</td><td>Tarjeta crédito</td></tr>
+                            <tr><td>30/03 12:45</td><td>Mesa 6</td><td>5</td><td>$67.800</td><td>Efectivo</td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- Footer -->
+        <!-- ============================================================ -->
+        <!-- VIEW: RESERVAS -->
+        <!-- ============================================================ -->
+        <section id="view-reservas" class="view-section">
+            <div class="page-header">
+                <h1>Reservas</h1>
+                <p>Gestión y seguimiento de reservas</p>
+                <div class="date-range">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                    Marzo 2026
+                </div>
+            </div>
+
+            <div class="filter-tabs" id="reservasFilter">
+                <button class="filter-tab active" onclick="filterReservas('todas')">Todas</button>
+                <button class="filter-tab" onclick="filterReservas('confirmada')">Confirmadas</button>
+                <button class="filter-tab" onclick="filterReservas('pendiente')">Pendientes</button>
+                <button class="filter-tab" onclick="filterReservas('cancelada')">Canceladas</button>
+            </div>
+
+            <div class="chart-card full-width animate-in" style="margin-bottom:28px;">
+                <div class="table-wrapper">
+                    <table class="data-table" id="reservasTable">
+                        <thead>
+                            <tr><th>Fecha</th><th>Hora</th><th>Nombre</th><th>Personas</th><th>Estado</th><th>Notas</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr data-status="confirmada"><td>30/03</td><td>21:00</td><td>Martínez, Lucía</td><td>4</td><td><span class="status-badge confirmada">Confirmada</span></td><td>Cumpleaños, pedir torta</td></tr>
+                            <tr data-status="confirmada"><td>30/03</td><td>21:30</td><td>Fernández, Carlos</td><td>2</td><td><span class="status-badge confirmada">Confirmada</span></td><td>Mesa ventana preferida</td></tr>
+                            <tr data-status="pendiente"><td>30/03</td><td>20:30</td><td>López, Ana</td><td>6</td><td><span class="status-badge pendiente">Pendiente</span></td><td>Evento corporativo</td></tr>
+                            <tr data-status="confirmada"><td>31/03</td><td>13:00</td><td>García, Roberto</td><td>3</td><td><span class="status-badge confirmada">Confirmada</span></td><td>Sin gluten</td></tr>
+                            <tr data-status="cancelada"><td>31/03</td><td>20:00</td><td>Romero, Valentina</td><td>2</td><td><span class="status-badge cancelada">Cancelada</span></td><td>Canceló por viaje</td></tr>
+                            <tr data-status="pendiente"><td>31/03</td><td>21:00</td><td>Díaz, Martín</td><td>8</td><td><span class="status-badge pendiente">Pendiente</span></td><td>Reunión de amigos</td></tr>
+                            <tr data-status="confirmada"><td>01/04</td><td>13:30</td><td>Sosa, María Elena</td><td>4</td><td><span class="status-badge confirmada">Confirmada</span></td><td>Aniversario</td></tr>
+                            <tr data-status="confirmada"><td>01/04</td><td>20:30</td><td>Pérez, Ignacio</td><td>5</td><td><span class="status-badge confirmada">Confirmada</span></td><td>Vegetariano x2</td></tr>
+                            <tr data-status="pendiente"><td>01/04</td><td>21:30</td><td>Torres, Camila</td><td>2</td><td><span class="status-badge pendiente">Pendiente</span></td><td>Primera visita</td></tr>
+                            <tr data-status="cancelada"><td>02/04</td><td>20:00</td><td>Álvarez, Diego</td><td>3</td><td><span class="status-badge cancelada">Cancelada</span></td><td>Reprogramar semana próxima</td></tr>
+                            <tr data-status="confirmada"><td>02/04</td><td>21:00</td><td>Molina, Sofía</td><td>4</td><td><span class="status-badge confirmada">Confirmada</span></td><td>Celebración empresa</td></tr>
+                            <tr data-status="confirmada"><td>02/04</td><td>21:30</td><td>Ruiz, Emiliano</td><td>2</td><td><span class="status-badge confirmada">Confirmada</span></td><td>—</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-card full-width animate-in">
+                    <div class="chart-header">
+                        <div>
+                            <div class="chart-title">Reservas por hora del día</div>
+                            <div class="chart-subtitle">Distribución horaria — Marzo 2026</div>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="reservasHoraChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- VIEW: MENÚ -->
+        <!-- ============================================================ -->
+        <section id="view-menu" class="view-section">
+            <div class="page-header">
+                <h1>Menú</h1>
+                <p>Rendimiento por categoría y platos</p>
+            </div>
+
+            <div class="menu-categories-grid">
+                <div class="menu-cat-card animate-in">
+                    <div class="menu-cat-icon">🥩</div>
+                    <div class="menu-cat-name">Carnes</div>
+                    <div class="menu-cat-stat"><span>8</span> platos</div>
+                    <div class="menu-cat-stat">Top: <span>Bife de chorizo</span></div>
+                    <div class="menu-cat-stat">Ingreso: <span>38%</span></div>
+                </div>
+                <div class="menu-cat-card animate-in">
+                    <div class="menu-cat-icon">🍝</div>
+                    <div class="menu-cat-name">Pastas</div>
+                    <div class="menu-cat-stat"><span>6</span> platos</div>
+                    <div class="menu-cat-stat">Top: <span>Sorrentinos de cordero</span></div>
+                    <div class="menu-cat-stat">Ingreso: <span>20%</span></div>
+                </div>
+                <div class="menu-cat-card animate-in">
+                    <div class="menu-cat-icon">🧀</div>
+                    <div class="menu-cat-name">Entradas</div>
+                    <div class="menu-cat-stat"><span>7</span> platos</div>
+                    <div class="menu-cat-stat">Top: <span>Provoleta</span></div>
+                    <div class="menu-cat-stat">Ingreso: <span>15%</span></div>
+                </div>
+                <div class="menu-cat-card animate-in">
+                    <div class="menu-cat-icon">🍰</div>
+                    <div class="menu-cat-name">Postres</div>
+                    <div class="menu-cat-stat"><span>5</span> platos</div>
+                    <div class="menu-cat-stat">Top: <span>Volcán de chocolate</span></div>
+                    <div class="menu-cat-stat">Ingreso: <span>9%</span></div>
+                </div>
+                <div class="menu-cat-card animate-in">
+                    <div class="menu-cat-icon">🍷</div>
+                    <div class="menu-cat-name">Vinos</div>
+                    <div class="menu-cat-stat"><span>12</span> etiquetas</div>
+                    <div class="menu-cat-stat">Top: <span>Malbec Reserva</span></div>
+                    <div class="menu-cat-stat">Ingreso: <span>18%</span></div>
+                </div>
+            </div>
+
+            <div class="chart-card full-width animate-in">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">Todos los platos</div>
+                        <div class="chart-subtitle">Rendimiento del menú completo</div>
+                    </div>
+                    <span class="chart-badge">38 ítems</span>
+                </div>
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Plato</th><th>Categoría</th><th>Precio</th><th>Pedidos/mes</th><th>Rating</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Bife de chorizo a la parrilla</td><td><span class="category-badge">Carnes</span></td><td>$12.500</td><td>342</td><td><span class="rating-stars">★★★★★</span></td></tr>
+                            <tr><td>Entraña con chimichurri</td><td><span class="category-badge">Carnes</span></td><td>$11.200</td><td>287</td><td><span class="rating-stars">★★★★★</span></td></tr>
+                            <tr><td>Sorrentinos de cordero</td><td><span class="category-badge">Pastas</span></td><td>$9.800</td><td>198</td><td><span class="rating-stars">★★★★☆</span></td></tr>
+                            <tr><td>Malbec Reserva (botella)</td><td><span class="category-badge">Vinos</span></td><td>$9.000</td><td>186</td><td><span class="rating-stars">★★★★★</span></td></tr>
+                            <tr><td>Provoleta con tomate seco</td><td><span class="category-badge">Entradas</span></td><td>$5.000</td><td>164</td><td><span class="rating-stars">★★★★☆</span></td></tr>
+                            <tr><td>Ñoquis con salsa de nuez</td><td><span class="category-badge">Pastas</span></td><td>$8.200</td><td>153</td><td><span class="rating-stars">★★★★☆</span></td></tr>
+                            <tr><td>Empanadas mendocinas (x3)</td><td><span class="category-badge">Entradas</span></td><td>$4.500</td><td>141</td><td><span class="rating-stars">★★★★★</span></td></tr>
+                            <tr><td>Volcán de chocolate</td><td><span class="category-badge">Postres</span></td><td>$5.500</td><td>128</td><td><span class="rating-stars">★★★★★</span></td></tr>
+                            <tr><td>Tira de asado (400g)</td><td><span class="category-badge">Carnes</span></td><td>$10.800</td><td>118</td><td><span class="rating-stars">★★★★☆</span></td></tr>
+                            <tr><td>Torrontés (copa)</td><td><span class="category-badge">Vinos</span></td><td>$3.200</td><td>112</td><td><span class="rating-stars">★★★★☆</span></td></tr>
+                            <tr><td>Ravioles de ricota y nuez</td><td><span class="category-badge">Pastas</span></td><td>$8.500</td><td>105</td><td><span class="rating-stars">★★★★☆</span></td></tr>
+                            <tr><td>Flan casero con dulce de leche</td><td><span class="category-badge">Postres</span></td><td>$4.200</td><td>97</td><td><span class="rating-stars">★★★★★</span></td></tr>
+                            <tr><td>Tabla de fiambres y quesos</td><td><span class="category-badge">Entradas</span></td><td>$7.800</td><td>89</td><td><span class="rating-stars">★★★★☆</span></td></tr>
+                            <tr><td>Cordero braseado</td><td><span class="category-badge">Carnes</span></td><td>$14.500</td><td>76</td><td><span class="rating-stars">★★★★★</span></td></tr>
+                            <tr><td>Cabernet Sauvignon Gran Reserva</td><td><span class="category-badge">Vinos</span></td><td>$14.000</td><td>68</td><td><span class="rating-stars">★★★★★</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- VIEW: CLIENTES -->
+        <!-- ============================================================ -->
+        <section id="view-clientes" class="view-section">
+            <div class="page-header">
+                <h1>Clientes</h1>
+                <p>Base de clientes y comportamiento</p>
+            </div>
+
+            <div class="kpi-grid">
+                <div class="kpi-card animate-in">
+                    <div class="kpi-icon">👥</div>
+                    <div class="kpi-label">Total clientes</div>
+                    <div class="kpi-value">1.847</div>
+                    <span class="kpi-change positive">Base acumulada</span>
+                </div>
+                <div class="kpi-card animate-in">
+                    <div class="kpi-icon">🆕</div>
+                    <div class="kpi-label">Nuevos este mes</div>
+                    <div class="kpi-value">134</div>
+                    <span class="kpi-change positive">↑ +22% vs. febrero</span>
+                </div>
+                <div class="kpi-card animate-in">
+                    <div class="kpi-icon">🔄</div>
+                    <div class="kpi-label">Recurrentes</div>
+                    <div class="kpi-value">623</div>
+                    <span class="kpi-change positive">34% del total</span>
+                </div>
+                <div class="kpi-card animate-in">
+                    <div class="kpi-icon">📍</div>
+                    <div class="kpi-label">Promedio visitas</div>
+                    <div class="kpi-value">3.2</div>
+                    <span class="kpi-change positive">↑ +0.4 vs. febrero</span>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-card animate-in">
+                    <div class="chart-header">
+                        <div>
+                            <div class="chart-title">Frecuencia de visita</div>
+                            <div class="chart-subtitle">Segmentación de clientes</div>
+                        </div>
+                    </div>
+                    <div class="chart-container doughnut">
+                        <canvas id="clientesFrecuenciaChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card animate-in">
+                    <div class="chart-header">
+                        <div>
+                            <div class="chart-title">Top 10 clientes</div>
+                            <div class="chart-subtitle">Por gasto total acumulado</div>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr><th>Nombre</th><th>Visitas</th><th>Gasto total</th><th>Última visita</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Martínez, Lucía</td><td>28</td><td>$412.800</td><td>30/03/2026</td></tr>
+                                <tr><td>García, Roberto</td><td>24</td><td>$356.400</td><td>29/03/2026</td></tr>
+                                <tr><td>Fernández, Carlos</td><td>22</td><td>$331.200</td><td>30/03/2026</td></tr>
+                                <tr><td>Sosa, María Elena</td><td>19</td><td>$298.500</td><td>28/03/2026</td></tr>
+                                <tr><td>López, Ana</td><td>18</td><td>$275.400</td><td>30/03/2026</td></tr>
+                                <tr><td>Pérez, Ignacio</td><td>16</td><td>$248.000</td><td>27/03/2026</td></tr>
+                                <tr><td>Díaz, Martín</td><td>15</td><td>$232.500</td><td>25/03/2026</td></tr>
+                                <tr><td>Molina, Sofía</td><td>14</td><td>$218.400</td><td>26/03/2026</td></tr>
+                                <tr><td>Ruiz, Emiliano</td><td>13</td><td>$195.000</td><td>24/03/2026</td></tr>
+                                <tr><td>Torres, Camila</td><td>12</td><td>$182.400</td><td>23/03/2026</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- VIEW: REPORTES -->
+        <!-- ============================================================ -->
+        <section id="view-reportes" class="view-section">
+            <div class="page-header">
+                <h1>Reportes</h1>
+                <p>Comparativas mensuales y métricas clave</p>
+            </div>
+
+            <div class="kpi-grid">
+                <div class="kpi-card animate-in">
+                    <div class="kpi-icon">💰</div>
+                    <div class="kpi-label">Facturación marzo</div>
+                    <div class="kpi-value">$6.230.000</div>
+                    <span class="kpi-change positive">↑ +15%</span>
+                </div>
+                <div class="kpi-card animate-in">
+                    <div class="kpi-icon">📊</div>
+                    <div class="kpi-label">Margen neto estimado</div>
+                    <div class="kpi-value">22.4%</div>
+                    <span class="kpi-change positive">↑ +2.1pp</span>
+                </div>
+                <div class="kpi-card animate-in">
+                    <div class="kpi-icon">🍽️</div>
+                    <div class="kpi-label">Cubiertos servidos</div>
+                    <div class="kpi-value">2.840</div>
+                    <span class="kpi-change positive">↑ +12%</span>
+                </div>
+                <div class="kpi-card animate-in">
+                    <div class="kpi-icon">⭐</div>
+                    <div class="kpi-label">Satisfacción</div>
+                    <div class="kpi-value">4.7/5</div>
+                    <span class="kpi-change positive">↑ +0.2</span>
+                </div>
+            </div>
+
+            <div class="chart-card full-width animate-in" style="margin-bottom:28px;">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">Comparativa mensual</div>
+                        <div class="chart-subtitle">Marzo 2026 vs. Febrero 2026</div>
+                    </div>
+                    <span class="chart-badge">Mes actual vs. anterior</span>
+                </div>
+                <div class="chart-container" style="height:320px;">
+                    <canvas id="reportesCompChart"></canvas>
+                </div>
+            </div>
+
+            <div style="text-align:center; margin-top:8px;">
+                <button class="btn-primary" onclick="alert('Función de exportación disponible en el plan completo. Contactá a Juan por WhatsApp.')">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Exportar reporte (PDF)
+                </button>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- VIEW: AJUSTES -->
+        <!-- ============================================================ -->
+        <section id="view-ajustes" class="view-section">
+            <div class="page-header">
+                <h1>Ajustes</h1>
+                <p>Configuración general del restaurante</p>
+            </div>
+
+            <div class="settings-grid">
+                <div class="settings-card animate-in">
+                    <h3>Información del restaurante</h3>
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input type="text" value="Fuegos de Mendoza">
+                    </div>
+                    <div class="form-group">
+                        <label>Dirección</label>
+                        <input type="text" value="Av. San Martín 1245, Ciudad de Mendoza">
+                    </div>
+                    <div class="form-group">
+                        <label>Teléfono</label>
+                        <input type="text" value="+54 261 555-1234">
+                    </div>
+                    <div class="form-group">
+                        <label>Horarios</label>
+                        <input type="text" value="Lun-Jue 12:00-15:00, 20:00-00:00 | Vie-Dom 12:00-01:00">
+                    </div>
+                    <div class="form-group">
+                        <label>Capacidad total</label>
+                        <input type="number" value="85">
+                    </div>
+                    <button class="btn-primary" onclick="alert('Cambios guardados (demo)')">Guardar cambios</button>
+                </div>
+
+                <div class="settings-card animate-in">
+                    <h3>Notificaciones</h3>
+                    <div class="toggle-row">
+                        <div>
+                            <div class="toggle-label">Nuevas reservas</div>
+                            <div class="toggle-desc">Recibir alerta por cada nueva reserva</div>
+                        </div>
+                        <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                    </div>
+                    <div class="toggle-row">
+                        <div>
+                            <div class="toggle-label">Cancelaciones</div>
+                            <div class="toggle-desc">Notificar cuando se cancele una reserva</div>
+                        </div>
+                        <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                    </div>
+                    <div class="toggle-row">
+                        <div>
+                            <div class="toggle-label">Reporte diario</div>
+                            <div class="toggle-desc">Resumen de ventas al cierre del día</div>
+                        </div>
+                        <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                    </div>
+                    <div class="toggle-row">
+                        <div>
+                            <div class="toggle-label">Alertas de stock</div>
+                            <div class="toggle-desc">Avisar cuando un insumo esté bajo</div>
+                        </div>
+                        <label class="toggle-switch"><input type="checkbox"><span class="toggle-slider"></span></label>
+                    </div>
+                    <div class="toggle-row">
+                        <div>
+                            <div class="toggle-label">Reseñas de clientes</div>
+                            <div class="toggle-desc">Notificar nuevas reseñas en Google</div>
+                        </div>
+                        <label class="toggle-switch"><input type="checkbox"><span class="toggle-slider"></span></label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer (visible on all views) -->
         <footer class="dashboard-footer">
             Dashboard creado por <a href="https://wa.me/5492616423730?text=Hola%20Juan!%20Vi%20el%20dashboard%20de%20restaurante%20y%20me%20interesa" target="_blank" rel="noopener">Juan Barranco</a> — Desarrollo web profesional para negocios de Mendoza
         </footer>
     </main>
 
     <script>
-        // ============ Mobile Sidebar Toggle ============
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('open');
-            document.getElementById('sidebarOverlay').classList.toggle('active');
+    // ================================================================
+    // VIEW SWITCHING
+    // ================================================================
+    const chartInstances = {};
+    let currentView = 'dashboard';
+
+    function switchView(viewName) {
+        if (currentView === viewName) return;
+
+        // Update sidebar
+        document.querySelectorAll('.sidebar-link').forEach(link => link.classList.remove('active'));
+        const activeLink = document.querySelector(`.sidebar-link[data-view="${viewName}"]`);
+        if (activeLink) activeLink.classList.add('active');
+
+        // Hide current view
+        const currentSection = document.getElementById('view-' + currentView);
+        if (currentSection) {
+            currentSection.classList.remove('visible');
+            setTimeout(() => { currentSection.classList.remove('active'); }, 300);
         }
 
-        // ============ Chart.js Global Defaults ============
-        Chart.defaults.color = '#9CA3AF';
-        Chart.defaults.font.family = "'Inter', sans-serif";
-        Chart.defaults.plugins.legend.labels.usePointStyle = true;
-        Chart.defaults.plugins.legend.labels.padding = 16;
-        Chart.defaults.plugins.tooltip.backgroundColor = '#1E2130';
-        Chart.defaults.plugins.tooltip.borderColor = '#2A2D3A';
-        Chart.defaults.plugins.tooltip.borderWidth = 1;
-        Chart.defaults.plugins.tooltip.titleFont = { weight: '600', size: 13 };
-        Chart.defaults.plugins.tooltip.bodyFont = { size: 12 };
-        Chart.defaults.plugins.tooltip.padding = 12;
-        Chart.defaults.plugins.tooltip.cornerRadius = 8;
-        Chart.defaults.plugins.tooltip.displayColors = true;
+        // Show new view
+        setTimeout(() => {
+            const newSection = document.getElementById('view-' + viewName);
+            if (newSection) {
+                newSection.classList.add('active');
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        newSection.classList.add('visible');
+                    });
+                });
+            }
+            currentView = viewName;
 
-        const amber = '#F59E0B';
-        const amberLight = 'rgba(245, 158, 11, 0.2)';
-        const amberGlow = 'rgba(245, 158, 11, 0.5)';
+            // Initialize charts for the new view if needed
+            initChartsForView(viewName);
+        }, currentView === viewName ? 0 : 320);
 
-        // ============ 1. Facturación semanal (Line Chart) ============
+        // Close mobile sidebar
+        document.getElementById('sidebar').classList.remove('open');
+        document.getElementById('sidebarOverlay').classList.remove('active');
+
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ================================================================
+    // MOBILE SIDEBAR
+    // ================================================================
+    function toggleSidebar() {
+        document.getElementById('sidebar').classList.toggle('open');
+        document.getElementById('sidebarOverlay').classList.toggle('active');
+    }
+
+    // ================================================================
+    // RESERVAS FILTER
+    // ================================================================
+    function filterReservas(status) {
+        // Update tabs
+        document.querySelectorAll('#reservasFilter .filter-tab').forEach(tab => tab.classList.remove('active'));
+        event.target.classList.add('active');
+
+        // Filter rows
+        const rows = document.querySelectorAll('#reservasTable tbody tr');
+        rows.forEach(row => {
+            if (status === 'todas' || row.dataset.status === status) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+
+    // ================================================================
+    // CHART.JS GLOBAL DEFAULTS
+    // ================================================================
+    Chart.defaults.color = '#A1A7B8';
+    Chart.defaults.font.family = "'Inter', sans-serif";
+    Chart.defaults.plugins.legend.labels.usePointStyle = true;
+    Chart.defaults.plugins.legend.labels.padding = 16;
+    Chart.defaults.plugins.tooltip.backgroundColor = '#1B1F2B';
+    Chart.defaults.plugins.tooltip.borderColor = '#2A2F45';
+    Chart.defaults.plugins.tooltip.borderWidth = 1;
+    Chart.defaults.plugins.tooltip.titleFont = { weight: '600', size: 13 };
+    Chart.defaults.plugins.tooltip.bodyFont = { size: 12 };
+    Chart.defaults.plugins.tooltip.padding = 12;
+    Chart.defaults.plugins.tooltip.cornerRadius = 8;
+    Chart.defaults.plugins.tooltip.displayColors = true;
+
+    const amber = '#F59E0B';
+    const amberLight = 'rgba(245,158,11,.2)';
+    const amberGlow = 'rgba(245,158,11,.5)';
+    const gridColor = 'rgba(34,38,58,.5)';
+
+    // ================================================================
+    // CHART INITIALIZATION
+    // ================================================================
+    const chartsInitialized = {};
+
+    function initChartsForView(view) {
+        if (chartsInitialized[view]) return;
+        chartsInitialized[view] = true;
+
+        switch(view) {
+            case 'dashboard': initDashboardCharts(); break;
+            case 'ventas': initVentasCharts(); break;
+            case 'reservas': initReservasCharts(); break;
+            case 'clientes': initClientesCharts(); break;
+            case 'reportes': initReportesCharts(); break;
+        }
+    }
+
+    // ================================================================
+    // DASHBOARD CHARTS
+    // ================================================================
+    function initDashboardCharts() {
+        // Revenue Line Chart
         const revenueCtx = document.getElementById('revenueChart').getContext('2d');
         const revenueGradient = revenueCtx.createLinearGradient(0, 0, 0, 280);
-        revenueGradient.addColorStop(0, 'rgba(245, 158, 11, 0.25)');
-        revenueGradient.addColorStop(1, 'rgba(245, 158, 11, 0.0)');
+        revenueGradient.addColorStop(0, 'rgba(245,158,11,.22)');
+        revenueGradient.addColorStop(1, 'rgba(245,158,11,0)');
 
-        new Chart(revenueCtx, {
+        chartInstances.revenue = new Chart(revenueCtx, {
             type: 'line',
             data: {
-                labels: ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4', 'Sem 5', 'Sem 6', 'Sem 7', 'Sem 8', 'Sem 9', 'Sem 10', 'Sem 11', 'Sem 12'],
+                labels: ['Sem 1','Sem 2','Sem 3','Sem 4','Sem 5','Sem 6','Sem 7','Sem 8','Sem 9','Sem 10','Sem 11','Sem 12'],
                 datasets: [{
                     label: 'Facturación ($)',
-                    data: [980000, 1120000, 1050000, 1280000, 1350000, 1190000, 1420000, 1380000, 1510000, 1480000, 1620000, 1570000],
-                    borderColor: amber,
-                    backgroundColor: revenueGradient,
-                    borderWidth: 2.5,
-                    fill: true,
-                    tension: 0.4,
-                    pointBackgroundColor: amber,
-                    pointBorderColor: '#1E2130',
-                    pointBorderWidth: 2,
-                    pointRadius: 4,
-                    pointHoverRadius: 7
+                    data: [980000,1120000,1050000,1280000,1350000,1190000,1420000,1380000,1510000,1480000,1620000,1570000],
+                    borderColor: amber, backgroundColor: revenueGradient,
+                    borderWidth: 2.5, fill: true, tension: .4,
+                    pointBackgroundColor: amber, pointBorderColor: '#161923',
+                    pointBorderWidth: 2, pointRadius: 4, pointHoverRadius: 7
                 }]
             },
             options: {
-                responsive: true,
-                maintainAspectRatio: false,
+                responsive: true, maintainAspectRatio: false,
                 interaction: { mode: 'index', intersect: false },
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        callbacks: {
-                            label: function(ctx) {
-                                return '$ ' + ctx.raw.toLocaleString('es-AR');
-                            }
-                        }
-                    }
+                plugins: { legend: { display: false },
+                    tooltip: { callbacks: { label: ctx => '$ ' + ctx.raw.toLocaleString('es-AR') } }
                 },
                 scales: {
-                    x: {
-                        grid: { color: 'rgba(42, 45, 58, 0.5)', drawBorder: false },
-                        ticks: { font: { size: 11 } }
-                    },
-                    y: {
-                        grid: { color: 'rgba(42, 45, 58, 0.5)', drawBorder: false },
-                        ticks: {
-                            font: { size: 11 },
-                            callback: function(value) {
-                                return '$' + (value / 1000000).toFixed(1) + 'M';
-                            }
-                        }
-                    }
+                    x: { grid: { color: gridColor, drawBorder: false }, ticks: { font: { size: 11 } } },
+                    y: { grid: { color: gridColor, drawBorder: false }, ticks: { font: { size: 11 }, callback: v => '$' + (v/1e6).toFixed(1) + 'M' } }
                 }
             }
         });
 
-        // ============ 2. Ventas por categoría (Doughnut Chart) ============
-        new Chart(document.getElementById('categoryChart'), {
+        // Category Doughnut
+        chartInstances.category = new Chart(document.getElementById('categoryChart'), {
             type: 'doughnut',
             data: {
-                labels: ['Carnes', 'Pastas', 'Entradas', 'Vinos', 'Postres'],
-                datasets: [{
-                    data: [38, 20, 15, 18, 9],
-                    backgroundColor: [
-                        '#F59E0B',
-                        '#3B82F6',
-                        '#22C55E',
-                        '#A855F7',
-                        '#EF4444'
-                    ],
-                    borderColor: '#1E2130',
-                    borderWidth: 3,
-                    hoverOffset: 8
+                labels: ['Carnes','Pastas','Entradas','Vinos','Postres'],
+                datasets: [{ data: [38,20,15,18,9],
+                    backgroundColor: ['#F59E0B','#60A5FA','#34D399','#A78BFA','#F87171'],
+                    borderColor: '#161923', borderWidth: 3, hoverOffset: 8
                 }]
             },
             options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                cutout: '65%',
+                responsive: true, maintainAspectRatio: false, cutout: '68%',
                 plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            padding: 20,
-                            font: { size: 12, weight: '500' }
-                        }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(ctx) {
-                                return ctx.label + ': ' + ctx.raw + '%';
-                            }
-                        }
-                    }
+                    legend: { position: 'bottom', labels: { padding: 18, font: { size: 12, weight: '500' } } },
+                    tooltip: { callbacks: { label: ctx => ctx.label + ': ' + ctx.raw + '%' } }
                 }
             }
         });
 
-        // ============ 3. Reservas por día (Bar Chart) ============
-        new Chart(document.getElementById('reservationsChart'), {
+        // Reservations by Day Bar
+        chartInstances.reservations = new Chart(document.getElementById('reservationsChart'), {
             type: 'bar',
             data: {
-                labels: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
-                datasets: [{
-                    label: 'Reservas',
-                    data: [28, 32, 35, 45, 82, 95, 68],
-                    backgroundColor: function(ctx) {
-                        const value = ctx.raw;
-                        if (value >= 80) return '#F59E0B';
-                        if (value >= 50) return 'rgba(245, 158, 11, 0.6)';
-                        return 'rgba(245, 158, 11, 0.3)';
-                    },
-                    borderRadius: 6,
-                    borderSkipped: false,
-                    maxBarThickness: 48
+                labels: ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'],
+                datasets: [{ label: 'Reservas', data: [28,32,35,45,82,95,68],
+                    backgroundColor: ctx => { const v = ctx.raw; return v >= 80 ? '#F59E0B' : v >= 50 ? 'rgba(245,158,11,.6)' : 'rgba(245,158,11,.3)'; },
+                    borderRadius: 6, borderSkipped: false, maxBarThickness: 48
                 }]
             },
             options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        callbacks: {
-                            label: function(ctx) {
-                                return ctx.raw + ' reservas';
-                            }
-                        }
-                    }
-                },
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.raw + ' reservas' } } },
                 scales: {
-                    x: {
-                        grid: { display: false },
-                        ticks: { font: { size: 11 } }
-                    },
-                    y: {
-                        grid: { color: 'rgba(42, 45, 58, 0.5)', drawBorder: false },
-                        ticks: { font: { size: 11 } },
-                        beginAtZero: true
-                    }
+                    x: { grid: { display: false }, ticks: { font: { size: 11 } } },
+                    y: { grid: { color: gridColor, drawBorder: false }, ticks: { font: { size: 11 } }, beginAtZero: true }
                 }
             }
         });
 
-        // ============ 4. Horarios pico (Line Chart) ============
+        // Peak Hours Line
         const peakCtx = document.getElementById('peakHoursChart').getContext('2d');
-        const peakGradient = peakCtx.createLinearGradient(0, 0, 0, 280);
-        peakGradient.addColorStop(0, 'rgba(59, 130, 246, 0.25)');
-        peakGradient.addColorStop(1, 'rgba(59, 130, 246, 0.0)');
+        const peakGrad = peakCtx.createLinearGradient(0, 0, 0, 280);
+        peakGrad.addColorStop(0, 'rgba(96,165,250,.22)');
+        peakGrad.addColorStop(1, 'rgba(96,165,250,0)');
 
-        new Chart(peakCtx, {
+        chartInstances.peak = new Chart(peakCtx, {
             type: 'line',
             data: {
-                labels: ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '00:00'],
-                datasets: [{
-                    label: 'Comensales',
-                    data: [45, 82, 78, 35, 12, 8, 15, 42, 88, 95, 72, 38, 10],
-                    borderColor: '#3B82F6',
-                    backgroundColor: peakGradient,
-                    borderWidth: 2.5,
-                    fill: true,
-                    tension: 0.4,
-                    pointBackgroundColor: '#3B82F6',
-                    pointBorderColor: '#1E2130',
-                    pointBorderWidth: 2,
-                    pointRadius: 4,
-                    pointHoverRadius: 7
+                labels: ['12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00','00:00'],
+                datasets: [{ label: 'Comensales', data: [45,82,78,35,12,8,15,42,88,95,72,38,10],
+                    borderColor: '#60A5FA', backgroundColor: peakGrad,
+                    borderWidth: 2.5, fill: true, tension: .4,
+                    pointBackgroundColor: '#60A5FA', pointBorderColor: '#161923',
+                    pointBorderWidth: 2, pointRadius: 4, pointHoverRadius: 7
                 }]
             },
             options: {
-                responsive: true,
-                maintainAspectRatio: false,
+                responsive: true, maintainAspectRatio: false,
                 interaction: { mode: 'index', intersect: false },
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        callbacks: {
-                            label: function(ctx) {
-                                return ctx.raw + ' comensales promedio';
-                            }
-                        }
-                    }
-                },
+                plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.raw + ' comensales promedio' } } },
                 scales: {
-                    x: {
-                        grid: { color: 'rgba(42, 45, 58, 0.5)', drawBorder: false },
-                        ticks: { font: { size: 11 } }
-                    },
-                    y: {
-                        grid: { color: 'rgba(42, 45, 58, 0.5)', drawBorder: false },
-                        ticks: { font: { size: 11 } },
-                        beginAtZero: true
-                    }
+                    x: { grid: { color: gridColor, drawBorder: false }, ticks: { font: { size: 11 } } },
+                    y: { grid: { color: gridColor, drawBorder: false }, ticks: { font: { size: 11 } }, beginAtZero: true }
                 }
             }
         });
+    }
 
-        // ============ 5. Origen de reservas (Bar Chart) ============
-        new Chart(document.getElementById('sourceChart'), {
+    // ================================================================
+    // VENTAS CHARTS
+    // ================================================================
+    function initVentasCharts() {
+        const ctx = document.getElementById('ventasDailyChart').getContext('2d');
+        const grad = ctx.createLinearGradient(0, 0, 0, 320);
+        grad.addColorStop(0, 'rgba(245,158,11,.22)');
+        grad.addColorStop(1, 'rgba(245,158,11,0)');
+
+        const days = [];
+        const data = [];
+        for (let i = 1; i <= 30; i++) {
+            days.push(i + '/03');
+            const base = 150000 + Math.floor(Math.random() * 120000);
+            const dayOfWeek = new Date(2026, 2, i).getDay();
+            const mult = (dayOfWeek === 5 || dayOfWeek === 6) ? 1.8 : (dayOfWeek === 0) ? 1.4 : 1;
+            data.push(Math.round(base * mult));
+        }
+        // Fix specific days mentioned in KPIs
+        data[13] = 385000; // Sábado 14/03
+        data[2] = 78400;   // Lunes 03/03
+
+        chartInstances.ventasDaily = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: days,
+                datasets: [{ label: 'Ventas ($)', data: data,
+                    borderColor: amber, backgroundColor: grad,
+                    borderWidth: 2, fill: true, tension: .35,
+                    pointBackgroundColor: amber, pointBorderColor: '#161923',
+                    pointBorderWidth: 2, pointRadius: 2.5, pointHoverRadius: 6
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: { legend: { display: false },
+                    tooltip: { callbacks: { label: ctx => '$ ' + ctx.raw.toLocaleString('es-AR') } }
+                },
+                scales: {
+                    x: { grid: { color: gridColor, drawBorder: false }, ticks: { font: { size: 10 }, maxRotation: 45 } },
+                    y: { grid: { color: gridColor, drawBorder: false }, ticks: { font: { size: 11 }, callback: v => '$' + (v/1e3).toFixed(0) + 'k' } }
+                }
+            }
+        });
+    }
+
+    // ================================================================
+    // RESERVAS CHARTS
+    // ================================================================
+    function initReservasCharts() {
+        chartInstances.reservasHora = new Chart(document.getElementById('reservasHoraChart'), {
             type: 'bar',
             data: {
-                labels: ['WhatsApp', 'Web', 'Teléfono', 'Google', 'Instagram'],
-                datasets: [{
-                    label: 'Porcentaje',
-                    data: [40, 30, 15, 10, 5],
-                    backgroundColor: [
-                        '#22C55E',
-                        '#3B82F6',
-                        '#A855F7',
-                        '#F59E0B',
-                        '#EC4899'
-                    ],
-                    borderRadius: 8,
-                    borderSkipped: false,
-                    maxBarThickness: 64
+                labels: ['12:00','13:00','14:00','15:00','19:00','20:00','20:30','21:00','21:30','22:00','22:30','23:00'],
+                datasets: [{ label: 'Reservas', data: [18,42,28,8,12,48,62,78,55,32,15,5],
+                    backgroundColor: ctx => { const v = ctx.raw; return v >= 60 ? '#F59E0B' : v >= 30 ? 'rgba(245,158,11,.6)' : 'rgba(245,158,11,.3)'; },
+                    borderRadius: 6, borderSkipped: false, maxBarThickness: 48
                 }]
             },
             options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                indexAxis: 'y',
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        callbacks: {
-                            label: function(ctx) {
-                                return ctx.raw + '% de las reservas';
-                            }
-                        }
-                    }
-                },
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.raw + ' reservas' } } },
                 scales: {
-                    x: {
-                        grid: { color: 'rgba(42, 45, 58, 0.5)', drawBorder: false },
-                        ticks: {
-                            font: { size: 11 },
-                            callback: function(value) { return value + '%'; }
-                        },
-                        max: 50
-                    },
-                    y: {
-                        grid: { display: false },
-                        ticks: { font: { size: 12, weight: '500' } }
-                    }
+                    x: { grid: { display: false }, ticks: { font: { size: 11 } } },
+                    y: { grid: { color: gridColor, drawBorder: false }, ticks: { font: { size: 11 } }, beginAtZero: true }
                 }
             }
         });
+    }
 
-        // ============ Intersection Observer for animations ============
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationPlayState = 'running';
+    // ================================================================
+    // CLIENTES CHARTS
+    // ================================================================
+    function initClientesCharts() {
+        chartInstances.clientesFrecuencia = new Chart(document.getElementById('clientesFrecuenciaChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Primera vez','Mensual','Semanal','VIP'],
+                datasets: [{ data: [35,30,25,10],
+                    backgroundColor: ['#60A5FA','#F59E0B','#34D399','#A78BFA'],
+                    borderColor: '#161923', borderWidth: 3, hoverOffset: 8
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false, cutout: '68%',
+                plugins: {
+                    legend: { position: 'bottom', labels: { padding: 18, font: { size: 12, weight: '500' } } },
+                    tooltip: { callbacks: { label: ctx => ctx.label + ': ' + ctx.raw + '%' } }
                 }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.animate-in').forEach(el => {
-            observer.observe(el);
+            }
         });
+    }
+
+    // ================================================================
+    // REPORTES CHARTS
+    // ================================================================
+    function initReportesCharts() {
+        chartInstances.reportesComp = new Chart(document.getElementById('reportesCompChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Facturación (M$)','Reservas','Ticket prom. (k$)','Ocupación (%)','Clientes nuevos','Satisfacción (x10)'],
+                datasets: [
+                    { label: 'Marzo 2026', data: [6.23, 412, 15.12, 78, 134, 47],
+                      backgroundColor: '#F59E0B', borderRadius: 6, borderSkipped: false, maxBarThickness: 40 },
+                    { label: 'Febrero 2026', data: [5.42, 349, 14.4, 73, 110, 45],
+                      backgroundColor: 'rgba(245,158,11,.3)', borderRadius: 6, borderSkipped: false, maxBarThickness: 40 }
+                ]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { labels: { font: { size: 12, weight: '500' }, padding: 20 } } },
+                scales: {
+                    x: { grid: { display: false }, ticks: { font: { size: 11 } } },
+                    y: { grid: { color: gridColor, drawBorder: false }, ticks: { font: { size: 11 } }, beginAtZero: true }
+                }
+            }
+        });
+    }
+
+    // ================================================================
+    // INIT ON LOAD
+    // ================================================================
+    initChartsForView('dashboard');
+
     </script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard - Barbería Los Andes | Demo</title>
+  <title>Dashboard - Navaja & Estilo | Demo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -15,23 +15,39 @@
       --gold: #D4A017;
       --gold-light: #E8C547;
       --gold-dark: #B8860B;
-      --bg-primary: #0F1117;
-      --bg-secondary: #1A1D27;
-      --bg-card: #1E2130;
-      --bg-sidebar: #141620;
-      --text-primary: #F0F0F5;
-      --text-secondary: #9CA3AF;
-      --text-muted: #6B7280;
-      --border: #2A2D3A;
+      --bg-primary: #0B0D14;
+      --bg-secondary: #12141D;
+      --bg-card: #181B28;
+      --bg-card-hover: #1E2133;
+      --bg-sidebar: #0F1119;
+      --bg-input: #1A1D2A;
+      --text-primary: #F2F2F8;
+      --text-secondary: #A0A7B8;
+      --text-muted: #636B7E;
+      --border: #252838;
+      --border-light: #2E3148;
       --green: #22C55E;
+      --green-bg: rgba(34,197,94,0.1);
       --red: #EF4444;
+      --red-bg: rgba(239,68,68,0.1);
+      --blue: #3B82F6;
+      --blue-bg: rgba(59,130,246,0.1);
+      --purple: #A855F7;
+      --purple-bg: rgba(168,85,247,0.1);
+      --orange: #F59E0B;
       --sidebar-width: 260px;
+      --banner-h: 42px;
+      --radius: 14px;
+      --radius-sm: 10px;
+      --shadow-card: 0 2px 12px rgba(0,0,0,0.25);
+      --shadow-card-hover: 0 8px 32px rgba(0,0,0,0.4);
+      --transition: 0.25s cubic-bezier(.4,0,.2,1);
     }
 
-    html { font-size: 14px; }
+    html { font-size: 14px; scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg-primary);
       color: var(--text-primary);
       min-height: 100vh;
@@ -41,18 +57,19 @@
     /* ===== DEMO BANNER ===== */
     .demo-banner {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 1000;
+      height: var(--banner-h);
       background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
       color: #0F1117;
-      text-align: center;
-      padding: 10px 20px;
-      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 0.82rem;
       font-weight: 600;
       letter-spacing: 0.02em;
-      box-shadow: 0 2px 12px rgba(212, 160, 23, 0.3);
+      box-shadow: 0 2px 16px rgba(212,160,23,0.3);
     }
     .demo-banner a {
       color: #0F1117;
@@ -60,132 +77,137 @@
       text-underline-offset: 3px;
       font-weight: 700;
       margin-left: 4px;
-      transition: opacity 0.2s;
+      transition: opacity var(--transition);
     }
-    .demo-banner a:hover { opacity: 0.75; }
+    .demo-banner a:hover { opacity: 0.7; }
 
     /* ===== SIDEBAR ===== */
     .sidebar {
       position: fixed;
-      top: 40px;
-      left: 0;
+      top: var(--banner-h); left: 0;
       width: var(--sidebar-width);
-      height: calc(100vh - 40px);
+      height: calc(100vh - var(--banner-h));
       background: var(--bg-sidebar);
       border-right: 1px solid var(--border);
-      padding: 24px 16px;
       display: flex;
       flex-direction: column;
       z-index: 100;
       transition: transform 0.3s ease;
+      overflow-y: auto;
     }
 
     .sidebar-brand {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 32px;
-      padding: 0 8px;
+      padding: 22px 20px 18px;
+      border-bottom: 1px solid var(--border);
     }
     .sidebar-brand .logo {
-      width: 42px;
-      height: 42px;
+      width: 44px; height: 44px;
       background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-      border-radius: 10px;
+      border-radius: var(--radius-sm);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.4rem;
+      font-size: 1.1rem;
       font-weight: 800;
       color: #0F1117;
       flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(212,160,23,0.25);
     }
     .sidebar-brand h2 {
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 700;
       color: var(--text-primary);
       line-height: 1.2;
     }
     .sidebar-brand span {
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       color: var(--text-muted);
-      font-weight: 400;
+      font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
     }
 
-    .sidebar-nav { flex: 1; }
+    .sidebar-nav { flex: 1; padding: 14px 12px; }
     .sidebar-nav ul { list-style: none; }
     .sidebar-nav li { margin-bottom: 2px; }
     .sidebar-nav a {
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 10px 14px;
-      border-radius: 8px;
+      padding: 11px 14px;
+      border-radius: var(--radius-sm);
       color: var(--text-secondary);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 500;
-      transition: all 0.2s;
+      transition: all var(--transition);
+      position: relative;
+      cursor: pointer;
     }
     .sidebar-nav a:hover {
-      background: rgba(212, 160, 23, 0.08);
+      background: rgba(212,160,23,0.07);
       color: var(--text-primary);
     }
     .sidebar-nav a.active {
-      background: rgba(212, 160, 23, 0.12);
+      background: linear-gradient(135deg, rgba(212,160,23,0.15), rgba(212,160,23,0.07));
       color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-nav a.active::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 6px; bottom: 6px;
+      width: 3px;
+      border-radius: 0 3px 3px 0;
+      background: var(--gold);
     }
     .sidebar-nav .nav-icon {
-      width: 20px;
+      width: 22px;
       text-align: center;
       font-size: 1rem;
+      flex-shrink: 0;
     }
 
     .sidebar-footer {
-      padding: 16px 8px 0;
+      padding: 14px 20px;
       border-top: 1px solid var(--border);
       display: flex;
       align-items: center;
       gap: 10px;
     }
     .sidebar-footer .avatar {
-      width: 36px;
-      height: 36px;
+      width: 36px; height: 36px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--gold), var(--gold-dark));
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 700;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: #0F1117;
       flex-shrink: 0;
     }
-    .sidebar-footer .user-info {
-      line-height: 1.3;
-    }
     .sidebar-footer .user-name {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 600;
       color: var(--text-primary);
     }
     .sidebar-footer .user-role {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       color: var(--text-muted);
     }
 
-    /* ===== MOBILE MENU TOGGLE ===== */
+    /* ===== MOBILE MENU ===== */
     .menu-toggle {
       display: none;
       position: fixed;
-      top: 50px;
-      left: 12px;
+      top: 52px; left: 12px;
       z-index: 200;
-      width: 40px;
-      height: 40px;
-      border-radius: 8px;
+      width: 40px; height: 40px;
+      border-radius: var(--radius-sm);
       background: var(--bg-card);
       border: 1px solid var(--border);
       color: var(--gold);
@@ -194,16 +216,25 @@
       align-items: center;
       justify-content: center;
     }
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      z-index: 99;
+      backdrop-filter: blur(4px);
+    }
+    .sidebar-overlay.active { display: block; }
 
     /* ===== MAIN CONTENT ===== */
     .main {
       margin-left: var(--sidebar-width);
-      margin-top: 40px;
-      padding: 28px 28px 60px;
-      min-height: calc(100vh - 40px);
+      margin-top: var(--banner-h);
+      padding: 30px 32px 70px;
+      min-height: calc(100vh - var(--banner-h));
     }
 
-    .main-header {
+    .page-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
@@ -211,25 +242,23 @@
       flex-wrap: wrap;
       gap: 12px;
     }
-    .main-header h1 {
+    .page-header h1 {
       font-size: 1.6rem;
       font-weight: 800;
       color: var(--text-primary);
+      line-height: 1.3;
     }
-    .main-header h1 span {
-      color: var(--gold);
-    }
-    .main-header p {
+    .page-header h1 .accent { color: var(--gold); }
+    .page-header p {
       color: var(--text-secondary);
       font-size: 0.85rem;
       margin-top: 4px;
     }
-
     .date-badge {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      padding: 9px 18px;
       font-size: 0.82rem;
       color: var(--text-secondary);
       font-weight: 500;
@@ -243,34 +272,38 @@
       gap: 18px;
       margin-bottom: 28px;
     }
+    .kpi-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
 
     .kpi-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 22px;
+      border-radius: var(--radius);
+      padding: 22px 24px;
       position: relative;
       overflow: hidden;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform var(--transition), box-shadow var(--transition);
     }
     .kpi-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-card-hover);
     }
     .kpi-card::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       height: 3px;
       background: linear-gradient(90deg, var(--gold), var(--gold-light));
     }
+    .kpi-card.accent-green::before { background: linear-gradient(90deg, var(--green), #4ade80); }
+    .kpi-card.accent-blue::before { background: linear-gradient(90deg, var(--blue), #60a5fa); }
+    .kpi-card.accent-purple::before { background: linear-gradient(90deg, var(--purple), #c084fc); }
+    .kpi-card.accent-red::before { background: linear-gradient(90deg, var(--red), #f87171); }
+
     .kpi-label {
-      font-size: 0.78rem;
+      font-size: 0.74rem;
       color: var(--text-muted);
       text-transform: uppercase;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.07em;
       font-weight: 600;
       margin-bottom: 10px;
     }
@@ -282,32 +315,25 @@
       line-height: 1;
     }
     .kpi-change {
-      font-size: 0.78rem;
+      font-size: 0.74rem;
       font-weight: 600;
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      padding: 3px 8px;
+      padding: 3px 10px;
       border-radius: 20px;
     }
-    .kpi-change.up {
-      color: var(--green);
-      background: rgba(34, 197, 94, 0.1);
-    }
-    .kpi-change.down {
-      color: var(--red);
-      background: rgba(239, 68, 68, 0.1);
-    }
+    .kpi-change.up { color: var(--green); background: var(--green-bg); }
+    .kpi-change.down { color: var(--red); background: var(--red-bg); }
     .kpi-icon {
       position: absolute;
-      top: 18px;
-      right: 18px;
-      font-size: 1.6rem;
-      opacity: 0.15;
+      top: 18px; right: 18px;
+      font-size: 1.5rem;
+      opacity: 0.12;
     }
 
-    /* ===== CHART CARDS ===== */
-    .dashboard-grid {
+    /* ===== CARDS & GRID ===== */
+    .grid-12 {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
       gap: 18px;
@@ -316,13 +342,11 @@
     .card {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 22px;
-      transition: box-shadow 0.2s;
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: box-shadow var(--transition);
     }
-    .card:hover {
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-    }
+    .card:hover { box-shadow: var(--shadow-card); }
     .card-header {
       display: flex;
       justify-content: space-between;
@@ -337,136 +361,366 @@
     .card-badge {
       font-size: 0.7rem;
       color: var(--text-muted);
-      background: rgba(255,255,255,0.05);
-      padding: 4px 10px;
+      background: rgba(255,255,255,0.04);
+      padding: 4px 12px;
       border-radius: 20px;
       font-weight: 500;
+      border: 1px solid var(--border);
     }
 
+    .col-12 { grid-column: span 12; }
     .col-8 { grid-column: span 8; }
     .col-6 { grid-column: span 6; }
     .col-4 { grid-column: span 4; }
-    .col-12 { grid-column: span 12; }
+    .col-3 { grid-column: span 3; }
 
-    .chart-container {
-      position: relative;
-      width: 100%;
-    }
-    .chart-container.line-chart { height: 260px; }
-    .chart-container.doughnut-chart { height: 260px; }
-    .chart-container.bar-chart { height: 260px; }
+    .chart-container { position: relative; width: 100%; }
+    .chart-container.h-260 { height: 260px; }
+    .chart-container.h-300 { height: 300px; }
+    .chart-container.h-220 { height: 220px; }
 
-    /* ===== TABLE ===== */
-    .table-wrapper {
-      overflow-x: auto;
-    }
-    .data-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
+    /* ===== TABLES ===== */
+    .table-wrapper { overflow-x: auto; }
+    .data-table { width: 100%; border-collapse: collapse; }
     .data-table th {
       font-size: 0.72rem;
       color: var(--text-muted);
       text-transform: uppercase;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.07em;
       font-weight: 600;
       text-align: left;
       padding: 10px 14px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 2px solid var(--border);
+      background: rgba(255,255,255,0.015);
     }
     .data-table td {
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       color: var(--text-secondary);
       padding: 12px 14px;
-      border-bottom: 1px solid rgba(42, 45, 58, 0.5);
+      border-bottom: 1px solid rgba(37,40,56,0.6);
+      vertical-align: middle;
     }
-    .data-table tbody tr {
-      transition: background 0.15s;
-    }
-    .data-table tbody tr:hover {
-      background: rgba(212, 160, 23, 0.04);
-    }
-    .data-table .amount {
-      color: var(--gold);
-      font-weight: 600;
-    }
-    .barbero-badge {
+    .data-table tbody tr { transition: background var(--transition); }
+    .data-table tbody tr:hover { background: rgba(212,160,23,0.04); }
+    .data-table .amount { color: var(--gold); font-weight: 700; }
+    .badge {
       display: inline-block;
       padding: 3px 10px;
       border-radius: 20px;
-      font-size: 0.75rem;
+      font-size: 0.73rem;
       font-weight: 600;
-      background: rgba(212, 160, 23, 0.1);
+    }
+    .badge-gold { background: rgba(212,160,23,0.12); color: var(--gold); }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-blue { background: var(--blue-bg); color: var(--blue); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+
+    /* ===== SERVICE / PRODUCT CARDS ===== */
+    .item-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .item-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .item-card:hover {
+      border-color: rgba(212,160,23,0.3);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card);
+    }
+    .item-card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+    .item-card-name {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    .item-card-price {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .item-card-meta {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .item-card-meta strong { color: var(--text-secondary); font-weight: 600; }
+
+    /* ===== BARBERO PROFILE CARDS ===== */
+    .barbero-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 18px;
+    }
+    .barbero-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-align: center;
+      transition: all var(--transition);
+    }
+    .barbero-card:hover {
+      border-color: rgba(212,160,23,0.3);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card);
+    }
+    .barbero-avatar {
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #0F1117;
+      margin: 0 auto 14px;
+      box-shadow: 0 4px 14px rgba(212,160,23,0.25);
+    }
+    .barbero-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .barbero-card .specialty {
+      font-size: 0.75rem;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+    .barbero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .barbero-stat {
+      background: var(--bg-card);
+      border-radius: var(--radius-sm);
+      padding: 10px 8px;
+    }
+    .barbero-stat .label {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+    .barbero-stat .val {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-top: 2px;
+    }
+    .barbero-stat .val.gold { color: var(--gold); }
+
+    /* ===== AGENDA ===== */
+    .agenda-quick-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+    .agenda-stat {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px 18px;
+      text-align: center;
+    }
+    .agenda-stat .val {
+      font-size: 1.4rem;
+      font-weight: 800;
       color: var(--gold);
     }
+    .agenda-stat .label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .status-dot {
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+    .status-dot.done { background: var(--green); }
+    .status-dot.pending { background: var(--gold); }
+    .status-dot.available { background: var(--text-muted); }
+
+    /* ===== SETTINGS ===== */
+    .settings-section {
+      margin-bottom: 28px;
+    }
+    .settings-section h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .setting-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(37,40,56,0.5);
+    }
+    .setting-row:last-child { border-bottom: none; }
+    .setting-info h4 {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 3px;
+    }
+    .setting-info p {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+    .toggle-switch {
+      position: relative;
+      width: 44px; height: 24px;
+      cursor: pointer;
+    }
+    .toggle-switch input { display: none; }
+    .toggle-slider {
+      position: absolute;
+      inset: 0;
+      background: var(--border-light);
+      border-radius: 12px;
+      transition: background var(--transition);
+    }
+    .toggle-slider::before {
+      content: '';
+      position: absolute;
+      width: 18px; height: 18px;
+      left: 3px; bottom: 3px;
+      background: var(--text-secondary);
+      border-radius: 50%;
+      transition: all var(--transition);
+    }
+    .toggle-switch input:checked + .toggle-slider {
+      background: var(--gold);
+    }
+    .toggle-switch input:checked + .toggle-slider::before {
+      transform: translateX(20px);
+      background: #0F1117;
+    }
+    .form-input {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.85rem;
+      width: 240px;
+      transition: border-color var(--transition);
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+    .btn-save {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: #0F1117;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 11px 28px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .btn-save:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(212,160,23,0.35);
+    }
+
+    /* ===== SECTION VISIBILITY ===== */
+    .module-section { display: none; }
+    .module-section.active { display: block; }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .module-section.active .kpi-card,
+    .module-section.active .card,
+    .module-section.active .item-card,
+    .module-section.active .barbero-card {
+      animation: fadeInUp 0.45s ease both;
+    }
+    .module-section.active .kpi-card:nth-child(1),
+    .module-section.active .card:nth-child(1) { animation-delay: 0.04s; }
+    .module-section.active .kpi-card:nth-child(2),
+    .module-section.active .card:nth-child(2) { animation-delay: 0.08s; }
+    .module-section.active .kpi-card:nth-child(3),
+    .module-section.active .card:nth-child(3) { animation-delay: 0.12s; }
+    .module-section.active .kpi-card:nth-child(4),
+    .module-section.active .card:nth-child(4) { animation-delay: 0.16s; }
+    .module-section.active .kpi-card:nth-child(5) { animation-delay: 0.2s; }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 1200px) {
       .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+      .kpi-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
       .col-8, .col-6, .col-4 { grid-column: span 6; }
+      .col-3 { grid-column: span 6; }
     }
-
     @media (max-width: 768px) {
       .sidebar { transform: translateX(-100%); }
       .sidebar.open { transform: translateX(0); }
       .menu-toggle { display: flex; }
-      .main { margin-left: 0; padding: 16px 14px 60px; }
-      .main-header { margin-top: 40px; }
-      .kpi-grid { grid-template-columns: 1fr; }
-      .col-8, .col-6, .col-4, .col-12 { grid-column: span 12; }
-      .dashboard-grid { grid-template-columns: 1fr; gap: 14px; }
+      .main { margin-left: 0; padding: 18px 14px 60px; }
+      .page-header { margin-top: 44px; }
+      .kpi-grid, .kpi-grid.cols-3 { grid-template-columns: 1fr; }
+      .col-8, .col-6, .col-4, .col-3, .col-12 { grid-column: span 12; }
+      .grid-12 { grid-template-columns: 1fr; gap: 14px; }
       .kpi-value { font-size: 1.3rem; }
-      .demo-banner { font-size: 0.72rem; padding: 8px 12px; }
+      .demo-banner { font-size: 0.7rem; padding: 8px 10px; }
+      .item-cards { grid-template-columns: 1fr; }
+      .barbero-cards { grid-template-columns: 1fr; }
+      .agenda-quick-stats { grid-template-columns: 1fr; }
+      .form-input { width: 100%; }
     }
-
-    /* ===== SIDEBAR OVERLAY (mobile) ===== */
-    .sidebar-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.6);
-      z-index: 99;
-    }
-    .sidebar-overlay.active { display: block; }
-
-    /* ===== ANIMATIONS ===== */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .kpi-card, .card {
-      animation: fadeInUp 0.5s ease both;
-    }
-    .kpi-card:nth-child(1) { animation-delay: 0.05s; }
-    .kpi-card:nth-child(2) { animation-delay: 0.1s; }
-    .kpi-card:nth-child(3) { animation-delay: 0.15s; }
-    .kpi-card:nth-child(4) { animation-delay: 0.2s; }
-    .card:nth-child(1) { animation-delay: 0.25s; }
-    .card:nth-child(2) { animation-delay: 0.3s; }
-    .card:nth-child(3) { animation-delay: 0.35s; }
-    .card:nth-child(4) { animation-delay: 0.4s; }
-    .card:nth-child(5) { animation-delay: 0.45s; }
-    .card:nth-child(6) { animation-delay: 0.5s; }
-    .card:nth-child(7) { animation-delay: 0.55s; }
-
-    /* ===== SCROLLBAR ===== */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
   </style>
 </head>
 <body>
 
   <!-- DEMO BANNER -->
   <div class="demo-banner">
-    &#10024; Esta es una demo creada por Juan Barranco — Todos los datos son ficticios e ilustrativos.
-    ¿Querés un dashboard así para tu barbería?
-    <a href="https://wa.me/5492616423730?text=Hola%20Juan!%20Vi%20el%20dashboard%20de%20barbería%20y%20me%20interesa" target="_blank" rel="noopener">→ Contactame</a>
+    Esta es una demo creada por Juan Barranco &mdash; Datos ficticios e ilustrativos.
+    &iquest;Quer&eacute;s un dashboard as&iacute; para tu negocio?
+    <a href="https://wa.me/5492616423730?text=Hola%20Juan!%20Vi%20el%20dashboard%20de%20barber%C3%ADa%20y%20me%20interesa" target="_blank" rel="noopener">&rarr; Contactame por WhatsApp</a>
   </div>
 
   <!-- MOBILE TOGGLE -->
-  <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">☰</button>
+  <button class="menu-toggle" id="menuToggle" aria-label="Abrir men&uacute;">&#9776;</button>
 
   <!-- SIDEBAR OVERLAY -->
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
@@ -474,225 +728,728 @@
   <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-brand">
-      <div class="logo">LA</div>
+      <div class="logo">N&E</div>
       <div>
-        <h2>Los Andes</h2>
-        <span>Barbería &amp; Estilo</span>
+        <h2>Navaja &amp; Estilo</h2>
+        <span>Barber&iacute;a Premium</span>
       </div>
     </div>
 
     <nav class="sidebar-nav">
       <ul>
-        <li><a href="#" class="active"><span class="nav-icon">📊</span> Dashboard</a></li>
-        <li><a href="#"><span class="nav-icon">📅</span> Agenda</a></li>
-        <li><a href="#"><span class="nav-icon">👥</span> Clientes</a></li>
-        <li><a href="#"><span class="nav-icon">✂️</span> Servicios</a></li>
-        <li><a href="#"><span class="nav-icon">👨‍💼</span> Barberos</a></li>
-        <li><a href="#"><span class="nav-icon">💰</span> Facturación</a></li>
-        <li><a href="#"><span class="nav-icon">📦</span> Productos</a></li>
-        <li><a href="#"><span class="nav-icon">⚙️</span> Configuración</a></li>
+        <li><a href="#" class="active" data-module="dashboard"><span class="nav-icon">&#128202;</span> Dashboard</a></li>
+        <li><a href="#" data-module="agenda"><span class="nav-icon">&#128197;</span> Agenda</a></li>
+        <li><a href="#" data-module="clientes"><span class="nav-icon">&#128101;</span> Clientes</a></li>
+        <li><a href="#" data-module="servicios"><span class="nav-icon">&#9986;&#65039;</span> Servicios</a></li>
+        <li><a href="#" data-module="barberos"><span class="nav-icon">&#128116;</span> Barberos</a></li>
+        <li><a href="#" data-module="facturacion"><span class="nav-icon">&#128176;</span> Facturaci&oacute;n</a></li>
+        <li><a href="#" data-module="productos"><span class="nav-icon">&#128230;</span> Productos</a></li>
+        <li><a href="#" data-module="configuracion"><span class="nav-icon">&#9881;&#65039;</span> Configuraci&oacute;n</a></li>
       </ul>
     </nav>
 
     <div class="sidebar-footer">
       <div class="avatar">RA</div>
-      <div class="user-info">
-        <div class="user-name">Rodrigo Álvarez</div>
+      <div>
+        <div class="user-name">Rodrigo &Aacute;lvarez</div>
         <div class="user-role">Administrador</div>
       </div>
     </div>
   </aside>
 
+  <!-- ============================================ -->
   <!-- MAIN CONTENT -->
-  <main class="main">
-    <div class="main-header">
-      <div>
-        <h1>Panel de <span>Gestión</span></h1>
-        <p>Resumen de rendimiento — Marzo 2026</p>
-      </div>
-      <div class="date-badge">📅 Lunes 30 de marzo, 2026</div>
-    </div>
+  <!-- ============================================ -->
+  <main class="main" id="mainContent">
 
-    <!-- KPIs -->
-    <div class="kpi-grid">
-      <div class="kpi-card">
-        <div class="kpi-label">Facturación del mes</div>
-        <div class="kpi-value">$1.450.000</div>
-        <div class="kpi-change up">▲ +13% vs. mes anterior</div>
-        <div class="kpi-icon">💰</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">Turnos atendidos</div>
-        <div class="kpi-value">520</div>
-        <div class="kpi-change up">▲ +10% vs. mes anterior</div>
-        <div class="kpi-icon">📅</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">Ticket promedio</div>
-        <div class="kpi-value">$6.200</div>
-        <div class="kpi-change up">▲ +5% vs. mes anterior</div>
-        <div class="kpi-icon">🧾</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">Clientes nuevos</div>
-        <div class="kpi-value">78</div>
-        <div class="kpi-change up">▲ +22% vs. mes anterior</div>
-        <div class="kpi-icon">👤</div>
-      </div>
-    </div>
-
-    <!-- CHARTS GRID -->
-    <div class="dashboard-grid">
-
-      <!-- 1. Facturación semanal (Line) -->
-      <div class="card col-8">
-        <div class="card-header">
-          <div class="card-title">Facturación semanal</div>
-          <div class="card-badge">Últimas 12 semanas</div>
+    <!-- ==================== DASHBOARD ==================== -->
+    <section class="module-section active" id="mod-dashboard">
+      <div class="page-header">
+        <div>
+          <h1>Panel de <span class="accent">Gesti&oacute;n</span></h1>
+          <p>Resumen de rendimiento &mdash; Marzo 2026</p>
         </div>
-        <div class="chart-container line-chart">
-          <canvas id="chartFacturacion"></canvas>
+        <div class="date-badge">&#128197; Lunes 30 de marzo, 2026</div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">Facturaci&oacute;n del mes</div>
+          <div class="kpi-value">$1.450.000</div>
+          <div class="kpi-change up">&#9650; +13% vs. mes anterior</div>
+          <div class="kpi-icon">&#128176;</div>
+        </div>
+        <div class="kpi-card accent-green">
+          <div class="kpi-label">Turnos atendidos</div>
+          <div class="kpi-value">520</div>
+          <div class="kpi-change up">&#9650; +10% vs. mes anterior</div>
+          <div class="kpi-icon">&#128197;</div>
+        </div>
+        <div class="kpi-card accent-blue">
+          <div class="kpi-label">Ticket promedio</div>
+          <div class="kpi-value">$6.200</div>
+          <div class="kpi-change up">&#9650; +5% vs. mes anterior</div>
+          <div class="kpi-icon">&#129534;</div>
+        </div>
+        <div class="kpi-card accent-purple">
+          <div class="kpi-label">Clientes nuevos</div>
+          <div class="kpi-value">78</div>
+          <div class="kpi-change up">&#9650; +22% vs. mes anterior</div>
+          <div class="kpi-icon">&#128100;</div>
         </div>
       </div>
 
-      <!-- 2. Servicios más solicitados (Doughnut) -->
-      <div class="card col-4">
-        <div class="card-header">
-          <div class="card-title">Servicios más solicitados</div>
-          <div class="card-badge">Marzo</div>
+      <div class="grid-12">
+        <!-- Facturacion semanal -->
+        <div class="card col-8">
+          <div class="card-header">
+            <div class="card-title">Facturaci&oacute;n semanal</div>
+            <div class="card-badge">&Uacute;ltimas 12 semanas</div>
+          </div>
+          <div class="chart-container h-260"><canvas id="chartDashFacturacion"></canvas></div>
         </div>
-        <div class="chart-container doughnut-chart">
-          <canvas id="chartServicios"></canvas>
+
+        <!-- Servicios más solicitados -->
+        <div class="card col-4">
+          <div class="card-header">
+            <div class="card-title">Servicios m&aacute;s solicitados</div>
+            <div class="card-badge">Marzo</div>
+          </div>
+          <div class="chart-container h-260"><canvas id="chartDashServicios"></canvas></div>
+        </div>
+
+        <!-- Turnos por día -->
+        <div class="card col-6">
+          <div class="card-header">
+            <div class="card-title">Turnos por d&iacute;a</div>
+            <div class="card-badge">Promedio semanal</div>
+          </div>
+          <div class="chart-container h-260"><canvas id="chartDashTurnos"></canvas></div>
+        </div>
+
+        <!-- Rendimiento por barbero -->
+        <div class="card col-6">
+          <div class="card-header">
+            <div class="card-title">Rendimiento por barbero</div>
+            <div class="card-badge">Marzo</div>
+          </div>
+          <div class="chart-container h-260"><canvas id="chartDashBarberos"></canvas></div>
+        </div>
+
+        <!-- Horarios pico -->
+        <div class="card col-8">
+          <div class="card-header">
+            <div class="card-title">Horarios pico</div>
+            <div class="card-badge">Turnos promedio por hora</div>
+          </div>
+          <div class="chart-container h-260"><canvas id="chartDashHorarios"></canvas></div>
+        </div>
+
+        <!-- Cómo nos encontraron -->
+        <div class="card col-4">
+          <div class="card-header">
+            <div class="card-title">C&oacute;mo nos encontraron</div>
+            <div class="card-badge">Clientes nuevos</div>
+          </div>
+          <div class="chart-container h-260"><canvas id="chartDashCanales"></canvas></div>
+        </div>
+
+        <!-- Últimos turnos table -->
+        <div class="card col-12">
+          <div class="card-header">
+            <div class="card-title">&Uacute;ltimos turnos</div>
+            <div class="card-badge">Hoy</div>
+          </div>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr><th>Hora</th><th>Cliente</th><th>Barbero</th><th>Servicio</th><th>Monto</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>09:00</td><td>Marcos Pereyra</td><td><span class="badge badge-gold">Mart&iacute;n</span></td><td>Corte cl&aacute;sico</td><td class="amount">$5.500</td></tr>
+                <tr><td>09:30</td><td>Tom&aacute;s Guti&eacute;rrez</td><td><span class="badge badge-blue">Luciano</span></td><td>Corte + barba</td><td class="amount">$7.500</td></tr>
+                <tr><td>10:00</td><td>Valent&iacute;n Rosas</td><td><span class="badge badge-purple">Sof&iacute;a</span></td><td>Coloraci&oacute;n</td><td class="amount">$8.000</td></tr>
+                <tr><td>10:30</td><td>Ignacio Fern&aacute;ndez</td><td><span class="badge badge-gold">Mart&iacute;n</span></td><td>Barba sola</td><td class="amount">$3.500</td></tr>
+                <tr><td>11:00</td><td>Agust&iacute;n L&oacute;pez</td><td><span class="badge badge-blue">Luciano</span></td><td>Corte cl&aacute;sico</td><td class="amount">$5.500</td></tr>
+                <tr><td>11:30</td><td>Facundo Morales</td><td><span class="badge badge-purple">Sof&iacute;a</span></td><td>Tratamiento capilar</td><td class="amount">$6.500</td></tr>
+                <tr><td>12:00</td><td>Nicol&aacute;s D&iacute;az</td><td><span class="badge badge-gold">Mart&iacute;n</span></td><td>Corte + barba</td><td class="amount">$7.500</td></tr>
+                <tr><td>12:30</td><td>Santiago Ruiz</td><td><span class="badge badge-blue">Luciano</span></td><td>Corte cl&aacute;sico</td><td class="amount">$5.500</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== AGENDA ==================== -->
+    <section class="module-section" id="mod-agenda">
+      <div class="page-header">
+        <div>
+          <h1>&#128197; <span class="accent">Agenda</span></h1>
+          <p>Turnos del d&iacute;a y vista semanal</p>
+        </div>
+        <div class="date-badge">Lunes 30 de marzo, 2026</div>
+      </div>
+
+      <div class="agenda-quick-stats">
+        <div class="agenda-stat">
+          <div class="val">14</div>
+          <div class="label">Turnos hoy</div>
+        </div>
+        <div class="agenda-stat">
+          <div class="val">14:30</div>
+          <div class="label">Pr&oacute;ximo turno</div>
+        </div>
+        <div class="agenda-stat">
+          <div class="val">3</div>
+          <div class="label">Huecos disponibles</div>
         </div>
       </div>
 
-      <!-- 3. Turnos por día (Bar) -->
-      <div class="card col-6">
-        <div class="card-header">
-          <div class="card-title">Turnos por día</div>
-          <div class="card-badge">Promedio semanal</div>
+      <div class="grid-12">
+        <div class="card col-7">
+          <div class="card-header">
+            <div class="card-title">Turnos de hoy</div>
+            <div class="card-badge">Lunes 30/03</div>
+          </div>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr><th>Hora</th><th>Cliente</th><th>Barbero</th><th>Servicio</th><th>Duraci&oacute;n</th><th>Estado</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>09:00</td><td>Marcos Pereyra</td><td><span class="badge badge-gold">Mart&iacute;n</span></td><td>Corte cl&aacute;sico</td><td>30 min</td><td><span class="status-dot done"></span>Completado</td></tr>
+                <tr><td>09:30</td><td>Tom&aacute;s Guti&eacute;rrez</td><td><span class="badge badge-blue">Luciano</span></td><td>Corte + barba</td><td>45 min</td><td><span class="status-dot done"></span>Completado</td></tr>
+                <tr><td>10:00</td><td>Valent&iacute;n Rosas</td><td><span class="badge badge-purple">Sof&iacute;a</span></td><td>Coloraci&oacute;n</td><td>60 min</td><td><span class="status-dot done"></span>Completado</td></tr>
+                <tr><td>10:30</td><td>Ignacio Fern&aacute;ndez</td><td><span class="badge badge-gold">Mart&iacute;n</span></td><td>Barba sola</td><td>20 min</td><td><span class="status-dot done"></span>Completado</td></tr>
+                <tr><td>11:00</td><td>Agust&iacute;n L&oacute;pez</td><td><span class="badge badge-blue">Luciano</span></td><td>Corte cl&aacute;sico</td><td>30 min</td><td><span class="status-dot done"></span>Completado</td></tr>
+                <tr><td>11:30</td><td>Facundo Morales</td><td><span class="badge badge-purple">Sof&iacute;a</span></td><td>Tratamiento</td><td>45 min</td><td><span class="status-dot done"></span>Completado</td></tr>
+                <tr><td>12:00</td><td>Nicol&aacute;s D&iacute;az</td><td><span class="badge badge-gold">Mart&iacute;n</span></td><td>Corte + barba</td><td>45 min</td><td><span class="status-dot done"></span>Completado</td></tr>
+                <tr><td>12:30</td><td>Santiago Ruiz</td><td><span class="badge badge-blue">Luciano</span></td><td>Corte cl&aacute;sico</td><td>30 min</td><td><span class="status-dot done"></span>Completado</td></tr>
+                <tr><td>14:30</td><td>Emiliano Torres</td><td><span class="badge badge-gold">Mart&iacute;n</span></td><td>Corte cl&aacute;sico</td><td>30 min</td><td><span class="status-dot pending"></span>Pendiente</td></tr>
+                <tr><td>15:00</td><td>Gonzalo Vega</td><td><span class="badge badge-purple">Sof&iacute;a</span></td><td>Coloraci&oacute;n</td><td>60 min</td><td><span class="status-dot pending"></span>Pendiente</td></tr>
+                <tr><td>15:30</td><td>Federico Bravo</td><td><span class="badge badge-blue">Luciano</span></td><td>Corte + barba</td><td>45 min</td><td><span class="status-dot pending"></span>Pendiente</td></tr>
+                <tr><td>16:00</td><td>Ramiro Sosa</td><td><span class="badge badge-gold">Mart&iacute;n</span></td><td>Barba sola</td><td>20 min</td><td><span class="status-dot pending"></span>Pendiente</td></tr>
+                <tr><td>17:00</td><td>Mat&iacute;as Herrera</td><td><span class="badge badge-blue">Luciano</span></td><td>Corte cl&aacute;sico</td><td>30 min</td><td><span class="status-dot pending"></span>Pendiente</td></tr>
+                <tr><td>18:00</td><td>Lautaro Mendoza</td><td><span class="badge badge-purple">Sof&iacute;a</span></td><td>Tratamiento</td><td>45 min</td><td><span class="status-dot pending"></span>Pendiente</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div class="chart-container bar-chart">
-          <canvas id="chartTurnos"></canvas>
+
+        <div class="card col-5">
+          <div class="card-header">
+            <div class="card-title">Turnos por d&iacute;a (semana actual)</div>
+            <div class="card-badge">Sem. 13</div>
+          </div>
+          <div class="chart-container h-300"><canvas id="chartAgendaSemana"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CLIENTES ==================== -->
+    <section class="module-section" id="mod-clientes">
+      <div class="page-header">
+        <div>
+          <h1>&#128101; <span class="accent">Clientes</span></h1>
+          <p>Base de datos y m&eacute;tricas de fidelizaci&oacute;n</p>
+        </div>
+        <div class="date-badge">Marzo 2026</div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">Total clientes</div>
+          <div class="kpi-value">342</div>
+          <div class="kpi-change up">&#9650; +18% acumulado</div>
+          <div class="kpi-icon">&#128101;</div>
+        </div>
+        <div class="kpi-card accent-green">
+          <div class="kpi-label">Nuevos este mes</div>
+          <div class="kpi-value">78</div>
+          <div class="kpi-change up">&#9650; +22% vs. feb</div>
+          <div class="kpi-icon">&#127381;</div>
+        </div>
+        <div class="kpi-card accent-blue">
+          <div class="kpi-label">Recurrentes</div>
+          <div class="kpi-value">68%</div>
+          <div class="kpi-change up">&#9650; +3pp vs. feb</div>
+          <div class="kpi-icon">&#128260;</div>
+        </div>
+        <div class="kpi-card accent-purple">
+          <div class="kpi-label">Frecuencia promedio</div>
+          <div class="kpi-value">2.4 / mes</div>
+          <div class="kpi-change up">&#9650; +0.2 vs. feb</div>
+          <div class="kpi-icon">&#128200;</div>
         </div>
       </div>
 
-      <!-- 4. Rendimiento por barbero (Bar) -->
-      <div class="card col-6">
-        <div class="card-header">
-          <div class="card-title">Rendimiento por barbero</div>
-          <div class="card-badge">Marzo</div>
+      <div class="grid-12">
+        <div class="card col-8">
+          <div class="card-header">
+            <div class="card-title">Clientes recientes</div>
+            <div class="card-badge">&Uacute;ltimas visitas</div>
+          </div>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr><th>Nombre</th><th>&Uacute;ltima visita</th><th>Barbero favorito</th><th>Servicio frecuente</th><th>Visitas total</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Marcos Pereyra</td><td>30/03/2026</td><td><span class="badge badge-gold">Mart&iacute;n</span></td><td>Corte cl&aacute;sico</td><td><strong>12</strong></td></tr>
+                <tr><td>Tom&aacute;s Guti&eacute;rrez</td><td>30/03/2026</td><td><span class="badge badge-blue">Luciano</span></td><td>Corte + barba</td><td><strong>8</strong></td></tr>
+                <tr><td>Valent&iacute;n Rosas</td><td>30/03/2026</td><td><span class="badge badge-purple">Sof&iacute;a</span></td><td>Coloraci&oacute;n</td><td><strong>5</strong></td></tr>
+                <tr><td>Ignacio Fern&aacute;ndez</td><td>30/03/2026</td><td><span class="badge badge-gold">Mart&iacute;n</span></td><td>Barba sola</td><td><strong>15</strong></td></tr>
+                <tr><td>Agust&iacute;n L&oacute;pez</td><td>30/03/2026</td><td><span class="badge badge-blue">Luciano</span></td><td>Corte cl&aacute;sico</td><td><strong>3</strong></td></tr>
+                <tr><td>Facundo Morales</td><td>30/03/2026</td><td><span class="badge badge-purple">Sof&iacute;a</span></td><td>Tratamiento</td><td><strong>7</strong></td></tr>
+                <tr><td>Nicol&aacute;s D&iacute;az</td><td>28/03/2026</td><td><span class="badge badge-gold">Mart&iacute;n</span></td><td>Corte + barba</td><td><strong>20</strong></td></tr>
+                <tr><td>Santiago Ruiz</td><td>28/03/2026</td><td><span class="badge badge-blue">Luciano</span></td><td>Corte cl&aacute;sico</td><td><strong>11</strong></td></tr>
+                <tr><td>Emiliano Torres</td><td>27/03/2026</td><td><span class="badge badge-gold">Mart&iacute;n</span></td><td>Corte cl&aacute;sico</td><td><strong>1</strong></td></tr>
+                <tr><td>Gonzalo Vega</td><td>25/03/2026</td><td><span class="badge badge-purple">Sof&iacute;a</span></td><td>Coloraci&oacute;n</td><td><strong>2</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div class="chart-container bar-chart">
-          <canvas id="chartBarberos"></canvas>
+
+        <div class="card col-4">
+          <div class="card-header">
+            <div class="card-title">Tipo de cliente</div>
+            <div class="card-badge">Marzo</div>
+          </div>
+          <div class="chart-container h-260"><canvas id="chartClientesTipo"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SERVICIOS ==================== -->
+    <section class="module-section" id="mod-servicios">
+      <div class="page-header">
+        <div>
+          <h1>&#9986;&#65039; <span class="accent">Servicios</span></h1>
+          <p>Cat&aacute;logo de servicios y rendimiento</p>
+        </div>
+        <div class="date-badge">Marzo 2026</div>
+      </div>
+
+      <div class="item-cards" style="margin-bottom:24px;">
+        <div class="item-card">
+          <div class="item-card-icon">&#9986;&#65039;</div>
+          <div class="item-card-name">Corte cl&aacute;sico</div>
+          <div class="item-card-price">$5.500</div>
+          <div class="item-card-meta">
+            <strong>182</strong> pedidos/mes<br>
+            Ingreso: <strong>$1.001.000</strong><br>
+            Duraci&oacute;n: <strong>30 min</strong>
+          </div>
+        </div>
+        <div class="item-card">
+          <div class="item-card-icon">&#128136;</div>
+          <div class="item-card-name">Corte + barba</div>
+          <div class="item-card-price">$7.500</div>
+          <div class="item-card-meta">
+            <strong>146</strong> pedidos/mes<br>
+            Ingreso: <strong>$1.095.000</strong><br>
+            Duraci&oacute;n: <strong>45 min</strong>
+          </div>
+        </div>
+        <div class="item-card">
+          <div class="item-card-icon">&#129492;</div>
+          <div class="item-card-name">Barba sola</div>
+          <div class="item-card-price">$3.500</div>
+          <div class="item-card-meta">
+            <strong>78</strong> pedidos/mes<br>
+            Ingreso: <strong>$273.000</strong><br>
+            Duraci&oacute;n: <strong>20 min</strong>
+          </div>
+        </div>
+        <div class="item-card">
+          <div class="item-card-icon">&#127912;</div>
+          <div class="item-card-name">Coloraci&oacute;n</div>
+          <div class="item-card-price">$8.000</div>
+          <div class="item-card-meta">
+            <strong>62</strong> pedidos/mes<br>
+            Ingreso: <strong>$496.000</strong><br>
+            Duraci&oacute;n: <strong>60 min</strong>
+          </div>
+        </div>
+        <div class="item-card">
+          <div class="item-card-icon">&#128118;</div>
+          <div class="item-card-name">Corte ni&ntilde;o</div>
+          <div class="item-card-price">$4.000</div>
+          <div class="item-card-meta">
+            <strong>34</strong> pedidos/mes<br>
+            Ingreso: <strong>$136.000</strong><br>
+            Duraci&oacute;n: <strong>25 min</strong>
+          </div>
+        </div>
+        <div class="item-card">
+          <div class="item-card-icon">&#128135;</div>
+          <div class="item-card-name">Tratamiento capilar</div>
+          <div class="item-card-price">$6.500</div>
+          <div class="item-card-meta">
+            <strong>52</strong> pedidos/mes<br>
+            Ingreso: <strong>$338.000</strong><br>
+            Duraci&oacute;n: <strong>45 min</strong>
+          </div>
         </div>
       </div>
 
-      <!-- 5. Horarios pico (Line) -->
-      <div class="card col-8">
-        <div class="card-header">
-          <div class="card-title">Horarios pico</div>
-          <div class="card-badge">Turnos promedio por hora</div>
+      <div class="grid-12">
+        <div class="card col-6">
+          <div class="card-header">
+            <div class="card-title">Distribuci&oacute;n de servicios</div>
+            <div class="card-badge">Marzo</div>
+          </div>
+          <div class="chart-container h-300"><canvas id="chartServiciosDist"></canvas></div>
         </div>
-        <div class="chart-container line-chart">
-          <canvas id="chartHorarios"></canvas>
+        <div class="card col-6">
+          <div class="card-header">
+            <div class="card-title">Ingresos por servicio</div>
+            <div class="card-badge">Marzo</div>
+          </div>
+          <div class="chart-container h-300"><canvas id="chartServiciosIngresos"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== BARBEROS ==================== -->
+    <section class="module-section" id="mod-barberos">
+      <div class="page-header">
+        <div>
+          <h1>&#128116; <span class="accent">Barberos</span></h1>
+          <p>Rendimiento individual del equipo</p>
+        </div>
+        <div class="date-badge">Marzo 2026</div>
+      </div>
+
+      <div class="barbero-cards" style="margin-bottom:24px;">
+        <div class="barbero-card">
+          <div class="barbero-avatar">MR</div>
+          <h3>Mart&iacute;n Rodr&iacute;guez</h3>
+          <div class="specialty">Corte cl&aacute;sico &bull; Barba</div>
+          <div class="barbero-stats">
+            <div class="barbero-stat"><div class="label">Turnos</div><div class="val">198</div></div>
+            <div class="barbero-stat"><div class="label">Facturaci&oacute;n</div><div class="val gold">$1.12M</div></div>
+            <div class="barbero-stat"><div class="label">Rating</div><div class="val">4.9 &#11088;</div></div>
+            <div class="barbero-stat"><div class="label">Cancelaciones</div><div class="val">3%</div></div>
+          </div>
+        </div>
+        <div class="barbero-card">
+          <div class="barbero-avatar">LG</div>
+          <h3>Luciano G&oacute;mez</h3>
+          <div class="specialty">Corte moderno &bull; Dise&ntilde;o</div>
+          <div class="barbero-stats">
+            <div class="barbero-stat"><div class="label">Turnos</div><div class="val">182</div></div>
+            <div class="barbero-stat"><div class="label">Facturaci&oacute;n</div><div class="val gold">$1.02M</div></div>
+            <div class="barbero-stat"><div class="label">Rating</div><div class="val">4.8 &#11088;</div></div>
+            <div class="barbero-stat"><div class="label">Cancelaciones</div><div class="val">5%</div></div>
+          </div>
+        </div>
+        <div class="barbero-card">
+          <div class="barbero-avatar">SV</div>
+          <h3>Sof&iacute;a Vargas</h3>
+          <div class="specialty">Coloraci&oacute;n &bull; Tratamientos</div>
+          <div class="barbero-stats">
+            <div class="barbero-stat"><div class="label">Turnos</div><div class="val">140</div></div>
+            <div class="barbero-stat"><div class="label">Facturaci&oacute;n</div><div class="val gold">$0.76M</div></div>
+            <div class="barbero-stat"><div class="label">Rating</div><div class="val">4.9 &#11088;</div></div>
+            <div class="barbero-stat"><div class="label">Cancelaciones</div><div class="val">2%</div></div>
+          </div>
         </div>
       </div>
 
-      <!-- 6. Cómo nos encontraron (Doughnut) -->
-      <div class="card col-4">
-        <div class="card-header">
-          <div class="card-title">Cómo nos encontraron</div>
-          <div class="card-badge">Clientes nuevos</div>
+      <div class="grid-12">
+        <div class="card col-12">
+          <div class="card-header">
+            <div class="card-title">Comparativa de rendimiento</div>
+            <div class="card-badge">Marzo</div>
+          </div>
+          <div class="chart-container h-300"><canvas id="chartBarberosComp"></canvas></div>
         </div>
-        <div class="chart-container doughnut-chart">
-          <canvas id="chartCanales"></canvas>
+      </div>
+    </section>
+
+    <!-- ==================== FACTURACION ==================== -->
+    <section class="module-section" id="mod-facturacion">
+      <div class="page-header">
+        <div>
+          <h1>&#128176; <span class="accent">Facturaci&oacute;n</span></h1>
+          <p>Ingresos y movimientos del mes</p>
+        </div>
+        <div class="date-badge">Marzo 2026</div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">Total mes</div>
+          <div class="kpi-value">$1.450.000</div>
+          <div class="kpi-change up">&#9650; +13% vs. feb</div>
+          <div class="kpi-icon">&#128176;</div>
+        </div>
+        <div class="kpi-card accent-green">
+          <div class="kpi-label">Promedio diario</div>
+          <div class="kpi-value">$55.769</div>
+          <div class="kpi-change up">&#9650; +8% vs. feb</div>
+          <div class="kpi-icon">&#128200;</div>
+        </div>
+        <div class="kpi-card accent-blue">
+          <div class="kpi-label">Mejor semana</div>
+          <div class="kpi-value">$420.000</div>
+          <div class="kpi-change up">Semana 12</div>
+          <div class="kpi-icon">&#127942;</div>
+        </div>
+        <div class="kpi-card accent-purple">
+          <div class="kpi-label">Ticket promedio</div>
+          <div class="kpi-value">$6.200</div>
+          <div class="kpi-change up">&#9650; +5% vs. feb</div>
+          <div class="kpi-icon">&#129534;</div>
         </div>
       </div>
 
-      <!-- 7. Últimos turnos (Table) -->
-      <div class="card col-12">
-        <div class="card-header">
-          <div class="card-title">Últimos turnos</div>
-          <div class="card-badge">Hoy</div>
+      <div class="grid-12">
+        <div class="card col-8">
+          <div class="card-header">
+            <div class="card-title">Facturaci&oacute;n semanal</div>
+            <div class="card-badge">&Uacute;ltimas 12 semanas</div>
+          </div>
+          <div class="chart-container h-300"><canvas id="chartFactSemanal"></canvas></div>
         </div>
-        <div class="table-wrapper">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th>Hora</th>
-                <th>Cliente</th>
-                <th>Barbero</th>
-                <th>Servicio</th>
-                <th>Monto</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>09:00</td>
-                <td>Marcos Pereyra</td>
-                <td><span class="barbero-badge">Martín</span></td>
-                <td>Corte clásico</td>
-                <td class="amount">$4.500</td>
-              </tr>
-              <tr>
-                <td>09:30</td>
-                <td>Tomás Gutiérrez</td>
-                <td><span class="barbero-badge">Luciano</span></td>
-                <td>Corte + barba</td>
-                <td class="amount">$7.200</td>
-              </tr>
-              <tr>
-                <td>10:00</td>
-                <td>Valentín Rosas</td>
-                <td><span class="barbero-badge">Sofía</span></td>
-                <td>Coloración</td>
-                <td class="amount">$9.500</td>
-              </tr>
-              <tr>
-                <td>10:30</td>
-                <td>Ignacio Fernández</td>
-                <td><span class="barbero-badge">Martín</span></td>
-                <td>Barba sola</td>
-                <td class="amount">$3.800</td>
-              </tr>
-              <tr>
-                <td>11:00</td>
-                <td>Agustín López</td>
-                <td><span class="barbero-badge">Luciano</span></td>
-                <td>Corte clásico</td>
-                <td class="amount">$4.500</td>
-              </tr>
-              <tr>
-                <td>11:30</td>
-                <td>Facundo Morales</td>
-                <td><span class="barbero-badge">Sofía</span></td>
-                <td>Tratamiento capilar</td>
-                <td class="amount">$8.000</td>
-              </tr>
-              <tr>
-                <td>12:00</td>
-                <td>Nicolás Díaz</td>
-                <td><span class="barbero-badge">Martín</span></td>
-                <td>Corte + barba</td>
-                <td class="amount">$7.200</td>
-              </tr>
-              <tr>
-                <td>12:30</td>
-                <td>Santiago Ruiz</td>
-                <td><span class="barbero-badge">Luciano</span></td>
-                <td>Corte clásico</td>
-                <td class="amount">$4.500</td>
-              </tr>
-            </tbody>
-          </table>
+
+        <div class="card col-4">
+          <div class="card-header">
+            <div class="card-title">M&eacute;todos de pago</div>
+            <div class="card-badge">Marzo</div>
+          </div>
+          <div class="chart-container h-300"><canvas id="chartFactMetodos"></canvas></div>
+        </div>
+
+        <div class="card col-12">
+          <div class="card-header">
+            <div class="card-title">&Uacute;ltimos movimientos</div>
+            <div class="card-badge">Marzo</div>
+          </div>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr><th>Fecha</th><th>Concepto</th><th>Monto</th><th>M&eacute;todo</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>30/03</td><td>Corte cl&aacute;sico - Marcos Pereyra</td><td class="amount">$5.500</td><td><span class="badge badge-green">Efectivo</span></td></tr>
+                <tr><td>30/03</td><td>Corte + barba - Tom&aacute;s Guti&eacute;rrez</td><td class="amount">$7.500</td><td><span class="badge badge-blue">Transferencia</span></td></tr>
+                <tr><td>30/03</td><td>Coloraci&oacute;n - Valent&iacute;n Rosas</td><td class="amount">$8.000</td><td><span class="badge badge-purple">Tarjeta</span></td></tr>
+                <tr><td>30/03</td><td>Barba sola - Ignacio Fern&aacute;ndez</td><td class="amount">$3.500</td><td><span class="badge badge-green">Efectivo</span></td></tr>
+                <tr><td>30/03</td><td>Corte cl&aacute;sico - Agust&iacute;n L&oacute;pez</td><td class="amount">$5.500</td><td><span class="badge badge-blue">Transferencia</span></td></tr>
+                <tr><td>30/03</td><td>Tratamiento - Facundo Morales</td><td class="amount">$6.500</td><td><span class="badge badge-green">Efectivo</span></td></tr>
+                <tr><td>29/03</td><td>Corte + barba - Pablo Casta&ntilde;o</td><td class="amount">$7.500</td><td><span class="badge badge-purple">Tarjeta</span></td></tr>
+                <tr><td>29/03</td><td>Corte ni&ntilde;o - Lucas Medina</td><td class="amount">$4.000</td><td><span class="badge badge-green">Efectivo</span></td></tr>
+                <tr><td>29/03</td><td>Coloraci&oacute;n - Diego Romero</td><td class="amount">$8.000</td><td><span class="badge badge-blue">Transferencia</span></td></tr>
+                <tr><td>28/03</td><td>Corte cl&aacute;sico - Nicol&aacute;s D&iacute;az</td><td class="amount">$5.500</td><td><span class="badge badge-green">Efectivo</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PRODUCTOS ==================== -->
+    <section class="module-section" id="mod-productos">
+      <div class="page-header">
+        <div>
+          <h1>&#128230; <span class="accent">Productos</span></h1>
+          <p>Stock y ventas de productos</p>
+        </div>
+        <div class="date-badge">Marzo 2026</div>
+      </div>
+
+      <div class="kpi-grid cols-3" style="margin-bottom:24px;">
+        <div class="kpi-card">
+          <div class="kpi-label">Total vendido</div>
+          <div class="kpi-value">$186.500</div>
+          <div class="kpi-change up">&#9650; +15% vs. feb</div>
+          <div class="kpi-icon">&#128176;</div>
+        </div>
+        <div class="kpi-card accent-green">
+          <div class="kpi-label">Unidades vendidas</div>
+          <div class="kpi-value">95</div>
+          <div class="kpi-change up">&#9650; +12 vs. feb</div>
+          <div class="kpi-icon">&#128230;</div>
+        </div>
+        <div class="kpi-card accent-blue">
+          <div class="kpi-label">Producto estrella</div>
+          <div class="kpi-value">Cera modeladora</div>
+          <div class="kpi-change up">35 vendidos</div>
+          <div class="kpi-icon">&#11088;</div>
         </div>
       </div>
 
-    </div>
+      <div class="item-cards" style="margin-bottom:24px;">
+        <div class="item-card">
+          <div class="item-card-icon">&#129523;</div>
+          <div class="item-card-name">Cera modeladora</div>
+          <div class="item-card-price">$2.800</div>
+          <div class="item-card-meta">
+            Stock: <strong>24 unidades</strong><br>
+            Vendidos/mes: <strong>35</strong><br>
+            Ingreso: <strong>$98.000</strong>
+          </div>
+        </div>
+        <div class="item-card">
+          <div class="item-card-icon">&#128167;</div>
+          <div class="item-card-name">Aceite para barba</div>
+          <div class="item-card-price">$3.200</div>
+          <div class="item-card-meta">
+            Stock: <strong>18 unidades</strong><br>
+            Vendidos/mes: <strong>22</strong><br>
+            Ingreso: <strong>$70.400</strong>
+          </div>
+        </div>
+        <div class="item-card">
+          <div class="item-card-icon">&#129532;</div>
+          <div class="item-card-name">Shampoo premium</div>
+          <div class="item-card-price">$2.500</div>
+          <div class="item-card-meta">
+            Stock: <strong>32 unidades</strong><br>
+            Vendidos/mes: <strong>28</strong><br>
+            Ingreso: <strong>$70.000</strong>
+          </div>
+        </div>
+        <div class="item-card">
+          <div class="item-card-icon">&#127810;</div>
+          <div class="item-card-name">After shave</div>
+          <div class="item-card-price">$1.800</div>
+          <div class="item-card-meta">
+            Stock: <strong>40 unidades</strong><br>
+            Vendidos/mes: <strong>10</strong><br>
+            Ingreso: <strong>$18.000</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-12">
+        <div class="card col-12">
+          <div class="card-header">
+            <div class="card-title">Inventario completo</div>
+            <div class="card-badge">Actualizado hoy</div>
+          </div>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr><th>Producto</th><th>Stock</th><th>Precio</th><th>Vendidos/mes</th><th>Ingreso</th><th>Estado</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Cera modeladora</td><td>24</td><td class="amount">$2.800</td><td>35</td><td class="amount">$98.000</td><td><span class="badge badge-green">OK</span></td></tr>
+                <tr><td>Aceite para barba</td><td>18</td><td class="amount">$3.200</td><td>22</td><td class="amount">$70.400</td><td><span class="badge badge-green">OK</span></td></tr>
+                <tr><td>Shampoo premium</td><td>32</td><td class="amount">$2.500</td><td>28</td><td class="amount">$70.000</td><td><span class="badge badge-green">OK</span></td></tr>
+                <tr><td>After shave</td><td>40</td><td class="amount">$1.800</td><td>10</td><td class="amount">$18.000</td><td><span class="badge badge-green">OK</span></td></tr>
+                <tr><td>Gel fijador</td><td>5</td><td class="amount">$1.500</td><td>15</td><td class="amount">$22.500</td><td><span class="badge badge-red">Bajo</span></td></tr>
+                <tr><td>Acondicionador</td><td>12</td><td class="amount">$2.200</td><td>8</td><td class="amount">$17.600</td><td><span class="badge badge-green">OK</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CONFIGURACION ==================== -->
+    <section class="module-section" id="mod-configuracion">
+      <div class="page-header">
+        <div>
+          <h1>&#9881;&#65039; <span class="accent">Configuraci&oacute;n</span></h1>
+          <p>Preferencias del sistema</p>
+        </div>
+      </div>
+
+      <div class="card" style="max-width:720px;">
+        <div class="settings-section">
+          <h3>Informaci&oacute;n del negocio</h3>
+          <div class="setting-row">
+            <div class="setting-info">
+              <h4>Nombre del negocio</h4>
+              <p>Se muestra en reportes y notificaciones</p>
+            </div>
+            <input type="text" class="form-input" value="Navaja & Estilo" readonly>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <h4>Tel&eacute;fono</h4>
+              <p>N&uacute;mero de contacto principal</p>
+            </div>
+            <input type="text" class="form-input" value="+54 261 555-1234" readonly>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <h4>Direcci&oacute;n</h4>
+              <p>Direcci&oacute;n f&iacute;sica del local</p>
+            </div>
+            <input type="text" class="form-input" value="Av. San Mart&iacute;n 1250, Mendoza" readonly>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h3>Notificaciones</h3>
+          <div class="setting-row">
+            <div class="setting-info">
+              <h4>Recordatorio de turno</h4>
+              <p>Enviar WhatsApp autom&aacute;tico 2 hs antes</p>
+            </div>
+            <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <h4>Alerta de stock bajo</h4>
+              <p>Notificar cuando un producto baja de 10 unidades</p>
+            </div>
+            <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <h4>Resumen diario</h4>
+              <p>Recibir un email con el resumen del d&iacute;a</p>
+            </div>
+            <label class="toggle-switch"><input type="checkbox"><span class="toggle-slider"></span></label>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h3>Horarios de atenci&oacute;n</h3>
+          <div class="setting-row">
+            <div class="setting-info">
+              <h4>D&iacute;a de descanso</h4>
+              <p>D&iacute;a en que la barber&iacute;a no atiende</p>
+            </div>
+            <input type="text" class="form-input" value="Lunes" readonly>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <h4>Horario de apertura</h4>
+              <p>Hora de inicio de atenci&oacute;n</p>
+            </div>
+            <input type="text" class="form-input" value="09:00" readonly>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <h4>Horario de cierre</h4>
+              <p>Hora de fin de atenci&oacute;n</p>
+            </div>
+            <input type="text" class="form-input" value="20:00" readonly>
+          </div>
+        </div>
+
+        <div style="padding-top:8px; text-align:right;">
+          <button class="btn-save" onclick="alert('Demo: los cambios no se guardan en esta versi&oacute;n de demostración.')">Guardar cambios</button>
+        </div>
+      </div>
+    </section>
+
   </main>
 
+  <!-- ============================================ -->
+  <!-- JAVASCRIPT -->
+  <!-- ============================================ -->
   <script>
+  (function() {
+    'use strict';
+
     // ===== MOBILE MENU =====
     const menuToggle = document.getElementById('menuToggle');
     const sidebar = document.getElementById('sidebar');
@@ -707,6 +1464,39 @@
       overlay.classList.remove('active');
     });
 
+    // ===== MODULE NAVIGATION =====
+    const navLinks = document.querySelectorAll('.sidebar-nav a[data-module]');
+    const modules = document.querySelectorAll('.module-section');
+    const chartInstances = {};
+
+    function switchModule(moduleId) {
+      // Hide all
+      modules.forEach(m => m.classList.remove('active'));
+      navLinks.forEach(l => l.classList.remove('active'));
+
+      // Show target
+      const target = document.getElementById('mod-' + moduleId);
+      if (target) target.classList.add('active');
+
+      // Activate nav
+      const link = document.querySelector('[data-module="' + moduleId + '"]');
+      if (link) link.classList.add('active');
+
+      // Close mobile sidebar
+      sidebar.classList.remove('open');
+      overlay.classList.remove('active');
+
+      // Initialize charts for the module
+      setTimeout(() => initModuleCharts(moduleId), 60);
+    }
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        switchModule(link.getAttribute('data-module'));
+      });
+    });
+
     // ===== CHART.JS GLOBAL CONFIG =====
     Chart.defaults.color = '#9CA3AF';
     Chart.defaults.font.family = "'Inter', sans-serif";
@@ -714,344 +1504,383 @@
     Chart.defaults.plugins.legend.labels.usePointStyle = true;
     Chart.defaults.plugins.legend.labels.pointStyleWidth = 10;
     Chart.defaults.plugins.legend.labels.padding = 16;
-    Chart.defaults.scale.grid = { color: 'rgba(42, 45, 58, 0.7)' };
+    Chart.defaults.scale.grid = { color: 'rgba(37, 40, 56, 0.8)' };
 
     const gold = '#D4A017';
     const goldLight = '#E8C547';
     const goldDark = '#B8860B';
+    const green = '#22C55E';
+    const blue = '#3B82F6';
+    const purple = '#A855F7';
+
+    const tooltipStyle = {
+      backgroundColor: '#1A1D2A',
+      borderColor: gold,
+      borderWidth: 1,
+      titleColor: '#F2F2F8',
+      bodyColor: gold,
+      padding: 12,
+      cornerRadius: 10,
+      titleFont: { weight: '600' }
+    };
 
     function goldGradient(ctx, chartArea) {
       if (!chartArea) return gold;
-      const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
-      gradient.addColorStop(0, 'rgba(212, 160, 23, 0.0)');
-      gradient.addColorStop(1, 'rgba(212, 160, 23, 0.25)');
-      return gradient;
+      const g = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+      g.addColorStop(0, 'rgba(212,160,23,0.0)');
+      g.addColorStop(1, 'rgba(212,160,23,0.25)');
+      return g;
     }
 
-    // ===== 1. FACTURACIÓN SEMANAL (Line) =====
-    const ctxFact = document.getElementById('chartFacturacion').getContext('2d');
-    new Chart(ctxFact, {
-      type: 'line',
-      data: {
-        labels: ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4', 'Sem 5', 'Sem 6', 'Sem 7', 'Sem 8', 'Sem 9', 'Sem 10', 'Sem 11', 'Sem 12'],
-        datasets: [{
-          label: 'Facturación ($)',
-          data: [280000, 310000, 295000, 340000, 320000, 360000, 355000, 380000, 370000, 410000, 395000, 420000],
-          borderColor: gold,
-          backgroundColor: function(context) {
-            const chart = context.chart;
-            const { ctx, chartArea } = chart;
-            return goldGradient(ctx, chartArea);
-          },
-          borderWidth: 2.5,
-          fill: true,
-          tension: 0.4,
-          pointRadius: 4,
-          pointBackgroundColor: gold,
-          pointBorderColor: '#1E2130',
-          pointBorderWidth: 2,
-          pointHoverRadius: 7,
-          pointHoverBackgroundColor: goldLight,
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            backgroundColor: '#1E2130',
-            borderColor: gold,
-            borderWidth: 1,
-            titleColor: '#F0F0F5',
-            bodyColor: gold,
-            padding: 12,
-            cornerRadius: 8,
-            callbacks: {
-              label: ctx => '$ ' + ctx.parsed.y.toLocaleString('es-AR')
-            }
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: false,
-            ticks: {
-              callback: v => '$' + (v / 1000) + 'k'
-            }
-          }
-        },
-        animation: {
-          duration: 1200,
-          easing: 'easeOutQuart'
-        }
+    function makeChart(canvasId, config) {
+      const canvas = document.getElementById(canvasId);
+      if (!canvas) return null;
+      // Destroy if exists
+      if (chartInstances[canvasId]) {
+        chartInstances[canvasId].destroy();
       }
-    });
+      chartInstances[canvasId] = new Chart(canvas.getContext('2d'), config);
+      return chartInstances[canvasId];
+    }
 
-    // ===== 2. SERVICIOS MÁS SOLICITADOS (Doughnut) =====
-    const ctxServ = document.getElementById('chartServicios').getContext('2d');
-    new Chart(ctxServ, {
-      type: 'doughnut',
-      data: {
-        labels: ['Corte clásico', 'Corte + barba', 'Barba sola', 'Coloración', 'Tratamiento'],
-        datasets: [{
-          data: [35, 28, 15, 12, 10],
-          backgroundColor: ['#D4A017', '#E8C547', '#B8860B', '#8B6914', '#6B5210'],
-          borderColor: '#1E2130',
-          borderWidth: 3,
-          hoverOffset: 8
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        cutout: '62%',
-        plugins: {
-          legend: {
-            position: 'bottom',
-            labels: { font: { size: 11 } }
-          },
-          tooltip: {
-            backgroundColor: '#1E2130',
-            borderColor: gold,
-            borderWidth: 1,
-            titleColor: '#F0F0F5',
-            bodyColor: gold,
-            padding: 12,
-            cornerRadius: 8,
-            callbacks: {
-              label: ctx => ' ' + ctx.label + ': ' + ctx.parsed + '%'
-            }
-          }
-        },
-        animation: {
-          animateRotate: true,
-          duration: 1000,
-          easing: 'easeOutQuart'
-        }
+    // ===== CHART INITIALIZERS PER MODULE =====
+    const initialized = {};
+
+    function initModuleCharts(moduleId) {
+      if (initialized[moduleId]) {
+        // Just resize existing charts
+        Object.keys(chartInstances).forEach(k => {
+          if (chartInstances[k]) chartInstances[k].resize();
+        });
+        return;
       }
-    });
+      initialized[moduleId] = true;
 
-    // ===== 3. TURNOS POR DÍA (Bar) =====
-    const ctxTurnos = document.getElementById('chartTurnos').getContext('2d');
-    new Chart(ctxTurnos, {
-      type: 'bar',
-      data: {
-        labels: ['Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
-        datasets: [{
-          label: 'Turnos',
-          data: [18, 22, 20, 28, 35, 12],
-          backgroundColor: [
-            'rgba(212, 160, 23, 0.6)',
-            'rgba(212, 160, 23, 0.7)',
-            'rgba(212, 160, 23, 0.65)',
-            'rgba(212, 160, 23, 0.8)',
-            'rgba(212, 160, 23, 1)',
-            'rgba(212, 160, 23, 0.4)'
-          ],
-          borderColor: gold,
-          borderWidth: 1,
-          borderRadius: 6,
-          hoverBackgroundColor: goldLight
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            backgroundColor: '#1E2130',
-            borderColor: gold,
-            borderWidth: 1,
-            titleColor: '#F0F0F5',
-            bodyColor: gold,
-            padding: 12,
-            cornerRadius: 8
-          }
-        },
-        scales: {
-          y: { beginAtZero: true }
-        },
-        animation: {
-          duration: 1000,
-          easing: 'easeOutQuart'
-        }
+      switch(moduleId) {
+        case 'dashboard': initDashboard(); break;
+        case 'agenda': initAgenda(); break;
+        case 'clientes': initClientes(); break;
+        case 'servicios': initServicios(); break;
+        case 'barberos': initBarberos(); break;
+        case 'facturacion': initFacturacion(); break;
       }
-    });
+    }
 
-    // ===== 4. RENDIMIENTO POR BARBERO (Bar grouped) =====
-    const ctxBarberos = document.getElementById('chartBarberos').getContext('2d');
-    new Chart(ctxBarberos, {
-      type: 'bar',
-      data: {
-        labels: ['Martín', 'Luciano', 'Sofía'],
-        datasets: [
-          {
-            label: 'Turnos atendidos',
-            data: [198, 182, 140],
-            backgroundColor: 'rgba(212, 160, 23, 0.85)',
+    // ===== DASHBOARD CHARTS =====
+    function initDashboard() {
+      // Facturacion semanal
+      makeChart('chartDashFacturacion', {
+        type: 'line',
+        data: {
+          labels: ['Sem 1','Sem 2','Sem 3','Sem 4','Sem 5','Sem 6','Sem 7','Sem 8','Sem 9','Sem 10','Sem 11','Sem 12'],
+          datasets: [{
+            label: 'Facturaci\u00f3n ($)',
+            data: [280000,310000,295000,340000,320000,360000,355000,380000,370000,410000,395000,420000],
             borderColor: gold,
-            borderWidth: 1,
-            borderRadius: 6,
-            yAxisID: 'y'
+            backgroundColor: function(context) {
+              const chart = context.chart;
+              const {ctx, chartArea} = chart;
+              return goldGradient(ctx, chartArea);
+            },
+            borderWidth: 2.5, fill: true, tension: 0.4,
+            pointRadius: 4, pointBackgroundColor: gold,
+            pointBorderColor: '#181B28', pointBorderWidth: 2,
+            pointHoverRadius: 7, pointHoverBackgroundColor: goldLight
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false }, tooltip: { ...tooltipStyle, callbacks: { label: ctx => '$ ' + ctx.parsed.y.toLocaleString('es-AR') } } },
+          scales: { y: { beginAtZero: false, ticks: { callback: v => '$' + (v/1000) + 'k' } } },
+          animation: { duration: 1200, easing: 'easeOutQuart' }
+        }
+      });
+
+      // Servicios doughnut
+      makeChart('chartDashServicios', {
+        type: 'doughnut',
+        data: {
+          labels: ['Corte cl\u00e1sico','Corte + barba','Barba sola','Coloraci\u00f3n','Tratamiento'],
+          datasets: [{
+            data: [35,28,15,12,10],
+            backgroundColor: [gold, goldLight, goldDark, '#8B6914', '#6B5210'],
+            borderColor: '#181B28', borderWidth: 3, hoverOffset: 8
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false, cutout: '62%',
+          plugins: { legend: { position: 'bottom', labels: { font: { size: 11 } } }, tooltip: { ...tooltipStyle, callbacks: { label: ctx => ' ' + ctx.label + ': ' + ctx.parsed + '%' } } },
+          animation: { animateRotate: true, duration: 1000, easing: 'easeOutQuart' }
+        }
+      });
+
+      // Turnos por dia
+      makeChart('chartDashTurnos', {
+        type: 'bar',
+        data: {
+          labels: ['Martes','Mi\u00e9rcoles','Jueves','Viernes','S\u00e1bado','Domingo'],
+          datasets: [{
+            label: 'Turnos',
+            data: [18,22,20,28,35,12],
+            backgroundColor: ['rgba(212,160,23,0.55)','rgba(212,160,23,0.65)','rgba(212,160,23,0.6)','rgba(212,160,23,0.75)','rgba(212,160,23,1)','rgba(212,160,23,0.35)'],
+            borderColor: gold, borderWidth: 1, borderRadius: 8, hoverBackgroundColor: goldLight
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false }, tooltip: tooltipStyle },
+          scales: { y: { beginAtZero: true } },
+          animation: { duration: 1000, easing: 'easeOutQuart' }
+        }
+      });
+
+      // Rendimiento barberos
+      makeChart('chartDashBarberos', {
+        type: 'bar',
+        data: {
+          labels: ['Mart\u00edn','Luciano','Sof\u00eda'],
+          datasets: [
+            { label: 'Turnos', data: [198,182,140], backgroundColor: 'rgba(212,160,23,0.85)', borderColor: gold, borderWidth: 1, borderRadius: 8, yAxisID: 'y' },
+            { label: 'Facturaci\u00f3n ($k)', data: [560,510,380], backgroundColor: 'rgba(184,134,11,0.45)', borderColor: goldDark, borderWidth: 1, borderRadius: 8, yAxisID: 'y1' }
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { position: 'top', labels: { font: { size: 11 } } }, tooltip: { ...tooltipStyle, callbacks: { label: function(ctx) { return ctx.datasetIndex === 1 ? ' Facturaci\u00f3n: $' + ctx.parsed.y + 'k' : ' Turnos: ' + ctx.parsed.y; } } } },
+          scales: {
+            y: { beginAtZero: true, position: 'left', title: { display: true, text: 'Turnos', color: '#9CA3AF' } },
+            y1: { beginAtZero: true, position: 'right', title: { display: true, text: 'Facturaci\u00f3n ($k)', color: '#9CA3AF' }, grid: { drawOnChartArea: false } }
           },
-          {
-            label: 'Facturación ($k)',
-            data: [560, 510, 380],
-            backgroundColor: 'rgba(184, 134, 11, 0.5)',
-            borderColor: goldDark,
-            borderWidth: 1,
-            borderRadius: 6,
-            yAxisID: 'y1'
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            position: 'top',
-            labels: { font: { size: 11 } }
-          },
-          tooltip: {
-            backgroundColor: '#1E2130',
+          animation: { duration: 1000, easing: 'easeOutQuart' }
+        }
+      });
+
+      // Horarios pico
+      makeChart('chartDashHorarios', {
+        type: 'line',
+        data: {
+          labels: ['9:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00'],
+          datasets: [{
+            label: 'Turnos promedio',
+            data: [3,5,7,6,3,2,4,6,8,9,7,4],
             borderColor: gold,
-            borderWidth: 1,
-            titleColor: '#F0F0F5',
-            bodyColor: gold,
-            padding: 12,
-            cornerRadius: 8,
-            callbacks: {
-              label: function(ctx) {
-                if (ctx.datasetIndex === 1) {
-                  return ' Facturación: $' + ctx.parsed.y + 'k';
+            backgroundColor: function(context) { return goldGradient(context.chart.ctx, context.chart.chartArea); },
+            borderWidth: 2.5, fill: true, tension: 0.4,
+            pointRadius: 4, pointBackgroundColor: gold, pointBorderColor: '#181B28', pointBorderWidth: 2,
+            pointHoverRadius: 7, pointHoverBackgroundColor: goldLight
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false }, tooltip: { ...tooltipStyle, callbacks: { label: ctx => ' ' + ctx.parsed.y + ' turnos' } } },
+          scales: { y: { beginAtZero: true, title: { display: true, text: 'Cantidad de turnos', color: '#9CA3AF' } } },
+          animation: { duration: 1200, easing: 'easeOutQuart' }
+        }
+      });
+
+      // Canales
+      makeChart('chartDashCanales', {
+        type: 'doughnut',
+        data: {
+          labels: ['Instagram','Google','Recomendaci\u00f3n','WhatsApp','Otros'],
+          datasets: [{
+            data: [35,25,25,10,5],
+            backgroundColor: [gold, goldLight, goldDark, '#8B6914', '#6B5210'],
+            borderColor: '#181B28', borderWidth: 3, hoverOffset: 8
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false, cutout: '62%',
+          plugins: { legend: { position: 'bottom', labels: { font: { size: 11 } } }, tooltip: { ...tooltipStyle, callbacks: { label: ctx => ' ' + ctx.label + ': ' + ctx.parsed + '%' } } },
+          animation: { animateRotate: true, duration: 1000, easing: 'easeOutQuart' }
+        }
+      });
+    }
+
+    // ===== AGENDA CHARTS =====
+    function initAgenda() {
+      makeChart('chartAgendaSemana', {
+        type: 'bar',
+        data: {
+          labels: ['Lun','Mar','Mi\u00e9','Jue','Vie','S\u00e1b','Dom'],
+          datasets: [{
+            label: 'Turnos',
+            data: [14,18,22,20,28,35,12],
+            backgroundColor: [
+              'rgba(212,160,23,0.9)',
+              'rgba(212,160,23,0.6)',
+              'rgba(212,160,23,0.65)',
+              'rgba(212,160,23,0.6)',
+              'rgba(212,160,23,0.75)',
+              'rgba(212,160,23,1)',
+              'rgba(212,160,23,0.35)'
+            ],
+            borderColor: gold, borderWidth: 1, borderRadius: 8, hoverBackgroundColor: goldLight
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+          plugins: { legend: { display: false }, tooltip: tooltipStyle },
+          scales: { x: { beginAtZero: true } },
+          animation: { duration: 900, easing: 'easeOutQuart' }
+        }
+      });
+    }
+
+    // ===== CLIENTES CHARTS =====
+    function initClientes() {
+      makeChart('chartClientesTipo', {
+        type: 'doughnut',
+        data: {
+          labels: ['Nuevo','Regular','VIP'],
+          datasets: [{
+            data: [23,52,25],
+            backgroundColor: [blue, gold, purple],
+            borderColor: '#181B28', borderWidth: 3, hoverOffset: 8
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false, cutout: '58%',
+          plugins: {
+            legend: { position: 'bottom', labels: { font: { size: 12 }, padding: 20 } },
+            tooltip: { ...tooltipStyle, callbacks: { label: ctx => ' ' + ctx.label + ': ' + ctx.parsed + '%' } }
+          },
+          animation: { animateRotate: true, duration: 1000, easing: 'easeOutQuart' }
+        }
+      });
+    }
+
+    // ===== SERVICIOS CHARTS =====
+    function initServicios() {
+      makeChart('chartServiciosDist', {
+        type: 'doughnut',
+        data: {
+          labels: ['Corte cl\u00e1sico','Corte + barba','Barba sola','Coloraci\u00f3n','Corte ni\u00f1o','Tratamiento'],
+          datasets: [{
+            data: [182,146,78,62,34,52],
+            backgroundColor: [gold, goldLight, goldDark, '#8B6914', blue, purple],
+            borderColor: '#181B28', borderWidth: 3, hoverOffset: 8
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false, cutout: '55%',
+          plugins: {
+            legend: { position: 'bottom', labels: { font: { size: 11 }, padding: 14 } },
+            tooltip: { ...tooltipStyle, callbacks: { label: ctx => ' ' + ctx.label + ': ' + ctx.parsed + ' pedidos' } }
+          },
+          animation: { animateRotate: true, duration: 1000, easing: 'easeOutQuart' }
+        }
+      });
+
+      makeChart('chartServiciosIngresos', {
+        type: 'bar',
+        data: {
+          labels: ['Corte cl\u00e1sico','Corte + barba','Barba sola','Coloraci\u00f3n','Corte ni\u00f1o','Tratamiento'],
+          datasets: [{
+            label: 'Ingresos ($)',
+            data: [1001000, 1095000, 273000, 496000, 136000, 338000],
+            backgroundColor: [
+              'rgba(212,160,23,0.85)',
+              'rgba(232,197,71,0.85)',
+              'rgba(184,134,11,0.85)',
+              'rgba(139,105,20,0.85)',
+              'rgba(59,130,246,0.7)',
+              'rgba(168,85,247,0.7)'
+            ],
+            borderRadius: 8, borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false }, tooltip: { ...tooltipStyle, callbacks: { label: ctx => ' $' + ctx.parsed.y.toLocaleString('es-AR') } } },
+          scales: { y: { beginAtZero: true, ticks: { callback: v => '$' + (v/1000) + 'k' } } },
+          animation: { duration: 1000, easing: 'easeOutQuart' }
+        }
+      });
+    }
+
+    // ===== BARBEROS CHARTS =====
+    function initBarberos() {
+      makeChart('chartBarberosComp', {
+        type: 'bar',
+        data: {
+          labels: ['Mart\u00edn','Luciano','Sof\u00eda'],
+          datasets: [
+            { label: 'Turnos', data: [198,182,140], backgroundColor: 'rgba(212,160,23,0.85)', borderRadius: 8 },
+            { label: 'Rating x40', data: [196,192,196], backgroundColor: 'rgba(34,197,94,0.6)', borderRadius: 8 },
+            { label: 'Facturaci\u00f3n ($k)', data: [1120,1020,760], backgroundColor: 'rgba(59,130,246,0.6)', borderRadius: 8 }
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'top', labels: { font: { size: 11 } } },
+            tooltip: {
+              ...tooltipStyle,
+              callbacks: {
+                label: function(ctx) {
+                  if (ctx.datasetIndex === 0) return ' Turnos: ' + ctx.parsed.y;
+                  if (ctx.datasetIndex === 1) return ' Rating: ' + (ctx.parsed.y / 40).toFixed(1) + ' / 5';
+                  return ' Facturaci\u00f3n: $' + ctx.parsed.y.toLocaleString('es-AR');
                 }
-                return ' Turnos: ' + ctx.parsed.y;
               }
             }
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            position: 'left',
-            title: { display: true, text: 'Turnos', color: '#9CA3AF' }
           },
-          y1: {
-            beginAtZero: true,
-            position: 'right',
-            title: { display: true, text: 'Facturación ($k)', color: '#9CA3AF' },
-            grid: { drawOnChartArea: false }
-          }
-        },
-        animation: {
-          duration: 1000,
-          easing: 'easeOutQuart'
+          scales: { y: { beginAtZero: true } },
+          animation: { duration: 1000, easing: 'easeOutQuart' }
         }
-      }
-    });
+      });
+    }
 
-    // ===== 5. HORARIOS PICO (Line) =====
-    const ctxHorarios = document.getElementById('chartHorarios').getContext('2d');
-    new Chart(ctxHorarios, {
-      type: 'line',
-      data: {
-        labels: ['9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'],
-        datasets: [{
-          label: 'Turnos promedio',
-          data: [3, 5, 7, 6, 3, 2, 4, 6, 8, 9, 7, 4],
-          borderColor: gold,
-          backgroundColor: function(context) {
-            const chart = context.chart;
-            const { ctx, chartArea } = chart;
-            return goldGradient(ctx, chartArea);
-          },
-          borderWidth: 2.5,
-          fill: true,
-          tension: 0.4,
-          pointRadius: 4,
-          pointBackgroundColor: gold,
-          pointBorderColor: '#1E2130',
-          pointBorderWidth: 2,
-          pointHoverRadius: 7,
-          pointHoverBackgroundColor: goldLight,
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            backgroundColor: '#1E2130',
+    // ===== FACTURACION CHARTS =====
+    function initFacturacion() {
+      makeChart('chartFactSemanal', {
+        type: 'line',
+        data: {
+          labels: ['Sem 1','Sem 2','Sem 3','Sem 4','Sem 5','Sem 6','Sem 7','Sem 8','Sem 9','Sem 10','Sem 11','Sem 12'],
+          datasets: [{
+            label: 'Facturaci\u00f3n ($)',
+            data: [280000,310000,295000,340000,320000,360000,355000,380000,370000,410000,395000,420000],
             borderColor: gold,
-            borderWidth: 1,
-            titleColor: '#F0F0F5',
-            bodyColor: gold,
-            padding: 12,
-            cornerRadius: 8,
-            callbacks: {
-              label: ctx => ' ' + ctx.parsed.y + ' turnos'
-            }
-          }
+            backgroundColor: function(context) { return goldGradient(context.chart.ctx, context.chart.chartArea); },
+            borderWidth: 2.5, fill: true, tension: 0.4,
+            pointRadius: 5, pointBackgroundColor: gold, pointBorderColor: '#181B28', pointBorderWidth: 2,
+            pointHoverRadius: 8, pointHoverBackgroundColor: goldLight
+          }]
         },
-        scales: {
-          y: {
-            beginAtZero: true,
-            title: { display: true, text: 'Cantidad de turnos', color: '#9CA3AF' }
-          }
-        },
-        animation: {
-          duration: 1200,
-          easing: 'easeOutQuart'
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false }, tooltip: { ...tooltipStyle, callbacks: { label: ctx => ' $' + ctx.parsed.y.toLocaleString('es-AR') } } },
+          scales: { y: { beginAtZero: false, ticks: { callback: v => '$' + (v/1000) + 'k' } } },
+          animation: { duration: 1200, easing: 'easeOutQuart' }
         }
-      }
-    });
+      });
 
-    // ===== 6. CÓMO NOS ENCONTRARON (Doughnut) =====
-    const ctxCanales = document.getElementById('chartCanales').getContext('2d');
-    new Chart(ctxCanales, {
-      type: 'doughnut',
-      data: {
-        labels: ['Instagram', 'Google', 'Recomendación', 'WhatsApp', 'Otros'],
-        datasets: [{
-          data: [35, 25, 25, 10, 5],
-          backgroundColor: ['#D4A017', '#E8C547', '#B8860B', '#8B6914', '#6B5210'],
-          borderColor: '#1E2130',
-          borderWidth: 3,
-          hoverOffset: 8
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        cutout: '62%',
-        plugins: {
-          legend: {
-            position: 'bottom',
-            labels: { font: { size: 11 } }
-          },
-          tooltip: {
-            backgroundColor: '#1E2130',
-            borderColor: gold,
-            borderWidth: 1,
-            titleColor: '#F0F0F5',
-            bodyColor: gold,
-            padding: 12,
-            cornerRadius: 8,
-            callbacks: {
-              label: ctx => ' ' + ctx.label + ': ' + ctx.parsed + '%'
-            }
-          }
+      makeChart('chartFactMetodos', {
+        type: 'doughnut',
+        data: {
+          labels: ['Efectivo','Transferencia','Tarjeta','MercadoPago'],
+          datasets: [{
+            data: [42,28,20,10],
+            backgroundColor: [green, blue, purple, gold],
+            borderColor: '#181B28', borderWidth: 3, hoverOffset: 8
+          }]
         },
-        animation: {
-          animateRotate: true,
-          duration: 1000,
-          easing: 'easeOutQuart'
+        options: {
+          responsive: true, maintainAspectRatio: false, cutout: '58%',
+          plugins: {
+            legend: { position: 'bottom', labels: { font: { size: 11 }, padding: 16 } },
+            tooltip: { ...tooltipStyle, callbacks: { label: ctx => ' ' + ctx.label + ': ' + ctx.parsed + '%' } }
+          },
+          animation: { animateRotate: true, duration: 1000, easing: 'easeOutQuart' }
         }
-      }
-    });
+      });
+    }
+
+    // ===== INIT DASHBOARD ON LOAD =====
+    initModuleCharts('dashboard');
+
+  })();
   </script>
 
 </body>
