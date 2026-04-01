@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cargando...</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg-dark, #0f0a1a);
+      color: var(--text-secondary, #c4b5d0);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: var(--accent, #d946ef); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--accent-light, #e879f9); }
+    ul { list-style: none; }
+
+    /* ── UTILITY ── */
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+    .section-label {
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.15em; color: var(--accent); text-align: center;
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 800;
+      color: var(--text-primary, #faf5ff); text-align: center;
+      margin-bottom: 12px; letter-spacing: -0.02em;
+    }
+    .section-subtitle {
+      text-align: center; color: var(--text-secondary);
+      max-width: 560px; margin: 0 auto 40px; font-size: 0.95rem;
+    }
+    .accent { color: var(--accent); }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 50px; font-weight: 600;
+      font-size: 0.95rem; border: none; cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      color: #fff; box-shadow: 0 4px 24px var(--accent-shadow);
+    }
+    .btn-outline {
+      background: transparent; color: var(--accent);
+      border: 2px solid var(--accent-border); padding: 12px 26px;
+    }
+    .btn-outline:hover { background: var(--accent-bg); }
+    .btn-wa {
+      background: #25D366; color: #fff;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+    }
+    .btn-wa:hover { box-shadow: 0 6px 30px rgba(37, 211, 102, 0.5); }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky; top: 0; z-index: 999;
+      background: rgba(15, 10, 26, 0.92); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 0; max-width: 1140px; margin: 0 auto; padding-left: 24px; padding-right: 24px;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.1rem; color: var(--text-primary); }
+    .nav-logo-icon { font-size: 1.4rem; }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { font-size: 0.88rem; font-weight: 500; color: var(--text-secondary); }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta { padding: 8px 20px; font-size: 0.82rem; border-radius: 50px; }
+    .nav-toggle { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; padding: 100px 0 60px;
+      overflow: hidden; text-align: center;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, var(--accent-bg) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--accent-bg); border: 1px solid var(--accent-border);
+      padding: 6px 16px; border-radius: 50px; font-size: 0.78rem;
+      font-weight: 600; color: var(--accent-light); margin-bottom: 20px;
+    }
+    .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+    .hero h1 {
+      font-size: clamp(2rem, 6vw, 3.2rem); font-weight: 900;
+      color: var(--text-primary); line-height: 1.1;
+      margin-bottom: 16px; letter-spacing: -0.03em;
+    }
+    .hero h1 .gradient-text {
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 1.05rem; color: var(--text-secondary);
+      max-width: 540px; margin: 0 auto 32px; line-height: 1.7;
+    }
+    .hero-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .hero-img {
+      margin: 48px auto 0; max-width: 800px; border-radius: 16px;
+      overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      border: 1px solid var(--border);
+    }
+    .hero-img img { width: 100%; height: 340px; object-fit: cover; }
+
+    /* ── CATEGORIES ── */
+    .categories { padding: 80px 0; }
+    .cat-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
+      gap: 16px;
+    }
+    .cat-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 24px 16px; text-align: center;
+      transition: all 0.3s; cursor: pointer; position: relative; overflow: hidden;
+    }
+    .cat-card:hover {
+      border-color: var(--accent-border-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px var(--accent-shadow-soft);
+    }
+    .cat-emoji { font-size: 2.4rem; margin-bottom: 12px; display: block; }
+    .cat-name { font-size: 0.88rem; font-weight: 700; color: var(--text-primary); }
+    .cat-count { font-size: 0.72rem; color: var(--text-muted); margin-top: 4px; }
+
+    /* ── PRODUCTS ── */
+    .products { padding: 80px 0; }
+    .product-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+      gap: 20px;
+    }
+    .product-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden; transition: all 0.3s;
+    }
+    .product-card:hover {
+      border-color: var(--accent-border-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px var(--accent-shadow-soft);
+    }
+    .product-img {
+      width: 100%; height: 200px; object-fit: cover;
+      transition: transform 0.4s;
+    }
+    .product-card:hover .product-img { transform: scale(1.05); }
+    .product-img-wrap { overflow: hidden; position: relative; }
+    .product-badge {
+      position: absolute; top: 12px; left: 12px;
+      background: var(--accent); color: #fff; font-size: 0.68rem;
+      font-weight: 700; padding: 4px 10px; border-radius: 50px;
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .product-body { padding: 20px; }
+    .product-cat { font-size: 0.72rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+    .product-name { font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+    .product-desc { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 14px; line-height: 1.6; }
+    .product-footer { display: flex; align-items: center; justify-content: space-between; }
+    .product-price { font-size: 1.1rem; font-weight: 800; color: var(--accent-light); }
+    .product-cta {
+      background: var(--accent-bg); color: var(--accent); border: 1px solid var(--accent-border);
+      padding: 6px 14px; border-radius: 50px; font-size: 0.78rem; font-weight: 600;
+      cursor: pointer; transition: all 0.2s; text-decoration: none;
+    }
+    .product-cta:hover { background: var(--accent); color: #fff; }
+
+    /* ── FEATURES ── */
+    .features { padding: 80px 0; }
+    .feat-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+      gap: 20px;
+    }
+    .feat-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 28px; text-align: center;
+      transition: all 0.3s;
+    }
+    .feat-card:hover { border-color: var(--accent-border-hover); }
+    .feat-icon { font-size: 2rem; margin-bottom: 14px; display: block; }
+    .feat-title { font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+    .feat-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+
+    /* ── PROMO BANNER ── */
+    .promo {
+      padding: 80px 0;
+    }
+    .promo-box {
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      border-radius: 20px; padding: 48px 40px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .promo-box::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .promo-box h2 { font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 800; color: #fff; margin-bottom: 12px; position: relative; }
+    .promo-box p { color: rgba(255,255,255,0.85); max-width: 480px; margin: 0 auto 24px; font-size: 0.95rem; position: relative; }
+    .promo-box .btn { position: relative; }
+
+    /* ── REVIEWS ── */
+    .reviews { padding: 80px 0; }
+    .review-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+      gap: 20px;
+    }
+    .review-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 28px;
+    }
+    .review-stars { color: #FBBF24; font-size: 0.9rem; margin-bottom: 14px; }
+    .review-text { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.7; font-style: italic; }
+    .review-author { display: flex; align-items: center; gap: 12px; }
+    .review-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 700; font-size: 0.85rem;
+    }
+    .review-name { font-size: 0.88rem; font-weight: 600; color: var(--text-primary); }
+    .review-role { font-size: 0.75rem; color: var(--text-muted); }
+
+    /* ── LOCATION & HOURS ── */
+    .location { padding: 80px 0; }
+    .loc-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+      gap: 24px;
+    }
+    .loc-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 32px;
+    }
+    .loc-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; }
+    .loc-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 0.88rem; }
+    .loc-row:last-child { border-bottom: none; }
+    .loc-day { color: var(--text-secondary); }
+    .loc-hour { color: var(--text-primary); font-weight: 600; }
+    .loc-closed { color: var(--text-muted); }
+    .loc-info { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px; font-size: 0.9rem; }
+    .loc-icon { font-size: 1.2rem; flex-shrink: 0; }
+    .loc-map {
+      width: 100%; height: 240px; border-radius: 12px;
+      border: 1px solid var(--border); margin-top: 16px;
+    }
+
+    /* ── CONTACT CTA ── */
+    .contact-cta { padding: 80px 0; }
+    .cta-box {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 48px 40px; text-align: center;
+    }
+    .cta-box h2 { font-size: clamp(1.3rem, 4vw, 1.8rem); font-weight: 800; color: var(--text-primary); margin-bottom: 12px; }
+    .cta-box p { color: var(--text-secondary); max-width: 480px; margin: 0 auto 28px; font-size: 0.92rem; }
+    .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    /* ── FOOTER ── */
+    .footer {
+      border-top: 1px solid var(--border); padding: 40px 0 24px;
+    }
+    .footer-inner {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer-copy { font-size: 0.8rem; color: var(--text-muted); }
+    .footer-social { display: flex; gap: 16px; }
+    .footer-social a {
+      color: var(--text-muted); font-size: 0.85rem; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .footer-social a:hover { color: var(--accent); }
+    .footer-dev { font-size: 0.72rem; color: var(--text-muted); text-align: center; width: 100%; margin-top: 16px; }
+    .footer-dev a { color: var(--accent); }
+
+    /* ── WHATSAPP FLOAT ── */
+    .wa-float {
+      position: fixed; bottom: 24px; right: 24px; z-index: 900;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: #25D366; color: #fff; font-size: 1.6rem;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+    }
+    .wa-float:hover { transform: scale(1.1); box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6); color: #fff; }
+
+    /* ── DEMO BANNER ── */
+    .demo-banner {
+      background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+      text-align: center; padding: 10px 16px; font-size: 0.78rem;
+      font-weight: 600; color: #fff;
+    }
+    .demo-banner a { color: #fff; text-decoration: underline; margin-left: 8px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: block; }
+      .nav-links.active {
+        display: flex; flex-direction: column; position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: var(--bg-dark); border-bottom: 1px solid var(--border);
+        padding: 16px 24px; gap: 16px;
+      }
+      .hero { padding: 80px 0 48px; }
+      .hero-buttons { flex-direction: column; align-items: center; }
+      .hero-img img { height: 220px; }
+      section { padding: 60px 0; }
+      .promo-box { padding: 36px 24px; }
+      .cta-box { padding: 36px 24px; }
+    }
+    @media (max-width: 480px) {
+      .container { padding: 0 16px; }
+      section { padding: 48px 0; }
+      .hero { padding: 70px 0 36px; }
+      .hero h1 { font-size: 1.75rem; }
+      .hero-sub { font-size: 0.92rem; }
+      .hero-img img { height: 180px; }
+      .product-img { height: 160px; }
+      .cat-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+      .cat-card { padding: 16px 10px; }
+      .cat-emoji { font-size: 1.8rem; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .wa-float { width: 50px; height: 50px; font-size: 1.4rem; bottom: 16px; right: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<script>
+const CONFIG = {
+  // ── Identidad ──
+  nombre: "Brillantina",
+  subtitulo: "Cotillón y Librería",
+  slogan: "Todo para tus fiestas, el cole y los mejores regalos",
+  sloganHighlight: "tus fiestas",
+  heroDescripcion: "Cotillón, librería y regalería en Barrio Ciro de Vieytes, Maipú. Encontrá todo lo que necesitás para cumpleaños, eventos, útiles escolares y mucho más.",
+  heroBadge: "Nuevo en el barrio",
+  heroImagen: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=900&q=80&fit=crop",
+
+  // ── Colores (rosado / violeta claro / blanco) ──
+  colores: {
+    accent: "#d946ef",
+    accentSecondary: "#a855f7",
+    accentLight: "#e879f9",
+    accentShadow: "rgba(217, 70, 239, 0.25)",
+    accentShadowSoft: "rgba(217, 70, 239, 0.08)",
+    accentBg: "rgba(217, 70, 239, 0.1)",
+    accentBorder: "rgba(217, 70, 239, 0.2)",
+    accentBorderHover: "rgba(217, 70, 239, 0.4)",
+    bgDark: "#1a0a1e",
+    bgCard: "#221228",
+    textPrimary: "#faf5ff",
+    textSecondary: "#c4b5d0",
+    textMuted: "#7c6b8a",
+    border: "rgba(217, 70, 239, 0.12)"
+  },
+
+  // ── Categorías ──
+  categorias: [
+    { emoji: "🎈", nombre: "Cotillón", desc: "Globos, guirnaldas, piñatas" },
+    { emoji: "📚", nombre: "Librería", desc: "Útiles y papelería" },
+    { emoji: "🎁", nombre: "Regalería", desc: "Regalos y souvenirs" },
+    { emoji: "🎨", nombre: "Manualidades", desc: "Goma eva, pinturas, brillantina" },
+    { emoji: "🍽️", nombre: "Descartables", desc: "Vasos, platos, servilletas" },
+    { emoji: "🧸", nombre: "Juguetes", desc: "Peluches y juegos" }
+  ],
+
+  // ── Productos destacados ──
+  productos: [
+    {
+      nombre: "Combo Cumpleaños Temático",
+      descripcion: "Guirnaldas, globos, platos, vasos, servilletas y velas. Temas variados para nenes y nenas.",
+      precio: "Consultá precio",
+      categoria: "Cotillón",
+      badge: "Popular",
+      imagen: "https://images.unsplash.com/photo-1602631985686-1bb0e6a8696e?w=500&q=80&fit=crop"
+    },
+    {
+      nombre: "Kit Escolar Completo",
+      descripcion: "Cuadernos, carpeta, lápices, marcadores, goma, regla y cartuchera. Todo lo de la lista en un solo lugar.",
+      precio: "Consultá precio",
+      categoria: "Librería",
+      badge: "Nuevo",
+      imagen: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=500&q=80&fit=crop"
+    },
+    {
+      nombre: "Globos con Helio",
+      descripcion: "Globos metalizados y de látex con helio. Números, letras, formas y colores. Ideales para decorar.",
+      precio: "Consultá precio",
+      categoria: "Cotillón",
+      badge: "",
+      imagen: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=500&q=80&fit=crop"
+    },
+    {
+      nombre: "Box de Regalo Personalizado",
+      descripcion: "Armamos cajas con productos a elección: tazas, golosinas, peluches, velas aromáticas y más.",
+      precio: "Desde $5.000",
+      categoria: "Regalería",
+      badge: "Personalizable",
+      imagen: "https://images.unsplash.com/photo-1549465220-1a8b9238f760?w=500&q=80&fit=crop"
+    },
+    {
+      nombre: "Decoración Baby Shower",
+      descripcion: "Packs completos para nena o nene: banderines, globos, centros de mesa, toppers y confetti.",
+      precio: "Consultá precio",
+      categoria: "Cotillón",
+      badge: "",
+      imagen: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500&q=80&fit=crop"
+    },
+    {
+      nombre: "Materiales para Manualidades",
+      descripcion: "Goma eva, cartulinas de colores, brillantina, témperas, pinceles, tijeras y pegamento.",
+      precio: "Consultá precio",
+      categoria: "Manualidades",
+      badge: "",
+      imagen: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=500&q=80&fit=crop"
+    }
+  ],
+
+  // ── Por qué elegirnos ──
+  features: [
+    { icono: "📍", titulo: "En tu barrio", desc: "Estamos en Ciro de Vieytes, Maipú. Cerca tuyo, sin viajes largos." },
+    { icono: "💰", titulo: "Mejores precios", desc: "Precios accesibles y combos armados para que ahorres." },
+    { icono: "🎨", titulo: "Variedad", desc: "Cotillón, librería, regalería, juguetes y mucho más." },
+    { icono: "💬", titulo: "Atención personalizada", desc: "Te ayudamos a elegir y armar combos a medida." }
+  ],
+
+  // ── Promo ──
+  promo: {
+    titulo: "¿Organizás una fiesta? 🎉",
+    descripcion: "Armamos combos personalizados con todo lo que necesitás. Elegí los colores, el tema y nosotros nos encargamos del resto.",
+    cta: "Consultá por WhatsApp"
+  },
+
+  // ── Reseñas ──
+  reviews: [
+    {
+      texto: "Tienen de todo para cumpleaños, y los precios son re accesibles. Me armaron un combo de decoración hermoso para los 5 de mi nena.",
+      nombre: "Valentina R.",
+      rol: "Cotillón para cumpleaños",
+      estrellas: 5
+    },
+    {
+      texto: "Compré todos los útiles del cole acá y me ahorré un montón. La atención es excelente, te asesoran y tienen todo lo de la lista.",
+      nombre: "Mariela G.",
+      rol: "Útiles escolares",
+      estrellas: 5
+    },
+    {
+      texto: "Necesitaba un regalo de último momento y encontré opciones hermosas. Siempre que paso me llevo algo. ¡Son lo más!",
+      nombre: "Carolina F.",
+      rol: "Regalería",
+      estrellas: 5
+    }
+  ],
+
+  // ── Contacto ──
+  whatsapp: "5492610000000",
+  whatsappMensaje: "Hola! Vi tu página y quería consultar precios 🎉",
+  instagram: "brillantina.mdz",
+  telefono: "",
+  email: "",
+  direccion: "Barrio Ciro de Vieytes, Maipú, Mendoza",
+
+  // ── Horarios ──
+  horarios: [
+    { dia: "Lunes a Viernes", hora: "9:00 — 13:00 / 17:00 — 20:30" },
+    { dia: "Sábados", hora: "9:00 — 13:00" },
+    { dia: "Domingos", hora: "Cerrado" }
+  ],
+
+  // ── Google Maps ──
+  googleMapsEmbed: "",
+
+  // ── Footer ──
+  footerAnio: 2026,
+  desarrollador: { nombre: "Juan Barranco", url: "https://jbarrancogit.github.io" },
+
+  // ── Demo banner ──
+  demoBanner: { visible: true, texto: "Esto es una demo visual · ", linkTexto: "Contactar al desarrollador", linkUrl: "https://jbarrancogit.github.io" }
+};
+
+// ── RENDER ──
+(function() {
+  const C = CONFIG;
+  const r = document.documentElement;
+  r.style.setProperty('--accent', C.colores.accent);
+  r.style.setProperty('--accent-secondary', C.colores.accentSecondary);
+  r.style.setProperty('--accent-light', C.colores.accentLight);
+  r.style.setProperty('--accent-shadow', C.colores.accentShadow);
+  r.style.setProperty('--accent-shadow-soft', C.colores.accentShadowSoft);
+  r.style.setProperty('--accent-bg', C.colores.accentBg);
+  r.style.setProperty('--accent-border', C.colores.accentBorder);
+  r.style.setProperty('--accent-border-hover', C.colores.accentBorderHover);
+  r.style.setProperty('--bg-dark', C.colores.bgDark);
+  r.style.setProperty('--bg-card', C.colores.bgCard);
+  r.style.setProperty('--text-primary', C.colores.textPrimary);
+  r.style.setProperty('--text-secondary', C.colores.textSecondary);
+  r.style.setProperty('--text-muted', C.colores.textMuted);
+  r.style.setProperty('--border', C.colores.border);
+
+  document.title = `${C.nombre} — ${C.subtitulo}`;
+
+  function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+  function waUrl(msg) { return `https://wa.me/${C.whatsapp}?text=${encodeURIComponent(msg || C.whatsappMensaje)}`; }
+  function stars(n) { return '★'.repeat(n) + '☆'.repeat(5 - n); }
+
+  let html = '';
+
+  // Demo banner
+  if (C.demoBanner && C.demoBanner.visible) {
+    html += `<div class="demo-banner">${esc(C.demoBanner.texto)}<a href="${C.demoBanner.linkUrl}" target="_blank">${esc(C.demoBanner.linkTexto)}</a></div>`;
+  }
+
+  // Nav
+  html += `
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo"><span class="nav-logo-icon">✨</span> ${esc(C.nombre)}</a>
+      <div class="nav-links" id="navLinks">
+        <a href="#categorias">Productos</a>
+        <a href="#destacados">Destacados</a>
+        <a href="#opiniones">Opiniones</a>
+        <a href="#ubicacion">Ubicación</a>
+        <a href="${waUrl()}" target="_blank" class="btn btn-wa nav-cta">WhatsApp</a>
+      </div>
+      <button class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('active')">☰</button>
+    </div>
+  </nav>`;
+
+  // Hero
+  html += `
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge"><span class="hero-badge-dot"></span> ${esc(C.heroBadge)}</div>
+      <h1>Todo para<br><span class="gradient-text">${esc(C.sloganHighlight)}</span></h1>
+      <p class="hero-sub">${esc(C.heroDescripcion)}</p>
+      <div class="hero-buttons">
+        <a href="${waUrl()}" target="_blank" class="btn btn-wa">💬 Consultá por WhatsApp</a>
+        <a href="#categorias" class="btn btn-outline">Ver productos</a>
+      </div>
+      ${C.heroImagen ? `<div class="hero-img"><img src="${C.heroImagen}" alt="${esc(C.nombre)}" loading="lazy"></div>` : ''}
+    </div>
+  </section>`;
+
+  // Categories
+  html += `
+  <section class="categories" id="categorias">
+    <div class="container">
+      <p class="section-label">¿Qué buscás?</p>
+      <h2 class="section-title">Nuestras categorías</h2>
+      <p class="section-subtitle">Encontrá todo lo que necesitás en un solo lugar</p>
+      <div class="cat-grid">
+        ${C.categorias.map(c => `
+          <div class="cat-card">
+            <span class="cat-emoji">${c.emoji}</span>
+            <div class="cat-name">${esc(c.nombre)}</div>
+            <div class="cat-count">${esc(c.desc)}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  </section>`;
+
+  // Products
+  html += `
+  <section class="products" id="destacados">
+    <div class="container">
+      <p class="section-label">Lo más buscado</p>
+      <h2 class="section-title">Productos destacados</h2>
+      <p class="section-subtitle">Los favoritos de nuestros clientes</p>
+      <div class="product-grid">
+        ${C.productos.map(p => `
+          <div class="product-card">
+            <div class="product-img-wrap">
+              <img class="product-img" src="${p.imagen}" alt="${esc(p.nombre)}" loading="lazy">
+              ${p.badge ? `<span class="product-badge">${esc(p.badge)}</span>` : ''}
+            </div>
+            <div class="product-body">
+              <div class="product-cat">${esc(p.categoria)}</div>
+              <div class="product-name">${esc(p.nombre)}</div>
+              <div class="product-desc">${esc(p.descripcion)}</div>
+              <div class="product-footer">
+                <span class="product-price">${esc(p.precio)}</span>
+                <a href="${waUrl('Hola! Me interesa: ' + p.nombre)}" target="_blank" class="product-cta">Consultar</a>
+              </div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  </section>`;
+
+  // Features
+  html += `
+  <section class="features">
+    <div class="container">
+      <p class="section-label">¿Por qué elegirnos?</p>
+      <h2 class="section-title">Comprá tranquilo</h2>
+      <div class="feat-grid">
+        ${C.features.map(f => `
+          <div class="feat-card">
+            <span class="feat-icon">${f.icono}</span>
+            <div class="feat-title">${esc(f.titulo)}</div>
+            <div class="feat-desc">${esc(f.desc)}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  </section>`;
+
+  // Promo
+  html += `
+  <section class="promo">
+    <div class="container">
+      <div class="promo-box">
+        <h2>${C.promo.titulo}</h2>
+        <p>${esc(C.promo.descripcion)}</p>
+        <a href="${waUrl('Hola! Quiero armar un combo personalizado para mi fiesta 🎉')}" target="_blank" class="btn btn-primary">${esc(C.promo.cta)}</a>
+      </div>
+    </div>
+  </section>`;
+
+  // Reviews
+  html += `
+  <section class="reviews" id="opiniones">
+    <div class="container">
+      <p class="section-label">Lo que dicen nuestros clientes</p>
+      <h2 class="section-title">Opiniones</h2>
+      <div class="review-grid">
+        ${C.reviews.map(rv => `
+          <div class="review-card">
+            <div class="review-stars">${stars(rv.estrellas)}</div>
+            <div class="review-text">"${esc(rv.texto)}"</div>
+            <div class="review-author">
+              <div class="review-avatar">${rv.nombre.charAt(0)}</div>
+              <div>
+                <div class="review-name">${esc(rv.nombre)}</div>
+                <div class="review-role">${esc(rv.rol)}</div>
+              </div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  </section>`;
+
+  // Location
+  html += `
+  <section class="location" id="ubicacion">
+    <div class="container">
+      <p class="section-label">Visitanos</p>
+      <h2 class="section-title">Ubicación y horarios</h2>
+      <div class="loc-grid">
+        <div class="loc-card">
+          <h3>📍 ¿Dónde estamos?</h3>
+          <div class="loc-info"><span class="loc-icon">🏠</span> <span>${esc(C.direccion)}</span></div>
+          ${C.instagram ? `<div class="loc-info"><span class="loc-icon">📸</span> <a href="https://instagram.com/${C.instagram}" target="_blank">@${esc(C.instagram)}</a></div>` : ''}
+          ${C.telefono ? `<div class="loc-info"><span class="loc-icon">📞</span> <span>${esc(C.telefono)}</span></div>` : ''}
+          ${C.googleMapsEmbed ? `<iframe class="loc-map" src="${C.googleMapsEmbed}" allowfullscreen loading="lazy"></iframe>` : ''}
+        </div>
+        <div class="loc-card">
+          <h3>🕐 Horarios</h3>
+          ${C.horarios.map(h => `
+            <div class="loc-row">
+              <span class="loc-day">${esc(h.dia)}</span>
+              <span class="${h.hora === 'Cerrado' ? 'loc-closed' : 'loc-hour'}">${esc(h.hora)}</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+  </section>`;
+
+  // Contact CTA
+  html += `
+  <section class="contact-cta">
+    <div class="container">
+      <div class="cta-box">
+        <h2>¿Tenés alguna consulta?</h2>
+        <p>Escribinos por WhatsApp y te respondemos al toque. También podés seguirnos en Instagram para ver las novedades.</p>
+        <div class="cta-buttons">
+          <a href="${waUrl()}" target="_blank" class="btn btn-wa">💬 WhatsApp</a>
+          ${C.instagram ? `<a href="https://instagram.com/${C.instagram}" target="_blank" class="btn btn-outline">📸 @${esc(C.instagram)}</a>` : ''}
+        </div>
+      </div>
+    </div>
+  </section>`;
+
+  // Footer
+  html += `
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-copy">© ${C.footerAnio} ${esc(C.nombre)}. Todos los derechos reservados.</span>
+        <div class="footer-social">
+          ${C.instagram ? `<a href="https://instagram.com/${C.instagram}" target="_blank">Instagram</a>` : ''}
+          <a href="${waUrl()}" target="_blank">WhatsApp</a>
+        </div>
+        <div class="footer-dev">Diseñado por <a href="${C.desarrollador.url}" target="_blank">${esc(C.desarrollador.nombre)}</a></div>
+      </div>
+    </div>
+  </footer>`;
+
+  // WhatsApp float
+  html += `<a href="${waUrl()}" target="_blank" class="wa-float" aria-label="WhatsApp">💬</a>`;
+
+  document.body.insertAdjacentHTML('beforeend', html);
+})();
+</script>
+
+</body>
+</html>
