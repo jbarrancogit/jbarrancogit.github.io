@@ -1,0 +1,10 @@
+# Datos de clientes (privado)
+clientes/
+
+# Python
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
+Thumbs.db

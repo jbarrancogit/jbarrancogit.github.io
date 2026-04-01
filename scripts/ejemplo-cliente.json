@@ -1,0 +1,14 @@
+{
+  "nombre_contacto": "María González",
+  "telefono": "+54 9 261 555-1234",
+  "email": "maria@ejemplo.com",
+  "negocio_nombre": "Café del Parque",
+  "sector": "gastronomia",
+  "ubicacion": "Godoy Cruz, Mendoza",
+  "descripcion": "Café de especialidad en Godoy Cruz con brunch y pastelería artesanal",
+  "horarios": "Lun a Sáb 8-20, Dom 9-14",
+  "direccion": "Av. San Martín 450, Godoy Cruz",
+  "plan": "starter",
+  "color_preset": "dorado",
+  "dominio": "cafedelparque.com.ar"
+}
