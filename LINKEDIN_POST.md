@@ -22,7 +22,7 @@ Así que decidí hacer algo al respecto.
 
 Estoy ofreciendo **páginas web profesionales para negocios de Mendoza** a precios que tienen sentido:
 
-→ Desde **$99.000** por un sitio completo
+→ Desde **$79.200** por un sitio completo (precio lanzamiento, 20% OFF)
 → Hosting profesional sin costo mensual
 → Tu sitio es tuyo para siempre (te entrego el código)
 → **Prototipo gratis en 48 horas** para que veas cómo queda antes de pagar un peso
@@ -53,7 +53,7 @@ Si tenés un negocio en Mendoza (o conocés a alguien que lo tenga), escribime. 
 
 Trabajo como ingeniero de software full-stack en Nevra. Antes estuve en Globant en proyectos internacionales.
 
-Ahora, además de mi trabajo, estoy ayudando a negocios de Mendoza a tener su propia página web profesional — **desde $99.000**.
+Ahora, además de mi trabajo, estoy ayudando a negocios de Mendoza a tener su propia página web profesional — **desde $79.200**.
 
 ¿Por qué tan barato? Porque programo todo yo y uso hosting sin costo mensual. Sin intermediarios, sin costos ocultos.
 
@@ -81,7 +81,7 @@ El otro día, caminando por Mendoza, vi una parrilla espectacular en Villanueva 
 
 Y pensé: la diferencia entre un negocio que crece y uno que se estanca muchas veces no es la calidad del producto. Es la presencia digital.
 
-Soy ingeniero de software full-stack. Trabajo en Nevra y antes estuve en Globant en proyectos internacionales. Hoy estoy usando esa misma ingeniería para construir sitios web para negocios de Mendoza. Pero a un precio que cualquier negocio puede pagar: **desde $99.000**.
+Soy ingeniero de software full-stack. Trabajo en Nevra y antes estuve en Globant en proyectos internacionales. Hoy estoy usando esa misma ingeniería para construir sitios web para negocios de Mendoza. Pero a un precio que cualquier negocio puede pagar: **desde $79.200**.
 
 No te cobro hosting mensual. No te ato a una plataforma. Te entrego tu código, tu sitio es tuyo para siempre.
 
