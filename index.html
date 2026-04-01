@@ -26,7 +26,7 @@
       --accent-glow: rgba(59, 130, 246, 0.12);
       --text-primary: #f4f4f5;
       --text-secondary: #a1a1aa;
-      --text-muted: #71717a;
+      --text-muted: #8b8b96;
       --border: rgba(255, 255, 255, 0.06);
       --green: #22c55e;
       --green-glow: rgba(34, 197, 94, 0.12);
@@ -40,6 +40,15 @@
       --glass-bg: rgba(255, 255, 255, 0.03);
       --glass-border: rgba(255, 255, 255, 0.06);
       --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+      --purple: #a855f7;
+      --pink: #ec4899;
+      --teal: #14b8a6;
+      --grad-wine: linear-gradient(135deg, #3b0a2a, #1a0515);
+      --grad-warm: linear-gradient(135deg, #3b1a0a, #1a0d05);
+      --grad-forest: linear-gradient(135deg, #0a2a1a, #051a0d);
+      --grad-ocean: linear-gradient(135deg, #0a1a3b, #050d1a);
+      --grad-earth: linear-gradient(135deg, #2a1a0a, #1a0d05);
+      --grad-deep: linear-gradient(135deg, #1e293b, #0f172a);
     }
 
     html { scroll-behavior: smooth; }
@@ -116,6 +125,7 @@
     }
     .hero-orb {
       position: absolute; border-radius: 50%; pointer-events: none; filter: blur(60px);
+      will-change: transform;
     }
     .hero-orb-1 {
       width: 400px; height: 400px; top: -80px; right: -100px;
@@ -257,7 +267,7 @@
       border-left: 3px solid var(--red);
     }
     .problem-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
-    .problem-card p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; text-align: justify; }
+    .problem-card p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; }
     .problem-stat { font-size: 2.6rem; font-weight: 900; color: var(--red); margin-bottom: 10px; letter-spacing: -0.02em; }
 
     /* STEPS */
@@ -300,7 +310,7 @@
       font-size: 1.3rem; margin-bottom: 16px;
     }
     .service-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
-    .service-card p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; text-align: justify; }
+    .service-card p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; }
     .service-tag {
       display: inline-block; margin-top: 14px; font-size: 0.72rem; font-weight: 600;
       color: var(--green); background: var(--green-glow);
@@ -325,7 +335,7 @@
     .exp-body h3 { font-size: 0.95rem; font-weight: 700; }
     .exp-role { font-size: 0.82rem; color: var(--accent-light); font-weight: 500; }
     .exp-date { font-size: 0.72rem; color: var(--text-muted); margin: 2px 0 6px; }
-    .exp-body p { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; text-align: justify; }
+    .exp-body p { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; }
 
     /* DIFFERENTIATORS */
     .diff-grid {
@@ -336,7 +346,7 @@
       background: var(--bg-card); border-radius: 0 var(--radius) var(--radius) 0;
     }
     .diff-item h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
-    .diff-item p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; text-align: justify; }
+    .diff-item p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
 
     /* PORTFOLIO */
     .portfolio-grid {
@@ -348,14 +358,14 @@
     }
     .portfolio-card:hover { border-color: var(--accent); transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25); }
     .portfolio-img {
-      height: 180px; background: linear-gradient(135deg, #1e293b, #0f172a);
+      height: 180px; background: var(--grad-deep);
       display: flex; align-items: center; justify-content: center;
       font-size: 2.5rem; color: var(--accent);
     }
     .portfolio-info { padding: 22px; }
     .portfolio-info h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
     .portfolio-company { font-size: 0.82rem; color: var(--accent-light); margin-bottom: 10px; }
-    .portfolio-info p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; text-align: justify; }
+    .portfolio-info p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; }
     .portfolio-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
     .portfolio-tag {
       font-size: 0.68rem; padding: 3px 10px;
@@ -374,7 +384,7 @@
     .value-card:hover { border-color: var(--accent); }
     .value-icon { font-size: 2rem; margin-bottom: 12px; }
     .value-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
-    .value-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; text-align: justify; }
+    .value-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
     .value-card .value-example {
       margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);
       font-size: 0.78rem; color: var(--text-muted); font-style: italic;
@@ -417,7 +427,7 @@
     .demo-info { padding: 20px; }
     .demo-info h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; }
     .demo-sector { font-size: 0.78rem; color: var(--accent-light); margin-bottom: 8px; }
-    .demo-info p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; text-align: justify; }
+    .demo-info p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; }
 
     /* PRICING */
     .pricing-grid {
@@ -431,7 +441,7 @@
     .price-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25); }
     .price-card.featured { border-color: var(--accent); box-shadow: 0 0 60px var(--accent-glow), 0 20px 60px rgba(0, 0, 0, 0.15); }
     .price-card.featured::before {
-      content: 'MAS ELEGIDO'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      content: 'MÁS ELEGIDO'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
       background: var(--accent); color: #fff; font-size: 0.68rem; font-weight: 700;
       padding: 4px 16px; border-radius: 100px; letter-spacing: 0.05em;
     }
@@ -458,19 +468,19 @@
       background: var(--bg-card); border: 1px solid var(--border);
       border-radius: var(--radius); max-width: 600px; margin-left: auto; margin-right: auto;
     }
-    .price-why p { font-size: 0.88rem; color: var(--text-secondary); text-align: justify; }
+    .price-why p { font-size: 0.88rem; color: var(--text-secondary); }
     .price-why strong { color: var(--text-primary); }
 
     /* FAQ */
     .faq-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); gap: 16px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(min(480px, 100%), 1fr)); gap: 16px;
     }
     .faq-item {
       background: var(--bg-card); border: 1px solid var(--border);
       border-radius: var(--radius); padding: 24px;
     }
     .faq-item h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; color: var(--text-primary); }
-    .faq-item p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; text-align: justify; }
+    .faq-item p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
 
     /* CTA */
     .cta-section { padding: 80px 0; text-align: center; }
@@ -540,13 +550,6 @@
     .footer-bottom-links { display: flex; gap: 24px; }
     .footer-bottom-links a { font-size: 0.78rem; color: var(--text-muted); }
     .footer-bottom-links a:hover { color: var(--text-secondary); }
-    @media (max-width: 768px) {
-      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
-    }
-    @media (max-width: 480px) {
-      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
-      .footer-bottom { flex-direction: column; text-align: center; }
-    }
 
     /* WHATSAPP */
     .whatsapp-float {
@@ -560,6 +563,12 @@
     .whatsapp-float:hover { transform: scale(1.1); color: #fff; box-shadow: 0 6px 30px rgba(37, 211, 102, 0.5); }
 
     /* RESPONSIVE */
+    /* ── RESPONSIVE: TABLET (≤1024px) ── */
+    @media (max-width: 1024px) {
+      .about-layout { grid-template-columns: 240px 1fr; gap: 40px; }
+    }
+
+    /* ── RESPONSIVE: MOBILE (≤768px) ── */
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .nav-toggle { display: block; }
@@ -569,19 +578,75 @@
         background: var(--bg-primary); border-bottom: 1px solid var(--border);
         padding: 16px 24px; gap: 16px;
       }
-      .hero { padding: 120px 0 50px; }
+      .hero { padding: 110px 0 50px; }
+      .hero h1 { font-size: clamp(2rem, 7vw, 3rem); }
       .hero-buttons { flex-direction: column; }
-      .btn { justify-content: center; }
-      .trust-grid { gap: 20px; }
-      .stats-grid { gap: 24px; }
+      .btn { justify-content: center; padding: 14px 24px; }
+      .trust-grid { gap: 16px; }
+      .stats-grid { gap: 20px; }
       section { padding: 80px 0; }
       .cta-box { padding: 40px 24px; }
       .exp-grid, .faq-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .about-layout { grid-template-columns: 1fr; gap: 32px; }
+      .about-photo-col { position: static; max-width: 240px; margin: 0 auto; }
+      .diff-grid { grid-template-columns: 1fr; }
     }
+
+    /* ── RESPONSIVE: SMALL MOBILE (≤480px) ── */
     @media (max-width: 480px) {
-      .services-grid, .pricing-grid, .portfolio-grid, .problem-grid, .steps-grid, .demos-grid, .value-grid, .data-grid, .data-pricing-grid { grid-template-columns: 1fr; }
+      .container { padding: 0 16px; }
+      section { padding: 60px 0; }
+      .hero { padding: 90px 0 40px; }
+      .hero h1 { font-size: 1.8rem; line-height: 1.15; }
+      .hero-sub { font-size: 1rem; }
+      .btn { padding: 12px 20px; font-size: 0.88rem; }
+      .services-grid, .pricing-grid, .portfolio-grid, .problem-grid,
+      .steps-grid, .demos-grid, .value-grid, .data-grid,
+      .data-pricing-grid { grid-template-columns: 1fr; }
       #iniciar [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+      .about-mv-grid { grid-template-columns: 1fr; }
+      .trust-grid { gap: 12px; }
+      .stats-grid { gap: 16px; }
+      .stat-number { font-size: 1.6rem; }
+      .problem-stat { font-size: 2rem; }
+      .problem-card, .service-card, .value-card,
+      .price-card, .data-price-card, .faq-item { padding: 20px; }
+      .diff-item { padding: 20px; }
+      .cta-box { padding: 28px 16px; border-radius: var(--radius); }
+      .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .nav-logo-name { font-size: 0.92rem; }
+      .whatsapp-float { bottom: 16px; right: 16px; width: 52px; height: 52px; font-size: 1.5rem; }
+      .price-card .price { font-size: 2rem; }
+      .data-price-card .dprice { font-size: 1.3rem; }
+      .section-title { font-size: 1.5rem; }
+      .about-photo-col { max-width: 200px; }
     }
+
+    /* ── RESPONSIVE: EXTRA SMALL (≤375px) ── */
+    @media (max-width: 375px) {
+      .container { padding: 0 12px; }
+      section { padding: 48px 0; }
+      .hero { padding: 80px 0 32px; }
+      .hero h1 { font-size: 1.55rem; }
+      .hero-sub { font-size: 0.92rem; line-height: 1.7; }
+      .hero-profile { gap: 10px; }
+      .hero-avatar { width: 56px; height: 56px; }
+      .hero-profile-name { font-size: 0.88rem; }
+      .hero-profile-role { font-size: 0.75rem; }
+      .section-title { font-size: 1.35rem; }
+      .section-desc { font-size: 0.92rem; }
+      .nav-inner { padding: 0 12px; }
+      .nav-logo-name { font-size: 0.85rem; }
+      .nav-logo-slogan { font-size: 0.5rem; }
+      .nav-cta { padding: 6px 14px; font-size: 0.78rem; }
+      .step-number { width: 48px; height: 48px; font-size: 1.1rem; }
+      .trust-name { font-size: 0.9rem; }
+      .trust-role { font-size: 0.65rem; }
+      .about-photo-col { max-width: 180px; }
+    }
+
     #iniciar input:focus, #iniciar textarea:focus, #iniciar select:focus {
       outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
     }
@@ -673,9 +738,8 @@
     .data-price-card .dfeatures li::before { content: '\2713'; color: var(--green); font-weight: 700; flex-shrink: 0; }
     .data-demo-link { display: inline-block; font-size: 0.78rem; color: var(--accent); font-weight: 600; margin-top: 4px; }
 
-    /* GLASS MORPHISM */
-    .service-card, .problem-card, .value-card, .demo-card, .price-card,
-    .faq-item, .diff-item, .exp-item, .portfolio-card, .data-card, .data-price-card {
+    /* GLASS MORPHISM — solo donde aporta (sobre fondos con gradientes/transparencias) */
+    .cta-box, .price-card.featured, .data-price-card {
       backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
       box-shadow: var(--glass-shadow);
     }
@@ -685,9 +749,110 @@
     .fade-up.visible { opacity: 1; transform: translateY(0); }
     .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
     .scale-in.visible { opacity: 1; transform: scale(1); }
+
+    /* ABOUT */
+    .about-layout {
+      display: grid; grid-template-columns: 280px 1fr; gap: 56px; align-items: start; margin-top: 48px;
+    }
+    .about-photo-col { position: sticky; top: 96px; }
+    .about-photo-frame {
+      width: 100%; aspect-ratio: 3 / 4; border-radius: var(--radius); overflow: hidden;
+      border: 1px solid var(--border); position: relative;
+    }
+    .about-photo-frame img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .about-photo-badge {
+      position: absolute; bottom: 12px; left: 12px; right: 12px;
+      background: rgba(9, 9, 11, 0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border); border-radius: 12px; padding: 12px 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .about-photo-badge .badge-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex-shrink: 0;
+      box-shadow: 0 0 6px rgba(34, 197, 94, 0.5); animation: pulse 2s infinite;
+    }
+    .about-photo-badge span { font-size: 0.75rem; color: var(--text-secondary); }
+    .about-photo-badge strong { color: var(--text-primary); }
+    .about-text-col { display: flex; flex-direction: column; gap: 36px; }
+    .about-intro { font-size: 1.08rem; color: var(--text-secondary); line-height: 1.85; }
+    .about-intro strong { color: var(--text-primary); font-weight: 600; }
+    .about-mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .about-mv-card {
+      padding: 28px; border-radius: var(--radius); border: 1px solid var(--border);
+      background: var(--bg-card);
+    }
+    .about-mv-card h3 {
+      font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em;
+      font-weight: 700; margin-bottom: 12px;
+    }
+    .about-mv-card h3.mission-label { color: var(--accent-light); }
+    .about-mv-card h3.vision-label { color: var(--green); }
+    .about-mv-card p { font-size: 0.92rem; color: var(--text-secondary); line-height: 1.7; }
+    .about-values {
+      display: flex; flex-wrap: wrap; gap: 10px; padding-top: 8px;
+    }
+    .about-value-tag {
+      font-size: 0.78rem; font-weight: 600; padding: 6px 16px;
+      border-radius: 100px; border: 1px solid var(--border); color: var(--text-secondary);
+      background: var(--bg-card);
+    }
+    .about-quote {
+      padding: 24px 28px; border-left: 3px solid var(--accent);
+      background: var(--bg-card); border-radius: 0 var(--radius) var(--radius) 0;
+    }
+    .about-quote p {
+      font-size: 0.95rem; color: var(--text-secondary); line-height: 1.7; font-style: italic;
+    }
+    .about-quote cite {
+      display: block; margin-top: 10px; font-size: 0.78rem; color: var(--text-muted);
+      font-style: normal; font-weight: 600;
+    }
+    /* JUSTIFIED TEXT — párrafos largos dentro de cards y secciones */
+    .problem-card p, .service-card p, .diff-item p, .value-card p,
+    .exp-body p, .portfolio-info p, .demo-info p, .faq-item p,
+    .price-why p, .about-intro, .about-mv-card p, .about-quote p,
+    .data-card p { text-align: justify; }
+
+    /* SKIP LINK */
+    .skip-link {
+      position: absolute; top: -100%; left: 16px; z-index: 200;
+      background: var(--accent); color: #fff; padding: 10px 20px;
+      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+      font-weight: 600; font-size: 0.88rem; transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; color: #fff; }
+
+    /* FOCUS VISIBLE */
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .btn:focus-visible, .price-btn:focus-visible, .nav-cta:focus-visible {
+      outline: 2px solid var(--accent-light);
+      outline-offset: 3px;
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+    }
+    input:focus-visible, textarea:focus-visible, select:focus-visible {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+
+    /* TOUCH TARGETS */
+    #iniciar input[type="radio"],
+    #iniciar input[type="checkbox"] {
+      width: 22px; height: 22px;
+    }
+    #iniciar label:has(input[type="radio"]),
+    #iniciar label:has(input[type="checkbox"]) {
+      min-height: 44px; display: flex; align-items: center; padding: 4px 0;
+    }
   </style>
 </head>
 <body>
+
+  <a href="#main-content" class="skip-link">Ir al contenido principal</a>
 
   <!-- NAV -->
   <nav>
@@ -702,6 +867,7 @@
       <ul class="nav-links" id="navLinks">
         <li><a href="#como-funciona">Cómo funciona</a></li>
         <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#sobre-mi">Sobre mí</a></li>
         <li><a href="#proyectos">Proyectos</a></li>
         <li><a href="#demos">Demos</a></li>
         <li><a href="#precios">Precios</a></li>
@@ -713,6 +879,8 @@
       </button>
     </div>
   </nav>
+
+  <main id="main-content">
 
   <!-- HERO -->
   <section class="hero">
@@ -897,21 +1065,21 @@
         </div>
 
         <div class="service-card fade-up">
-          <div class="service-icon" style="background: rgba(168, 85, 247, 0.12); color: #a855f7;">&#9889;</div>
+          <div class="service-icon" style="background: rgba(168, 85, 247, 0.12); color: var(--purple);">&#9889;</div>
           <h3>Automatizaciones</h3>
           <p>Formularios inteligentes, presupuestadores online, emails automáticos de confirmación y notificaciones. Dejale el trabajo repetitivo a la tecnología y concentrate en lo que importa.</p>
           <span class="service-tag">Incluido en plan Premium</span>
         </div>
 
         <div class="service-card fade-up">
-          <div class="service-icon" style="background: rgba(236, 72, 153, 0.12); color: #ec4899;">&#127757;</div>
+          <div class="service-icon" style="background: rgba(236, 72, 153, 0.12); color: var(--pink);">&#127757;</div>
           <h3>Sitio Bilingüe (ES/EN)</h3>
           <p>Contenido profesional en inglés real, no Google Translate. Trabajo en inglés a diario con clientes internacionales. Ideal para bodegas, turismo y alojamientos que buscan atraer visitantes de afuera.</p>
           <span class="service-tag">Turismo y exportación</span>
         </div>
 
         <div class="service-card fade-up">
-          <div class="service-icon" style="background: rgba(20, 184, 166, 0.12); color: #14b8a6;">&#128202;</div>
+          <div class="service-icon" style="background: rgba(20, 184, 166, 0.12); color: var(--teal);">&#128202;</div>
           <h3>Panel de Métricas</h3>
           <p>Sabé cuántas personas visitan tu web, de dónde vienen, qué buscan y qué hacen. Google Analytics configurado profesionalmente para que tomes decisiones con datos reales.</p>
           <span class="service-tag">Incluido en plan Premium</span>
@@ -982,7 +1150,7 @@
 
       <div class="demos-grid">
         <a href="demos/dashboard-bodega.html" target="_blank" class="demo-card fade-up">
-          <div class="demo-preview" style="background: linear-gradient(135deg, #3b0a2a, #1a0515);">📈</div>
+          <div class="demo-preview" style="background: var(--grad-wine);">📈</div>
           <div class="demo-info">
             <h3>Dashboard Bodega</h3>
             <p class="demo-sector">Ventas de vinos, degustaciones, visitantes web</p>
@@ -991,7 +1159,7 @@
         </a>
 
         <a href="demos/dashboard-restaurante.html" target="_blank" class="demo-card fade-up">
-          <div class="demo-preview" style="background: linear-gradient(135deg, #3b1a0a, #1a0d05);">📊</div>
+          <div class="demo-preview" style="background: var(--grad-warm);">📊</div>
           <div class="demo-info">
             <h3>Dashboard Restaurante</h3>
             <p class="demo-sector">Facturación, reservas, platos más pedidos</p>
@@ -1000,7 +1168,7 @@
         </a>
 
         <a href="demos/dashboard-alojamiento.html" target="_blank" class="demo-card fade-up">
-          <div class="demo-preview" style="background: linear-gradient(135deg, #0a2a1a, #051a0d);">🏔️</div>
+          <div class="demo-preview" style="background: var(--grad-forest);">🏔️</div>
           <div class="demo-info">
             <h3>Dashboard Alojamiento</h3>
             <p class="demo-sector">Ocupación, reservas, canales de venta</p>
@@ -1009,7 +1177,7 @@
         </a>
 
         <a href="demos/dashboard-profesional.html" target="_blank" class="demo-card fade-up">
-          <div class="demo-preview" style="background: linear-gradient(135deg, #0a1a3b, #050d1a);">🦷</div>
+          <div class="demo-preview" style="background: var(--grad-ocean);">🦷</div>
           <div class="demo-info">
             <h3>Dashboard Consultorio</h3>
             <p class="demo-sector">Turnos, facturación por servicio, pacientes</p>
@@ -1018,7 +1186,7 @@
         </a>
 
         <a href="demos/dashboard-peluqueria.html" target="_blank" class="demo-card fade-up">
-          <div class="demo-preview" style="background: linear-gradient(135deg, #2a1a0a, #1a0d05);">💈</div>
+          <div class="demo-preview" style="background: var(--grad-earth);">💈</div>
           <div class="demo-info">
             <h3>Dashboard Barbería</h3>
             <p class="demo-sector">Rendimiento por barbero, servicios, horarios</p>
@@ -1097,6 +1265,61 @@
         <div class="diff-item fade-up">
           <h3>Soporte real post-entrega</h3>
           <p>No desaparezco después de entregar. Incluyo meses de soporte en todos los planes y ofrezco mantenimiento mensual accesible para que tu sitio siempre esté al día y funcionando perfecto.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE MÍ -->
+  <section id="sobre-mi" class="section-glow glow-purple" style="background: var(--bg-secondary);">
+    <div class="container">
+      <p class="section-label fade-up">Sobre mí</p>
+      <h2 class="section-title fade-up">El ingeniero detrás de cada proyecto</h2>
+
+      <div class="about-layout">
+        <div class="about-photo-col fade-up">
+          <div class="about-photo-frame">
+            <img src="https://avatars.githubusercontent.com/u/258823180?v=4" alt="Juan Ignacio Barranco — Ingeniero de Software" width="280" height="373" loading="lazy">
+            <div class="about-photo-badge">
+              <div class="badge-dot"></div>
+              <span><strong>Disponible</strong> para proyectos</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-text-col">
+          <p class="about-intro fade-up">
+            Soy <strong>Juan Ignacio Barranco</strong>, ingeniero de software de <strong>Maipú, Mendoza</strong>. Estudio <strong>Ingeniería en Sistemas de Información en la UTN</strong> y trabajo como full-stack developer en Nevra. Antes de eso pasé por Globant construyendo backend para un cliente internacional, por SLINGR.io desarrollando aplicaciones enterprise para ADP, y por Upwork haciendo data engineering para empresas de Estados Unidos.
+          </p>
+
+          <p class="about-intro fade-up">
+            Un día caminando por Mendoza me di cuenta de algo que no podía ignorar: negocios con años de trayectoria, productos increíbles y clientes fieles, pero completamente invisibles en internet. Bodegas familiares sin una página. Parrillas espectaculares que solo aparecen si sabés dónde están. Profesionales excelentes que dependen 100% del boca en boca. <strong>Decidí usar lo que aprendí construyendo software para empresas de afuera, para ayudar a negocios de acá.</strong>
+          </p>
+
+          <div class="about-mv-grid fade-up">
+            <div class="about-mv-card">
+              <h3 class="mission-label">Misión</h3>
+              <p>Que cada negocio bueno de Mendoza tenga la presencia digital que se merece — a un precio que pueda pagar, con calidad de ingeniería real y sin depender de nadie para mantenerlo.</p>
+            </div>
+            <div class="about-mv-card">
+              <h3 class="vision-label">Visión</h3>
+              <p>Ser la primera opción cuando un comercio, profesional o emprendedor de Mendoza quiera dar el salto a lo digital. No como agencia, sino como el ingeniero de confianza que te acompaña.</p>
+            </div>
+          </div>
+
+          <div class="about-values fade-up">
+            <span class="about-value-tag">Transparencia total</span>
+            <span class="about-value-tag">Código propio</span>
+            <span class="about-value-tag">Sin costos ocultos</span>
+            <span class="about-value-tag">Calidad internacional</span>
+            <span class="about-value-tag">Precios locales</span>
+            <span class="about-value-tag">Soporte real</span>
+          </div>
+
+          <div class="about-quote fade-up">
+            <p>La diferencia entre un negocio que crece y uno que se estanca muchas veces no es la calidad del producto — es la presencia digital.</p>
+            <cite>— Lo que me motivó a arrancar esto</cite>
+          </div>
         </div>
       </div>
     </div>
@@ -1208,7 +1431,7 @@
         </div>
 
         <div class="portfolio-card fade-up">
-          <div class="portfolio-img" style="background: linear-gradient(135deg, #3b1a0a, #1a0a00);">&#127851;</div>
+          <div class="portfolio-img" style="background: var(--grad-warm);">&#127851;</div>
           <div class="portfolio-info">
             <h3>La Noche de los Alfajores</h3>
             <p class="portfolio-company">Entre Dos SRL — Mendoza</p>
@@ -1223,7 +1446,7 @@
         </div>
 
         <div class="portfolio-card fade-up">
-          <div class="portfolio-img" style="background: linear-gradient(135deg, #0a2a1a, #0a1a0a);">&#128200;</div>
+          <div class="portfolio-img" style="background: var(--grad-forest);">&#128200;</div>
           <div class="portfolio-info">
             <h3>Data Pipelines para USA</h3>
             <p class="portfolio-company">Upwork — Clientes internacionales</p>
@@ -1238,7 +1461,7 @@
         </div>
 
         <div class="portfolio-card fade-up">
-          <div class="portfolio-img" style="background: linear-gradient(135deg, #0a1a3b, #0a0a1a);">&#128640;</div>
+          <div class="portfolio-img" style="background: var(--grad-ocean);">&#128640;</div>
           <div class="portfolio-info">
             <h3>Aplicaciones Enterprise — ADP</h3>
             <p class="portfolio-company">SLINGR.io → Lifion by ADP</p>
@@ -1252,7 +1475,7 @@
         </div>
 
         <a href="https://jbarrancogit.github.io/dashboard-arquitectura-utn/" target="_blank" class="portfolio-card fade-up" style="text-decoration:none; color:inherit;">
-          <div class="portfolio-img" style="background: linear-gradient(135deg, #1a0a3b, #0a0a2a);">&#128187;</div>
+          <div class="portfolio-img" style="background: var(--grad-ocean);">&#128187;</div>
           <div class="portfolio-info">
             <h3>Dashboard Arquitectura de Computadoras</h3>
             <p class="portfolio-company">UTN FRM — Proyecto universitario <span style="font-size:0.72rem; background:var(--green-glow); color:var(--green); padding:2px 8px; border-radius:100px; margin-left:6px;">EN VIVO</span></p>
@@ -1267,7 +1490,7 @@
         </a>
 
         <a href="https://jbarrancogit.github.io/dashboard-ssl-utn/" target="_blank" class="portfolio-card fade-up" style="text-decoration:none; color:inherit;">
-          <div class="portfolio-img" style="background: linear-gradient(135deg, #0a2a2a, #0a1a1a);">&#128202;</div>
+          <div class="portfolio-img" style="background: var(--grad-forest);">&#128202;</div>
           <div class="portfolio-info">
             <h3>Dashboard Sintaxis y Semántica</h3>
             <p class="portfolio-company">UTN FRM — Proyecto universitario <span style="font-size:0.72rem; background:var(--green-glow); color:var(--green); padding:2px 8px; border-radius:100px; margin-left:6px;">EN VIVO</span></p>
@@ -1282,7 +1505,7 @@
         </a>
 
         <a href="https://jbarrancogit.github.io/paradigmas-dashboard/" target="_blank" class="portfolio-card fade-up" style="text-decoration:none; color:inherit;">
-          <div class="portfolio-img" style="background: linear-gradient(135deg, #2a1a0a, #1a0a0a);">&#129520;</div>
+          <div class="portfolio-img" style="background: var(--grad-earth);">&#129520;</div>
           <div class="portfolio-info">
             <h3>Dashboard Paradigmas de Programación</h3>
             <p class="portfolio-company">UTN FRM — Proyecto universitario <span style="font-size:0.72rem; background:var(--green-glow); color:var(--green); padding:2px 8px; border-radius:100px; margin-left:6px;">EN VIVO</span></p>
@@ -1308,7 +1531,7 @@
 
       <div class="demos-grid">
         <a href="demos/bodega.html" target="_blank" class="demo-card fade-up">
-          <div class="demo-preview" style="background: linear-gradient(135deg, #3b0a2a, #1a0515);">🍷</div>
+          <div class="demo-preview" style="background: var(--grad-wine);">🍷</div>
           <div class="demo-info">
             <h3>Bodega Tierra del Sol</h3>
             <p class="demo-sector">Bodegas y Viñedos — Luján de Cuyo</p>
@@ -1317,7 +1540,7 @@
         </a>
 
         <a href="demos/restaurante.html" target="_blank" class="demo-card fade-up">
-          <div class="demo-preview" style="background: linear-gradient(135deg, #3b1a0a, #1a0d05);">🔥</div>
+          <div class="demo-preview" style="background: var(--grad-warm);">🔥</div>
           <div class="demo-info">
             <h3>Fuegos de Mendoza</h3>
             <p class="demo-sector">Gastronomía — Av. Arístides Villanueva</p>
@@ -1326,7 +1549,7 @@
         </a>
 
         <a href="demos/alojamiento.html" target="_blank" class="demo-card fade-up">
-          <div class="demo-preview" style="background: linear-gradient(135deg, #0a2a1a, #051a0d);">🏔️</div>
+          <div class="demo-preview" style="background: var(--grad-forest);">🏔️</div>
           <div class="demo-info">
             <h3>Cabañas del Valle</h3>
             <p class="demo-sector">Alojamiento y Turismo — Potrerillos</p>
@@ -1335,7 +1558,7 @@
         </a>
 
         <a href="demos/profesional.html" target="_blank" class="demo-card fade-up">
-          <div class="demo-preview" style="background: linear-gradient(135deg, #0a1a3b, #050d1a);">🦷</div>
+          <div class="demo-preview" style="background: var(--grad-ocean);">🦷</div>
           <div class="demo-info">
             <h3>Consultorio Dra. López</h3>
             <p class="demo-sector">Servicios Profesionales — Godoy Cruz</p>
@@ -1344,7 +1567,7 @@
         </a>
 
         <a href="demos/peluqueria.html" target="_blank" class="demo-card fade-up">
-          <div class="demo-preview" style="background: linear-gradient(135deg, #2a1a0a, #1a0d05);">💈</div>
+          <div class="demo-preview" style="background: var(--grad-earth);">💈</div>
           <div class="demo-info">
             <h3>Navaja & Estilo</h3>
             <p class="demo-sector">Peluquerías y Barberías — Maipú</p>
@@ -1691,8 +1914,8 @@
             </div>
           </div>
           <div style="margin-bottom: 16px;">
-            <label style="display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px;">Si tenés dominio, ¿cuál es? <span style="color: var(--red);">*</span></label>
-            <input type="url" name="dominio_actual" required placeholder="Ej: www.minegocio.com.ar (o escribí 'no tengo')" style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-primary); color: var(--text-primary); font-family: inherit; font-size: 0.9rem;">
+            <label style="display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px;">Si tenés dominio, ¿cuál es?</label>
+            <input type="text" name="dominio_actual" placeholder="Ej: www.minegocio.com.ar (dejá vacío si no tenés)" style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-primary); color: var(--text-primary); font-family: inherit; font-size: 0.9rem;">
           </div>
           <div>
             <label style="display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px;">¿Qué dominio te gustaría? <span style="color: var(--red);">*</span>
@@ -1764,6 +1987,8 @@
     </div>
   </section>
 
+  </main>
+
   <!-- FOOTER -->
   <footer>
     <div class="footer-main">
@@ -1813,6 +2038,7 @@
             <h4>Navegación</h4>
             <ul>
               <li><a href="#como-funciona">Cómo funciona</a></li>
+              <li><a href="#sobre-mi">Sobre mí</a></li>
               <li><a href="#proyectos">Proyectos</a></li>
               <li><a href="#demos">Demos</a></li>
               <li><a href="#precios">Precios</a></li>
