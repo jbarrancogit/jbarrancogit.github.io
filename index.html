@@ -606,6 +606,12 @@
       .data-pricing-grid { grid-template-columns: 1fr; }
       #iniciar [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
       .about-mv-grid { grid-template-columns: 1fr; }
+      .about-text-col { gap: 24px; }
+      .about-mv-card { padding: 20px; }
+      .about-quote { padding: 20px; }
+      .about-intro { font-size: 0.95rem; line-height: 1.75; }
+      .about-values { gap: 8px; }
+      .about-value-tag { padding: 5px 12px; font-size: 0.72rem; }
       .trust-grid { gap: 12px; }
       .stats-grid { gap: 16px; }
       .stat-number { font-size: 1.6rem; }
@@ -645,6 +651,11 @@
       .trust-name { font-size: 0.9rem; }
       .trust-role { font-size: 0.65rem; }
       .about-photo-col { max-width: 180px; }
+      .about-mv-card { padding: 16px; }
+      .about-mv-card p { font-size: 0.85rem; }
+      .about-quote { padding: 16px; }
+      .about-quote p { font-size: 0.85rem; }
+      .about-intro { font-size: 0.88rem; }
     }
 
     #iniciar input:focus, #iniciar textarea:focus, #iniciar select:focus {
@@ -753,6 +764,7 @@
     /* ABOUT */
     .about-layout {
       display: grid; grid-template-columns: 280px 1fr; gap: 56px; align-items: start; margin-top: 48px;
+      overflow: hidden;
     }
     .about-photo-col { position: sticky; top: 96px; }
     .about-photo-frame {
@@ -774,7 +786,7 @@
     }
     .about-photo-badge span { font-size: 0.75rem; color: var(--text-secondary); }
     .about-photo-badge strong { color: var(--text-primary); }
-    .about-text-col { display: flex; flex-direction: column; gap: 36px; }
+    .about-text-col { display: flex; flex-direction: column; gap: 36px; min-width: 0; }
     .about-intro { font-size: 1.08rem; color: var(--text-secondary); line-height: 1.85; }
     .about-intro strong { color: var(--text-primary); font-weight: 600; }
     .about-mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
